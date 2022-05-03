@@ -15,8 +15,15 @@ public class OrderSheetVO {
 	private String inputEDate;
 	private String itemState;
 	private String memName;
+	private String[] orderNums;
 	
 	
+	public String[] getOrderNums() {
+		return orderNums;
+	}
+	public void setOrderNums(String[] orderNums) {
+		this.orderNums = orderNums;
+	}
 	public String getMemName() {
 		return memName;
 	}

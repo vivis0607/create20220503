@@ -22,28 +22,25 @@ function Allcheck(){
 }
 
 //상태 일괄변경 클릭시
-function buy(){
-	//필요한 데이러틀 가져온다(상품코드, 수량)
-	//체크한 상품의 상품코드
+function updateItemsStates(){
+	var itemState = document.getElementById('itemState').value;
 	var checkBoxes = document.querySelectorAll('.chk:checked');
-	var objArr = [];
+	var orderNumArr = [];
 	for(var i = 0; i<checkBoxes.length; i++){
-		var obj = new Object();
-		
-		obj.itemCode = checkBoxes[i].value;
-		objArr[i] = obj;
+		orderNumArr[i] = checkBoxes[i].value;
 	}
 	
 	//JSON.stringify(objArr);
 	$.ajax({
-		url: '', //요청경로
+		url: '/sales/updateItemsStates', //요청경로
 		type: 'post',
-		data: {'data':JSON.stringify(objArr)}, //필요한 데이터 '데이터이름':값
+		traditional: true,
+		data: {'orderNums' : orderNumArr
+				,'itemState' : itemState}, //필요한 데이터 '데이터이름':값
 		success: function(result) {
 			//ajax 실행 성공 후 실행할 코드 작성
-			alert('주문페이지로 넘어갑니다.');
-			
-			location.href = '/buy/buyPage';
+			alert('주문상태 일괄 변경되었습니다');
+			location.href = '/sales/orderStateManage';
 		},
 		error: function() {
 			//ajax 실행 실패 시 실행되는 구간
@@ -54,7 +51,7 @@ function buy(){
 
 
 //선택삭제
-function deleteCarts(){
+/*function deleteCarts(){
 	var chk = document.querySelectorAll('.chk:checked');
 	
 	if(chk.length == 0){
@@ -69,5 +66,5 @@ function deleteCarts(){
 	}
 	
 	location.href='/cart/deleteCarts?itemCodes='+itemCodes;
-}
+}*/
 

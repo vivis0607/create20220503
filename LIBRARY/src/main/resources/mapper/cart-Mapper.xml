@@ -359,5 +359,14 @@
 		WHERE ORDER_NUM = #{orderNum}
 	</update>
 	
+	<!-- 선택주문내역 배송상태변경 -->
+	<update id="updateItemsStates">
+		UPDATE ORDER_SHEET
+		SET ITEM_STATE = #{itemState}
+		WHERE ORDER_NUM IN
+		<foreach collection="orderNums" item="orderNum" open="(" close=")" separator=",">
+			#{orderNum}
+		</foreach>
+	</update>
 </mapper>
 

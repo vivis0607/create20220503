@@ -23,4 +23,9 @@ public class SalesServiceImpl implements SalesService {
 	public void updateItemState(OrderSheetVO orderSheetVO) {
 		sqlSession.update("cartMapper.updateItemState", orderSheetVO);
 	}
+
+	@Override
+	public void updateItemsStates(OrderSheetVO orderSheetVO) {
+		sqlSession.update("cartMapper.updateItemsStates", orderSheetVO);
+	}
 }

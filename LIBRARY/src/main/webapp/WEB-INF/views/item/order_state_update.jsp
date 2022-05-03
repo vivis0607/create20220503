@@ -165,6 +165,6 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="/resources/js/item/order_state_update.js"></script>
+<script type="text/javascript" src="/resources/js/item/order_state_update.js?ver=3"></script>
 </body>
 </html>
