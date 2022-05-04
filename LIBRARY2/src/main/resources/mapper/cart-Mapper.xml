@@ -368,5 +368,29 @@
 			#{orderNum}
 		</foreach>
 	</update>
+	
+	<!-- 선택주문내역 삭제 -->
+	<delete id="deleteOrders">
+		DELETE FROM ORDER_SHEET
+		WHERE ORDER_NUM IN
+		<foreach collection="orderNums" item="orderNum" open="(" close=")" separator=",">
+			#{orderNum}
+		</foreach>
+	</delete>
+	
+	<!-- 아이템배송상태별 조회 -->
+	<select id="searchKindState" resultMap="order">
+		SELECT ORDER_NUM
+		    , BUY_DATE
+		    , O.MEM_ID AS MEM_ID
+		    , PAY_CODE
+		    , TOTAL_PRICE
+		    , ITEM_STATE
+		    , MEM_NAME
+		FROM ORDER_SHEET O, BOOK_MEMBER M
+		WHERE O.MEM_ID = M.MEM_ID
+		AND ITEM_STATE = #{itemState}
+		ORDER BY ORDER_NUM DESC
+	</select>
 </mapper>
 

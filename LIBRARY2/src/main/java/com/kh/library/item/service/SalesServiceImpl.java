@@ -28,4 +28,14 @@ public class SalesServiceImpl implements SalesService {
 	public void updateItemsStates(OrderSheetVO orderSheetVO) {
 		sqlSession.update("cartMapper.updateItemsStates", orderSheetVO);
 	}
+
+	@Override
+	public void deleteOrders(OrderSheetVO orderSheetVO) {
+		sqlSession.delete("cartMapper.deleteOrders", orderSheetVO);
+	}
+
+	@Override
+	public List<OrderSheetVO> searchKindState(OrderSheetVO orderSheetVO) {
+		return sqlSession.selectList("cartMapper.searchKindState", orderSheetVO);
+	}
 }

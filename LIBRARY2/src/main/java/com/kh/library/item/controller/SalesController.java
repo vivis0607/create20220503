@@ -1,11 +1,7 @@
 package com.kh.library.item.controller;
 
-import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,5 +38,17 @@ public class SalesController {
 	public void updateItemsStates(OrderSheetVO orderSheetVO) {
 		salesService.updateItemsStates(orderSheetVO);
 		
+	}
+	
+	@GetMapping("/deleteOrders")
+	public String deleteOrders(OrderSheetVO orderSheetVO) {
+		salesService.deleteOrders(orderSheetVO);
+		return "redirect:/sales/orderStateManage";
+	}
+	
+	@GetMapping("/searchKindState")
+	public String searchKindState(OrderSheetVO orderSheetVO, Model model) {
+		model.addAttribute("salesList",salesService.searchKindState(orderSheetVO));
+		return "item/order_state_update";		
 	}
 }

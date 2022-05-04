@@ -51,20 +51,25 @@ function updateItemsStates(){
 
 
 //선택삭제
-/*function deleteCarts(){
+function deleteOrders(){
 	var chk = document.querySelectorAll('.chk:checked');
 	
 	if(chk.length == 0){
-		alert('삭제할 상품을 선택하세요');
+		alert('삭제할 주문내역을 선택하세요');
 		return;
 	}
 	
 	//선택한 상품코드를 저장할 배열
-	var itemCodes = [];
+	var orderNums = [];
 	for(var i = 0; i<chk.length; i++){
-		itemCodes[i] = chk[i].value;
+		orderNums[i] = chk[i].value;
 	}
-	
-	location.href='/cart/deleteCarts?itemCodes='+itemCodes;
-}*/
+	alert("선택하신 주문내역이 삭제되었습니다");
+	location.href='/sales/deleteOrders?orderNums='+orderNums;
+}
+
+function searchKindState(selectedTag){
+	var itemState = selectedTag.innerText;
+	location.href='/sales/searchKindState?itemState='+itemState;
+}
 

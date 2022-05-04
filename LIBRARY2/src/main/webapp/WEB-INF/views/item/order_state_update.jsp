@@ -30,6 +30,11 @@
 	margin: 0 auto;
 	text-align: center;
 }
+.itemStateSpan{
+	background-color: #26465C;
+	color: white;
+}
+
 </style>
 </head>
 <body>
@@ -40,12 +45,12 @@
 			<tr>
 				<th>진행상태</th>
 				<td>
-					<span>전체</span>
-					<span>주문접수</span>
-				    <span>결제완료</span>
-					<span>배송준비중</span>
-					<span>배송처리</span>
-					<span>배송완료</span>
+					<span class="itemStateSpan" onclick="location.href='/sales/orderStateManage';">전체</span>
+					<span class="itemStateSpan" onclick="searchKindState(this);">결제완료</span>
+				    <span class="itemStateSpan" onclick="searchKindState(this);">상품준비중</span>
+					<span class="itemStateSpan" onclick="searchKindState(this);">배송준비중</span>
+					<span class="itemStateSpan" onclick="searchKindState(this);">배송처리</span>
+					<span class="itemStateSpan" onclick="searchKindState(this);">배송완료</span>
 				</td>
 			</tr>
 			<tr>
@@ -129,7 +134,7 @@
 		</table>
 	</div>
 	<div>
-		<button>선택삭제</button>
+		<button onclick="deleteOrders();">선택삭제</button>
 		<button data-bs-target="#updateItemsModal" data-bs-toggle="modal" >상태일괄변경</button>
 	</div>
 </div>
@@ -158,13 +163,13 @@
 	        </div>
 	        <div class="row">
 	        	<div class="col d-grid gap-2">
-		        	<button type="button" class="btn btn-primary" onclick="updateItemsStates();">비밀번호확인</button>
+		        	<button type="button" class="btn btn-primary" onclick="updateItemsStates();">주문상태 변경</button>
 	        	</div>
 	        </div>
       </div>
     </div>
   </div>
 </div>
-<script type="text/javascript" src="/resources/js/item/order_state_update.js?ver=3"></script>
+<script type="text/javascript" src="/resources/js/item/order_state_update.js?ver=5"></script>
 </body>
 </html>
