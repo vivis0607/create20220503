@@ -69,7 +69,8 @@
 								</td>
 								<td>
 									<div onclick="location.href='/item/itemDetail?itemCode=${buy.itemCode}';">${buy.itemName }</div>
-									<div><fmt:formatNumber value="${buy.itemPrice }" pattern="#,###"/>원 | ${buy.itemCnt }개</div>
+									<div><fmt:formatNumber value="${buy.itemPrice }" pattern="#,###"/>원 | ${buy.itemCnt }개
+									</div>
 								</td>
 								<td>
 									${order.itemState }

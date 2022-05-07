@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.library.item.vo.OrderSheetVO;
-import com.kh.library.item.vo.SalesVO;
 
 @Service("salesService")
 public class SalesServiceImpl implements SalesService {
@@ -51,7 +50,27 @@ public class SalesServiceImpl implements SalesService {
 	}
 
 	@Override
-	public SalesVO displaySalesDay(OrderSheetVO orderSheetVO) {
-		return sqlSession.selectOne("cartMapper.displaySalesDay", orderSheetVO);
+	public OrderSheetVO selectSalesDay() {
+		return sqlSession.selectOne("cartMapper.selectSalesDay");
+	}
+
+	@Override
+	public OrderSheetVO selectSalesWeek() {
+		return sqlSession.selectOne("cartMapper.selectSalesWeek");
+	}
+
+	@Override
+	public OrderSheetVO selectSalesMonth() {
+		return sqlSession.selectOne("cartMapper.selectSalesMonth");
+	}
+
+	@Override
+	public OrderSheetVO selectSalesYear() {
+		return sqlSession.selectOne("cartMapper.selectSalesYear");
+	}
+
+	@Override
+	public OrderSheetVO selectSalesItemStateDay(String itemState) {
+		return sqlSession.selectOne("cartMapper.selectSalesItemStateDay", itemState);
 	}
 }

@@ -436,5 +436,50 @@
 			AND ITEM_STATE = #{itemState}
 		</if>
 	</select>
+	
+	<!-- 매출현황(1일) -->
+	<select id="selectSalesDay" resultMap="order">
+		SELECT SUM(TOTAL_PRICE) AS TOTAL_PRICE 
+			,COUNT(ORDER_NUM) AS ORDER_CNT
+		FROM ORDER_SHEET
+		WHERE BUY_DATE BETWEEN SYSDATE
+		    AND SYSDATE+0.9999
+	</select>
+	
+	<!-- 매출현황(일주일) -->
+	<select id="selectSalesWeek" resultMap="order">
+		SELECT SUM(TOTAL_PRICE) AS TOTAL_PRICE 
+			,COUNT(ORDER_NUM) AS ORDER_CNT
+		FROM ORDER_SHEET
+		WHERE BUY_DATE BETWEEN (SYSDATE - (INTERVAL '6' DAY))
+		    AND SYSDATE+0.9999
+	</select>
+	
+	<!-- 매출현황(한달) -->
+	<select id="selectSalesMonth" resultMap="order">
+		SELECT SUM(TOTAL_PRICE) AS TOTAL_PRICE 
+			,COUNT(ORDER_NUM) AS ORDER_CNT
+		FROM ORDER_SHEET
+		WHERE BUY_DATE BETWEEN (SYSDATE - (INTERVAL '1' MONTH))-1
+		    AND SYSDATE+0.9999
+	</select>
+	
+	<!-- 매출현황(일년) -->
+	<select id="selectSalesYear" resultMap="order">
+		SELECT SUM(TOTAL_PRICE) AS TOTAL_PRICE 
+			,COUNT(ORDER_NUM) AS ORDER_CNT
+		FROM ORDER_SHEET
+		WHERE BUY_DATE BETWEEN (SYSDATE - (INTERVAL '1' Year))-1
+		    AND SYSDATE+0.9999
+	</select>
+	
+	
+	<!-- 금일 주문상태별 매출현황 -->
+	<select id="selectSalesItemStateDay" resultMap="order">
+		SELECT SUM(TOTAL_PRICE) AS TOTAL_PRICE 
+			,COUNT(ORDER_NUM) AS ORDER_CNT
+		FROM ORDER_SHEET
+		WHERE ITEM_STATE = #{itemState}
+	</select>
 </mapper>
 

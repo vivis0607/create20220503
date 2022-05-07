@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +53,7 @@
 							<div>${item.itemCnt }</div>
 						</td>
 						<td>
-							<div>${item.totalPrice }</div>
+							<div><fmt:formatNumber value="${item.totalPrice }" pattern="#,###"/></div>
 							<input type="hidden" class="itemCode" value="${item.itemCode }">
 							<input type="hidden" class="itemCnt" value="${item.itemCnt }">
 						</td>
@@ -64,12 +65,12 @@
 							<input type="hidden" id="itemsCnt" value="${buyList.size()-1 }">
 							<input type="hidden" id="totalPrice" value="${totalPrice }">
 							<div>
-								상품구매금액 : ${totalPrice }  + 배송비 0 (무료) = 합계 : 
+								상품구매금액 : <fmt:formatNumber value="${totalPrice }" pattern="#,###"/>  + 배송비 0 (무료) = 합계 : 
 							</div>
 						</td>
 						<td>
 							<div>
-								 ${totalPrice } 원 
+								 <fmt:formatNumber value="${totalPrice }" pattern="#,###"/> 원 
 							</div>						
 						</td>
 					</tr>
@@ -178,11 +179,11 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>${totalPrice }</td>
+						<td><fmt:formatNumber value="${totalPrice }" pattern="#,###"/></td>
 						<td> + </td>
 						<td>무료</td>
 						<td> = </td>
-						<td>${totalPrice }</td>
+						<td><fmt:formatNumber value="${totalPrice }" pattern="#,###"/></td>
 					</tr>
 				</tbody>
 			</table>
@@ -210,7 +211,7 @@
 					<tr>
 						<td>최종 결제금액</td>
 						<td>
-							<span>${totalPrice }</span>원
+							<span><fmt:formatNumber value="${totalPrice }" pattern="#,###"/></span>원
 						</td>
 					</tr>
 				</table>
@@ -223,7 +224,7 @@
 		<button type="button" onclick="deleteBuy();">취소하기</button>
 	</div>
 </div>
-<script type="text/javascript" src="/resources/js/item/buy.js?var=41"></script>
+<script type="text/javascript" src="/resources/js/item/buy.js?var=42"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- 아임포트결제api -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>

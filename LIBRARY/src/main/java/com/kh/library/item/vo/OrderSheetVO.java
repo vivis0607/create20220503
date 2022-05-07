@@ -9,7 +9,7 @@ public class OrderSheetVO {
 	private String toTell;
 	private String memId;
 	private String payCode;
-	private String totalPrice;
+	private int totalPrice;
 	private String deliMsg;
 	private String inputSDate;
 	private String inputEDate;
@@ -19,7 +19,15 @@ public class OrderSheetVO {
 	private String sort;
 	private String keyword;
 	private int orderCnt;
+	private OrderSheetVO[] orderSheetVOs;
 	
+	
+	public OrderSheetVO[] getOrderSheetVOs() {
+		return orderSheetVOs;
+	}
+	public void setOrderSheetVOs(OrderSheetVO[] orderSheetVOs) {
+		this.orderSheetVOs = orderSheetVOs;
+	}
 	public int getOrderCnt() {
 		return orderCnt;
 	}
@@ -40,6 +48,12 @@ public class OrderSheetVO {
 	}
 	
 	
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 	public String[] getOrderNums() {
 		return orderNums;
 	}
@@ -111,12 +125,6 @@ public class OrderSheetVO {
 	}
 	public void setPayCode(String payCode) {
 		this.payCode = payCode;
-	}
-	public String getTotalPrice() {
-		return totalPrice;
-	}
-	public void setTotalPrice(String totalPrice) {
-		this.totalPrice = totalPrice;
 	}
 	public String getDeliMsg() {
 		return deliMsg;

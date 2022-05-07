@@ -3,7 +3,6 @@ package com.kh.library.item.service;
 import java.util.List;
 
 import com.kh.library.item.vo.OrderSheetVO;
-import com.kh.library.item.vo.SalesVO;
 
 public interface SalesService {
 
@@ -29,5 +28,17 @@ public interface SalesService {
 	List<OrderSheetVO> searchOrderState(OrderSheetVO orderSheetVO);
 	
 	//매출 일별조회
-	SalesVO displaySalesDay(OrderSheetVO orderSheetVO);
+	OrderSheetVO selectSalesDay();
+	
+	//매출 이번주 조회
+	OrderSheetVO selectSalesWeek();
+	
+	//매출 이번달 조회
+	OrderSheetVO selectSalesMonth();
+	
+	//매출 올해 조회
+	OrderSheetVO selectSalesYear();
+	
+	//금일 주문상태별 매출현황
+	OrderSheetVO selectSalesItemStateDay(String itemState);
 }

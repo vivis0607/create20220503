@@ -72,17 +72,33 @@ public class SalesController {
 	
 	//매출현황페이지이동
 	@GetMapping("/salesStatus")
-	public String salesStatus() {
+	public String salesStatus(Model model) {
+		//일별매출
+		model.addAttribute("salesDay", salesService.selectSalesDay());
+		
+		//주별매출
+		model.addAttribute("salesWeek", salesService.selectSalesWeek());
+		
+		//월별매출
+		model.addAttribute("salesMonth", salesService.selectSalesMonth());
+		
+		//년별매출
+		model.addAttribute("salesYear", salesService.selectSalesYear());
+		
+		//아이템상태별 특정일 매출상태
+		model.addAttribute("itemPre", salesService.selectSalesItemStateDay("상품준비중"));
+		model.addAttribute("deliPre", salesService.selectSalesItemStateDay("배송준비중"));
+		model.addAttribute("payFin", salesService.selectSalesItemStateDay("결제완료"));
+		model.addAttribute("deliPro", salesService.selectSalesItemStateDay("배송처리"));
+		model.addAttribute("deliFin", salesService.selectSalesItemStateDay("배송완료"));
+		model.addAttribute("cancle", salesService.selectSalesItemStateDay("취소요청"));
 		
 		return "item/sales_status";
 	}
 	
-	//일별매출
 	
-	//주별매출
 	
-	//월별매출
 	
-	//년별매출
+	
 	
 }
