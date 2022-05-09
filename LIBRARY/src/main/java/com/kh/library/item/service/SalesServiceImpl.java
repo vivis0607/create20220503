@@ -73,4 +73,9 @@ public class SalesServiceImpl implements SalesService {
 	public OrderSheetVO selectSalesItemStateDay(String itemState) {
 		return sqlSession.selectOne("cartMapper.selectSalesItemStateDay", itemState);
 	}
+
+	@Override
+	public List<OrderSheetVO> selcetSalesPeriod(OrderSheetVO orderSheetVO) {
+		return sqlSession.selectList("cartMapper.selcetSalesPeriod", orderSheetVO);
+	}
 }

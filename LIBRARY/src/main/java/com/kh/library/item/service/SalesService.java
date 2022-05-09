@@ -41,4 +41,7 @@ public interface SalesService {
 	
 	//금일 주문상태별 매출현황
 	OrderSheetVO selectSalesItemStateDay(String itemState);
+	
+	//매출기간별 그래프 조회
+	List<OrderSheetVO> selcetSalesPeriod(OrderSheetVO orderSheetVO);
 }

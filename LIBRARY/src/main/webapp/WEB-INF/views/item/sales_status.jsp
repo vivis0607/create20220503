@@ -23,6 +23,8 @@ margin: 0 auto;
 padding: 20px;
 }
 </style>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
 </head>
 <body>
 <div class="row SalesStatusContainer">
@@ -110,8 +112,14 @@ padding: 20px;
 	</div>
 	<div class="row">
 		<div class="col-12">
+			<c:forEach items="${period }" var="peri">
+				<input type="hidden" class="buyDates" value="${peri.buyDate }">
+				<input type="hidden" class="totalPrices" value="${peri.totalPrice }">
+			</c:forEach>
 			<div>매출현황그래프자리</div>
-			<canvas id="myChart" width="300" height="200"></canvas>
+			<div class="graphBox">
+				<canvas id="bar-chart" width="300px" height="150px"></canvas>
+			</div>
 		</div>
 	</div>
 	<div class="row">
@@ -122,9 +130,7 @@ padding: 20px;
 </div>	
 </div>
 
-
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
-<script type="text/javascript" src="/resources/js/item/sales_status.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script type="text/javascript" src="/resources/js/item/sales_status.js?ver=7"></script>
 </body>
 </html>

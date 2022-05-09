@@ -481,5 +481,37 @@
 		FROM ORDER_SHEET
 		WHERE ITEM_STATE = #{itemState}
 	</select>
+	
+	<!-- 선택기간별 매출현황그래프 -->
+	<select id="selcetSalesPeriod" resultMap="order">
+	SELECT D.BUY_DATE AS BUY_DATE, 
+	    DECODE(O.TOTAL_PRICE, NULL, 0, O.TOTAL_PRICE) AS TOTAL_PRICE
+	FROM (
+			SELECT TO_DATE(#{inputSDate}, 'YYYYMMDD') + LEV - 1 AS BUY_DATE
+		        FROM (SELECT LEVEL LEV
+	       			FROM DUAL
+			        CONNECT BY LEVEL &lt;= (TO_DATE(#{inputEDate}, 'YYYYMMDD') - TO_DATE(#{inputSDate}, 'YYYYMMDD')+1)
+			        )
+	    ) D LEFT OUTER JOIN (
+	        SELECT TO_CHAR(BUY_DATE,'YY/MM/DD') AS BUY_DATE
+			    , SUM(TOTAL_PRICE) AS TOTAL_PRICE
+			FROM ORDER_SHEET
+			WHERE BUY_DATE BETWEEN #{inputSDate}
+					    AND #{inputEDate}
+			GROUP BY TO_CHAR(BUY_DATE,'YY/MM/DD')
+			ORDER BY BUY_DATE ASC
+	    ) O
+	ON O.BUY_DATE = D.BUY_DATE
+	ORDER BY D.BUY_DATE ASC
+	</select>
+
+
+		<!-- SELECT TO_CHAR(BUY_DATE,'YY/MM/DD') AS BUY_DATE
+		    , SUM(TOTAL_PRICE) AS TOTAL_PRICE
+		FROM ORDER_SHEET
+		WHERE BUY_DATE BETWEEN #{inputSDate}
+				    AND #{inputEDate}
+		GROUP BY TO_CHAR(BUY_DATE,'YY/MM/DD')
+		ORDER BY BUY_DATE ASC -->
 </mapper>
 

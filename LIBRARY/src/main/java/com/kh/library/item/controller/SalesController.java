@@ -1,6 +1,10 @@
 package com.kh.library.item.controller;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -72,7 +76,7 @@ public class SalesController {
 	
 	//매출현황페이지이동
 	@GetMapping("/salesStatus")
-	public String salesStatus(Model model) {
+	public String salesStatus(Model model, OrderSheetVO orderSheetVO) {
 		//일별매출
 		model.addAttribute("salesDay", salesService.selectSalesDay());
 		
@@ -92,6 +96,18 @@ public class SalesController {
 		model.addAttribute("deliPro", salesService.selectSalesItemStateDay("배송처리"));
 		model.addAttribute("deliFin", salesService.selectSalesItemStateDay("배송완료"));
 		model.addAttribute("cancle", salesService.selectSalesItemStateDay("취소요청"));
+		
+		//그래프 그릴때, 넣어줄 날짜와 매출 리스트
+		Date today = new Date();
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		String toDay = date.format(today);
+		Calendar mon = Calendar.getInstance();
+		mon.add(Calendar.MONTH , -1);
+		String beforeMonth = new java.text.SimpleDateFormat("yyyy-MM-dd").format(mon.getTime());
+		
+		orderSheetVO.setInputEDate(toDay);
+		orderSheetVO.setInputSDate(beforeMonth);
+		model.addAttribute("period", salesService.selcetSalesPeriod(orderSheetVO));
 		
 		return "item/sales_status";
 	}
