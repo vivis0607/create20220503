@@ -35,7 +35,14 @@
 							    <tr>
 							      <th scope="row">${status.index + 1 }</th>
 							      <td><a href="/book/bookDetail?bookCode=${borrow.bookCode }">${borrow.title }</a></td>
-							      <td>대여중</td>
+							      <c:choose>
+							      	<c:when test="${borrow.status eq 1 }">
+								      <td style="color:red;">연체중</td>
+							      	</c:when>
+							      	<c:otherwise>
+								      <td>대여중</td>
+								     </c:otherwise>
+							      </c:choose>
 							      <td>${borrow.brDate }</td>
 							      <td>${borrow.rtDate }</td>
 							    </tr>
@@ -51,6 +58,11 @@
 				  	</c:choose>
 				  </tbody>
 				</table>
+				<div>
+					<c:if test="${not empty limitDate }">
+						*${borrowVO.memId }님의 대여일은 ${limitDate }까지 제한되어 있습니다.
+					</c:if>
+				</div>
 			</div>
 		</div>
 		<div class="row">
@@ -95,7 +107,7 @@
 			</div>
 		</div>
 		<div class="col-8 d-grid gap-2 d-md-flex justify-content-md-end">
-			<button type="button" class="btn btn-primary" onclick="history.back();">목록</button>
+			<button type="button" class="btn btn-success" onclick="history.back();">목록</button>
 		</div>
 	</div>
 </div>

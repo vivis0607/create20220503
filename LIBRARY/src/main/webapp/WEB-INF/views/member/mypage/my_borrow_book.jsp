@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<input type="hidden" id="memId" value="${sessionScope.loginInfo.memId}">
 		<table>
 		<thead>
 			<tr>
@@ -23,7 +24,7 @@
 			<c:forEach items="${userBorrow }" var="borrow">
 				<tr>
 					<td>${borrow.rowNum }</td>
-					<td>${borrow.title }</td>
+					<td><p id="goDetail" onclick="getBkDetail(this);"><strong>${borrow.title }</strong></p></td>
 					<td>${borrow.isbn }</td>
 					<td>${borrow.brDate }</td>
 					<td>${borrow.rtDate }</td>
@@ -32,9 +33,11 @@
 						<c:when test="${borrow.status eq 1 }">연체</c:when>
 						<c:otherwise>반납완료</c:otherwise>	
 					</c:choose></td>
+					<td><input type="hidden" id="bookCode" value="${borrow.bookCode }"></td>
  				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+<script type="text/javascript" src="/resources/js/book/detail_book.js?ver=13"></script>
 </body>
 </html>

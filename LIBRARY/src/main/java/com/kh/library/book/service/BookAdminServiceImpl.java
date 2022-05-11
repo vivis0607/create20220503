@@ -59,7 +59,36 @@ public class BookAdminServiceImpl implements BookAdminService {
 	public String selectNextBookCode() {
 		return sqlSession.selectOne("bookMapper.selectNextBookCode");
 	}
-		
+	
+	//책 수정
+	@Override
+	public void updateBook(BookVO bookVO) {
+		sqlSession.update("bookMapper.updateBook",bookVO);
+	}
+
+	@Override
+	public void updateBkImg(BookImgVO vo) {
+		sqlSession.update("bookMapper.updateBkImg", vo);
+	}
+
+	@Override
+	public String selectBkAtName(String bookCode) {
+		return sqlSession.selectOne("bookMapper.selectBkAtName",bookCode);
+	}
+
+	//책 삭제
+	@Override
+	public void deleteBook(BookVO bookVO) {
+		sqlSession.update("bookMapper.deleteBook",bookVO);
+	}
+
+	//isDel 조회
+	@Override
+	public String selectIsDelete(String bookCode) {
+		return sqlSession.selectOne("bookMapper.selectIsDelete",bookCode);
+	}
+
+	
 	//추천도서 랭킹
 	@Override
 	public List<BookVO> selectRcdBook(){
@@ -72,18 +101,18 @@ public class BookAdminServiceImpl implements BookAdminService {
 		return sqlSession.selectList("bookMapper.selectNewBook");
 	}
 	
-	//예약 추가 
-	@Override
-	public void insertReserve(ReserveVO reserveVO) {
-		sqlSession.insert("bookMapper.insertReserve",reserveVO);
-	}
-	
 	//예약 목록 조회
 	@Override
 	public List<ReserveVO> selectRsvList(ReserveVO reserveVO) {
 		return sqlSession.selectList("bookMapper.selectRsvAdmin",reserveVO);
 	}
 	
+	//rtDate 조회
+	@Override
+	public String selectRtDate(BorrowVO borrowVO) {
+		String rtDate = sqlSession.selectOne("bookMapper.selectRtDate",borrowVO);
+		return rtDate;
+	}
 	
 	//도서 대여
 	@Override
@@ -111,6 +140,12 @@ public class BookAdminServiceImpl implements BookAdminService {
 	@Override
 	public List<BorrowVO> selectBrMember(BorrowVO borrowVO) {
 		return sqlSession.selectList("bookMapper.selectBrMember",borrowVO);
+	}
+	
+	//멤버별 대여제한 이력 조회
+	@Override
+	public MemberVO selectLimitDate(MemberVO memberVO) {
+		return sqlSession.selectOne("memberMapper.selectLimitDate",memberVO);
 	}
 
 	//도서 반납
@@ -146,6 +181,9 @@ public class BookAdminServiceImpl implements BookAdminService {
 		sqlSession.update("bookMapper.updateHpBook",hbVO);
 	}
 
+	
+	
+	
 	
 
 	

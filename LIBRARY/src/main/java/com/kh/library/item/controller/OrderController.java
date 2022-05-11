@@ -46,7 +46,7 @@ public class OrderController {
 		orderSheetVO.setMemId(((MemberVO)(session.getAttribute("loginInfo"))).getMemId());
 		model.addAttribute("buyViewList", orderService.purchaseDetails(orderSheetVO));
 		model.addAttribute("orderList", orderService.selectOrderNum(orderSheetVO));
-		return "item/order_list";
+		return "mypage/order_list";
 	}
 	
 	//구매내역기간검색
@@ -55,6 +55,6 @@ public class OrderController {
 		orderSheetVO.setMemId(((MemberVO)(session.getAttribute("loginInfo"))).getMemId());
 		model.addAttribute("buyViewList", orderService.purchaseDetails(orderSheetVO));
 		model.addAttribute("orderList", orderService.selectOrderPeriod(orderSheetVO));
-		return "item/order_list";
+		return "mypage/order_list";
 	}
 }

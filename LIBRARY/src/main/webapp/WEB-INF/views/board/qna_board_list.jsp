@@ -9,6 +9,7 @@
 <style type="text/css">
 .qnaContainer{
 	margin: 0 auto;
+	margin-top : 30px;
 	width: 80%;
 	text-align: center;
 }
@@ -21,7 +22,37 @@
 	height: 30px;
 	border: 1px solid gray;
 }
-
+button.img-button{
+	border: none;
+	background: transparent;
+	font-size: 1.125rem;
+}
+.fas{
+	color: black;
+}
+.keyword{
+	border: none;
+	border-bottom: 1px solid black;
+	outline: none;
+	background: transparent;
+	width: 300px;
+	color: black;
+	font-size: 1.063rem;
+	font-style: "Malgun Gothic";
+}
+select{
+	border: none;
+	outline: none;
+	width: 80px;
+	font-size: 1.125rem;
+	font-weight: 200;
+	background: transparent;
+	color: black;
+}
+.searchQnaDiv{
+	margin-bottom: 50px;
+	margin-top : 50px;
+}
 </style>
 </head>
 <body>
@@ -29,16 +60,19 @@
 	<div>
 		<h2>Q & A</h2>	
 	</div>
-	<div>
+	<div class="searchQnaDiv">
 		<form action="/otherB/searchQna" method="post">
-			<select id="sort" name="sort">
+			<select class="SelectSearch" id="sort" name="sort">
 				<option value="MEM_NAME">글쓴이</option>
-				<option value="QNA_TITLE">제목</option>
+				<option value="BOARD_TITLE">제목</option>
 			</select>
-			<input type="text" id="keyword" name="keyword">
-			<button type="submit">검색</button>
+			<input class="keyword" type="text" name="keyword" maxlength="255" autocomplete="off">
+			<button class="img-button" type="submit" name="click">
+				<i class="fas fa-search"></i>
+			</button>
 		</form>		
 	</div>
+	
 	<div>
 		<c:if test="${not empty sessionScope.loginInfo }">
 			<div>
@@ -70,7 +104,7 @@
 									<td>${qna.rownum }</td>
 									<td>
 										<c:choose>
-											<c:when test="${qna.qnaIsPrivate eq 'Y' }">
+											<c:when test="${qna.qnaIsPrivate eq 'Y' and sessionScope.loginInfo.memId ne 'admin' }">
 												<img alt="..." src="/resources/images/common/lockimg.png" height="20px;" width="20px;" style="float: left;">
 												<span class="qnaPwSpan" data-bs-target="#qnaPwModal" data-bs-toggle="modal" 
 												 	data-id="${qna.qnaNum }">${qna.qnaTitle }</span>

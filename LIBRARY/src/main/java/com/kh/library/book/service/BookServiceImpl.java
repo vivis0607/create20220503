@@ -62,13 +62,26 @@ public class BookServiceImpl implements BookService {
 		return sqlSession.selectOne("memberMapper.selectRsvInfo",memberVO);
 	}
 		
+	//중복예약제한
+	@Override
+	public String selectRsvCode(ReserveVO reserveVO) {
+		String rsvCode = sqlSession.selectOne("bookMapper.selectRsvCode",reserveVO);
+		return rsvCode;
+	}
+
+	//대여중같은도서예약제한
+	@Override
+	public String selectBrCode(BorrowVO borrowVO) {
+		String brCode = sqlSession.selectOne("bookMapper.selectBrCode",borrowVO);
+		return brCode;
+	}
 		
 	//도서 예약
 	@Override
-	public void reserve(BookVO bookVO) {
+	public void reserve(BookVO bookVO, MemberVO memberVO) {
 		sqlSession.insert("bookMapper.insertReserve", bookVO);
 		sqlSession.update("bookMapper.updateStatus",bookVO);
-		sqlSession.update("memberMapper.updateRsvCnt",bookVO);
+		sqlSession.update("memberMapper.updateRsvCnt",memberVO);
 	}
 	
 	// 유저 예약 도서 조회
@@ -79,10 +92,10 @@ public class BookServiceImpl implements BookService {
 	
 	//유저 예약 취소
 	@Override
-	public void deleteReserve(ReserveVO reserveVO) {
+	public void deleteReserve(ReserveVO reserveVO, MemberVO memberVO) {
 		sqlSession.delete("bookMapper.deleteRsvList", reserveVO);
 		sqlSession.update("bookMapper.updateBookInfo", reserveVO);
-		sqlSession.update("memberMapper.updateCancelRsvCnt",reserveVO);
+		sqlSession.update("memberMapper.updateCancelRsvCnt",memberVO);
 	}
 	
 	//유저 대여 목록 조회
@@ -90,6 +103,7 @@ public class BookServiceImpl implements BookService {
 	public List<BorrowVO> selectBrUser(BorrowVO borrowVO){
 		return sqlSession.selectList("bookMapper.selectBrUser",borrowVO);
 	}
+	
 	
 	
 	//희망도서 신청
@@ -103,6 +117,13 @@ public class BookServiceImpl implements BookService {
 	public List<HopeBookVO> selectHpUser(HopeBookVO hbVO) {
 		return sqlSession.selectList("bookMapper.selectHpUser",hbVO);
 	}
+
+	//유저 희망도서 상태별 조회
+	@Override
+	public List<HopeBookVO> selectHpStatusUser(HopeBookVO hbVO) {
+		return sqlSession.selectList("bookMapper.selectHpStatusUser",hbVO);
+	}
+
 
 
 

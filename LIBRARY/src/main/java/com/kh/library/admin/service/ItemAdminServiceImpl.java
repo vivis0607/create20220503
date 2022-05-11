@@ -24,12 +24,6 @@ public class ItemAdminServiceImpl implements ItemAdminService {
 	}
 
 	@Override
-	public void insertItemImges(ItemImgVO itemImgVO) {
-		sqlSession.insert("itemMapper.insertItemImg", itemImgVO);
-		
-	}
-
-	@Override
 	public int selectNextItemImgCode() {
 		return sqlSession.selectOne("itemMapper.NextImgCode");
 	}
@@ -91,12 +85,17 @@ public class ItemAdminServiceImpl implements ItemAdminService {
 		sqlSession.update("itemMapper.updateItem", itemVO);
 		
 	}
-	@Transactional(rollbackFor = Exception.class)
-	public void updateItemImgs(ItemImgVO itemImgVO) {
-		sqlSession.delete("itemMapper.deleteItemImgAll",itemImgVO );
-		sqlSession.insert("itemMapper.insertItemImg", itemImgVO);
-		
+
+	@Override
+	public void deleteItemImgAll(ItemImgVO itemImgVO) {
+		sqlSession.delete("itemMapper.deleteItemImgAll", itemImgVO);
 	}
+
+	@Override
+	public void insertItemImges(ItemImgVO itemImgVO) {
+		sqlSession.insert("itemMapper.insertItemImg", itemImgVO);
+	}
+	
 
 	
 

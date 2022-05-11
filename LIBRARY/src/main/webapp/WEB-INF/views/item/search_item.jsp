@@ -7,6 +7,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.searchContainer{
+	margin: 0 auto;
+	text-align: center;
+}
+.searchDiv{
+   display: inline-block; 
+   border: 2px solid #DDDDDD; 
+   border-radius: 48px; 
+   width: 450px; 
+   height: 45px; 
+   text-align: center;
+}
+.searchDiv input[type="text"]{
+   width: 350px; 
+   height: 40px; 
+   vertical-align: middle; 
+   border: none; 
+   outline: 0;
+}
+</style>
 </head>
 <body>
 <div>
@@ -14,11 +35,17 @@
 		<div>
 			" ${keyword } "에 대한 ${itemCnt }개의 통합 검색결과입니다
 		</div>
-		<div>
-			<form action="/item/searchItem" method="post">
-	  			<input type="text" name="keyword" id="keyword">
-	 			<button type="submit">검색</button>
-			</form>
+		<div class="searchContainer">
+			<div class="searchDiv">
+				<form action="/item/searchItem" method="post" id="searchForm">
+			      <span>
+			         <input type="text" name="keyword" id="keyword" onkeydown="if (event.keyCode == 13) { search(); }"> 
+			         <span onclick="search();" style="cursor: pointer;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+			              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+			         </svg></span>
+			      </span>
+				</form>
+		    </div>
 		</div>
 	</div>
 	<div class="row itemList">
@@ -37,5 +64,11 @@
 		</c:forEach>
 	</div>
 </div>
+
+<script type="text/javascript">
+	function search(){
+		document.getElementById('searchForm').submit();
+	}
+</script>
 </body>
 </html>

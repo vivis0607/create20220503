@@ -14,8 +14,14 @@ public class ItemVO {
 	private String[] itemCodeArr;
 	private String keyword;
 	private int itemCnt;
+	private String isDelete;
 	
-	
+	public String getIsDelete() {
+		return isDelete;
+	}
+	public void setIsDelete(String isDelete) {
+		this.isDelete = isDelete;
+	}
 	public int getItemCnt() {
 		return itemCnt;
 	}

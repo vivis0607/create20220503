@@ -201,12 +201,6 @@
 	WHERE ITEM_CODE = #{itemCode}
 	</delete>
 	
-	<!-- ITEM이미지 삭제 -->
-	<delete id="deleteItemImgAll">
-		DELETE ITEM_IMAGE
-		WHERE ITEM_CODE = #{itemCode}	
-	</delete>
-	
 	<!-- 선택된 ITEM 삭제유무 업데이트 -->
 	<update id="updateIsDeleteItems">
 		UPDATE ITEM
@@ -245,6 +239,11 @@
 		WHERE ITEM_CODE = #{itemCode}
 	</update>
 	
+	<!-- ITEM이미지 삭제 -->
+	<delete id="deleteItemImgAll">
+		DELETE ITEM_IMAGE
+		WHERE ITEM_CODE = #{itemCode}	
+	</delete>
 	
 	
 </mapper>

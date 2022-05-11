@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<h2>도서대여목록</h2>
 	<table>
 		<thead>
@@ -48,8 +49,11 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div id="member">
+		<input type="hidden" id="limitDate" name="limitDate" value="${member.limitDate }"/>
 
-
+	</div>
+	
 
 
 <!-- 정상 반납 Modal -->
@@ -85,6 +89,7 @@
 	  <input type="hidden"  id="originIsbn" 	value="">
 	  <input type="hidden"  id="originLimitDate" value="">
 	  
+	  
 	  <input type="hidden" id="brCode" name="brCode">
 	  <input type="hidden" id="isbn" name="isbn">
 	  <input type="hidden" id="memId" name="memId">
@@ -102,7 +107,7 @@
  	</form> 
  </div>	
 
-<script type="text/javascript" src="/resources/js/book/admin_returnBook.js?ver=34"></script>
-<script type="text/javascript" src="/resources/js/book/admin_returnOverdue.js?ver=20"></script>
+<script type="text/javascript" src="/resources/js/book/admin_returnBook.js?ver=36"></script>
+<script type="text/javascript" src="/resources/js/book/admin_returnOverdue.js?ver=28"></script>
 </body>
 </html>

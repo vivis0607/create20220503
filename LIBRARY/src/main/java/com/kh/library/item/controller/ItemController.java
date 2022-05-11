@@ -62,14 +62,14 @@ public class ItemController {
 		model.addAttribute("itemList",itemService.selectItems(itemVO));
 		model.addAttribute("cateList",itemService.selectItemCategory());
 		
-		return "item/item_manage";
+		return "admin/item_manage";
 	}
 	
 	//아이템등록양식이동
 	@GetMapping("/insertItem")
 	public String insertItemForm(Model model) {
 		model.addAttribute("cateList",itemService.selectItemCategory());
-		return "item/add_item";
+		return "admin/add_item";
 	}
 	
 	//아이템 등록하기
@@ -156,84 +156,14 @@ public class ItemController {
 	public String updateItemForm(String itemCode, Model model) {
 		model.addAttribute("item",itemService.selectItemDetail(itemCode));
 		model.addAttribute("cateList",itemService.selectItemCategory());
-		return "item/update_item";
+		return "admin/update_item";
 	}
 	//아이템 수정
 	@PostMapping("/updateItem")
 	public String updateItem(ItemVO itemVO, MultipartHttpServletRequest multi) {
-		
-		//이미지저장공간세팅
-		List<ItemImgVO> imgList = new ArrayList<ItemImgVO>();
-		ItemImgVO itemImgVO = new ItemImgVO();
-		//다음에 들어갈 itemCode, itemImgCode 조회
-		int nextItemImgCode = itemAdminService.selectNextItemImgCode();
-		
-		//파일업로드
-		Iterator<String> inputTagNames = multi.getFileNames();
-		String uploadPath = "C:\\Users\\fierc\\OneDrive\\Desktop\\workspaceSTS\\LIBRARY\\src\\main\\webapp\\resources\\images\\item\\";
-		
-		while(inputTagNames.hasNext()) {
-			String inputTagName = inputTagNames.next();
-			
-			// 다중첨부
-			if(inputTagName.equals("subImg")) {
-				List<MultipartFile> fileList = multi.getFiles(inputTagName);
-				for(MultipartFile file : fileList) {
-					//원본파일명
-					String originFileName = file.getOriginalFilename();
-			
-					if(!originFileName.equals("")) {
-						//첨부할 파일명
-						String attachedFileName = System.currentTimeMillis()+"_"+originFileName;
-						
-						try {
-							file.transferTo(new java.io.File(uploadPath+attachedFileName));
-							ItemImgVO vo = new ItemImgVO();
-							vo.setItemImgCode(nextItemImgCode++);
-							vo.setItemOriginName(originFileName);
-							vo.setItemAtImgName(attachedFileName);
-							vo.setIsMain("N");
-							vo.setItemCode(itemVO.getItemCode());
-							imgList.add(vo);
-						} catch (IllegalStateException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						
-					}
-				}
-			}
-			//단일첨부
-			else {
-				MultipartFile file = multi.getFile(inputTagName);
-				String originFileName = file.getOriginalFilename();
-				
-				if(!originFileName.equals("")) {
-					String attachedFileName = System.currentTimeMillis()+"_"+originFileName;
-					
-					try {
-						file.transferTo(new java.io.File(uploadPath+attachedFileName));		
-						ItemImgVO vo = new ItemImgVO();
-						vo.setItemImgCode(nextItemImgCode++);
-						vo.setItemOriginName(originFileName);
-						vo.setItemAtImgName(attachedFileName);
-						vo.setIsMain("Y");
-						vo.setItemCode(itemVO.getItemCode());
-						imgList.add(vo);
-					} catch (IllegalStateException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			} 		
-		}//--이미지첨부끝!//	
-		//굿즈 insert
-		itemImgVO.setItemImgList(imgList);
 		itemAdminService.updateItem(itemVO);
 		
-
+		
 		return "redirect:/item/itemManage";
 	}
 	
@@ -256,7 +186,7 @@ public class ItemController {
 	public String itemCateManage(Model model, String add) {
 		model.addAttribute("cateList",itemService.selectItemCategory());
 		model.addAttribute("add",add);
-		return "item/item_cate_manage";
+		return "admin/item_cate_manage";
 	}
 	
 	//아이템 카테고리 추가

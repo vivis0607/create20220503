@@ -9,7 +9,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<form action="/member/hopeBookStatusU?memId=${loginInfo.memId}" method="post" id="searchBook">
+	<!-- 검색구분 선택 -->
+	<label for="select">현재 신청 상태</label>
+		<select name="searchSub">
+			<option value="all" >전체</option>
+			<option value="0">승인대기</option>
+			<option value="1">처리중</option>
+			<option value="2">소장중</option>
+		</select>
+		<input type="submit" value="적용">
+	</form>
 	<table>
 			<thead>
 				<tr>
@@ -34,7 +44,8 @@
 						<td><c:choose>
 							<c:when test="${hbBook.status eq 0}">승인대기</c:when>
 							<c:when test="${hbBook.status eq 1 }">처리중</c:when>
-							<c:otherwise>소장중</c:otherwise>	
+							<c:when test="${hbBook.status eq 2 }">소장중</c:when>
+							<c:otherwise>거절</c:otherwise>	
 						</c:choose></td>
 	 				</tr>
 				</c:forEach>

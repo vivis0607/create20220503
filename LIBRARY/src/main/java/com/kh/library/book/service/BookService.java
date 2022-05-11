@@ -32,14 +32,20 @@ public interface BookService {
 	//예약 권한 조회
 	MemberVO selectRsvInfo(MemberVO memberVO);
 	
+	//중복예약방지 
+	String selectRsvCode(ReserveVO reserveVO);
+	
+	//대출시예약방지
+	String selectBrCode(BorrowVO borrowVO);
+	
 	//도서 예약 기능
-	void reserve(BookVO bookVO);
+	void reserve(BookVO bookVO, MemberVO memberVO);
 	
 	//유저 예약 도서 조회
 	List<ReserveVO> selectRsvUser(ReserveVO reserveVO);
 	
 	//유저 예약 취소
-	void deleteReserve(ReserveVO reserveVO);
+	void deleteReserve(ReserveVO reserveVO,MemberVO memberVO);
 
 	
 	//유저 대여 목록 조회
@@ -49,8 +55,12 @@ public interface BookService {
 	//희망도서 신청 기능
 	void insertHopeBook(HopeBookVO hbVO);
 	
+	
 	//유저 희망도서 목록 조회
 	List<HopeBookVO> selectHpUser(HopeBookVO hbVO);
+
+	//유저 희망도서 상태별 조회
+	List<HopeBookVO> selectHpStatusUser(HopeBookVO hbVO);
 
 	
 	

@@ -47,6 +47,7 @@ public interface ItemAdminService {
 	//아이템 수정
 	void updateItem(ItemVO itemVO);
 	
-	//아이템이미지 수정
-	public void updateItemImgs(ItemImgVO itemImgVO);
+	//아이템이미지 전체삭제
+	void deleteItemImgAll(ItemImgVO itemImgVO);
+	
 }

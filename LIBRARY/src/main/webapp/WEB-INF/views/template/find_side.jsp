@@ -8,10 +8,10 @@
 <style type="text/css">
 	.find-container{
 		background-color: #efefef;
+		width: 300px;
 	}
 	.sideBodyDiv{
 	width: 100%;
-	display: flex;
 	
 	} 
 </style>

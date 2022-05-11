@@ -4,6 +4,7 @@ package com.kh.library.item.controller;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -29,7 +30,7 @@ public class SalesController {
 	@GetMapping("/orderStateManage")
 	public String orderStateManage(Model model) {
 		model.addAttribute("salesList",salesService.selectOrderAll());
-		return "item/order_state_update";
+		return "admin/order_state_update";
 	}
 	
 	//주문내역 배송상태 건별 변경
@@ -57,21 +58,21 @@ public class SalesController {
 	@GetMapping("/searchKindState")
 	public String searchKindState(OrderSheetVO orderSheetVO, Model model) {
 		model.addAttribute("salesList",salesService.searchKindState(orderSheetVO));
-		return "item/order_state_update";		
+		return "admin/order_state_update";		
 	}
 	
 	//주문내역 기간조회
 	@PostMapping("/searchStatePeriod")
 	public String searchStatePeriod(Model model, OrderSheetVO orderSheetVO) {
 		model.addAttribute("salesList",salesService.searchStatePeriod(orderSheetVO));
-		return "item/order_state_update";		
+		return "admin/order_state_update";		
 	}
 	
 	//주문내역 조건검색
 	@PostMapping("/searchOrderState")
 	public String searchOrderState(Model model, OrderSheetVO orderSheetVO) {
 		model.addAttribute("salesList",salesService.searchOrderState(orderSheetVO));
-		return "item/order_state_update";		
+		return "admin/order_state_update";		
 	}
 	
 	//매출현황페이지이동
@@ -109,10 +110,14 @@ public class SalesController {
 		orderSheetVO.setInputSDate(beforeMonth);
 		model.addAttribute("period", salesService.selcetSalesPeriod(orderSheetVO));
 		
-		return "item/sales_status";
+		return "admin/sales_status";
 	}
 	
-	
+	@ResponseBody
+	@PostMapping("/sByItemStatePeriod")
+	public List<OrderSheetVO> sByItemStatePeriod(OrderSheetVO orderSheetVO) {
+		return salesService.selcetSalesPeriod(orderSheetVO);
+	}
 	
 	
 	

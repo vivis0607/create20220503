@@ -330,6 +330,7 @@
 	<select id="selectOrderPeriod" resultMap="order">
 		SELECT ORDER_NUM
 			, BUY_DATE
+			, ITEM_STATE
 		FROM ORDER_SHEET
 		WHERE MEM_ID = #{memId}
 		AND BUY_DATE BETWEEN TO_DATE(#{inputSDate})
@@ -487,17 +488,15 @@
 	SELECT D.BUY_DATE AS BUY_DATE, 
 	    DECODE(O.TOTAL_PRICE, NULL, 0, O.TOTAL_PRICE) AS TOTAL_PRICE
 	FROM (
-			SELECT TO_DATE(#{inputSDate}, 'YYYYMMDD') + LEV - 1 AS BUY_DATE
-		        FROM (SELECT LEVEL LEV
-	       			FROM DUAL
-			        CONNECT BY LEVEL &lt;= (TO_DATE(#{inputEDate}, 'YYYYMMDD') - TO_DATE(#{inputSDate}, 'YYYYMMDD')+1)
-			        )
+			 SELECT TO_CHAR(TO_DATE(TO_DATE(#{inputSDate}, 'YYYY-MM-DD') + LEVEL - 1, 'YY/MM/DD'),'YY/MM/DD') as BUY_DATE
+	         FROM DUAL
+	         CONNECT BY LEVEL &lt;= TO_DATE(#{inputEDate}, 'YYYY-MM-DD') - TO_DATE(#{inputSDate}, 'YYYY-MM-DD') + 1
 	    ) D LEFT OUTER JOIN (
 	        SELECT TO_CHAR(BUY_DATE,'YY/MM/DD') AS BUY_DATE
 			    , SUM(TOTAL_PRICE) AS TOTAL_PRICE
 			FROM ORDER_SHEET
 			WHERE BUY_DATE BETWEEN #{inputSDate}
-					    AND #{inputEDate}
+					    AND TO_DATE(#{inputEDate})+0.9999
 			GROUP BY TO_CHAR(BUY_DATE,'YY/MM/DD')
 			ORDER BY BUY_DATE ASC
 	    ) O
@@ -505,13 +504,5 @@
 	ORDER BY D.BUY_DATE ASC
 	</select>
 
-
-		<!-- SELECT TO_CHAR(BUY_DATE,'YY/MM/DD') AS BUY_DATE
-		    , SUM(TOTAL_PRICE) AS TOTAL_PRICE
-		FROM ORDER_SHEET
-		WHERE BUY_DATE BETWEEN #{inputSDate}
-				    AND #{inputEDate}
-		GROUP BY TO_CHAR(BUY_DATE,'YY/MM/DD')
-		ORDER BY BUY_DATE ASC -->
 </mapper>
 

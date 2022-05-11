@@ -31,15 +31,15 @@ public class ClubAdminController {
 	//클럽관리
 	@GetMapping("/clubAdmin")
 	public String clubAdmin(ClubApplyVO clubApplyVO, Model model, MemberVO memberVO) {
-		model.addAttribute("clubMemList", clubAdminService.selectClubMemberList(memberVO));
+		model.addAttribute("clubMemList", clubAdminService.selectClubAdminMemberList(memberVO));
 		model.addAttribute("applyList", clubAdminService.selectClubApplyList(clubApplyVO));
-		return "club/club_manage1";
+		return "club/club_manage";
 	}
 	
 	//클럽수락
 	@ResponseBody
 	@PostMapping("/clubJoinAcceptance")
-	public void clubJoinAcceptance(ClubApplyVO clubApplyVO, HttpSession session) {
+	public void clubJoinAcceptance(ClubApplyVO clubApplyVO) {
 		String getId = clubApplyVO.getMemId();
 		clubAdminService.updateAndDeleteClubAcceptance(clubApplyVO, getId);
 		

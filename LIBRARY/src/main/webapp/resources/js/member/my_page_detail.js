@@ -1,6 +1,7 @@
 //기본정보 조회 시, value값 표시하기
 const birth = document.querySelector('.modal-body-plus input[type="hidden"]').value;
 const result = birth.replace(/[^0-9]/g, '').replace(/^(\d{0,4})(\d{0,2})(\d{0,2})$/g, '$1-$2-$3');
+
 document.querySelector('.modal-body-plus input[type="date"]').value = result;
 
 //기본정보 변경 시 변경되는 프로필 이미지 미리보기
@@ -17,6 +18,18 @@ function previewFile(){
 		reader.readAsDataURL(file);
 	}
 }
+//프사 삭제
+
+function deleteProfileImage(){
+	let preview = document.getElementById('thumbnail');
+
+	
+	preview.src = '/resources/images/member/profile_sample.jpg';
+	
+
+	
+}
+
 
 //기본정보 유효성 검사
 
@@ -25,12 +38,12 @@ $('#basicForm').validate({
 
       rules: {
 		memTell:{
-			number:true
+			digits:true
 		}
       },
       messages: {
 		memTell:{
-			number:'전화번호 표기 방식이 올바르지 않습니다'
+			digits:'전화번호 표기 방식이 올바르지 않습니다'
 		}
       },
       errorElement:'div',
@@ -43,6 +56,8 @@ $('#basicForm').validate({
          form.submit();   //유효성 검사를 통과시 전송
       }
    });
+
+
 //보안정보 유효성 검사
 
 $('#secretForm').validate({

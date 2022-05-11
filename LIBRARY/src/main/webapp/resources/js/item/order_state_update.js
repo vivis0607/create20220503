@@ -1,6 +1,7 @@
-function updateItemState(){
-	var updateItemState = document.getElementById('updateItemState');
+function updateItemState(selectedTag){
+	var updateItemState = selectedTag.closest('td').previousElementSibling.firstElementChild;
 	updateItemState.submit();
+	alert('적용되었습니다');
 }
 
 //체크박스 전체선택, 전체해제

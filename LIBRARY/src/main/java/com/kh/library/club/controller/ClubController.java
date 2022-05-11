@@ -37,9 +37,18 @@ public class ClubController {
 	//북클럽 목록 조회
 	@GetMapping("/clubList")
 	public String clubList(Model model, HttpSession session, ClubVO clubVO, MemberVO memberVO) {
+		
+		if(session.getAttribute("loginInfo") != null) {
+			String getId = ((MemberVO)(session.getAttribute("loginInfo"))).getMemId();
+			String memId = ((MemberVO)(session.getAttribute("loginInfo"))).getMemId();
+			
+			model.addAttribute("msgCnt", clubService.selectMsgCount(getId));
+			model.addAttribute("clubApplyCode", clubService.selectClubApplyCode(memId));
+		}
+		
 		model.addAttribute("clubList", clubService.selectClubList(clubVO));
 		
-		return "club/club_list";
+		return "club/club_list1";
 	}
 	
 	//북클럽 생성페이지 이동
@@ -176,8 +185,6 @@ public class ClubController {
 		return "redirect:/club/clubList";
 	}
 	
-	//
-	
 	//-------------------------알림함--------------------------
 	@GetMapping("/getMsgList")
 	public String getMsgList(Model model, HttpServletRequest request) {
@@ -187,11 +194,17 @@ public class ClubController {
 		return "club/message";
 	}
 	@ResponseBody
-	@PostMapping("/getMsgList1")
-	public List<MessageVO> getMsgList1(Model model, HttpServletRequest request, HttpSession session) {
+	@PostMapping("/getMsgList")
+	public List<MessageVO> getMsgList1(Model model, HttpSession session) {
 		String getId = ((MemberVO)(session.getAttribute("loginInfo"))).getMemId();
 		return messageService.selectGetMsgList(getId);
 	}
 	
+	//알림읽음 표시
+	@ResponseBody
+	@PostMapping("/updateMsgIsRead")
+	public void updateMsgIsRead(String msgCode) {
+		clubService.updateMsgIsRead(msgCode);
+	}
 	
 }

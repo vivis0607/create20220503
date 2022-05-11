@@ -40,6 +40,17 @@ table tr, td{
 	position: fixed;
 	bottom: 0;
 }
+.nav .nav__list-link{
+	position: relative;
+}
+
+.nav .nav_badge{
+	position: absolute;
+	top : -10px;
+	right: 0px;
+	color: white;
+	background-color: #dc5d46;
+}
 </style>
 </head>
 <body>
@@ -92,12 +103,12 @@ table tr, td{
 	<input type="hidden" id="clubCode" value="${sessionScope.loginInfo.clubCode }">
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- 회원알림창Modal -->
+<div class="modal fade" id="msgModal" tabindex="-1" aria-labelledby="msgModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="msgModalLabel">Modal title</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

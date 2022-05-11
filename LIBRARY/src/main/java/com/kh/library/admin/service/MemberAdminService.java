@@ -26,6 +26,9 @@ public interface MemberAdminService {
 	//클럽수락 메세지
 	void insertClubJoinMessage(MessageVO messageVO);
 	
+	//희망도서 메세지
+	void insertHopeBookMessage(MessageVO messageVO);
+	
 	//대여정보
 	List<BorrowVO> selectBorrowBookInfo(String memId);
 	
@@ -37,5 +40,8 @@ public interface MemberAdminService {
 	
 	//알림상세보기
 	MessageVO selectSendMessageDetail(String msgCode);
+	
+	//예약제한일
+	String selectLimitDate(String memId);
 	
 }

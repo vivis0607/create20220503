@@ -1,5 +1,34 @@
+//검색
+$(document).on('click', '#button-addon2' , function() {
+	var keyword = $('#keyword').val();
+	location.href = '/admin/memberManage?keyword=' + keyword;	
+});
+
+// 알림전송내역 상세조회
+$(document).on('click', '.adminMsgDetail' , function() {
+	var getId= $(this).children().eq(0).text();
+	var msgContent= $(this).children().eq(1).text();
+	var sendDate = $(this).children().eq(2).text();
+
+
+	$('#getId').text(getId);
+	$('#msgContent').text(msgContent);
+	$('#sendDate').text(sendDate);
+
+	$('#adminMsgModal').modal('hide');
+	$('#adminMsgDetailModal').modal('show');
+
+});
+
+//목록
+$(document).on('click', '#adminMsgList' , function() {
+	$('#adminMsgDetailModal').modal('hide');
+	$('#adminMsgModal').modal('show');
+});
+
+//메세지 전송 유효성 검사
 function byteCheck(obj, maxByte){
-	
+
 	var str = obj.value;
     var str_len = str.length;
 
@@ -35,23 +64,26 @@ function byteCheck(obj, maxByte){
         document.getElementById('byteInfo').innerText = rbyte;
      }	
 }
+
 //모달에 id값 넘겨주기
 $(".open-msgModal").click(function(){
 	var data = $(this).data('id');
     $("#get-name.form-control").val(data);
 });
 
+//알림 전송 확인창
 function sendMsg(){
 	var result = confirm('알림을 전송하시겠습니까?');
 	var formTag = document.getElementById('sendMsg');
-	
+
 	if(result){
 		formTag.submit();
+		$('#sendMessageModal').modal('hide');
 	}
-	
+
 }
 
-// 알림전송내역 모달 띄우기
+// 알림전송내역 모달
 
 function sendMsgList(){
 	$.ajax({
@@ -59,40 +91,22 @@ function sendMsgList(){
 		type: 'post',
 		data: {}, 
 		success: function(result) {
-			var modalBody =  document.querySelector('#msgModalToggle .modal-body');
-			modalBody.innerHTML = '';
-			
+			var tbody =  document.querySelector('#adminMsgModalTable tbody');
+			tbody.innerHTML = '';
+
 			var str = '';
-			str += '<table class="table text-center table-hover" style="table-layout: fixed; ">';
-			 str += '  <colgroup>                                                 ';
-            str += '     <col width="10%">                                       ';
-            str += '     <col width="*">                                       ';
-            str += '     <col width="15%">                                         ';
-            str += '     <col width="20%">                                       ';
-			str += '<thead>';
-			str += '<tr>';
-			str += '<th scope="col">No</th>';
-			str += '<th scope="col">내용</th>';
-			str += '<th scope="col">회원ID</th>';
-			str += '<th scope="col">전송날짜</th>';
-			str += '</tr>';
-			str += '</thead>';
-			str += '<tbody>';
-			
-			for(var i = 0; i < result.length; i++){
-				str += '<tr>';
-				str += '<th scope="row">'+ 0 +'</th>';
-				str += '<td style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"><span id="open-msgDetail" onclick="sendMsgDetail(${'+ result[i].msgCode +'});" data-bs-toggle="modal" data-bs-target="#msgModalToggle2" data-id="${'+ result[i].msgCode +'}">'+ result[i].msgContent +'</span></td>';
-				str += '<td>'+ result[i].getId +'</td>';
-				str += '<td style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">'+ result[i].sendDate +'</td>';
-				str += '</tr>';
-			}
-			str += '</tbody>';
-			str += '</table>';
-			
-			modalBody.innerHTML = str;
-			
-			$('#msgModalToggle').modal('show');
+			$(result).each(function(index, item){
+
+					str += '<tr class="adminMsgDetail">';
+					str += '<td>'+ item.getId +'</td>';
+					str += '<td class="msgDetail" style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"><span id="open-msgDetail" data-msgCode="'+ item.msgCode +'">'+ item.msgContent +'</span></td>';
+					str += '<td style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">'+ item.sendDate +'</td>';
+					str += '</tr>';
+
+
+			});	
+				$('#adminMsgModalTable tbody').prepend(str);
+				$('#adminMsgModal').modal('show');
 		},
 		error: function() {
 			//ajax 실행 실패 시 실행되는 구간
@@ -102,48 +116,6 @@ function sendMsgList(){
 }
 
 
-function sendMsgDetail(msgCode){
-	$.ajax({
-		url: '/admin/sendMsgDetail', 
-		type: 'post',
-		data: {'msgCode':msgCode}, 
-		success: function(result) {
-			var modalBody =  document.querySelector('#msgModalToggle2 .modal-body');
-			modalBody.innerHTML = '';
-			
-			var str = '';
-			str += '<table class="table text-center table-hover" style="table-layout: fixed; ">';
-			str += '  <colgroup>                                                 ';
-            str += '     <col width="25%">                                       ';
-            str += '     <col width="25%">                                       ';
-            str += '     <col width="25%">                                       ';
-            str += '     <col width="25%">                                       ';
-			str += '<tr>';
-			str += '<th scope="col">회원ID</th>';
-			str += '<td>' + result.getId + '</td>';
-			str += '<th scope="col">전송날짜</th>';
-			str += '<td>'+ result.sendDate +'</td>';
-			str += '</tr>';
-			str += '<tr>';
-			str += '<th scope="col">내용</th>';
-			str += '<td colspan="4" style="word-break: break-all">'+ result.msgContent +'</td>';
-			str += '</tr>';
-			str += '</table>';
-			
-			modalBody.innerHTML = str;
-			var msgCode = $(this).data('id');
-		$("#msgCode1.msgCode2").val(msgCode);
-				$('#msgModalToggle').modal('hide');
-				$('#msgModalToggle2').modal('show');
-		},
-		error: function() {
-			//ajax 실행 실패 시 실행되는 구간
-			alert('실패');
-		}
-	});
-}	
-	
-	
 //대여정보 id값
 function borrowInfo(memId){
 	location.href = '/admin/borrowInfo?memId=' + memId;
@@ -155,11 +127,3 @@ function search(nowPage){
 	var formTag = document.getElementById('searchForm');
 	formTag.submit();	
 }
-	
-	
-	
-	
-	
-	
-	
-	

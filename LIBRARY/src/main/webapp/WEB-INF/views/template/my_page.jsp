@@ -19,8 +19,34 @@
 	
 	table, tr, td{
 		border-collapse: collapse;
-		border: 1px solid black;
+		border: 1px soilid black;
 	}
+	
+	.myPageLeftDiv table td{
+		height: 2.5rem;
+		padding-left: 3rem;
+	}
+	
+	@keyframes tdhover{
+		from{
+			width: 0;
+			background-color: white;
+			color: #246350;
+		}
+		to{
+			width: 100%;
+			background-color: #246350;
+			color: white;
+		}
+	}
+	.myPageLeftDiv table td:hover{
+		animation: tdhover 0.1s linear forwards;
+	}
+	a:hover{
+		color: inherit;
+	} 
+	
+	
 	.myPageDiv{
 		width: 85%;
 		margin: 0px auto;
@@ -31,15 +57,22 @@
 	}
 	
 	.myPage-simple{
-		border: 1px solid black;
 		display: flex;
 		flex-direction: column;
+		margin-bottom: 2rem;
+		border-radius: 10px;
+		color: #246350;
+		font-size: 1.2rem;
+		text-align: center;
 	}
 	.myPage-simple img{
 		width: 100%;
 		height: 290px;
 		object-fit:cover;
+		border-radius: 100%;
+		margin-bottom: 1rem;
 	}
+	
 </style>
 </head>
 <body>
@@ -54,13 +87,12 @@
 				<div>
 					<img alt="" src="/resources/images/member/${loginInfo.memImage }">
 				</div>
-				<div>
-				${loginInfo.memName }님
-				대출정보</div>
+				<div>${loginInfo.memName }님의 마이페이지</div>
+				<div>현재 대여 중인 도서 : ${loginInfo.brCnt }권</div>
 			</div>
 				<table>
 					<tr>
-						<td>
+						<td class="bubbly-button">
 							<a href="/member/myPageDetail?memId=${loginInfo.memId}">
 						내 정보 상세조회</a></td>
 					</tr>
@@ -79,7 +111,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td><a>구매목록 상세조회</a></td>
+						<td><a href='/order/orderList'>구매목록 상세조회</a></td>
 					</tr>
 					<tr>
 						<td><a href="/member/bookPlaner?memId=${loginInfo.memId }">독서 플래너</a></td>
@@ -97,5 +129,6 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript" src="/resources/js/member/my_page.js?ver=0"></script>
 </body>
 </html>

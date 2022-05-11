@@ -35,7 +35,8 @@
 		left: 30px;
 		
 	}
-	button {
+	.pageName div {
+		display: inline-block;
 		margin-top: 1rem;
 		padding: 2px 7px;
 		background-color: #FDFAF6;
@@ -55,12 +56,36 @@
 		display: flex;
 		justify-content: space-around;
 	}
+	#toread-form input[type="text"]{
+		border: none;
+		border-bottom: 1px solid #efefef;
+		margin: 1rem auto;
+	}
+	#toread-form input::placeholder {
+		color: white;
+		text-align: center;
+	}
+	
+	@keyframes slideIn{
+		from{
+			width: 0;
+			border-bottom: 2px solid #FFF891;
+		}
+		to{
+			width: 100%;
+			border-bottom: 2px solid #FFF891;
+		}
+	}
+	
+	#toread-form input:focus {
+		animation: slideIn 0.3s linear forwards;
+	}
 	
 </style>
 </head>
 <body>
 <div class="pageName">
-독서 플래너 <button onclick="location.href='/member/bookPlanerForm';">기록하기</button>
+독서 플래너 <div onclick="location.href='/member/bookPlanerForm';">기록하기</div>
 </div>
 <div class="bookPlaner-top">
 	<div class="bookPlaner-top-left">
@@ -71,10 +96,12 @@
 	</div>
 	<div class="bookPlaner-top-right">
 		TO READ LIST
-		<ul>
-			<li>칵테일, 러브, 좀비</li>
-			<li>쇼코의 미소</li>
-		</ul>
+		<form action="" id="toread-form">
+			<input type="text" placeholder="입력 후 엔터를 누르세요" required>
+			<ul id="toread-list">
+			</ul>
+			<input type="hidden" name="memId" value="${loginInfo.memId }">
+		</form>
 	</div>
 </div>
 <div class="complitBookList">
@@ -102,7 +129,7 @@
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-<script type="text/javascript" src="/resources/js/member/book_planer.js?ver=3"></script>
+<script type="text/javascript" src="/resources/js/member/book_planer.js?ver=13"></script>
 </body>
 </html>
 

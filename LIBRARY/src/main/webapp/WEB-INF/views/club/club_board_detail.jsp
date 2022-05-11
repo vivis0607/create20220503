@@ -18,8 +18,10 @@
 		<div class="col-4" style="margin-top: 10px;">
 			<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="history.back();">목록</button>
 		<c:if test="${clubBoard.memId eq sessionScope.loginInfo.memId }">
-			<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="location.href='/club/clubBoardUpdate?cbBoardNum=${clubBoard.cbBoardNum}&&clubCode=${clubBoard.clubCode }';">수정</button>
-			<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="location.href='/club/clubBoardDelete?cbBoardNum=${clubBoard.cbBoardNum}&&clubCode=${clubBoard.clubCode }';">삭제</button>
+			<button type="button" class="btn btn-success btn-sm justify-content-md-end" 
+			onclick="location.href='/club/clubBoardUpdate?cbBoardNum=${clubBoard.cbBoardNum}&&clubCode=${clubBoard.clubCode }';">수정</button>
+			<button type="button" class="btn btn-success btn-sm justify-content-md-end" 
+			onclick="location.href='/club/clubBoardDelete?cbBoardNum=${clubBoard.cbBoardNum}&&clubCode=${clubBoard.clubCode }';">삭제</button>
 		</c:if>
 		</div>
 	</div>
@@ -61,8 +63,10 @@
 			</div>
 			<c:if test="${sessionScope.loginInfo.memId eq cmt.memId}">
 				<div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end">
-					<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="updateCmt(this, '${sessionScope.loginInfo.memId }', '${cmt.cbCmtNum }', '${cmt.clubCode }', '${cmt.cbBoardNum }', '${cmt.cbCmtContent}');" style="margin-top: 5px;">수정</button>
-					<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="deleteCmt('${sessionScope.loginInfo.memId }', '${cmt.cbCmtNum }');" style="margin-top: 5px;">삭제</button>
+					<button type="button" class="btn btn-success btn-sm justify-content-md-end" style="margin-top: 5px;" 
+						onclick="updateCmt(this, '${cmt.memId }', '${cmt.cbCmtNum }', '${cmt.clubCode }', '${cmt.cbBoardNum }', '${cmt.cbCmtContent}');" >수정</button>
+					<button type="button" class="btn btn-success btn-sm justify-content-md-end" style="margin-top: 5px;" 
+						onclick="deleteCmt('${cmt.memId }', '${cmt.cbCmtNum }');" >삭제</button>
 				</div>
 			</c:if>
 			<div class="col-12">

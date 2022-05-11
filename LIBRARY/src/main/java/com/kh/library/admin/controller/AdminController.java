@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.library.admin.service.ItemAdminService;
 import com.kh.library.admin.service.MemberAdminService;
 import com.kh.library.admin.vo.MessageVO;
+import com.kh.library.book.service.BookAdminService;
 import com.kh.library.book.service.BookService;
 import com.kh.library.book.vo.ReserveVO;
 import com.kh.library.book.vo.BorrowVO;
@@ -41,12 +42,25 @@ public class AdminController {
 	private BookService bookService;
 	
 		 
-	@GetMapping("/test") 
-	public String test() { 
-		 return "manage/home"; }
-		  
+	@Resource(name="bookAdminService")
+	private BookAdminService bookAdminService;
+   
+   //메인페이지, 연체일 확인, 연체제한 업데이트
+   @GetMapping("/test") 
+   public String test() { 
+      
+      bookAdminService.updateOverdue();
+      bookAdminService.clearLimitDate();
+       
+      return "manage/home"; 
+   }
+		
+   //관리자 메뉴
+   @GetMapping("/adminMenu")
+	public String goAdminMenu() {
+		return "admin/go_menu";
+	}
 
-	
 	//도서 예약
 	@RequestMapping("/reserveBook")
 	public String reserveBook(ReserveVO reserveVO) {
@@ -91,6 +105,7 @@ public class AdminController {
 		String memId = request.getParameter("memId");
 		model.addAttribute("borrowList", memberAdminService.selectBorrowBookInfo(memId));
 		model.addAttribute("reserveList", memberAdminService.selectReserveBookInfo(memId));
+		model.addAttribute("limitDate", memberAdminService.selectLimitDate(memId));
 		return "admin/member_borrow_info";
 	}
 	
@@ -103,7 +118,6 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("/sendMsgDetail")
 	public MessageVO sendMsgList(MessageVO messageVO, String msgCode) {
-		//String msgCode = messageVO.getMsgCode();
 		return memberAdminService.selectSendMessageDetail(msgCode);
 	}
 	

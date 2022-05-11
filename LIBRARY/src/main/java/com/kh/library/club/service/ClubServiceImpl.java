@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.library.admin.vo.MessageVO;
 import com.kh.library.club.vo.ClubApplyVO;
 import com.kh.library.club.vo.ClubBoardCmtVO;
 import com.kh.library.club.vo.ClubBoardVO;
@@ -134,6 +135,26 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int selectBookClubMemComplitBook(MemberVO memberVO) {
 		return sqlSession.selectOne("clubMapper.selectBookClubMemComplitBook", memberVO);
+	}
+
+	@Override
+	public int selectMsgCount(String getId) {
+		return sqlSession.selectOne("clubMapper.selectMsgCount", getId);
+	}
+
+	@Override
+	public void updateMsgIsRead(String msgCode) {
+		sqlSession.update("clubMapper.updateMsgIsRead", msgCode);
+	}
+
+	@Override
+	public void updateClubApplyCode(ClubApplyVO clubApplyVO) {
+		sqlSession.update("clubMapper.updateClubApplyCode", clubApplyVO);
+	}
+
+	@Override
+	public String selectClubApplyCode(String memId) {
+		return sqlSession.selectOne("clubMapper.selectClubApplyCode", memId);
 	}
 
 }

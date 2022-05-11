@@ -14,7 +14,7 @@ function login(){
 			else if(result === 1){
 				alert('로그인 실패');
 				loginCheck += '아이디 또는 비밀번호를 잘못 입력했습니다.';
-				document.querySelector('span').innerHTML = loginCheck;
+				document.querySelector('span.loginChk').innerHTML = loginCheck;
 			}
 			
 		},

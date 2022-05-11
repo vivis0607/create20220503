@@ -3,14 +3,11 @@ function insertRecommend(){
 	var bookCode =$('#rcdBook #bookCode').val();
 	var rcdStatus =$('#rcdBook #rcdStatus').val();
 	
-	alert(memId);
-	alert(bookCode);
-	alert(rcdStatus);
 	
 	if(rcdStatus == 1){
-		alert('한 도서 당 추천 수는 1번입니다.');
+		alert('이미 추천된 도서입니다.');
 	}else{
-		
+		alert('추천되었습니다.')
 		location.href = '/book/rcdBook?bookCode='+bookCode+'&memId='+memId;
 	}
 }

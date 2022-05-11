@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.kh.library.admin.service.MemberAdminService;
+import com.kh.library.admin.vo.MessageVO;
 import com.kh.library.book.service.BookAdminService;
 import com.kh.library.book.service.BookService;
 import com.kh.library.book.vo.BookImgVO;
@@ -30,6 +32,7 @@ import com.kh.library.book.vo.ReserveVO;
 import com.kh.library.member.vo.MemberVO;
 
 import net.sf.json.JSONArray;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @RequestMapping("/book")
@@ -42,16 +45,28 @@ public class BookController {
 	@Resource(name = "bookAdminService")
 	private BookAdminService bookAdminService;
 	
+	@Resource(name = "memberAdminService") 
+	private MemberAdminService memberAdminService;
+	
+	
 	@GetMapping("/list")
 	public String firstList() {
 		return "book/list";
 	}
 	
+	
+	//아이디 가져오기
+	@ResponseBody
+	@GetMapping("/selectMemId")
+	public String selectMemID(HttpSession session) {
+		String memId = (String) session.getAttribute("memID");
+		return memId;
+	}
 	//책 등록페이지
 	@GetMapping("/regBookForm")
 	public String regBookForm(Model model) {
 			model.addAttribute("cateList",bookService.selectBookCategory());
-			return "book/reg_book";
+			return "admin/reg_book";
 	}
 	
 	// 책 등록 
@@ -89,20 +104,111 @@ public class BookController {
 		    				  e.printStackTrace();
 		    			  }
 		    		  }
-		    	
+		      //이미지 첨부 안하면 기본 이미지 세팅 필요
+		      else {
+		    	  BookImgVO vo = new BookImgVO();
+		    	  vo.setBkImgCode(nextBookImgCode++);
+	    		  vo.setBkOriginName("book_sample.jpg");
+	    		  vo.setBkAtName("book_sample.jpg");
+	    		  vo.setBookCode(bookVO.getBookCode());
+	    		  bookVO.setBkImg("book_sample.jpg");
+	    		  bookAdminService.insertBook(bookVO, vo);
+		      }
 		   
 		      
 			return "redirect:/book/bookList";
 		
 		}
 	
-	//전체도서 목록 페이지
+	//관리자용 도서 상세보기
+	@GetMapping("/bookDetailAdmin")
+	public String bookDetailAdmin(Model model, BookVO bookVO, RecommendVO rcdVO, MemberVO memberVO) {
+		model.addAttribute("bookDetail", bookService.selectBookDetail(bookVO));
+		model.addAttribute("rcdInfo", bookService.selectRcdInfo(rcdVO));
+		model.addAttribute("member", bookService.selectRsvInfo(memberVO));
+		
+		return "admin/book_detail";
+	}	
+		
+	//도서 수정폼
+	@GetMapping("/modifyBook")
+	public String modifyBook(Model model, BookVO bookVO) {
+		model.addAttribute("bookDetail", bookService.selectBookDetail(bookVO));
+		
+		return "book/modify_book_form";
+	}
+	
+	//도서 수정
+	@PostMapping("/updateBook")
+	public String updateBook(BookVO bookVO, MultipartHttpServletRequest multi){
+		MultipartFile file = multi.getFile("file");
+		
+	    if(!file.getOriginalFilename().equals("")) {
+    	  String uploadPath = "D:\\git\\spring-study\\LIBRARY\\src\\main\\webapp\\resources\\images\\book\\";
+    	  
+    	  try {
+    		  
+    		  String bkOriginName = file.getOriginalFilename();
+    		  String bkAtName = System.currentTimeMillis()+"_"+file.getOriginalFilename();
+    		  file.transferTo(new File(uploadPath+bkAtName));
+    		  BookImgVO vo = new BookImgVO();
+    		  vo.setBkOriginName(bkOriginName);
+    		  vo.setBkAtName(bkAtName);
+    		  vo.setBookCode(bookVO.getBookCode());
+    		  bookAdminService.updateBkImg(vo);
+    		  
+    		  bookVO.setBkImg(bkAtName);
+		      
+    			  } catch(IllegalStateException e) {
+    				  e.printStackTrace();
+    			  } catch(IOException e) {
+    				  e.printStackTrace();
+    			  }
+    		  }
+	    else if(file.getOriginalFilename().equals("")) {
+	    	bookVO.setBkImg(bookAdminService.selectBkAtName(bookVO.getBookCode()));
+	    }
+	    
+		//이미지 수정하는 코드 짜야함... 짬
+		bookAdminService.updateBook(bookVO);
+		
+		return "redirect:/book/bookDetailAdmin?bookCode="+bookVO.getBookCode();
+	}
+	
+	//isDelete 조회
+	@ResponseBody
+	@PostMapping("/selectIsDelete")
+	public String selectIsDelete(String bookCode) {
+		return bookAdminService.selectIsDelete(bookCode);
+		
+		
+	}
+	//도서 삭제
+	@RequestMapping("/deleteBook")
+	public String deleteBook(BookVO bookVO) {
+		
+		bookAdminService.deleteBook(bookVO);
+		
+		return "redirect:/book/bookList";
+		
+	}
+	
+	//전체도서 목록 페이지 관리자용 
 	@GetMapping("/bookList")
 	public String bookList(Model model) {
 		//도서 목록 조회
 		model.addAttribute("bookList", bookService.selectBookList());
 		
-		return "book/book_list";
+		return "admin/book_list";
+	}
+	
+	//전체도서 목록 페이지 
+	@GetMapping("/bookListU")
+	public String bookListU(Model model) {
+		//도서 목록 조회
+		model.addAttribute("bookList", bookService.selectBookList());
+		
+		return "book/book_list_user";
 	}
 	
 	//도서 검색
@@ -121,6 +227,7 @@ public class BookController {
 		model.addAttribute("member", bookService.selectRsvInfo(memberVO));
 		return "book/book_detail";
 	}
+	
 	
 	//도서 추천
 	@GetMapping("/rcdBook")
@@ -149,10 +256,25 @@ public class BookController {
 		
 		return "book/list";
 	}
+	
+	//중복예약방지-예약중복
+	@ResponseBody
+	@PostMapping("/selectRsvCode")
+	public String selectRsvCode(ReserveVO reserveVO) {
+		return bookService.selectRsvCode(reserveVO);
+	}
+	
+	//대출시예약방지
+	@ResponseBody
+	@PostMapping("/selectBrCode")
+	public String selectBrCode(BorrowVO borrowVO) {
+		return bookService.selectBrCode(borrowVO);
+	}
+	
 	//도서예약
 	@RequestMapping("/reserve")
-	public String reserve(BookVO bookVO, Model model) {
-		bookService.reserve(bookVO);
+	public String reserve(BookVO bookVO, Model model ,MemberVO memberVO) {
+		bookService.reserve(bookVO, memberVO);
 		model.addAttribute("bookDetail", bookService.selectBookDetail(bookVO));
 		
 		return "book/book_detail";
@@ -160,22 +282,31 @@ public class BookController {
 	
 	//관리자 도서예약리스트 조회
 	@GetMapping("/reserveListAdmin")
-	public String selectRsvAdmin(ReserveVO reserveVO, Model model) {
+	public String selectRsvAdmin(ReserveVO reserveVO, Model model , BorrowVO borrowVO) {
 		model.addAttribute("adminReserve", bookAdminService.selectRsvList(reserveVO));
 		
 		return "admin/reserve_list";
 	}
 	
+	//재대출 방지 rtDate 조회
+	@ResponseBody
+	@PostMapping("/selectRtDate")
+	public String selectRtDate(BorrowVO borrowVO) {
+		return bookAdminService.selectRtDate(borrowVO);
+	}
+	
 	//도서 대여
 	@RequestMapping("/borrowBook")
-	public String borrowBook(ReserveVO reserveVO, MemberVO memberVO) {
+	public String borrowBook(ReserveVO reserveVO, MemberVO memberVO, MessageVO messageVO) {
 		System.out.println("!!!" + reserveVO.getMemId());
 		System.out.println("!!!" + reserveVO.getIsbn());
 		System.out.println("!!!"+memberVO.getMemId());
 		bookAdminService.borrowBook(reserveVO, memberVO);
+		memberAdminService.insertSendMessage(messageVO);
 		
 		return "redirect:/book/reserveListAdmin";
 	}
+	
 	
 	//대여 목록 조회
 	@GetMapping("/selectBrList")
@@ -196,10 +327,13 @@ public class BookController {
 	
 	//회원별 대여 목록 조회
 	@RequestMapping("/selectBrMember")
-	public String selectBrMember(BorrowVO borrowVO, Model model) {
+	public String selectBrMember(BorrowVO borrowVO, Model model, MemberVO memberVO) {
 		model.addAttribute("adminBorrow", bookAdminService.selectBrMember(borrowVO));
+		model.addAttribute("member", bookAdminService.selectLimitDate(memberVO));
 		return "admin/borrow_list_member";
 	}
+	
+	
 	
 	//도서 반납
 	@RequestMapping("/returnBook")
@@ -218,17 +352,16 @@ public class BookController {
 		bookAdminService.updateReturn(borrowVO, memberVO);
 		bookAdminService.updateLimit(memberVO);
 		
-		return "redirect:/book/selectBrMember";
+		return "redirect:/book/selectBrMember?memId="+memberVO.getMemId();
 	}
 	
 	// ----------------------------- 속 내용만 어드민컨트롤러로 이동 -------------------------
-	@GetMapping("/updateOverdue")
-	public String updateOverdue() {
-		bookAdminService.updateOverdue();
-		bookAdminService.clearLimitDate();
-		
-		return "manage/home";
-	}
+	/*
+	 * @GetMapping("/updateOverdue") public String updateOverdue() {
+	 * bookAdminService.updateOverdue(); bookAdminService.clearLimitDate();
+	 * 
+	 * return "manage/home"; }
+	 */
 	
 	//희망도서 신청 폼 
 	@GetMapping("/hopeBookForm")
@@ -258,7 +391,7 @@ public class BookController {
 		model.addAttribute("hbBook", bookAdminService.selectHopeBookListStatus(hbVO));
 		return "admin/hope_book_list";
 	}
-	
+
 	//희망도서 상태 업데이트
 	@RequestMapping("/updateHopeBook")
 	public String updateHopeBook( HopeBookVO hbVO) {
@@ -266,6 +399,7 @@ public class BookController {
 		return "redirect:/book/hopeBookList";
 	}
 	
+	//희망도서 상태 선택 변경
 	@ResponseBody
 	@PostMapping("/updateHp")
 	public void updateHp(String data, HttpSession session) {

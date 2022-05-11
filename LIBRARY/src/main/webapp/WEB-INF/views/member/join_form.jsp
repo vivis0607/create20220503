@@ -8,8 +8,9 @@
 <style type="text/css">
 
 	.joinFormDiv{
-		width: 70%;
+		width: 75%;
 		margin: 0px auto;
+		margin-right: 0px;
 	}
 	.id-available{
 		color: green;
@@ -20,6 +21,60 @@
 		color: red;
 		display: none;
 		font-size: 12px;
+	}
+	
+	
+	
+	.wrapper button{
+		background: none;
+		border: 0;
+		box-sizing: border-box;
+		width: 250px;
+	  	height: 50px;
+		margin: 4rem 0;
+		margin-left: 20%;
+		display: block;
+		padding: 0.7rem 1.7rem;
+		box-shadow: inset 0 0 0 2px #02475E;
+		color: #02475E;
+		font-size: inherit;
+		font-weight: 700;
+		
+		position: relative;
+		vertical-align: middle;
+		
+		} 
+	.wrapper button{
+	  line-height: 20px;
+	  font-size: 18px;
+	  color: #246350;
+	  text-align: center;
+	  position: relative;
+	  transition: all .35s;
+	}
+	
+	.wrapper button span{
+	  position: relative;
+	  z-index: 2;
+	}
+	
+	.wrapper button:after{
+	  position: absolute;
+	  content: "";
+	  top: 0;
+	  left: 0;
+	  width: 0;
+	  height: 100%;
+	  background:  #246350;
+	  transition: all .35s;
+	}
+	
+	.wrapper button:hover{
+	  color: #ffffff;
+	}
+	
+	.wrapper button:hover:after{
+	  width: 100%;
 	}
 	
 </style>
@@ -33,7 +88,7 @@
 		<form action="/member/join" method="post" id="joinForm" enctype="multipart/form-data">
 		 <div class="row mb-3">
 		    <label for="inputId" class="col-sm-2 col-form-label">아이디</label>
-		    <div class="col-sm-6">
+		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="inputId" name="memId">
 			  <div class="id-available">사용할 수 있는 아이디예요.</div>
 		      <div class="id-unavailable">다른 사람이 사용 중인 아이디입니다.</div>    
@@ -68,19 +123,14 @@
 		    </div>
 		 </div>
 		 
-		 
-		 
-		 
 		 <div class="row mb-3">
 		    <label for="inputGender" class="col-sm-2 col-form-label">성별</label>
-				 <div class="col-sm-1">
-				  <input class="form-check-input" type="radio" name="memGender" id="inlineRadio1" value="MEN">
-				  <label class="form-check-label" for="inlineRadio1">남</label>
-				</div>
-				<div class="col-sm-1">
-				  <input class="form-check-input" type="radio" name="memGender" id="inlineRadio2" value="WOMEN">
-				  <label class="form-check-label" for="inlineRadio2">여</label>
-				</div>
+		     <div class="col-sm-6">
+			    <select class="form-select" name="memGender" aria-label="Default select example">
+				  <option selected value="WOMEN">여</option>
+				  <option value="MEN">남</option>
+				</select>
+		    </div>
 		 </div>
 	
 		<div class="row mb-3">
@@ -117,31 +167,29 @@
 		 </div>
 		 <div class="row mb-3">
 			<label for="inputAddr" class="col-sm-2 col-form-label">&nbsp;</label>
-          	<div class="col-sm-7">
+          	<div class="col-sm-6">
               <input type="text" class="form-control" id="inputEmail4" name="memAddr">
            </div>
 		 </div>
 		 
 		 
 		  <div class="row mb-3">
-			  <div class="col-2">
-	              <label for="inputTell" class="form-label">전화번호</label>
-	              <select id="inputTell" class="form-select" name="memTell">
-	                 <option value="010" selected>010</option>
-	                 <option value="011">011</option>
-	              </select>
-	          </div>
+	          <label for="inputTell" class="col-sm-2 col-form-label">전화번호</label>
+				  <div class="col-2">
+		              <select id="inputTell" class="form-select" name="memTell">
+		                 <option value="010" selected>010</option>
+		                 <option value="011">011</option>
+		              </select>
+		          </div>
 	          <div class="col-2">
-	              <label for="inputTell" class="form-label">&nbsp;</label>
 	              <input type="text" class="form-control" id="inputCity" name="memTell">
 	          </div>
 	          <div class="col-2">
-	              <label for="inputTell" class="form-label">&nbsp;</label>
 	              <input type="text" class="form-control" id="inputCity" name="memTell">
 	          </div>
 		 </div>
-		 <div class="col-5 d-grid gap-2">
-              <button type="submit" class="btn btn-dark" >회원가입</button>
+		 <div class="wrapper">
+              <button type="submit" ><span>회원가입</span></button>
          </div>
            
            
@@ -156,7 +204,7 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- jQuery validation 문법 쓰기 : 주의! jQuery 문법을 쓴 후에 적어야 됨-->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script type="text/javascript" src="/resources/js/member/join_form.js?ver=40"></script>
+<script type="text/javascript" src="/resources/js/member/join_form.js?ver=42"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

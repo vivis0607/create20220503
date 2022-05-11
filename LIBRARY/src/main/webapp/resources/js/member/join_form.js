@@ -1,3 +1,20 @@
+ //특수 문자 제거
+ 
+const joinForm = document.querySelector('#joinForm');
+
+function removeSpecData(){
+	const reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/ ]/gi;
+	let id = form.querySelector('#inputId');
+	
+	id = id.replace(reg, "");
+	alert(id);
+}
+
+
+
+
+joinForm.addEventListener('submit', removeSpecData);
+
 
 /*유효성 검사*/
 $('#joinForm').validate({
@@ -71,7 +88,8 @@ $('#joinForm').validate({
 		error.css('margin-top', '2px');
 	  },
       submitHandler: function(form) {
-         form.submit();   //유효성 검사를 통과시 전송
+		removeSpecData(form);
+        form.submit();   //유효성 검사를 통과시 전송
       }
    });
 
@@ -106,14 +124,13 @@ $.ajax({
 
 /*우편번호 api*/
 function sample4_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                var roadAddr = data.roadAddress; // 도로명 주소 변수
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("inputAddr").value = roadAddr;
-            	}
-      	  }).open();
-      	  
-    	}
+	new daum.Postcode({
+	    oncomplete: function(data) {
+	        var roadAddr = data.roadAddress; // 도로명 주소 변수
+	        // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	        document.getElementById("inputAddr").value = roadAddr;
+	    	}
+	  }).open();
+}
 
     	

@@ -10,8 +10,6 @@ public class ItemImgVO {
 	private String itemCode;
 	private List<ItemImgVO> itemImgList;
 	
-	
-	
 	public List<ItemImgVO> getItemImgList() {
 		return itemImgList;
 	}

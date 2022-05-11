@@ -3,10 +3,12 @@ package com.kh.library.member.service;
 import java.util.List;
 
 import com.kh.library.book.vo.BookVO;
+import com.kh.library.club.vo.ClubApplyVO;
 import com.kh.library.club.vo.ClubVO;
 import com.kh.library.member.vo.BookComplitVO;
 import com.kh.library.member.vo.MemberImageVO;
 import com.kh.library.member.vo.MemberVO;
+import com.kh.library.member.vo.ToReadListVO;
 
 public interface MemberService {
 	//----------회원가입---------//
@@ -47,11 +49,25 @@ public interface MemberService {
 	//북클럽 조회
 	ClubVO selectMyBookClub(String memId);
 	
+	//북클럽 신청 조회
+	ClubApplyVO selectMyBookClubApply(String memId);
+	
+	//북클럽 신청 취소
+	void deleteMyBookClubApply(ClubApplyVO clubApplyVO);
+	
 	//----------마이페이지:독서플래너----------//
 	//조회
 	List<BookComplitVO> selectBookPlaner(String memId);
 	//차트조회
 	List<BookComplitVO> selectBookPlanerChart(String memId);
+	//to-read-list 조회
+	List<ToReadListVO> selectToReadList(String memId);
+		//추가
+	void insertToReadList(ToReadListVO toReadListVO);
+		//삭제
+	void deleteToReadList(String toReadListCode);
+		//isDone
+	void updateToReadList(ToReadListVO toReadListVO);
 	//상세조회
 	BookComplitVO selectBookPlanerDetail(BookComplitVO bookComplitVO);
 	//책 검색

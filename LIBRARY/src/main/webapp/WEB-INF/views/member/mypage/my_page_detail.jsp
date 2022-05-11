@@ -83,6 +83,10 @@
 		flex-direction: column;
 	}
 	
+	.error{
+		z-index: 1;
+	}
+	
 </style>
 </head>
 <body>
@@ -222,7 +226,7 @@
 	      	</div>
 		  </div>		
 	      <div class="modal-footer">
-	        <button type="submit" class="btn btn-primary">수정하기</button>
+	        <button onclick="updateBasic()" class="btn btn-primary" >수정하기</button>
 	      </div>
 	</form>
       
@@ -303,7 +307,7 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- jQuery validation 문법 쓰기 : 주의! jQuery 문법을 쓴 후에 적어야 됨-->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script type="text/javascript" src="/resources/js/member/my_page_detail.js?ver=23"></script>
+<script type="text/javascript" src="/resources/js/member/my_page_detail.js?ver=24"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

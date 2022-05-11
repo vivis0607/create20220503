@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.library.book.vo.BookVO;
+import com.kh.library.club.vo.ClubApplyVO;
 import com.kh.library.club.vo.ClubVO;
-import com.kh.library.member.vo.BookCommentVO;
 import com.kh.library.member.vo.BookComplitVO;
 import com.kh.library.member.vo.MemberImageVO;
 import com.kh.library.member.vo.MemberVO;
+import com.kh.library.member.vo.ToReadListVO;
 
 @Service("memberService")
 public class MemberServiceImpl implements MemberService{
@@ -107,6 +108,18 @@ public class MemberServiceImpl implements MemberService{
 		return sqlSession.selectOne("memberMapper.selectMyBookClub", memId);
 	}
 	
+	//북클럽 신청 조회
+	@Override
+	public ClubApplyVO selectMyBookClubApply(String memId) {
+		return sqlSession.selectOne("memberMapper.selectMyBookClubApply", memId);
+	}
+	
+	//북클럽 신청 취소
+	@Override
+	public void deleteMyBookClubApply(ClubApplyVO clubApplyVO) {
+		sqlSession.delete("memberMapper.deleteMyBookClubApply", clubApplyVO);
+	}
+	
 	//-------------마이페이지:독서플래너----------------//
 	//독서 플래너 조회
 	@Override
@@ -118,6 +131,28 @@ public class MemberServiceImpl implements MemberService{
 	public List<BookComplitVO> selectBookPlanerChart(String memId) {
 		return sqlSession.selectList("memberMapper.selectBookPlanerChart", memId);
 	}
+	
+	//to read list
+	@Override
+	public List<ToReadListVO> selectToReadList(String memId) {
+		return sqlSession.selectList("memberMapper.selectToReadList", memId);
+	}
+	//추가
+	@Override
+	public void insertToReadList(ToReadListVO toReadListVO) {
+		sqlSession.insert("memberMapper.insertToReadList", toReadListVO);
+	}
+	//삭제
+	@Override
+	public void deleteToReadList(String toReadListCode) {
+		sqlSession.delete("memberMapepr.deleteToReadList", toReadListCode);
+	}
+	//isDone 상태전환
+	@Override
+	public void updateToReadList(ToReadListVO toReadListVO) {
+		sqlSession.update("memberMapper.updateToReadList", toReadListVO);
+	}
+	
 	//상세 조회
 	@Override
 	public BookComplitVO selectBookPlanerDetail(BookComplitVO bookComplitVO) {
@@ -144,6 +179,19 @@ public class MemberServiceImpl implements MemberService{
 	public void updateBookPlaner(BookComplitVO bookComplitVO) {
 		sqlSession.update("memberMapper.updateBookPlaner", bookComplitVO);
 	}
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
 
 	
 

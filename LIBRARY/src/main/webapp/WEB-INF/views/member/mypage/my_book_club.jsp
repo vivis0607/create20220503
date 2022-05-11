@@ -11,12 +11,12 @@
 <div class="pageName">
 	나의 북클럽
 </div>
-클럽명 : <a href="/club/clubDetail?clubCode='${sessionScope.loginInfo.clubCode }'">${myBookClub.clubName }</a>
 <c:if test="${not empty sessionScope.loginInfo }">
 <div class="row">
 	<div class="col-8">
+	
 		<c:choose>
-			<c:when test="">
+			<c:when test="${not empty myBookClubApply}">
 				<table class="table" style="text-align: center;">
 				  <thead>
 				    <tr>
@@ -28,29 +28,40 @@
 				  </thead>
 				  <tbody>
 				    <tr>
-				      <td>${myBookClub.clubName }</td>
-				      <td>${myBookClub.clubName }</td>
+				      <td>${myBookClubApply.clubName }</td>
+				      <td>${myBookClubApply.clubApplyDate}</td>
 				      <td>승낙대기중…</td>
 				      <td>
-				      	<button type="button" class="btn btn-outline-danger btn-sm" onclick="applyCancel('${myBookClub.memId}'});">취소</button>
+				      	<button type="button" class="btn btn-outline-danger btn-sm" onclick="applyCancel('${myBookClubApply.memId}');">취소</button>
 				      </td>
 				    </tr>
 				  </tbody>
 				</table>
 			</c:when>
 			<c:otherwise>
-				<table class="table" style="text-align: center;">
+				<table class="table table-bordered" style="text-align: center;">
 				  <thead>
 				    <tr>
 				      <th scope="col">클럽명</th>
 				      <th scope="col">인원</th>
+				      <th scope="col">이동</th>
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <td><a>${myBookClub.clubName }</a></td>
-				      <td>${myBookClub.clubName }</td>
-				    </tr>
+		  			<c:choose>
+						<c:when test="${not empty sessionScope.loginInfo.clubCode }">
+				 		   <tr>
+						      <td><a>${myBookClub.clubName }</a></td>
+						      <td>${myBookClub.clubNumberPeople } / ${myBookClub.clubHeadCnt } </td>
+						      <td><button type="button" class="btn btn-success btn-sm" onclick="location.href='/club/clubDetail?clubCode=${myBookClub.clubCode}';">이동하기</button> </td>
+						    </tr>
+						</c:when>
+						<c:otherwise>
+							  <tr>
+							      <td colspan="3">가입된 북클럽이 없습니다.</td>
+						    </tr>
+						</c:otherwise>
+					</c:choose>
 				  </tbody>
 				</table>
 			</c:otherwise>

@@ -117,7 +117,6 @@ tr td{
 				<div class="button">
 					<div onclick="buy('${sessionScope.loginInfo.memId}', '${item.itemCode }');">BUY NOW</div>
 					<div onclick="goCart('${sessionScope.loginInfo.memId}', '${item.itemCode }');">ADD TO CART</div>
-					<div>WISH LIST</div>
 				</div>
 			</div>
 		</div>

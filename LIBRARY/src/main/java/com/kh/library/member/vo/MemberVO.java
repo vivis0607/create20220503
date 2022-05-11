@@ -18,6 +18,8 @@ public class MemberVO extends PageVO{
 	private String clubCode;
 	private String keyword;
 	private String rowNum;
+	private String clubApplyCode;
+	private String bookComplitCnt;
 	
 	
 	private String isOd; //연체여부
@@ -142,6 +144,18 @@ public class MemberVO extends PageVO{
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	public String getClubApplyCode() {
+		return clubApplyCode;
+	}
+	public void setClubApplyCode(String clubApplyCode) {
+		this.clubApplyCode = clubApplyCode;
+	}
+	public String getBookComplitCnt() {
+		return bookComplitCnt;
+	}
+	public void setBookComplitCnt(String bookComplitCnt) {
+		this.bookComplitCnt = bookComplitCnt;
 	}
 	
 }
