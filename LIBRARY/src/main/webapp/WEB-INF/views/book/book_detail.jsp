@@ -86,6 +86,6 @@ img{
 	
 
 <script type="text/javascript" src="/resources/js/book/recommend_book.js?ver=6"></script>
-<script type="text/javascript" src="/resources/js/book/reserve_book.js?ver=16"></script>
+<script type="text/javascript" src="/resources/js/book/reserve_book.js?ver=18"></script>
 </body>
 </html>

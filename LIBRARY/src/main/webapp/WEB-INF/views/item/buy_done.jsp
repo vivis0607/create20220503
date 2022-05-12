@@ -10,36 +10,80 @@
 .buyFinContainer{
 	width: 80%;
 	margin: 0 auto;
+	margin-top: 30px;
+}
+.orderInfoTb{
+	width: 100%;
+	margin: 0 atuo;
+	margin-bottom: 70px;
+	margin-top: 40px;
+	font-size: 17px;
 }
 .payInfoDiv{
-	margin-bottom: 70px;
-}
-.orderInfoDiv{
-	margin-bottom: 70px;
-	font-size: 15px;
+	width: 90%;
+	margin: 0 auto;
+	margin-bottom: 50px;
 }
 .deliveryInfoDiv{
-	margin-bottom: 20px;
+	width: 90%;
+	margin: 0 auto;
+	margin-bottom: 70px;
+}
+.buysubtitleDiv{
+	font-size: x-large;
+	font-weight: bold;
+	margin-bottom: 10px;
+	color: #16784B;
+}
+.tableDiv{
+	border: 3px solid #c7e2d1;
+	border-radius: 8px;
+	padding: 10px;
+}
+.tableDiv tr th{
+	text-align: right;
+	font-weight: bold;
+	vertical-align: middle;
+	padding-bottom: 10px;
+}
+.tableDiv tr td{
+	text-align: left;
+	vertical-align: middle;
+	padding-left: 20px;
+	padding-bottom: 10px;
+}
+.xs{
+	height: 20px;
+	width: 60px;
+	font-size: 11px;
+	text-align: center;
+	padding-top: 2px;
+	padding-right: 0;
+	padding-left: 0;
 }
 </style>
 </head>
 <body>
 <div class="buyFinContainer">
-	<div>
-		<h2>주문완료</h2>
+	<div style="font-size:xx-large; text-align: center; color: #16784B; font-weight: bolder; font-size: ">
+		Thanks For
 	</div>
-	<hr>
+	<hr style="color: #16784B;">
 	<div class="orderInfoDiv">
-		<table>
+		<table class="orderInfoTb">
+		<colgroup>
+			<col width="30%">
+			<col width="70%">
+		</colgroup>
 			<tr>
-				<td>
-					<img alt="..." src="/resources/images/common/check.png">
+				<td style="text-align: center;">
+					<img alt="..." src="/resources/images/common/check.png" width="50%">
 				</td>
-				<td>
-					<h2>${sessionScope.loginInfo.memName }고객님의 주문이 완료 되었습니다</h2><br>
+				<td style="padding-left: 20px;">
+					<h3>" ${sessionScope.loginInfo.memName } "고객님의 주문이 완료 되었습니다</h3><br>
 					<br>
 					주문내역 및 배송에 관한 안내는 
-					<a href="/order/orderList" style="text-decoration: underline; ">
+					<a href="/order/orderList" style="text-decoration: underline; font-weight: bold; color: #16784B;">
 					주문조회</a> 
 					를 통하여 확인 가능합니다.<br>
 					<br>
@@ -50,15 +94,15 @@
 		</table>
 	</div>
 	<div class="payInfoDiv">
-		<div>결제정보</div>
-		<div>
+		<div class="buysubtitleDiv">결제정보</div>
+		<div class="tableDiv">
 			<table>
 				<tr>
 					<th>최종결제금액</th>
 					<td>
 						<span>
 						<fmt:formatNumber value="${buyer.totalPrice }" pattern="#,###"/>
-						</span>원<button onclick="location.href='/order/referOrderd?orderNum=${buyer.orderNum }';">내역보기 ></button>
+						</span>원 &nbsp;<button type="button" class="btn btn-success btn-sm xs" onclick="location.href='/order/referOrderd?orderNum=${buyer.orderNum }';">내역보기 ></button>
 					</td>
 				</tr>
 				<tr>
@@ -69,8 +113,8 @@
 		</div>
 	</div>
 	<div class="deliveryInfoDiv">
-		<div>배송지정보</div>
-		<div>
+		<div class="buysubtitleDiv">배송지정보</div>
+		<div class="tableDiv">
 			<table>
 				<tr>
 					<th>받으시는분</th>
@@ -91,9 +135,9 @@
 			</table>
 		</div>
 	</div>
-	<div>
-		<button type="button" onclick="location.href='/item/itemList';">쇼핑계속하기</button>
-		&nbsp; <button type="button" onclick="location.href='/order/referOrderd?orderNum=${buyer.orderNum }';">주문확인하기</button>
+	<div style="text-align: center; width: 100%; margin: 0 auto;">
+		<button type="button" class="btn btn-success btn-sm" onclick="location.href='/item/itemList';">쇼핑계속하기</button>
+		&nbsp; <button type="button" class="btn btn-success btn-sm"" onclick="location.href='/order/referOrderd?orderNum=${buyer.orderNum }';">주문확인하기</button>
 	</div>
 	<div></div>
 </div>

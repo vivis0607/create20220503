@@ -6,26 +6,52 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
 <style type="text/css">
-.frDetailDiv{
-	margin: 0 auto;
-	text-align: center;
-	width: 100%;
+.ntBtn{
+	padding-top:10px;
+	text-align:right;
 }
-.frtitleDiv{
-	font-size: x-large;
-	font-weight: bold;
-}
-#writer{
+.content thead{
 	text-align: left;
-	width: 50%;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 15px;
+    background: #eff2f5;
 }
-#etcInfo{
+.detail{
+	padding-top:20px;
+}
+.detail table {
+	border-bottom: 1px solid #dddddd;
+	border-collapse: collapse;
+	width:100%;
+}
+.detail table .title{
+	text-align: left;
+	padding:10px 20px 5px 20px;
+	width: 70%;
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+.detail table .writeTime{
 	text-align: right;
-	width: 50%;
+	padding:15px 20px 0px 10px;
 }
-textarea{
-	resize: none;
+.detail table .writeInfo{
+	text-align: right;
+	padding:0px 20px 10px 10px;
+}
+
+.detail table .writerInfo, .detail table .content{
+	text-align: left;
+	padding:5px 10px 5px 20px;
+}
+
+.detail table .Info{
+	border-top: 0.25rem solid #16784B;
+	border-bottom: 1px solid #dddddd;
+	background-color: #E7EDE4;
 }
 .freeCmtTb{
 	border: 1px solid gray;
@@ -36,11 +62,6 @@ textarea{
 .inputCmtTb{
 	margin: 0 auto;
 	margin-bottom: 30px;
-	
-}
-.updateDiv{
-	margin-bottom: 50px;
-	margin-top: 50px;
 }
 .freeCmtDiv{
 	width: 50%;
@@ -49,28 +70,39 @@ textarea{
 </style>
 </head>
 <body>
-<div class="frDetailDiv">
-	<div class="frtitleDiv">
-		${board.boardTitle }
-	</div>
-	<div>
-		<span id="writer">작성자: ${board.memName}</span>
-		<span id="etcInfo">조회수: ${board.boardReadCnt } / 작성일: ${board.boardCreateDate }</span>
-	</div>
-	<div>
-		<hr>
-		<div>
-			${board.boardContent }
+<div class="container">
+	<div class="subTit">
+      <div class="line_map">홈 > 참여마당 > 자유게시판</div>
+      <div class="tit">자유게시판</div>
+   	</div>
+	<div class="detail">
+		<table>
+			<tbody class="Info">
+				<tr>
+					<td class="title">${board.boardTitle }</td>
+					<td class="writeTime">${board.boardCreateDate }</td>
+				</tr>
+				<tr>
+					<td class="writerInfo">${board.memName}</td>
+					<td class="writeInfo">조회수: ${board.boardReadCnt }</td>
+				</tr>
+			</tbody>
+			<tbody>
+				<tr>
+					<td class="content" colspan="2">
+						<pre>${board.boardContent }</pre>
+					</td>
+				</tr>
+			</tbody>
+		</table>	
+		<div class="ntBtn">
+			<c:if test="${board.memId eq sessionScope.loginInfo.memId }">
+				<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="location.href='/otherB/updateFreeBoard?boardNum=${board.boardNum}';">수정</button>
+				<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="location.href='/otherB/deleteFreeBoard?boardNum=${board.boardNum}';">삭제</button>
+			</c:if>
+			<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="location.href='/otherB/freeBoard';">목록</button>
 		</div>
 	</div>
-	<div class="updateDiv">
-		<c:if test="${board.memId eq sessionScope.loginInfo.memId }">
-			<button type="button" onclick="location.href='/otherB/updateFreeBoard?boardNum=${board.boardNum}';">수정하기</button>
-			<button type="button" onclick="location.href='/otherB/deleteFreeBoard?boardNum=${board.boardNum}';">삭제하기</button>
-		</c:if>
-		<button type="button" onclick="location.href='/otherB/freeBoard';">목록가기</button>
-	</div>
-	
 	
 	<div class="cmtDiv">
 	<c:if test="${not empty sessionScope.loginInfo }">

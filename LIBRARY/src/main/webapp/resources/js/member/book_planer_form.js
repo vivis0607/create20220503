@@ -1,7 +1,7 @@
 //완독도서 검색
 function bookPlanerSearch(){
-	const title = document.querySelector('input[name="title"]').value;
-	const writer = document.querySelector('input[name="writer"]').value;
+	const title = document.querySelector('.bookPlaner-search input[name="title"]').value;
+	const writer = document.querySelector('.bookPlaner-search input[name="writer"]').value;
 	
 	$.ajax({
 	   url: '/member/bookPlanerSearch', //요청경로
@@ -40,7 +40,7 @@ function resultChoice(v){
 	//alert(v.childNodes[1].innerText);
 	//alert(v.childNodes[2].innerText);
 	
-	document.querySelector('.bookPlaner-search-form > input[name="title"]').value = v.childNodes[1].innerText;
-	document.querySelector('.bookPlaner-search-form > input[name="writer"]').value = v.childNodes[2].innerText;
+	document.querySelector('.hs-write-form input[name="title"]').value = v.childNodes[1].innerText;
+	document.querySelector('.hs-write-form input[name="writer"]').value = v.childNodes[2].innerText;
 	
 	}

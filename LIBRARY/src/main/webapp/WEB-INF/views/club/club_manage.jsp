@@ -10,30 +10,74 @@
 .subDiv{
 	margin-left: 100px;
 }
-table{
-	width: 700px;
-	text-align: center;
-	border-radius: 9px;
-	margin-top: 50px;
+.nav-link{
+	color: #198754;
 }
-th{
-	background-color: #E0EDE0;
-	padding: 0.75rem 2rem;
-	text-transform: uppercase;
-	letter-spacing: 0.1rem;
-	font-size: 1rem;
+.nav-link:hover{
+	color: #198754;
 }
-td{
-	padding: 1rem 2rem;
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+	color: #495057;
 }
-tr:nth-child(even) {
-	background-color: #F1F8F1;
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
+body {
+	background: #f9f9f9;
+}
+
+.table {
+	border-spacing: 0 15px;
+	border-collapse: separate;
+	text-align: left;
+}
+.table thead tr th,
+.table thead tr td,
+.table tbody tr th,
+.table tbody tr td {
+	vertical-align: middle;
+	border: none;
+}
+.table tbody tr {
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+}
+.table tbody tr td {
+	background: #fff;
+}
+.table tbody tr td:nth-child(1) {
+	border-radius: 5px 0 0 5px;
+}
+.table tbody tr td:nth-last-child(1) {
+	border-radius: 0 5px 5px 0;
+}
+
+.user-info {
+	display: flex;
+	align-items: center;
+}
+.user-info__img img {
+	margin-right: 15px;
+	height: 45px;
+	width: 45px;
+	border-radius: 45px;
+	border: 3px solid #fff;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.active-circle {
+	height: 10px;
+	width: 10px;
+	border-radius: 10px;
+	margin-right: 5px;
+}
+h6{
+	display: block;
 }
 </style>
 </head>
 <body>
+
 <div class="row">
-	<div class="col-4">
+	<div class="col-2">
 		<div class="subDiv">
 			<a href="/club/clubList">북클럽조회</a><br>
 			<c:if test="${sessionScope.loginInfo.clubAdmin eq 'Y' }">
@@ -54,42 +98,47 @@ tr:nth-child(even) {
 		<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade show active" id="home" role="tabpanel"
 				aria-labelledby="home-tab">
-				<table>
-					<colgroup>
-						<col width="10%">
-						<col width="*">
-					<thead>
-						<tr>
-							<th scope="col">No</th>
-							<th scope="col">아이디</th>
-							<th scope="col">이름</th>
-							<th scope="col">강퇴</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${clubMemList }" var="clubMem"
-							varStatus="status">
+				<div class="main-content">
+					<table class="table table-hover text-center">
+						<colgroup>
+							<col width="15%">
+							<col width="*">
+							<col width="25%">
+							<col width="25%">
+						<thead>
 							<tr>
-								<td>${status.index + 1 }</td>
-								<td>${clubMem.memId }</td>
-								<td>${clubMem.memName }</td>
-								<td>	
-									<c:choose>
-										<c:when test="${clubMem.clubAdmin eq 'N' }">
-											<button type="button" class="btn btn-outline-danger btn-sm" onclick="kick('${clubMem.memId }');">강퇴</button>
-										</c:when>
-										<c:otherwise>
-											모임장
-										</c:otherwise>
-									</c:choose>
-								</td>
+								<th scope="col">No</th>
+								<th scope="col">아이디</th>
+								<th scope="col">이름</th>
+								<th scope="col">강퇴</th>
 							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+						</thead>
+						<tbody>
+							<c:forEach items="${clubMemList }" var="clubMem"
+								varStatus="status">
+								<tr>
+									<td>${status.index + 1 }</td>
+									<td><div class="user-info__img"><img src="/resources/images/member/${clubMem.memImage }">${clubMem.memId }</div>
+									</td>
+									<td>${clubMem.memName }</td>
+									<td>	
+										<c:choose>
+											<c:when test="${clubMem.clubAdmin eq 'N' }">
+												<button type="button" class="btn btn-outline-danger btn-sm" onclick="kick('${clubMem.memId }');">강퇴</button>
+											</c:when>
+											<c:otherwise>
+												모임장
+											</c:otherwise>
+										</c:choose>
+									</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 			</div>
 			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-				<table>
+				<table class="table table-hover text-center">
 					<colgroup>
 						<col width="10%">
 						<col width="*">
@@ -102,20 +151,26 @@ tr:nth-child(even) {
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${applyList }" var="apply" varStatus="status">
-							<tr>
-								<td>${status.index + 1 }</td>
-								<td>${apply.memId }</td>
-								<td>${apply.memName }</td>
-								<td>
-									<button type="button" class="btn btn-outline-success btn-sm" onclick="acceptance('${apply.clubCode}', '${apply.memId }');">수락</button>
-									<button type="button" class="btn btn-outline-danger btn-sm" onclick="rejection('${apply.memId}');">거절</button>
-								</td>
-							</tr>
-						</c:forEach>
+						<c:choose>
+							<c:when test="${not empty applyList}">
+								<c:forEach items="${applyList }" var="apply" varStatus="status">
+									<tr>
+										<td>${status.index + 1 }</td>
+										<td>${apply.memId }</td>
+										<td>${apply.memName }</td>
+										<td>
+											<button type="button" class="btn btn-outline-success btn-sm" onclick="acceptance('${apply.clubCode}', '${apply.memId }');">수락</button>
+											<button type="button" class="btn btn-outline-danger btn-sm" onclick="rejection('${apply.memId}');">거절</button>
+										</td>
+									</tr>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<td colspan="4">신청한 회원이 없습니다.</td>
+							</c:otherwise>
+						</c:choose>
 					</tbody>
 				</table>
-					
 			</div>
 			</div>
 		</div>

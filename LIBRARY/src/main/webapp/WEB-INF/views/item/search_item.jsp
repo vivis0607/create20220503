@@ -8,13 +8,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-.searchContainer{
+
+.searchitem_container{
+	width: 80%;
 	margin: 0 auto;
+	margin-top: 30px;
 	text-align: center;
+}
+.searchContainer{
+	width: 100%;
+	margin: 0 auto;
 }
 .searchDiv{
    display: inline-block; 
-   border: 2px solid #DDDDDD; 
+   border: 2px solid #41764F; 
    border-radius: 48px; 
    width: 450px; 
    height: 45px; 
@@ -27,13 +34,17 @@
    border: none; 
    outline: 0;
 }
+.searchResultDiv{
+	font-size: large;
+	text-align: center;
+}
 </style>
 </head>
 <body>
-<div>
+<div class="searchitem_container">
 	<div>
-		<div>
-			" ${keyword } "에 대한 ${itemCnt }개의 통합 검색결과입니다
+		<div class="searchResultDiv">
+			<span>" ${keyword } "</span>에 대한 <span>${itemCnt }</span>개의 통합 검색결과입니다
 		</div>
 		<div class="searchContainer">
 			<div class="searchDiv">

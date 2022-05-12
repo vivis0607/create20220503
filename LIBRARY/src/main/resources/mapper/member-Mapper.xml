@@ -186,6 +186,14 @@
       FROM MEMBER_IMAGE
       WHERE MEM_ID = #{memId}
    </select>
+   
+   
+   <!-- 현재 비밀번호 확인 -->
+   <select id="checkPwd" resultType="String">
+	  SELECT MEM_PWD
+	  FROM BOOK_MEMBER
+	  WHERE MEM_ID = #{memId}
+   </select>
    <!-- 보안 정보 수정 -->
    <update id="updateSecretInfo">
       UPDATE BOOK_MEMBER

@@ -42,6 +42,8 @@ public interface MemberService {
 	String selectMemAtImgName(String memId);
 	//보안 정보 수정
 	void updateSecretInfo(MemberVO memberVO);
+			//현재 비밀번호 확인
+	String checkPwd(String memId);
 	//추가 정보 수정
 	void updatePlusInfo(MemberVO memberVO);
 	

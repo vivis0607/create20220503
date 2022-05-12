@@ -8,10 +8,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-.container{
-	width: 99%;
-	padding-right: 0px;
+.itemD_container{
+	width: 80%;
 	margin: 0 auto;
+	margin-top: 30px;
 }
 .itemDiv{
 	height: 500px;
@@ -29,16 +29,16 @@
 	letter-spacing: 3px;
 	word-spacing: 3px;
 }
-table{
+.itemInfoTb{
 	margin-top: 40px;
 	margin-bottom: 20px;
 	width: 400px;
 }
-tr th{
+.itemInfoTb tr th{
  text-align: right;
  padding-right: 30px;
 }
-tr td{
+.itemInfoTb tr td{
  text-align: right;
 }
 .button{
@@ -49,6 +49,7 @@ tr td{
 .detailDiv{
 	width: 90%;
 	margin: 0 auto;
+	text-align: center;
 }
 .imgDiv{
 	margin: 0 auto;
@@ -56,13 +57,15 @@ tr td{
 
 .itemdpDiv{
 	margin-bottom: 100px;
+	margin-top: 30px;
 }
+
 </style>
 </head>
 <body>
 
-<div class="row container">
-	<div class="col-11">
+<div class="row itemD_container">
+	<div class="col-12" style="margin-top: 30px;">
 		&nbsp; <a href="/item/itemList">home</a>/
 		<c:forEach items="${cateList }" var="cate">		
 			<c:if test="${item.cateCode eq cate.cateCode }">
@@ -75,7 +78,7 @@ tr td{
 			<div class="col-6 imgDiv">
 				<c:forEach items="${item.itemImgList }" var="img">
 					<c:if test="${img.isMain eq 'Y' }">
-						<img alt="..." src="/resources/images/item/${img.itemAtImgName }" height="450px;">
+						<img alt="..." src="/resources/images/item/${img.itemAtImgName }" width="95%">
 					</c:if>
 				</c:forEach>	
 			</div>
@@ -84,7 +87,7 @@ tr td{
 				<div class="itemNameDiv">${item.itemName}</div>
 				<hr>
 				<div>
-					<table>
+					<table class="itemInfoTb">
 					<colgroup>
 						<col width="30%">
 						<col width="*">
@@ -100,7 +103,7 @@ tr td{
 						<tr>
 							<th>상품수량</th>
 							<td><div>
-								<input id="ea" type="number" value="1" min="1" max="10" name="itemCnt" style="width: 100px;">
+								<input id="ea" type="number" value="1" min="1" max="10" name="itemCnt" style="width: 60px;">
 							</div></td>
 						</tr>
 						<tr>
@@ -121,16 +124,21 @@ tr td{
 			</div>
 		</div>
 		<div class="row detailDiv">
-			${item.itemDetail }
-			<br><br>
-			<c:forEach items="${item.itemImgList }" var="img">
-				<c:if test="${img.isMain eq 'N' }">
-					<img alt="..." src="/resources/images/item/${img.itemAtImgName }" height="600px;"><br>
-				</c:if>
-			</c:forEach>
+			<div class="col-12">
+				<div class="row" style="margin-bottom: 20px;">
+					<pre>${item.itemDetail }</pre>
+				</div>
+				<div class="row">
+					<c:forEach items="${item.itemImgList }" var="img">
+						<c:if test="${img.isMain eq 'N' }">
+							<img alt="..." src="/resources/images/item/${img.itemAtImgName }" height="600px;"><br>
+						</c:if>
+					</c:forEach>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="/resources/js/item/item_details.js?ver=29"></script>
+<script type="text/javascript" src="/resources/js/item/item_details.js?ver=30"></script>
 </body>
 </html>

@@ -27,6 +27,7 @@
 		<result column="KEYWORD" 			property="keyword"/>
 		<result column="ROW_NUM" 			property="rowNum"/>
 		<result column="CB_READ_CNT" 		property="cbReadCnt"/>
+		<result column="MEM_IMAGE" 			property="memImage"/>
 	</resultMap>
 	
 	<resultMap type="com.kh.library.club.vo.ClubBoardCmtVO" id="cmt">
@@ -126,6 +127,7 @@
 			, CLUB_CODE
 			, MEM_ID
 			, MEM_NAME
+			, MEM_IMAGE
 		) VALUES (
 			(SELECT 'CB_BOARD_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(CB_BOARD_NUM, 10))), 0) + 1, 3, 0) AS CB_BOARD_NUM FROM BOOK_CLUB_BOARD)
 			, #{cbBoardTitle}
@@ -133,6 +135,7 @@
 			, #{clubCode}
 			, #{memId}
 			, #{memName}
+			, #{memImage}
 		)
 	</insert>
 	
@@ -204,7 +207,7 @@
 		SELECT CB_BOARD_NUM
 		    , CB_BOARD_TITLE
 		    , CB_BOARD_CONTENT
-		    , TO_CHAR(CB_BOARD_DATE, 'YYYY-MM-DD HH24:MI') AS CB_BOARD_DATE
+		    , TO_CHAR(CB_BOARD_DATE, 'YYYY.MM.DD HH24:MI') AS CB_BOARD_DATE
 		    , CLUB_CODE
 		    , MEM_ID
 		    , MEM_NAME
@@ -212,6 +215,7 @@
 				FROM BOOK_CLUB_BOARD_COMMENT
 				WHERE CB_BOARD_NUM = BOOK_CLUB_BOARD.CB_BOARD_NUM) AS CB_CMT_COUNT
 			, CB_READ_CNT
+			, MEM_IMAGE
 		FROM BOOK_CLUB_BOARD
 		WHERE CB_BOARD_NUM = #{cbBoardNum}
 		AND CLUB_CODE = #{clubCode}
@@ -239,7 +243,6 @@
 	<delete id="deleteClubBoard">
 		DELETE BOOK_CLUB_BOARD
 		WHERE CB_BOARD_NUM = #{cbBoardNum}
-		AND CLUB_CODE = #{clubCode}
 	</delete>
 	
 	<!-- 댓글등록 -->
@@ -265,7 +268,7 @@
 	<select id="selectCbCmtList" resultMap="cmt">
 		SELECT	CMT.MEM_ID 
 			, CMT.MEM_NAME
-			, TO_CHAR(CB_CMT_DATE, 'YYYY-MM-DD HH24:MI:SS') AS CB_CMT_DATE
+			, TO_CHAR(CB_CMT_DATE, 'YYYY.MM.DD HH24:MI:SS') AS CB_CMT_DATE
 			, CB_CMT_CONTENT
 			, CB_CMT_NUM
 			, CB_BOARD_NUM
@@ -306,7 +309,6 @@
 			, #{memName}
 		)
 	</insert>
-	
 	
 	<!-- 클럽승인코드 조회 -->
 	<select id="selectClubApplyCode" resultType="String">

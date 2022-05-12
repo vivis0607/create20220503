@@ -18,7 +18,7 @@ new Chart(document.getElementById("bar-chart"), {
       datasets: [
         {
           label: '일자별 매출현황',
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          backgroundColor: "#c7e2d1",
           data: totalPrice
         }
       ]
@@ -68,7 +68,7 @@ $.ajax({
 		      datasets: [
 		        {
 		          label: '일자별 매출현황',
-		          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+		          backgroundColor: "#c7e2d1" ,
 		          data: totalPrice
 		        }
 		      ]

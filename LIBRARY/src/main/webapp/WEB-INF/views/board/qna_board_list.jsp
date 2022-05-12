@@ -6,62 +6,64 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
 <style type="text/css">
-.qnaContainer{
-	margin: 0 auto;
-	margin-top : 30px;
-	width: 80%;
-	text-align: center;
+table{
+   border: 1px solid black;
+   border-collapse: collapse;
+   width: 100%;
+   margin-top: 10px;
+   text-align: center;
+   margin-bottom: 30px;
 }
-.qnaTb{
-	margin: 0 auto;
-	width: 100%;
-	border: 1px solid gray;
-}
-.qnaTb tr td{
-	height: 30px;
-	border: 1px solid gray;
-}
-button.img-button{
-	border: none;
-	background: transparent;
-	font-size: 1.125rem;
+.img-button{
+   border: none;
+   background: transparent;
+   font-size: 1.125rem;
 }
 .fas{
-	color: black;
+   color: black;
 }
 .keyword{
-	border: none;
-	border-bottom: 1px solid black;
-	outline: none;
-	background: transparent;
-	width: 300px;
-	color: black;
-	font-size: 1.063rem;
-	font-style: "Malgun Gothic";
+   border: none;
+   border-bottom: 1px solid black;
+   outline: none;
+   background: transparent;
+   width: 300px;
+   color: black;
+   font-size: 1.063rem;
+   font-style: "Malgun Gothic";
 }
 select{
-	border: none;
-	outline: none;
-	width: 80px;
-	font-size: 1.125rem;
-	font-weight: 200;
-	background: transparent;
-	color: black;
+   border: none;
+   outline: none;
+   width: 80px;
+   font-size: 1.125rem;
+   font-weight: 200;
+   background: transparent;
+   color: black;
 }
-.searchQnaDiv{
-	margin-bottom: 50px;
-	margin-top : 50px;
+.searchBar{
+   padding: 10px;
+}
+.searchBar .searchForm{
+	text-align: center;
+}
+.ntBtn{
+	text-align:right;
 }
 </style>
+   <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="qnaContainer">
-	<div>
-		<h2>Q & A</h2>	
-	</div>
-	<div class="searchQnaDiv">
-		<form action="/otherB/searchQna" method="post">
+<div class="container">
+	<div class="subTit">
+      <div class="line_map">홈 > 참여마당 > Q&A</div>
+      <div class="tit">Q&A</div>
+   </div>
+	<div class="searchBar">
+		<form action="/otherB/searchQna" method="post" class="searchForm">
 			<select class="SelectSearch" id="sort" name="sort">
 				<option value="MEM_NAME">글쓴이</option>
 				<option value="BOARD_TITLE">제목</option>
@@ -74,13 +76,17 @@ select{
 	</div>
 	
 	<div>
-		<c:if test="${not empty sessionScope.loginInfo }">
-			<div>
-				<button type="button" onclick="location.href='/otherB/regQnaForm';">글쓰기등록</button>
-			</div>
-		</c:if>
+		
 		<div>
-			<table class="qnaTb">
+			<table class="table table-hover table-border text-center">
+			<colgroup>
+				<col width="7%">
+				<col width="*">
+				<col width="15%">
+				<col width="13%">
+				<col width="11%">
+				<col width="10%">
+			</colgroup>
 				<thead>
 					<tr>
 						<td>순</td>
@@ -135,8 +141,12 @@ select{
 			</table>
 		</div>
 	</div>
+	<c:if test="${not empty sessionScope.loginInfo && sessionScope.loginInfo.memId ne 'admin' }">
+		<div class="ntBtn">
+			<button type="button" class="btn btn-success btn-m" onclick="location.href='/otherB/regQnaForm';">글쓰기등록</button>
+		</div>
+	</c:if>
 </div>
-
 
 
 <!-- 비밀글 비밀번호모달창 -->
@@ -154,7 +164,7 @@ select{
 	        </div>
 	        <div class="row">
 	        	<div class="col d-grid gap-2">
-		        	<button type="submit" class="btn btn-primary">비밀번호확인</button>
+		        	<button type="submit" class="btn btn-success">비밀번호확인</button>
 	        	</div>
 	        </div>
       	</form>

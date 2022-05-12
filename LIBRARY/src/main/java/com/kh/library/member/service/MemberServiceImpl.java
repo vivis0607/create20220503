@@ -90,11 +90,19 @@ public class MemberServiceImpl implements MemberService{
 		return sqlSession.selectOne("memberMapper.selectMemAtImgName", memId);
 	}
 	
+	
+	//보안 정보 - 현 비번 확인
+	@Override
+	public String checkPwd(String memId) {
+		return sqlSession.selectOne("memberMapper.checkPwd", memId);
+	}
+
 	//보안 정보 수정 - 비밀번호 수정
 	@Override
 	public void updateSecretInfo(MemberVO memberVO) {
 		sqlSession.update("memberMapper.updateSecretInfo", memberVO);
 	}
+	
 
 	//추가 정보 수정
 	@Override
@@ -180,6 +188,7 @@ public class MemberServiceImpl implements MemberService{
 		sqlSession.update("memberMapper.updateBookPlaner", bookComplitVO);
 	}
 
+	
 	
 
 	

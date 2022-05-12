@@ -7,51 +7,49 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-.container{
-	width: 450px;
+.itemCate_container{
+	width: 100%;
 	margin: 0 auto;
 	margin-bottom: 100px;
-}
-.addCateDiv{
 	text-align: center;
-	width: 50px;
-	color: #F7F1E7;
-	background-color: #26465C;
-	float: right;
-	margin-bottom: 10px;
-	margin-top: 20px;
-	border-radius: 5px;
 }
-table{
+.table{
 	margin: 0 auto;
-	width: 400px;
+	width: 100%;
 	text-align: center;
 }
-thead {
-	font-weight: bold;
+.row{
+	margin-top: 20px;
+	width: 100%;
 }
-tr td{
-	height: 40px;
-	border-bottom: 1px solid gray;
+.BoardbtnDiv{
+	margin-bottom: 10px;
+	text-align: right;
+	padding-right: 10px;
 }
 </style>
 </head>
 <body>
-<div class="row container">
+<div class="row itemCate_container">
 	<div class="col-12">
-		<div>
-			<a href="/item/itemList">HOME</a> / 굿즈카테고리관리
+		<div class="row">
+			<h3>GOODS CATEGORY MANAGE</h3>
 		</div>
-		<div class="addCateDiv" onclick="addCate();">추가</div>
-		<div>
-			<table>
-				<colgroup>
-					<col width="10%">
-					<col width="">
-					<col width="15%">
-					<col width="15%">
-				</colgroup>
-				<thead>
+		<div class="row BoardbtnDiv">
+			<div class="col-12">
+				<button type="button" class="btn btn-success btn-m" onclick="addCate();">추가</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+			<table class="table table-hover table-border text-center">
+			<colgroup>
+				<col width="10%">
+				<col width="*">
+				<col width="15%">
+				<col width="15%">
+			</colgroup>
+			<thead>
 					<tr>
 						<td>순</td>
 						<td>카테고리명</td>
@@ -65,8 +63,8 @@ tr td{
 						<tr>
 							<td>${i}</td>
 							<td><div id="cateName">${cate.cateName}</div></td>
-							<td><div id="cateUpdate"><button type="button" onclick="updateCate(this, '${cate.cateCode}');">수정</button></div></td>
-							<td><button type="button" onclick="location.href='/item/deleteCate?cateCode=${cate.cateCode}&isDelete=Y';">삭제</button></td>
+							<td><div id="cateUpdate"><button type="button" class="btn btn-success btn-m" onclick="updateCate(this, '${cate.cateCode}');">수정</button></div></td>
+							<td><button type="button" class="btn btn-success btn-m" onclick="location.href='/item/deleteCate?cateCode=${cate.cateCode}&isDelete=Y';">삭제</button></td>
 						</tr>
 					</c:forEach>
 					<c:if test="${add eq 'add' }">
@@ -82,6 +80,7 @@ tr td{
 					</c:if>
 				</tbody>
 			</table>
+			</div>
 		</div>
 	</div>
 </div>

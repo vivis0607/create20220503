@@ -14,27 +14,31 @@
 	max-height: calc(100vh - 200px);
 	overflow-y: auto;
 }
+.page-item.active .page-link {
+	background-color: #198754;
+	border-color: #198754;
+}
+.page-link {
+	color: #198754;
+}
+.page-link:hover {
+	color: #198754;
+}
+.table{
+ --bs-table-hover-bg:#ecf7f1; 
+}
 </style>
 </head>
 <body>
+<div class="container">
 <div class="row">
-	<div class="col-1">
-		<div class="subDiv">
-			<a href="/club/clubList">북클럽조회</a><br>
-			<c:if test="${sessionScope.loginInfo.clubAdmin eq 'Y' }">
-				<a href="/clubAdmin/clubAdmin?clubCode=${sessionScope.loginInfo.clubCode }">북클럽관리</a><br>
-			</c:if> 
-			<a href="/admin/memberManage">회원관리</a><br>
-			
-		</div>
-	</div>
-	<div class="col-8">
+	<div class="col-12">
 		<div class="row">
-			<div class="col-4">
-				<form action="/admin/memberManage" method="post" id="searchForm">
+			<div class="col-7">
+				<form action="/admin/memberManage" method="post" id="search-form">
 					<input type="hidden" value="1" id="nowPage" name="nowPage">
 					<div class="input-group mb-3">
-					  <input type="text" class="form-control" name="keyword" id="keyword" placeholder="회원 ID" aria-label="Recipient's username" aria-describedby="button-addon2">
+					  <input type="text" class="form-control" name="keyword" id="keyword" placeholder="회원 ID" aria-label="Recipient's username" aria-describedby="button-addon2" >
 					  <button class="btn btn-secondary" type="button" id="button-addon2">검색</button>
 					</div>
 				</form>
@@ -113,6 +117,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 
 <!--알림 전송 Modal -->

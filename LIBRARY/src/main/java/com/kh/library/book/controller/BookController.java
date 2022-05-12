@@ -81,7 +81,7 @@ public class BookController {
 		      
 		      MultipartFile file = multi.getFile("file");
 		      if(!file.getOriginalFilename().equals("")) {
-		    	  String uploadPath = "D:\\git\\spring-study\\LIBRARY\\src\\main\\webapp\\resources\\images\\book\\";
+		    	  String uploadPath = "D:\\git\\spring\\LIBRARY\\src\\main\\webapp\\resources\\images\\book\\";
 		    	  
 		    	  try {
 		    		  
@@ -133,9 +133,9 @@ public class BookController {
 	//도서 수정폼
 	@GetMapping("/modifyBook")
 	public String modifyBook(Model model, BookVO bookVO) {
-		model.addAttribute("bookDetail", bookService.selectBookDetail(bookVO));
+		model.addAttribute("bk", bookService.selectBookDetail(bookVO));
 		
-		return "book/modify_book_form";
+		return "admin/modify_book_form";
 	}
 	
 	//도서 수정
@@ -144,7 +144,7 @@ public class BookController {
 		MultipartFile file = multi.getFile("file");
 		
 	    if(!file.getOriginalFilename().equals("")) {
-    	  String uploadPath = "D:\\git\\spring-study\\LIBRARY\\src\\main\\webapp\\resources\\images\\book\\";
+    	  String uploadPath = "D:\\git\\spring\\LIBRARY\\src\\main\\webapp\\resources\\images\\book\\";
     	  
     	  try {
     		  
@@ -241,21 +241,37 @@ public class BookController {
 		return "redirect:/book/bookDetail?bookCode="+bookVO.getBookCode()+"&memId="+bookVO.getMemId();
 	}
 	
-	//추천도서 랭킹
+	//추천도서 랭킹 //////////////////////////admin으로 빼야 됨///////////////////////////////////
 	@GetMapping("/selectRcdBook")
 	public String selectRcdBook(Model model) {
 		model.addAttribute("bookList", bookAdminService.selectRcdBook());
 		
 		return "manage/home";
 	}
+	//추천도서 더보기
+	@GetMapping("/selectRcdBook1")
+	public String selectRcdBook1(Model model) {
+		model.addAttribute("bookList", bookAdminService.selectRcdBook());
+		
+		return "book/most_rcd_list";
+	}
 	
-	//신간도서 select 
+	//신간도서 select  //////////////////////////admin으로 빼야 됨///////////////////////////////////
 	@GetMapping("/selectNewBook")
 	public String selectNewBook(Model model) {
 		model.addAttribute("newBookList", bookAdminService.selectNewBook());
 		
 		return "book/list";
 	}
+	
+	//신간도서 더 보기 
+	@GetMapping("/selectNewBook1")
+	public String selectNewBook1(Model model) {
+		model.addAttribute("newBookList", bookAdminService.selectNewBook());
+		
+		return "book/new_book_list";
+	}
+	
 	
 	//중복예약방지-예약중복
 	@ResponseBody
@@ -277,7 +293,7 @@ public class BookController {
 		bookService.reserve(bookVO, memberVO);
 		model.addAttribute("bookDetail", bookService.selectBookDetail(bookVO));
 		
-		return "book/book_detail";
+		return "redirect:/book/bookDetail?bookCode="+bookVO.getBookCode()+"&memId="+bookVO.getMemId();
 	}
 	
 	//관리자 도서예약리스트 조회
@@ -302,7 +318,7 @@ public class BookController {
 		System.out.println("!!!" + reserveVO.getIsbn());
 		System.out.println("!!!"+memberVO.getMemId());
 		bookAdminService.borrowBook(reserveVO, memberVO);
-		memberAdminService.insertSendMessage(messageVO);
+		/* memberAdminService.insertSendMessage(messageVO); */
 		
 		return "redirect:/book/reserveListAdmin";
 	}

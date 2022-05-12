@@ -12,11 +12,11 @@
    <div class="col-8">
       <div style="background-color: #eeeeee; padding: 16px; border-radius: 12px;">
          <form class="row g-3" action="/book/updateBook" method="post" id="updateBookForm" enctype="multipart/form-data">
-         <c:forEach items="${bookDetail }" var = "bk">
             <div class="col-12">
                <label for="categorySeletor" class="form-label">카테고리</label>
                      ${bk.cateName }
             </div>
+            <input type="hidden" name="bookCode" id="bookCode" value="${bk.bookCode }">
             <div class="col-12">
                <label for="title" class="form-label">도서명</label>
                <input type="text" class="form-control" id="title" name="title" value="${bk.title }">
@@ -71,7 +71,6 @@
             <div class="col-12 d-grid gap-2">
                <input type="submit" value="도서 수정">
             </div>
-            </c:forEach>
          </form>
       </div>
    </div>

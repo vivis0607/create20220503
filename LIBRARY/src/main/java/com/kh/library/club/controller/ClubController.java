@@ -144,9 +144,9 @@ public class ClubController {
 	
 	//게시글 삭제
 	@GetMapping("/clubBoardDelete")
-	public String clubBoardDelete(ClubBoardVO clubBoardVO, RedirectAttributes redirectAttributes, String clubCode) {
-		clubService.deleteClubBoard(clubBoardVO);
+	public String clubBoardDelete(ClubBoardVO clubBoardVO, RedirectAttributes redirectAttributes, HttpServletRequest request, String clubCode) {
 		redirectAttributes.addAttribute("clubCode", clubCode);
+		clubService.deleteClubBoard(clubBoardVO);
 		return "redirect:/club/clubDetail";
 	}
 	

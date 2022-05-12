@@ -20,7 +20,7 @@ function acceptance(clubCode, memId, getId){
 			}
 		});
 	}
-}ㅋ
+}
 
 function byteCheck(obj, maxByte){
 	
@@ -64,11 +64,6 @@ $(".open-msgModal").click(function(){
 	var data = $(this).data('id');
     $("#get-name.form-control").val(data);
 });
-
-
-
-
-
 
 
 

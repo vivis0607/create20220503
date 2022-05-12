@@ -8,6 +8,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+.itemlist_container{
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 30px;
+}
 .col-3{
 	margin-bottom: 16px;
 }
@@ -18,9 +23,12 @@
 }
 .cateDiv{
 	margin: 0 auto;
-	margin-top: 30px;
+	margin-top: 50px;
 	text-align: center;
 	margin-bottom: 30px;
+	color: #41764F;
+	font-weight: bold;
+	font-size: large;
 }
 
 input{
@@ -33,7 +41,7 @@ input{
 }
 .searchDiv{
    display: inline-block; 
-   border: 2px solid #DDDDDD; 
+   border: 2px solid #41764F; 
    border-radius: 48px; 
    width: 450px; 
    height: 45px; 
@@ -50,51 +58,53 @@ input{
 
 </head>
 <body>
-<button onclick="location.href='/buy/buyPage';">구매하기</button><br>
-
-<div class="searchContainer">
-	<div class="searchDiv">
-		<form action="/item/searchItem" method="post" id="searchForm">
-	      <span>
-	         <input name="keyword" id="keyword" required type="text" onkeydown="if (event.keyCode == 13) { search(); }"> 
-	         <span onclick="search();" style="cursor: pointer;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-	              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-	         </svg></span>
-	      </span>
-		</form>
-    </div>
-</div>
-
-
-
-<div class="cateDiv">
-	<span onclick="location.href='/item/itemList';"> 전체보기 </span>  &nbsp;
-	<c:forEach items="${cateList}" var="cate">
-		<span onclick="cateItem('${cate.cateCode}');">${cate.cateName }</span> &nbsp;
-	</c:forEach>
-</div>
-<div class="row itemList">
-	<c:forEach items="${itemList }" var="item">
-		<div class="col-3 text-center">
-			<div>
-				<a href="/item/itemDetail?itemCode=${item.itemCode }">
-					<img alt="..." src="/resources/images/item/${item.itemAtImgName }" height="250px;">
-				</a>
+<div class="itemlist_container">
+	<button onclick="location.href='/buy/buyPage';">구매하기</button><br>
+	
+	<div class="searchContainer">
+		<div class="searchDiv">
+			<form action="/item/searchItem" method="post" id="searchForm">
+		      <span>
+		          <input type="text" name="keyword" id="keyword" onkeydown="if (event.keyCode == 13) { search(); }"> 
+			         <span onclick="search();" style="cursor: pointer;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+			              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+			         </svg></span>
+		      </span>
+			</form>
+	    </div>
+	</div>
+	
+	
+	
+	<div class="cateDiv">
+		<span onclick="location.href='/item/itemList';"> 전체보기 </span>  &nbsp;
+		<c:forEach items="${cateList}" var="cate">
+			<span onclick="cateItem('${cate.cateCode}');">${cate.cateName }</span> &nbsp;
+		</c:forEach>
+	</div>
+	<div class="row itemList">
+		<c:forEach items="${itemList }" var="item">
+			<div class="col-3 text-center">
+				<div>
+					<a href="/item/itemDetail?itemCode=${item.itemCode }">
+						<img alt="..." src="/resources/images/item/${item.itemAtImgName }" width="95%;" height="280px;" style="border-radius: 8px; border: 1px solid #CCCDCD;">
+					</a>
+				</div>
+				<div onclick="location.href='/item/itemDetail?itemCode=${item.itemCode}';">
+					<span class="itemName" >${item.itemName }</span><br>
+					<fmt:formatNumber value="${item.itemPrice }" pattern="\#,###"/>
+				</div>
+				<div>
+				</div>
 			</div>
-			<div onclick="location.href='/item/itemDetail?itemCode=${item.itemCode}';">
-				<span class="itemName" >${item.itemName }</span><br>
-				<fmt:formatNumber value="${item.itemPrice }" pattern="\#,###"/>
-			</div>
-			<div>
-			</div>
-		</div>
-	</c:forEach>
+		</c:forEach>
+	</div>
 </div>
 <script type="text/javascript">
 	function search(){
 		document.getElementById('searchForm').submit();
 	}
 </script>
-<script src="\resources\js\item\item_list.js?ver=1" type="text/javascript" ></script>
+<script src="\resources\js\item\item_list.js?ver=3" type="text/javascript" ></script>
 </body>
 </html>

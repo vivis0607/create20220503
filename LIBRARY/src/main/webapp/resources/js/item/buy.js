@@ -107,6 +107,7 @@ function payment(){
 				alert('실패');
 			}
 		});
+		}
 		var IMP = window.IMP; // 생략가능
 		 IMP.init('imp13381691');
 		 // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
@@ -163,7 +164,6 @@ function payment(){
 			 }
 			 alert(msg);
 		 });
-		}
 			
 	}else{
 		alert('결제동의에 체크해주세요');

@@ -8,48 +8,112 @@
 <title>Insert title here</title>
 <link href="/resources/css/member/menu.css" rel="stylesheet">
 
+<style type="text/css">
+input#keyword{
+	background-color: inherit;
+	width: 400px;
+}
+
+.searchContainer{
+	margin: 0 auto;
+	text-align: center;
+}
+.searchDiv{
+   display: inline-block; 
+   border: 2px solid #DDDDDD; 
+   /*color: #FDFAF6;*/
+   border-radius: 48px; 
+   width: 550px; 
+   height: 45px; 
+   text-align: center;
+}
+.searchDiv input[type="text"]{
+   width: 450px; 
+   height: 40px; 
+   vertical-align: middle; 
+   border: none; 
+   outline: 0;
+}
+
+.row{
+    width: 100%;
+}
+
+</style>
 </head>
 <body>
 <div class="top-container">
-	<header>
-		<div class="header-loginBox">
-			<c:choose>
-				<c:when test="${not empty sessionScope.loginInfo}">
-					<div class="header-loginBoxDiv" id="weather">
-						<span></span>
-						<span class="weatherIcon"></span>
-						<span></span>
-						&nbsp;&nbsp;&nbsp;책 읽기 좋은 날씨예요😊
-					</div>
-					<div class="header-loginBoxDiv" onclick="location.href='/member/logout';">로그아웃</div>
-				</c:when>
-				<c:otherwise>
-					<div class="header-loginBoxDiv" onclick="location.href='/member/login';">로그인</div>
-					<div class="header-loginBoxDiv" onclick="location.href='/member/join';">회원가입</div>
-				</c:otherwise>
-			</c:choose>
+	<div class="header-loginBox">
+	<div class="header-weatherBox">
+		<c:if test="${not empty sessionScope.loginInfo}">
+			<div class="header-loginBoxDiv" id="weather">
+				<span></span>
+				<span class="weatherIcon"></span>
+				<span></span>
+				&nbsp;&nbsp;&nbsp;책 읽기 좋은 날씨예요😊
+			</div>
+		</c:if>
+	</div>
+		<c:if test="${empty sessionScope.loginInfo}">
+		<div class="header-loginBoxDiv">
+			<div class="header-loginBoxDiv" onclick="location.href='/member/login';">로그인</div>
+			<div class="header-loginBoxDiv" onclick="location.href='/member/join';">회원가입</div>
 		</div>
-		<div class="header-mainBox">
-			<div class="nav-logoDiv"><a href="/admin/test"><h1>양심 도서관</h1></a></div>
-			<c:if test="${not empty sessionScope.loginInfo }">
-				<c:if test="${loginInfo.isAdmin eq 'Y' }">
-					<span class="adminIcon">👑</span>
-				</c:if>
-				<div class="header-profile">
-					<div><img alt="" src="/resources/images/member/${loginInfo.memImage }"></div>
-					<div>
-						<div>${sessionScope.loginInfo.memName}님 반가와요</div>
-						<div class="header-profile-icon">
-							<span onclick="location.href='/member/myPageDetail?memId=${sessionScope.loginInfo.memId}'">
-								My Page</span>&nbsp;&nbsp;
-							<span onclick="location.href='/cart/cartView';">&nbsp;<i class="fa-solid fa-cart-shopping"></i>&nbsp;</span>
-						</div>
-					</div>
-				</div>
-			</c:if>
+		</c:if>
+	</div>		
+		
+	<div class="header-mainBox">
+		<div class="nav-logoDiv"><a href="/admin/test"><h1>양심 도서관</h1></a></div>
+		<div class="searchContainer">
+			<div class="searchDiv">
+				<form action="/item/searchItem" method="post" id="searchForm">
+			      <span>
+			         <input name="keyword" id="keyword" required type="text" onkeydown="if (event.keyCode == 13) { search(); }"> 
+			         <span onclick="search();" style="cursor: pointer;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+			              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+			         </svg></span>
+			      </span>
+				</form>
+		    </div>
 		</div>
-	</header>
-	<nav>
+		<c:if test="${not empty sessionScope.loginInfo }">
+			<div class="header-profile">
+				<nav class="header-nav">
+				  <input type="checkbox" class="nav__cb" id="menu-cb"/>
+				  <div class="nav__content">
+				  
+				    <ul class="nav__items">
+				      <li class="nav__item">
+				        <span class="nav__item-text" onclick="location.href='/member/myPageDetail?memId=${sessionScope.loginInfo.memId}'">
+				          My Page
+				        </span>
+				      </li>
+				      <li class="nav__item">
+				        <span class="nav__item-text" onclick="location.href='/cart/cartView';">
+				          <i class="fa-solid fa-cart-shopping"></i>
+				        </span>
+				      </li>
+				      <li class="nav__item">
+				        <span class="nav__item-text">
+				          플래너?
+				        </span>
+				      </li>
+				      <li class="nav__item">
+				        <span class="nav__item-text" onclick="location.href='/member/logout';">
+				          Logout
+				        </span>
+				      </li>
+				    </ul>
+				  </div>
+				  <span class="nav__btn" >
+				  	<img src="/resources/images/member/${loginInfo.memImage }">
+					  	
+				  </span>
+				  <label class="nav__btn" for="menu-cb"></label>
+				</nav>
+			</div>
+		</c:if>
+	</div>
 		<div class="nav-main-menu">
 			<ul>
 				<li>도서관소개</li>
@@ -74,9 +138,9 @@
 				</c:if>
 			</ul>
 		</div>
-	</nav>
 </div>
 <script type="text/javascript" src="/resources/js/member/menu.js?ver=6"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+
 </body>
 </html>

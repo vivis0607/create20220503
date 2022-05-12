@@ -49,11 +49,11 @@ function goCart(memId, itemCode){
 
 
 function buy(memId, itemCode){
-	if(memId == undefined){
+	if(memId == ''){
 		alert('로그인 후 이용바랍니다.');
 		location.href='/member/login'
 	}
-	else{	
+	else{
 		$.ajax({
 	   url: '/buy/insertBuyAtOnce', //요청경로
 	    type: 'post',

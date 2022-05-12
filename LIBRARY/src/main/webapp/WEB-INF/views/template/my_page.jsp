@@ -10,12 +10,7 @@
 		display: flex;
 		justify-content: center;
 	} 
-	.sideBodyDiv nav{
-		width: 30%;
-	}
-	.sideBodyDiv article{
-		width: 60%;
-	}
+
 	
 	table, tr, td{
 		border-collapse: collapse;
@@ -24,18 +19,18 @@
 	
 	.myPageLeftDiv table td{
 		height: 2.5rem;
-		padding-left: 3rem;
+		padding-left: 1rem;
 	}
 	
 	@keyframes tdhover{
 		from{
 			width: 0;
 			background-color: white;
-			color: #246350;
+			color: #16784B;
 		}
 		to{
 			width: 100%;
-			background-color: #246350;
+			background-color: #16784B;
 			color: white;
 		}
 	}
@@ -51,6 +46,7 @@
 		width: 85%;
 		margin: 0px auto;
 	}
+
 	.myPageLeftDiv{
 		display: flex;
 		flex-direction: column;
@@ -59,20 +55,32 @@
 	.myPage-simple{
 		display: flex;
 		flex-direction: column;
-		margin-bottom: 2rem;
+		margin-bottom: 1rem;
 		border-radius: 10px;
-		color: #246350;
-		font-size: 1.2rem;
+		color: #16784B;
+		font-size: 1rem;
 		text-align: center;
 	}
 	.myPage-simple img{
-		width: 100%;
-		height: 290px;
+		width: 200px;
+		height: 200px;
 		object-fit:cover;
 		border-radius: 100%;
 		margin-bottom: 1rem;
 	}
-	
+	.simpleMyBook{
+		display: flex;
+		flex-direction: column;
+		border: 1px solid #28D987;
+		border-radius: 10px;
+		margin: 1.8rem 0;
+		padding: 2px 0;
+		box-shadow: 1px 1px 4px 2px #c7e2d1;
+	}
+	.simpleMyBook > div{
+		display: flex;
+		justify-content: space-evenly;
+	}
 </style>
 </head>
 <body>
@@ -87,8 +95,15 @@
 				<div>
 					<img alt="" src="/resources/images/member/${loginInfo.memImage }">
 				</div>
-				<div>${loginInfo.memName }님의 마이페이지</div>
-				<div>현재 대여 중인 도서 : ${loginInfo.brCnt }권</div>
+				<div>${loginInfo.memName }님 반가와요</div>
+				<div class="simpleMyBook">
+					<div>
+						<div>대여 도서</div><div>${loginInfo.brCnt }권</div>
+					</div>
+					<div>
+						<div>연체 도서</div><div>${loginInfo.brCnt }권</div>
+					</div>
+				</div>
 			</div>
 				<table>
 					<tr>

@@ -6,23 +6,52 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
 <style type="text/css">
-.qnaDetailDiv{
-	margin: 0 auto;
-	text-align: center;
-	width: 100%;
+.ntBtn{
+	padding-top:10px;
+	text-align:right;
 }
-.qnatitleDiv{
-	font-size: x-large;
-	font-weight: bold;
-}
-#writer{
+.content thead{
 	text-align: left;
-	width: 50%;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 15px;
+    background: #eff2f5;
 }
-#etcInfo{
+.detail{
+	padding-top:20px;
+}
+.detail table {
+	border-bottom: 1px solid #dddddd;
+	border-collapse: collapse;
+	width:100%;
+}
+.detail table .title{
+	text-align: left;
+	padding:10px 20px 5px 20px;
+	width: 70%;
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+.detail table .writeTime{
 	text-align: right;
-	width: 50%;
+	padding:15px 20px 0px 10px;
+}
+.detail table .writeInfo{
+	text-align: right;
+	padding:0px 20px 10px 10px;
+}
+
+.detail table .writerInfo, .detail table .content{
+	text-align: left;
+	padding:5px 10px 5px 20px;
+}
+
+.detail table .Info{
+	border-top: 0.25rem solid #16784B;
+	border-bottom: 1px solid #dddddd;
+	background-color: #E7EDE4;
 }
 textarea{
 	resize: none;
@@ -39,10 +68,6 @@ textarea{
 	margin-bottom: 30px;
 	
 }
-.updateDiv{
-	margin-bottom: 50px;
-	margin-top: 50px;
-}
 .answerDiv{
 	width: 50%;
 	margin: 0 auto;
@@ -50,27 +75,40 @@ textarea{
 </style>
 </head>
 <body>
-<div class="qnaDetailDiv">
-	<div class="qnatitleDiv">
-		${qnaInfo.qnaTitle }
-	</div>
-	<div>
-		<span id="writer">작성자: ${qnaInfo.memName}</span>
-		<span id="etcInfo">조회수: ${qnaInfo.qnaReadCnt } / 작성일: ${qnaInfo.qnaCreateDate }</span>
-	</div>
-	<div>
-		<hr>
-		<div>
-			${qnaInfo.qnaContent }
+<div class="container">
+	<div class="subTit">
+      <div class="line_map">홈 > 참여마당 > Q&A</div>
+      <div class="tit">Q&A</div>
+   	</div>
+	<div class="detail">
+		<table>
+			<tbody class="Info">
+				<tr>
+					<td class="title">${qnaInfo.qnaTitle }</td>
+					<td class="writeTime">${qnaInfo.qnaCreateDate }</td>
+				</tr>
+				<tr>
+					<td class="writerInfo">${qnaInfo.memName}</td>
+					<td class="writeInfo">조회수: ${qnaInfo.qnaReadCnt }</td>
+				</tr>
+			</tbody>
+			<tbody>
+				<tr>
+					<td class="content" colspan="2">
+						<pre>${qnaInfo.qnaContent }</pre>
+					</td>
+				</tr>
+			</tbody>
+		</table>	
+		<div class="ntBtn">
+			<c:if test="${qnaInfo.memId eq sessionScope.loginInfo.memId }">
+				<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="location.href='/otherB/qnaUpdateFrom?qnaNum=${qnaInfo.qnaNum}';">수정</button>
+				<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="location.href='/otherB/qnaDelete?qnaNum=${qnaInfo.qnaNum}';">삭제</button>
+			</c:if>
+			<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="location.href='/otherB/freeBoard';">목록</button>
 		</div>
 	</div>
-	<div class="updateDiv">
-		<c:if test="${qnaInfo.memId eq sessionScope.loginInfo.memId }">
-			<button type="button" onclick="location.href='/otherB/qnaUpdateFrom?qnaNum=${qnaInfo.qnaNum}';">수정하기</button>
-			<button type="button" onclick="location.href='/otherB/qnaDelete?qnaNum=${qnaInfo.qnaNum}';">삭제하기</button>
-		</c:if>
-		<button type="button" onclick="location.href='/otherB/qnaBoard';">목록가기</button>
-	</div>
+	
 	
 	
 	<div class="answerDiv">

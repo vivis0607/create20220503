@@ -28,7 +28,11 @@
 		display: flex;
 		flex-direction: column;
 	}
-	
+	.memberManage{
+		cursor: pointer;
+		font-weight: bold;
+		color: #125B50;
+	}
 
 </style>
 </head>
@@ -61,6 +65,7 @@
 						</li>
 					</ul>
 				</li>
+				<li><span class="memberManage" style="font-weight: bold; color:#125B50;" onclick="location.href='/admin/memberManage';">회원관리</span>
 			</ul>
 			
 				

@@ -18,76 +18,111 @@ joinForm.addEventListener('submit', removeSpecData);
 
 /*유효성 검사*/
 $('#joinForm').validate({
-      debug: false,
-
-      rules: {
+	debug: false,
+	groups:{
+		username1: 'memTell1 memTell2',
+		username2: 'memEmail1 memEmail2'
+	},
+	rules: {
 		memId: {
-			required: true,
-			minlength: 5,
-			maxlength: 12
+		required: true,
+		minlength: 5,
+		maxlength: 12
 		},
-        memPwdCheck: { 
-			required: true,
-            equalTo: '#inputPwd'
+		memPwdCheck: { 
+		required: true,
+        equalTo: '#inputPwd'
          },
-         memName: {
-			required: true
+		memName: {
+		required: true
 		},
-         memBirth: {
-			required: true
+		memBirth: {
+		required: true
 		},
-        memGender:{
-			required: true
+		memGender:{
+		required: true
 		},
-		memTell: {
-			number: true,
-			required: true
+		memTell1: {
+		digits: true,
+		required: true,
+		minlength: 3,
+		maxlength: 4
 		},
-		memEmail:{
-			required: true
+		memTell2:{
+		digits: true,
+		required: true,
+		minlength: 4,
+		maxlength: 4
+		},
+		memEmail1:{
+		required: true
+		},
+		memEmail2:{
+		required: true
 		},
 		memAddr:{
-			required: true
+		required: true
 		}
       },
-      messages: {
-         memId: {
+	messages: {
+  	  memId: {
 			required: '필수입력 항목입니다.',
             minlength: '5자 이상 입력해 주셔야 해요.',           
             maxlength: '12자 이하로 입력해 주셔야 해요.'            
          },
-         memPwdCheck: {
+	memPwdCheck: {
 		required: '필수입력 항목입니다.',
-			equalTo: '위에 입력하신 비밀번호랑 일치하지 않아요😥'
+		equalTo: '위에 입력하신 비밀번호랑 일치하지 않아요😥'
 		},
-		memName:{
-			required: '필수입력 항목입니다.',
+	memName:{
+		required: '필수입력 항목입니다.',
 		},
-		memBirth: {
-			required: '필수입력 항목입니다.'
+	memBirth: {
+		required: '필수입력 항목입니다.'
 		},
-		memGender:{
-			required: '필수입력 항목입니다.'
+	memGender:{
+		required: '필수입력 항목입니다.'
 		},
-		memTell: {
-			number: '전화번호 표기 방식이 올바르지 않습니다',
-			required: '필수입력 항목입니다.'
+	memTell1: {
+		digits: '전화번호 표기 방식이 올바르지 않습니다',
+		required: '필수입력 항목입니다.',
+		minlength: '3~4자리의 숫자를 입력해 주세요.',
+		maxlength: '4자리의 숫자를 입력해 주세요.'
 		},
-		memEmail: {
-			required: '필수입력 항목입니다.'
+	memTell2: {
+		digits: '전화번호 표기 방식이 올바르지 않습니다',
+		required: '필수입력 항목입니다.',
+		minlength: '3~4자리의 숫자를 입력해 주세요.',
+		maxlength: '4자리의 숫자를 입력해 주세요.'
 		},
-		memAddr:{
-			required: '필수입력 항목입니다.'
+	memEmail1: {
+		required: '필수입력 항목입니다.'
+		},
+	memEmail2: {
+		required: '필수입력 항목입니다.'
+		},
+	memAddr:{
+		required: '필수입력 항목입니다.'
 		}
       },
-      errorElement:'div',
-      errorPlacement: function(error,element){
-		error.insertAfter(element);
+	errorElement:'div',
+	errorPlacement: function(error,element){
+		if($(element).attr('id') == 'inputTell1' || $(element).attr('id') == 'inputTell2'){
+			error.insertAfter($('#joinTell'));
+		}
+		else if($(element).attr('id') == 'inputEmail1' || $(element).attr('id') == 'inputEmail2'){
+			error.insertAfter($('#joinEmail'));
+		}
+		else{
+			error.insertAfter(element);
+		}
 		error.css('color', 'red');
 		error.css('font-size', '12px');
 		error.css('margin-top', '2px');
 	  },
       submitHandler: function(form) {
+		$('#inputTell1').attr('name', 'memTell');
+		$('#inputTell2').attr('name', 'memTell');
 		removeSpecData(form);
         form.submit();   //유효성 검사를 통과시 전송
       }

@@ -204,7 +204,7 @@
    <!-- 이미지 업데이트 -->
    <update id="updateBkImg">
       UPDATE BOOK_IMAGE
-      SET , BK_ORIGIN_NAME=#{bkOriginName}
+      SET BK_ORIGIN_NAME=#{bkOriginName}
          , BK_AT_NAME=#{bkAtName}
       WHERE BOOK_CODE=#{bookCode}
    </update>

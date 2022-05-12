@@ -1,7 +1,7 @@
 //검색
 $(document).on('click', '#button-addon2' , function() {
-	var keyword = $('#keyword').val();
-	location.href = '/admin/memberManage?keyword=' + keyword;	
+	var formTag = document.getElementById('search-form');
+	formTag.submit();	
 });
 
 // 알림전송내역 상세조회
@@ -124,6 +124,6 @@ function borrowInfo(memId){
 //페이징
 function search(nowPage){
 	document.getElementById('nowPage').value = nowPage;
-	var formTag = document.getElementById('searchForm');
+	var formTag = document.getElementById('search-form');
 	formTag.submit();	
 }

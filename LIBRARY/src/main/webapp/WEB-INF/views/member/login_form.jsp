@@ -40,9 +40,11 @@
 	
 	.findBox{
 		text-align: center;
-		margin-bottom: 2rem;
-		font-size: 0.8rem;
-		color: #d4d4d4;
+		margin-bottom: 3rem;
+		font-size: 1rem;
+	}
+	.findBox a:hover{
+		border-bottom:2px solid #246350;
 	}
 	
 	button{
@@ -55,7 +57,7 @@
 		display: block;
 		padding: 0.7rem 1.7rem;
 		box-shadow: inset 0 0 0 2px #02475E;
-		color: #02475E;
+		color: #16784B;
 		font-size: inherit;
 		font-weight: 700;
 		
@@ -66,7 +68,7 @@
 	.wrapper button{
 	  line-height: 20px;
 	  font-size: 18px;
-	  color: #246350;
+	  color: #16784B;
 	  text-align: center;
 	  position: relative;
 	  transition: all .35s;
@@ -84,7 +86,7 @@
 	  left: 0;
 	  width: 0;
 	  height: 100%;
-	  background:  #246350;
+	  background:  #16784B;
 	  transition: all .35s;
 	}
 	
@@ -114,8 +116,7 @@
 		</form>
 		<div class="findBox">
 			<a href="/member/findId">
-			아이디 찾기
-			</a> 
+			아이디 찾기</a>&nbsp;&nbsp;
 			<a href="/member/findPwd">
 			비밀번호 찾기
 			</a>

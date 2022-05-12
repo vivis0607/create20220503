@@ -152,7 +152,7 @@
 	
 	<!-- 예약제한일 -->
 	<select id="selectLimitDate" resultType="String">
-		SELECT LIMIT_DATE
+		SELECT TO_CHAR(LIMIT_DATE, 'YYYY-MM-DD') AS LIMIT_DATE
 		FROM BOOK_MEMBER
 		WHERE MEM_ID = #{memId}
 	</select>

@@ -3,8 +3,8 @@
 //현재 조회할 수 없는 도서입니다.(사유:비치 중지)
 //텍스트에 p태그 넣고 onclick() 넣기
 
-function getBkDetail(selectedTag){
-	var OBookCode = $(selectedTag).closest('tr').children().eq(6).val();
+function getBkDetail(selected){
+	var OBookCode = $(selected).closest('tr').children().eq(6).val();
 	var memId = $('#memId').val();
 	
 	const bookCode = OBookCode;

@@ -22,7 +22,6 @@ function returnBook(){
 	
 	var rtDate = year +'-'+ month +'-'+ date;
 	
-	alert(rtDate);
 	
 	
 	var isbn = $('#returnBook #originIsbn').val();
@@ -36,7 +35,7 @@ function returnBook(){
 	
 	
 	location.href = '/book/returnBook?isbn='+isbn+'&brCode='+brCode+'&memId='+memId+'&rtDate='+rtDate;
-	alert('반납되었습니다.');
+	alert(rtDate+'반납되었습니다.');
 	
 /*	var formTag = document.getElementById('rtBook');
 	formTag.submit();

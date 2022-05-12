@@ -7,15 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	.myPageDetail table{
-		width: 100%;
-	}
-	.myPageDetail-basic img{
-		width: 5rem;
-	}
 	.modal-body-top-left img{
 		margin: auto 0px;
-		width: 100%;
+		width: 112px;
+		height: 112px;
 	}
 	.modal-body{
 		display: flex;
@@ -41,7 +36,7 @@
 	.file-label {
 	  margin-top: 1rem;
 	  padding: 2px 10px;
-	  background-color: #02475E;
+	  background-color: #16784B;
 	  color: #fff;
 	  text-align: center;
 	  width: 100%;
@@ -56,7 +51,7 @@
 		align-items: center;
 		font-size: 1.3rem;
 		font-weight: bold;
-		color: #02475E;
+		color: #16784B;
 	}
 	.myPageDetail-part > span{
 		margin-right: 7px;
@@ -87,6 +82,60 @@
 		z-index: 1;
 	}
 	
+	.myPageDetail table tr{
+		padding: 3px 0;
+	}
+	.myPageDetail-secret{
+	    margin: 2rem 0;
+	
+	}
+	.modal-body-pwd{
+		width: 80%;
+	}
+	
+	.myPageDetail{
+		padding-left: 60px;
+	}
+	
+	.myPageDetail-table{
+	    width: 801px;
+	    margin-top: 0.5rem;
+	    margin-left: 2rem;
+	    border: 1px solid #eee;
+	    border-left: 3px solid #16784B;
+	}
+	.myPageDetail-table td{
+		padding: 1rem 15px;
+	}
+	.myPageDetail-table td:first-child {
+		background-color: #eee;
+		font-weight: bold;
+	}
+	
+	.modal-body table{
+		width: 100%;
+	}
+	.modal-body input{
+		border: 1px solid #d4d4d4;
+		border-radius: 3px;
+		padding: 3.5px;
+	}
+	.modal-body input:focus {
+		border-color: #c7e2d1;
+		box-shadow: 0 0 8px #c7e2d1;
+	}
+	.modal-body-pwd input, .modal-body-plus input{
+		width:100%;
+		margin: 3px 0;
+	}
+	
+	.modal-body-plus div:first-child {
+		padding-top: 8px;
+	}
+	
+	myPageDetail-part button:checkd{
+		border: none;
+	}
 </style>
 </head>
 <body>
@@ -99,14 +148,17 @@
 	<div class="myPageDetail">
 		<div class="myPageDetail-part">
 			<span>기본정보</span> 
-			<button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#myPageDetail-basic" style="background-color: #FDFAF6; color: #02475E; border: 1px solid #02475E;">
+			<!-- <button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#myPageDetail-basic" style="background-color: #FDFAF6; color: #16784B;; border: 1px solid #16784B;">
+			  수정
+			</button> -->
+			<button type="button" class="btn btn-sm" onclick="showPopup();" data-bs-target="#myPageDetail-basic" style="background-color: #FDFAF6; color: #16784B;; border: 1px solid #16784B;">
 			  수정
 			</button>
 		</div>
 		<div class="myPageDetail-basic">
-			<table>
+			<table class="myPageDetail-table">
 				<colgroup>
-					<col width="30%">
+					<col width="20%">
 					<col width="*">
 				</colgroup>
 				<tr>
@@ -138,13 +190,13 @@
 		<div class="myPageDetail-secret">
 			<div class="myPageDetail-part">
 				<span>보안정보</span> 
-				<button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#myPageDetail-secret" style="background-color: #FDFAF6; color: #02475E; border: 1px solid #02475E;">
+				<button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#myPageDetail-secret" style="background-color: #FDFAF6; color: #16784B;; border: 1px solid #16784B;;">
 				  수정
 				</button>
 			</div>
-			<table>
+			<table class="myPageDetail-table">
 				<colgroup>
-					<col width="30%">
+					<col width="20%">
 					<col width="*">
 				</colgroup>
 				<tr>
@@ -158,13 +210,13 @@
 		<div class="myPageDetail-sub">
 			<div class="myPageDetail-part">
 				<span>추가정보</span> 
-				<button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#myPageDetail-plus" style="background-color: #FDFAF6; color: #02475E; border: 1px solid #02475E;">
+				<button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#myPageDetail-plus" style="background-color: #FDFAF6; color:#16784B; border: 1px solid #16784B;">
 				  수정
 				</button>
 			</div>
-			<table>
+			<table class="myPageDetail-table">
 				<colgroup>
-					<col width="30%">
+					<col width="20%">
 					<col width="*">
 				</colgroup>
 				<tr>
@@ -191,6 +243,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form action="/member/updateBasicInfo" method="post" id="basicForm" enctype="multipart/form-data">
+   		<input type="hidden" name="memId" value="${memberInfo.memId}">
 	      <div class="modal-body">
 	      	<div class="modal-body-top-left">
 	      		<div>
@@ -209,24 +262,23 @@
 	      	
 	      	<div class="modal-body-top-right">
 	      		<div>
-	      			<input type="hidden" name="memId" value="${memberInfo.memId}">
 	      			${memberInfo.memId}
 	      		</div>
 	      		<div>
-	      			<input type="text" name="memName" value="${memberInfo.memName} ">
+	      			<input type="text" name="memName" value="${memberInfo.memName}" placeholder="이름">
 	      		</div>
 	      		<div>
-	      			<input type="text" name="memTell" size="3" value="${(memberInfo.memTell).substring(0, 3) }">
-	      			- <input type="text" name="memTell" size="4" value="${(memberInfo.memTell).substring(4, 8) }">
-	      			- <input type="text" name="memTell" size="4" value="${(memberInfo.memTell).substring((memberInfo.memTell).length()-4, (memberInfo.memTell).length()) }">
+	      			<input type="text" name="memTell" size="3" value="${(memberInfo.memTell).substring(0, 3) }" placeholder="XXX">
+	      			- <input type="text" id="validateTell_1" name="memTell1" size="4" value="${(memberInfo.memTell).substring(4, 8) }" placeholder="XXXX">
+	      			- <input type="text" id="validateTell_2" name="memTell2" size="4" value="${(memberInfo.memTell).substring((memberInfo.memTell).length()-4, (memberInfo.memTell).length()) }" placeholder="XXXX">
 	      		</div>
 	      		<div>
-	      			<input type="email" name="memEmail" value="${memberInfo.memEmail }">
+	      			<input type="email" name="memEmail" value="${memberInfo.memEmail }" placeholder="email@email.com">
 	      		</div>
 	      	</div>
 		  </div>		
 	      <div class="modal-footer">
-	        <button onclick="updateBasic()" class="btn btn-primary" >수정하기</button>
+	        <button onclick="updateBasic()" class="btn btn-success" >수정하기</button>
 	      </div>
 	</form>
       
@@ -245,24 +297,29 @@
       	<input type="hidden" name="memId" value="${memberInfo.memId}">
 	      <div class="modal-body">
 		      <div class="modal-body-pwd">
-		      	<div>
-	      			새 비밀번호 입력
-	      		</div>
-		      	<div>
-	      			비밀번호 확인
-	      		</div>
-		      </div>
-		      <div class="modal-body-pwd">
-		      	<div>
-	      			<input type="password" name="memPwd" id="inputPwd">
-	      		</div>
-		      	<div>
-	      			<input type="password" name="memPwdCheck" >
-	      		</div>
+		      
+		      <table>
+		      	<colgroup>
+		      		<col width="40%">
+		      		<col width="*">
+		      	</colgroup>
+		      	<tr>
+		      		<td>현재 비밀번호</td>
+		      		<td><input type="password"></td>
+		      	</tr>
+		      	<tr>
+		      		<td>새 비밀번호</td>
+		      		<td><input type="password" name="memPwd" id="inputPwd"></td>
+		      	</tr>
+		      	<tr>
+		      		<td>비밀번호 확인</td>
+		      		<td><input type="password" name="memPwdCheck" ></td>
+		      	</tr>
+		      </table>
 		      </div>
 		  </div>		
 	      <div class="modal-footer">
-	        <button type="submit" class="btn btn-primary">비밀번호 변경</button>
+	        <button type="submit" class="btn btn-success disabled">비밀번호 변경</button>
 	      </div>
 	</form>
       
@@ -296,7 +353,7 @@
 	      	</div>
 		  </div>		
 	      <div class="modal-footer">
-	        <button type="submit" class="btn btn-primary">수정하기</button>
+	        <button type="submit" class="btn btn-success">수정하기</button>
 	      </div>
 	</form>
       
@@ -307,7 +364,7 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- jQuery validation 문법 쓰기 : 주의! jQuery 문법을 쓴 후에 적어야 됨-->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script type="text/javascript" src="/resources/js/member/my_page_detail.js?ver=24"></script>
+<script type="text/javascript" src="/resources/js/member/my_page_detail.js?ver=35"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

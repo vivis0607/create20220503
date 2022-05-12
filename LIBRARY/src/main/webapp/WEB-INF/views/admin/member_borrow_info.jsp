@@ -6,13 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+table{
+	margin-top: 20px;
+}
+</style>
 </head>
 <body>
 <div class="row justify-content-center">
 	<div class="col-2"></div>
 	<div class="col-8">
 		<div class="row">
-			<div class="col-5">
+			<div class="col-8">
 				${borrowVO.memId }님의 대여정보
 			</div>
 		</div>
@@ -60,7 +65,7 @@
 				</table>
 				<div>
 					<c:if test="${not empty limitDate }">
-						*${borrowVO.memId }님의 대여일은 ${limitDate }까지 제한되어 있습니다.
+						* ${borrowVO.memId }님의 대여일은 <span style="color: red;">${limitDate }</span>까지 제한되어 있습니다.
 					</c:if>
 				</div>
 			</div>

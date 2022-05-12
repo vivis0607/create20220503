@@ -38,6 +38,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-<script type="text/javascript" src="/resources/js/book/detail_book.js?ver=13"></script>
+<script type="text/javascript" src="/resources/js/book/detail_book.js?ver=15"></script>
 </body>
 </html>

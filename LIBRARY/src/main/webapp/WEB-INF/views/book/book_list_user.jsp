@@ -7,54 +7,73 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
+<link href="/resources/css/book/searchBar.css" rel="stylesheet">
 <style type="text/css">
+
 img:hover{
 	opacity: 0.7;
 }
-img:hover{
-	opacity: 0.7;
+.bookList{
+	padding: 15px;
+	border: 1px dotted #dddddd;
+	margin-bottom: 20px;
 }
-.searchBar {
-	margin: 0 auto;
-	width: 60%;
-	padding-bottom:10px;
+.bookList table{
+	width: 100%;
+	margin-bottom: 20px;
 }
-.searchBar {
-	margin: 0 auto;
-	width: 60%;
-	padding-bottom:10px;
+.bookList tr, td{
+
+	padding: 5px;
 }
-table{
-	border: 1px solid black;
-	width: 60%;
-	margin: 0 auto;
-}
-.searchForm{
+
+.bookList .title{
+	font-size: 20px;
+	padding-top: 10px;
 	padding-bottom: 10px;
+	height: auto; 
+	font-weight: 800;
 }
-.list{
-	padding-bottom: 10px;
+.bookList .img{
+	width: 150px;
+}
+.bookList .tit{
+	width: 100px;
+	height: auto; 
+	font-weight: 500;
+}
+.bookList img{
+	border: 1px solid #dddddd;
+	padding: 5px; 
+	
+}
+.bookList .location{
+	width: 100px;
+	height: auto; 
+	text-align: left;
+	padding-top:30px;
+	padding-bottom:0px;
+	padding-left: 15px;
+	padding-right: 20px; 
+	font-weight: 500;
+}
+.bookList .loc{
+	padding-top:30px;
+	padding-bottom:0px;
 }
 </style>
 </head>
 <body>
-<div >
-<%-- 	<c:forEach items="${bookList }" var="book">
-		<div class="col-3 text-center" style="margin-bottom: 16px;">
-			<div class="card" style="width: 13rem; margin: 0 auto;">
-			  <a href="/book/bookDetail?bookCode=${book.bookCode }"><img src="/resources/images/book/${book.bkImg }" class="card-img-top" alt="..." height="250px;"></a>
-			  <div class="card-body" style="padding: 0.2rem 1.2rem;">
-			    <h5 class="card-title">${book.title }</h5>
-			    <p class="card-text">
-			    </p>
-			  </div>
-			</div>
-		</div>
-	</c:forEach> --%>
+<div class="container">
+	<div class="subTit">
+      <div class="line_map">홈 > 자료검색 > 소장자료검색</div>
+      <div class="tit">소장자료검색</div>
+   </div>
+
 <div class="searchBar">
 	<form action="/book/searchBook" method="post" id="searchBook">
 	<!-- 검색구분 선택 -->
-	<label for="select">소장자료검색</label>
 		<select name="searchSub">
 			<option value="all" >전체</option>
 			<option value="title">도서명</option>
@@ -63,41 +82,43 @@ table{
 			<option value="keyword">키워드</option>
 		</select>
 		<input type="text" name="searchTxt" placeholder="소장자료 검색">
-		<input type="submit" value="검색">
+		<button type="submit" class="btn btn-success btn-sm" onclick="location.href='book/searchBook';">검색</button>
 	</form>
 </div>
 
 <c:forEach items="${bookList}" var="book">
-<div class="list" id="list">
+<div class="bookList" >
+<input type="hidden" id="bookCode" value="${book.bookCode }">
+<input type="hidden" id="memId" value="${sessionScope.loginInfo.memId}">
+
 <table>
 	<tr>
-		<td><input type="hidden" id="bookCode" value="${book.bookCode }"></td>
-		<td><input type="hidden" id="memId" value="${sessionScope.loginInfo.memId}"></td>
-		<td rowspan="3"><a href="/book/bookDetail?bookCode=${book.bookCode }&memId=${sessionScope.loginInfo.memId}"><img src="/resources/images/book/${book.bkImg }"  alt="..." height="120px;" width="80px;" ></a></td>
-		<td colspan="2"><a href="/book/bookDetail?bookCode=${book.bookCode }&memId=${sessionScope.loginInfo.memId}"><strong>${book.title }</strong></a></td>
-		<%-- <td colspan="2"><p id="goDetail" onclick="getBkDetail(this)"><strong>${book.title }</strong></p></td> --%>
-		
+		<td class="title" colspan="3"><a href="/book/bookDetail?bookCode=${book.bookCode }&memId=${sessionScope.loginInfo.memId}">${book.title }</a></td>
 	</tr>
 	<tr>
+		<td class="img" rowspan="5"><a href="/book/bookDetail?bookCode=${book.bookCode }&memId=${sessionScope.loginInfo.memId}"><img src="/resources/images/book/${book.bkImg }"  alt="..." height="185px;" width="122px;" ></a></td>
 		<td>저자</td>
-		<td colspan="2">${book.writer }</td>
+		<td>${book.writer }</td>
 	</tr>
 	<tr>
-		<td>발행처</td>
+		<td class="tit">발행처</td>
 		<td colspan="2">${book.publisher }</td>
 	</tr>
 	<tr>
-		<td>발행년도</td>
-		<td>${book.pubDate }</td>
-		<td colspan="2">ISBN<td>
-		<td>${book.isbn }<td>
+		<td class="tit">ISBN</td>
+		<td colspan="2">${book.isbn }</td>
 	</tr>
 	<tr>
-		<td>키워드</td>
-		<td colspan="3">${book.keyword }</td>
+		<td class="tit">발행년도</td>
+		<td colspan="2">${book.pubDate }</td>
 	</tr>
 	<tr>
-		<td colspan="4">*자료위치 ${book.area }</td>		
+	
+		<td class="tit">키워드</td>
+		<td colspan="2">${book.keyword }</td>
+	</tr>
+	<tr>
+		<td class="location" colspan="2">*자료위치 &ensp; &emsp;${book.area }</td>
 	</tr>
 
 	
@@ -111,6 +132,5 @@ table{
 
 
 <script type="text/javascript" src="/resources/js/book/admin_manageBook.js?ver=5"></script>
-<script type="text/javascript" src="/resources/js/book/detail_book.js?ver=1"></script>
 </body>
 </html>

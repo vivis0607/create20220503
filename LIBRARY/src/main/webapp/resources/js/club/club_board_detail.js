@@ -1,9 +1,16 @@
 
+function deleteBoard(cbBoardNum, clubCode){
+	let result = confirm('삭제된 글은 복구할 수 없습니다. 게시글을 정말 삭제하시겠습니까?');
+	if(result){
+		location.href='/club/clubBoardDelete?cbBoardNum=' + cbBoardNum + '&&clubCode=' + clubCode;
+	}
+}
 
 
+
+//댓글 수정
 function updateCmt(tag, memId, cbCmtNum, clubCode, cbBoardNum, cbCmtContent){
 	
-				
 	var str1 = '';
 	var str2 = '';
 	
@@ -19,9 +26,9 @@ function updateCmt(tag, memId, cbCmtNum, clubCode, cbBoardNum, cbCmtContent){
 	
 	tag.closest('div').previousElementSibling.innerHTML = str1;
 	tag.closest('div').innerHTML = str2;
-	
 }
 
+//댓글 수정완료
 function updateCmtComplete(){
 	
 	var updateForm = document.getElementById('updateForm');
@@ -29,6 +36,7 @@ function updateCmtComplete(){
 	
 }
 
+//댓글 삭제
 function deleteCmt(memId, cbCmtNum){
 	
 	let result = confirm('댓글을 삭제하시겠습니까?');
@@ -52,6 +60,7 @@ function deleteCmt(memId, cbCmtNum){
 	}
 }
 
+//유효성 검사
 function byteCheck(obj, maxByte){
 	
 	var str = obj.value;

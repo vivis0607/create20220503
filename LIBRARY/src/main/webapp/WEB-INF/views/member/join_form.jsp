@@ -35,8 +35,8 @@
 		margin-left: 20%;
 		display: block;
 		padding: 0.7rem 1.7rem;
-		box-shadow: inset 0 0 0 2px #02475E;
-		color: #02475E;
+		box-shadow: inset 0 0 0 2px #16784B;
+		color: #16784B;
 		font-size: inherit;
 		font-weight: 700;
 		
@@ -47,7 +47,7 @@
 	.wrapper button{
 	  line-height: 20px;
 	  font-size: 18px;
-	  color: #246350;
+	  color: #16784B;
 	  text-align: center;
 	  position: relative;
 	  transition: all .35s;
@@ -65,7 +65,7 @@
 	  left: 0;
 	  width: 0;
 	  height: 100%;
-	  background:  #246350;
+	  background:  #16784B;
 	  transition: all .35s;
 	}
 	
@@ -77,6 +77,21 @@
 	  width: 100%;
 	}
 	
+	.joinFormDiv input{
+		border: 1px solid #d4d4d4;
+		border-radius: 3px;
+	}
+	.joinFormDiv input:focus, .joinFormDiv select:focus{
+		border-color: #c7e2d1;
+		box-shadow: 0 0 8px #c7e2d1;
+	}
+	.joinFormDiv select:checked {
+		boder: none;
+	
+	}
+	.joinFormDiv #username1-error{
+		padding-left: 9.3rem;
+	}
 </style>
 </head>
 <body>
@@ -136,10 +151,10 @@
 		<div class="row mb-3">
 		    <label for="inputEmail" class="col-sm-2 col-form-label">이메일</label>
 		    <div class="col-sm-6">
-				<div class="input-group mb-3">
-				  <input type="text" class="form-control" name="memEmail" placeholder="Username" aria-label="Username">
+				<div class="input-group mb-3" id="joinEmail">
+				  <input type="text" class="form-control" id="inputEmail1" name="memEmail1" placeholder="Username" aria-label="Username">
 				  <span class="input-group-text">@</span>
-				  <input type="text" class="form-control" name="memEmail" placeholder="Server" aria-label="Server">
+				  <input type="text" class="form-control" id="inputEmail2" name="memEmail2" placeholder="Server" aria-label="Server">
 				</div>
 		    </div>
 		 </div>
@@ -173,21 +188,22 @@
 		 </div>
 		 
 		 
-		  <div class="row mb-3">
+		  <div class="row mb-3" id="joinTell">
 	          <label for="inputTell" class="col-sm-2 col-form-label">전화번호</label>
-				  <div class="col-2">
-		              <select id="inputTell" class="form-select" name="memTell">
-		                 <option value="010" selected>010</option>
-		                 <option value="011">011</option>
-		              </select>
-		          </div>
-	          <div class="col-2">
-	              <input type="text" class="form-control" id="inputCity" name="memTell">
+			  <div class="col-2">
+	              <select id="inputTell" class="form-select" name="memTell">
+	                 <option value="010" selected>010</option>
+	                 <option value="011">011</option>
+	              </select>
 	          </div>
 	          <div class="col-2">
-	              <input type="text" class="form-control" id="inputCity" name="memTell">
+	              <input type="text" class="form-control" id="inputTell1" name="memTell1">
+	          </div>
+	          <div class="col-2">
+	              <input type="text" class="form-control" id="inputTell2" name="memTell2">
 	          </div>
 		 </div>
+		 
 		 <div class="wrapper">
               <button type="submit" ><span>회원가입</span></button>
          </div>
@@ -204,7 +220,7 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- jQuery validation 문법 쓰기 : 주의! jQuery 문법을 쓴 후에 적어야 됨-->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script type="text/javascript" src="/resources/js/member/join_form.js?ver=42"></script>
+<script type="text/javascript" src="/resources/js/member/join_form.js?ver=43"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

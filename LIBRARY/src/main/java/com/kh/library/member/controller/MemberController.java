@@ -251,9 +251,11 @@ public class MemberController {
       //기본 정보 수정은 했는데 프로필은 바꾸지 않았을 경우
       else if(file.getOriginalFilename().equals("")){
          memberVO.setMemImage(memberService.selectMemAtImgName(memberVO.getMemId()));
+         
+      
       }
       
-      else {
+      else if(file.getOriginalFilename().equals("profile_sample.jpg")){
           MemberImageVO vo = new MemberImageVO();
           vo.setMemOriginName("profile_sample.jpg");
           vo.setMemAtImgName("profile_sample.jpg");
@@ -270,6 +272,18 @@ public class MemberController {
    }
    
    //보안 정보 수정
+   @ResponseBody
+   @PostMapping("/checkPwd")
+   public int checkPwd(String memId, String memPwd) {
+	   boolean a = pwEncoder.matches(memPwd, memberService.checkPwd(memId));
+	   System.out.println("@@@@@@@@@@@@@@@@@@@" + a);
+	   if(pwEncoder.matches(memPwd, memberService.checkPwd(memId))) {
+		   return 1;
+	   }
+	   else {
+		   return 0;
+	   }
+   }
    @PostMapping("/updateSecretInfo")
    public String updateSecretInfo(MemberVO memberVO) {
 	   //-------------------비밀번호 암호화-----------------------//
