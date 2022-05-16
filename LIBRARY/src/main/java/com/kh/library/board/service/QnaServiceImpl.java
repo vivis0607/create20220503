@@ -26,8 +26,8 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	@Override
-	public List<QnaVO> selectQnaList() {
-		return sqlSession.selectList("otherboardMapper.selectQnaList");
+	public List<QnaVO> selectQnaList(QnaVO qnaVO) {
+		return sqlSession.selectList("otherboardMapper.selectQnaList", qnaVO);
 	}
 
 	@Override
@@ -90,4 +90,11 @@ public class QnaServiceImpl implements QnaService {
 	public void qnaDelete(QnaVO qnaVO) {
 		sqlSession.delete("otherboardMapper.qnaDelete", qnaVO);
 	}
+
+	@Override
+	public void updateQnaReadCnt(QnaVO qnaVO) {
+		sqlSession.update("otherboardMapper.updateQnaReadCnt", qnaVO);
+	}
+	
+	
 }

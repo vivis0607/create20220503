@@ -3,11 +3,9 @@
 function showModal(){
 	
 	var bookCode = $('#manageBook #bookCode').val();
-	alert(bookCode);
 	$('#deleteBook #originBookCode').val(bookCode);
 	$('#deleteBook').modal('show');
 	
-	alert(bookCode);
 	
 }
 	

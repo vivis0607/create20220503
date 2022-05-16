@@ -26,14 +26,16 @@ div.sideBodyDiv{
 
 .sideBodyDiv nav{
 	width: 35%;
+	padding-left: 250px;
 }
 .sideBodyDiv article{
 	width: 100%;
-	margin: 0px auto;
+	
 }
+
 .container{
 	width: 80%;
-	margin: 0px auto;
+	margin-right:400px;
 }
 
 a{

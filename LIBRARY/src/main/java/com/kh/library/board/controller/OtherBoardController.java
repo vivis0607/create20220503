@@ -1,5 +1,7 @@
 package com.kh.library.board.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.library.board.service.FreeBoardService;
 import com.kh.library.board.service.QnaService;
@@ -151,8 +154,8 @@ public class OtherBoardController {
 	
 	//Q&A페이지 이동
 	@GetMapping("/qnaBoard")
-	public String qnaBoardList(Model model) {
-		model.addAttribute("qnaList", qnaService.selectQnaList());
+	public String qnaBoardList(Model model, QnaVO qnaVO) {
+		model.addAttribute("qnaList", qnaService.selectQnaList(qnaVO));
 		return "board/qna_board_list";
 	}
 	
@@ -190,6 +193,7 @@ public class OtherBoardController {
 	//Q&A상세보기페이지 이동
 	@GetMapping("/qnaDetail")
 	public String qnaDetail(QnaVO qnaVO, Model model) {
+		qnaService.updateQnaReadCnt(qnaVO);
 		model.addAttribute("qnaInfo", qnaService.selectQnaDetail(qnaVO));
 		model.addAttribute("answerList", qnaService.selectQnaAnswer(qnaVO));
 		if(qnaService.selectQnaAnswer(qnaVO).size() != 0) {
@@ -201,6 +205,7 @@ public class OtherBoardController {
 			qnaVO.setIsAnswered(isAnswered);
 		}
 		qnaService.updateisAnswered(qnaVO);
+		
 		return "board/qna_board_detail";
 	}
 	
@@ -262,5 +267,6 @@ public class OtherBoardController {
 		model.addAttribute("qnaList", qnaService.selectSearchQna(qnaVO));		
 		return "board/qna_board_list";
 	}
-		
+	
+	
 }

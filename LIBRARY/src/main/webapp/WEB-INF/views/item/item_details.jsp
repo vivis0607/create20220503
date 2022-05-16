@@ -66,12 +66,14 @@
 
 <div class="row itemD_container">
 	<div class="col-12" style="margin-top: 30px;">
-		&nbsp; <a href="/item/itemList">home</a>/
-		<c:forEach items="${cateList }" var="cate">		
-			<c:if test="${item.cateCode eq cate.cateCode }">
-				<a>${cate.cateName }</a><br><br>
-			</c:if>
-		</c:forEach>
+		<div style="text-align: right;">
+			&nbsp; <a href="/item/itemList">home</a>/
+			<c:forEach items="${cateList }" var="cate">		
+				<c:if test="${item.cateCode eq cate.cateCode }">
+					<a>${cate.cateName }</a><br><br>
+				</c:if>
+			</c:forEach>
+		</div>
 		<div class="row itemdpDiv">
 		
 		<input type="hidden" name="itemCode" value="${item.itemCode }">

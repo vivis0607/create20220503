@@ -1,6 +1,7 @@
 function login(){
-	const memId = document.querySelector('input[name="memId"]').value;
-	const memPwd = document.querySelector('input[name="memPwd"]').value;
+	const loginForm = document.getElementById('loginForm');
+	const memId = loginForm.querySelector('input[name="memId"]').value;
+	const memPwd = loginForm.querySelector('input[name="memPwd"]').value;
 	let loginCheck = '';
 	$.ajax({
 		url: '/member/login', //요청경로

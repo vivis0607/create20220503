@@ -9,7 +9,7 @@
 <link href="/resources/css/common/infoBar.css" rel="stylesheet">
 <style type="text/css">
 
-table{
+.container table{
    border: 1px solid black;
    border-collapse: collapse;
    width: 100%;

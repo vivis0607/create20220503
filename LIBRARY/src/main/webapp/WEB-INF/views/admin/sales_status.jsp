@@ -23,9 +23,7 @@
 	vertical-align: middle;
 }
 .SalesStatusContainer{
-margin: 0 auto;
 margin-top: 30px;
-padding: 20px;
 }
 canvas{
 	width: 80%;
@@ -79,9 +77,13 @@ input{
 
 </head>
 <body>
+<div class="container">
+
 <div class="row SalesStatusContainer">
 <div class="col-12 ">
-	<div style="margin: 0 auto; width: 100%; text-align: center; font-size: x-large; margin-bottom: 30px; font-weight: bold;">매출현황</div>
+	<div style="text-align:left; margin-bottom: 30px;">
+		<h4>매출 현황</h4>
+	</div>
 	<div class="row" style="margin-bottom: 20px;">
 		<div class="col-3 DayBoxDiv">
 			<table class="priceTb">
@@ -266,7 +268,7 @@ input{
 		</div>
 	</div>
 </div>	
-
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script type="text/javascript" src="/resources/js/item/sales_status.js?ver=12"></script>

@@ -6,34 +6,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
 <style type="text/css">
-	.sideBodyDiv{
-		display: flex;
-		justify-content: center;
-	} 
-	.sideBodyDiv nav{
-		width: 30%;
-	}
-	.sideBodyDiv article{
-		width: 60%;
-	}
-	
-	table{
-		border: 1px solid black;
-	}
-	.adminPageDiv{
-		width: 85%;
-	}
-	.adminMenuDiv{
-		display: flex;
-		flex-direction: column;
-	}
-	
+
 
 </style>
 </head>
 <body>
-관리자메뉴
+<div class="container">
+   <div class="subTit">
+      <div class="line_map">홈 > 참여마당 > 공지사항</div>
+      <div class="tit">공지사항</div>
+   </div>
+   관리자메뉴
+   
+</div>
+
 </body>
 </html>
 

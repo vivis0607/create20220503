@@ -40,6 +40,8 @@ img:hover{
 	
 	<div class="searchRes">
 	 <c:forEach items="${searchList }" var="search">
+	 	<div class="result" >
+	 	</div>
 			<table>
 				<tr>
 					<td rowspan="3"><a href="/book/bookDetail?bookCode=${search.bookCode }&memId=${sessionScope.loginInfo.memId}"><img src="/resources/images/book/${search.bkImg }"  alt="..." height="120px;" width="80px;" ></a></td>

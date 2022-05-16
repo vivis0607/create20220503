@@ -1,6 +1,8 @@
 package com.kh.library.club.vo;
 
-public class ClubVO {
+import com.kh.library.util.vo.PageVO;
+
+public class ClubVO extends PageVO{
 	private String clubCode;
 	private String clubName;
 	private int clubHeadCnt;
@@ -10,6 +12,10 @@ public class ClubVO {
 	private String clubIntro;
 	private String clubDate;
 	private int clubNumberPeople;
+	private String keyword;
+	private int rowNum;
+	private String clubPlace;
+	private String clubInfo;
 	
 	public int getClubNumberPeople() {
 		return clubNumberPeople;
@@ -64,5 +70,29 @@ public class ClubVO {
 	}
 	public void setClubIntro(String clubIntro) {
 		this.clubIntro = clubIntro;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	public int getRowNum() {
+		return rowNum;
+	}
+	public void setRowNum(int rowNum) {
+		this.rowNum = rowNum;
+	}
+	public String getClubPlace() {
+		return clubPlace;
+	}
+	public void setClubPlace(String clubPlace) {
+		this.clubPlace = clubPlace;
+	}
+	public String getClubInfo() {
+		return clubInfo;
+	}
+	public void setClubInfo(String clubInfo) {
+		this.clubInfo = clubInfo;
 	}
 }

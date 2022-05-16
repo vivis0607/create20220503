@@ -11,7 +11,7 @@ function updateCate(selectTag, cateCode){
 	str1 += '<input type="text" name="cateName">';
 	str1 += '<input type="hidden" name="cateCode" value="'+cateCode+'">';
 	str1 += '</form>';
-	str2 += '<button type="button" id="updateFin" onclick="cateUpdateFin();">수정완료</button>';
+	str2 += '<button type="button" class="btn btn-success btn-sm" id="updateFin" onclick="cateUpdateFin();">수정완료</button>';
 	
 	selectTag.closest('td').previousElementSibling.innerHTML = str1;
 	selectTag.closest('td').innerHTML = str2;

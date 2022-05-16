@@ -7,23 +7,53 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-table{
-	margin-top: 20px;
+.table {
+	border-spacing: 0 15px;
+	border-collapse: separate;
+	text-align: left;
+	border: none;
+}
+.table thead tr th,
+.table thead tr td,
+.table tbody tr th,
+.table tbody tr td {
+	vertical-align: middle;
+	border: none;
+}
+.table tbody tr {
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+}
+.table tbody tr td {
+	background: #fff;
+}
+.table tbody tr td:nth-child(1) {
+	border-radius: 5px 0 0 5px;
+}
+.table tbody tr td:nth-last-child(1) {
+	border-radius: 0 5px 5px 0;
+}
+.user-info {
+	display: flex;
+	align-items: center;
+}
+.mem_id{
+	font-weight: bold;
 }
 </style>
 </head>
 <body>
-<div class="row justify-content-center">
+<div class="container row">
 	<div class="col-2"></div>
-	<div class="col-8">
+	<div class="col-10">
 		<div class="row">
 			<div class="col-8">
-				${borrowVO.memId }님의 대여정보
+				<span class="mem-id">${borrowVO.memId }</span>님의 대여정보
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-8">
-				<table class="table table-striped table-hover text-center">
+				<table class="table table-striped text-center">
 				  <thead>
 				    <tr>
 				      <th scope="col">No</th>
@@ -74,11 +104,11 @@ table{
 			<div class="col-8"><hr></div>
 		</div>
 		<div class="row">
-			<div class="col-5" style="margin-top: 20px;">
-				${borrowVO.memId }님의 예약정보
+			<div class="col-5" style="margin-top: 10px;">
+				<span class="mem-id">${borrowVO.memId }</span>님의 예약정보
 			</div>
 			<div class="col-8">
-				<table class="table table-striped table-hover text-center">
+				<table class="table table-striped text-center">
 				  <thead>
 				    <tr>
 				      <th scope="col">No</th>

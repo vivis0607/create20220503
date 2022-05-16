@@ -10,6 +10,7 @@
 .itemCate_container{
 	width: 100%;
 	margin: 0 auto;
+	margin-top:30px;
 	margin-bottom: 100px;
 	text-align: center;
 }
@@ -30,10 +31,11 @@
 </style>
 </head>
 <body>
+<div class="container">
 <div class="row itemCate_container">
 	<div class="col-12">
-		<div class="row">
-			<h3>GOODS CATEGORY MANAGE</h3>
+		<div class="row" style="text-align: left;">
+			<h4>상품 카테고리 관리</h4>
 		</div>
 		<div class="row BoardbtnDiv">
 			<div class="col-12">
@@ -63,8 +65,8 @@
 						<tr>
 							<td>${i}</td>
 							<td><div id="cateName">${cate.cateName}</div></td>
-							<td><div id="cateUpdate"><button type="button" class="btn btn-success btn-m" onclick="updateCate(this, '${cate.cateCode}');">수정</button></div></td>
-							<td><button type="button" class="btn btn-success btn-m" onclick="location.href='/item/deleteCate?cateCode=${cate.cateCode}&isDelete=Y';">삭제</button></td>
+							<td><div id="cateUpdate"><button type="button" class="btn btn-success btn-sm" onclick="updateCate(this, '${cate.cateCode}');">수정</button></div></td>
+							<td><button type="button" class="btn btn-success btn-sm" onclick="location.href='/item/deleteCate?cateCode=${cate.cateCode}&isDelete=Y';">삭제</button></td>
 						</tr>
 					</c:forEach>
 					<c:if test="${add eq 'add' }">
@@ -72,8 +74,8 @@
 							<td>추가</td>
 							<td colspan="3">
 								<form action="/item/addCategory" method="post">
-									<input type="text" name="cateName">
-									<button type="submit">카테고리 추가</button>
+									<span style="float: left; padding-left:17%;"><input type="text" name="cateName"></span>
+									<span style="float: right; padding-right: 6%;"><button type="submit" class="btn btn-success btn-sm">카테고리 추가</button></span>
 								</form>
 							</td>
 						</tr>
@@ -84,7 +86,8 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="/resources/js/item/item_cate_manage.js?ver=11"></script>
+</div>
+<script type="text/javascript" src="/resources/js/item/item_cate_manage.js?ver=12"></script>
 
 
 

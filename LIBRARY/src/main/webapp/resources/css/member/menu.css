@@ -2,7 +2,7 @@
 
 .top-container{
 		background-color: #16784B;
-		height: 100%;
+	    height: 86%;
 		display: flex;
 		flex-direction: column;
    	 	justify-content: space-between;
@@ -12,9 +12,8 @@
 		display: flex;
 	    justify-content: space-between;
 	    align-items: center;
-	    height: 3rem;
+	    height: 2.5rem;
 	    position: relative;
-	    margin-bottom: 3.5rem;
 	    margin-right: 10px;
 	
 	}
@@ -33,6 +32,7 @@
 	.header-mainBox{
 		display: flex;
 		position: relative;
+		margin-top: 1.5%;
 		height: 7rem;
 		width: 88%;
 		left: 12%;
@@ -61,7 +61,7 @@
 	}
 	.nav-main-menu ul{
 		display: flex;
-		height: 3.8rem;
+		height: 3.3rem;
 		margin: 0;
 		align-items: center;
 		justify-content: center;
@@ -113,26 +113,14 @@
 	   box-shadow:0 0 1px #333;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 
-/* MAIN VARIABLES FOR CUSTOMIZATION */
-/* -------------------------------- */
+/* 우측 상단 프로필 메뉴 */
 .header-nav {
   overflow: hidden;
   position: absolute;
   left: 99%;
-  bottom: 122%;
+  bottom: 77%;
   width: auto;
   height: 65px;
   margin-top: -45px;
@@ -233,14 +221,129 @@
   border-radius: 100%;
 }
 .nav__btn img{
+	padding: 5px;
 	width:65px;
 	height: 65px;
 	border-radius: 100%;
 }
 
-/* .nav__cb:checked ~ .nav__btn:before {
-  transform: translateY(7px) rotate(-225deg);
+
+
+/*TO READ LIST*/
+.toRead-nav {
+	text-align: right;
+	left: 95%;
+	background-color: #F5F3CE;
+	opacity: 0.9;
+    overflow: hidden;
+    position: relative;
+    position: fixed;
+    transform: translateX(0px);
+    height: 70%;
+    width: 400px;
+    transition: all 800ms cubic-bezier(.8, 0, .33, 1);
+    border-radius: 100% 0% 50% 100%;
+    z-index: 1;
 }
-.nav__cb:checked ~ .nav__btn:after {
-  transform: translateY(-7px) rotate(225deg);
-} */
+
+.toRead-nav.nav-open {
+    transform: translateX(-300px);
+    border-radius: 0% 0% 0% 0%;
+   background: rgba(255, 255, 255, 0.6);
+}
+
+.toRead-nav .menu-btn {
+    position: absolute;
+    top: 40%;
+    left: 8%;
+    padding: 0;
+    width: 30px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.toRead-nav .menu-btn .line {
+    padding: 0;
+    width: 30px;
+    background: #fff;
+    height: 2px;
+    margin: 5px 0;
+    transition: all 700ms cubic-bezier(.9, 0, .33, 1);
+}
+
+
+
+.toRead-nav .nav-links {
+    position: absolute;
+    padding: 3.5rem 3rem 3.5rem 7.5rem;
+    left: 75px;
+    top: 0;
+    width: 100%;
+    height: 70%;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(0px);
+    opacity: 0;
+    transition: all 900ms cubic-bezier(.9, 0, .33, 1);
+}
+
+.toRead-nav .nav-links.fade-in {
+    opacity: 1;
+    transform: translateX(-100px);
+}
+
+.toRead-nav .nav-links .link {
+    margin: 20px 0;
+    text-decoration: none;
+    font-family: sans-serif;
+    color: rgba(0,0,0,0.9);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    transition: all 300ms cubic-bezier(.9, 0, .33, 1);
+}
+
+.toRead-nav .nav-links .link:hover {
+    color: rgba(0, 0, 0, .5);
+}
+
+.toRead-nav a{
+  margin: 0 20px;
+  color: #fff;
+  font-size: 2rem;
+  transition: all 400ms ease;
+}
+
+.toRead-nav a:hover{
+  color: #222;
+} 
+
+
+#toread-form input[type="text"]{
+	background-color: inherit;
+	border: none;
+	border-bottom: 1px solid #efefef;
+	margin: 1rem auto;
+}
+
+@keyframes slideIn{
+	from{
+		width: 0;
+		border-bottom: 2px solid #FFF891;
+	}
+	to{
+		width: 100%;
+		border-bottom: 2px solid #FFF891;
+	}
+}
+
+#toread-form input:focus {
+	animation: slideIn 0.3s linear forwards;
+}
+.bookPlaner-div span{
+	font-size: 0.9rem;
+}
+.bookPlaner-div span:first-child{
+	font-size: 1rem;
+	font-weight: bold;
+}

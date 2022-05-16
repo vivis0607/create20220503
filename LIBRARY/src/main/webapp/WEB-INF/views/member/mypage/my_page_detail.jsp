@@ -244,6 +244,7 @@
       </div>
       <form action="/member/updateBasicInfo" method="post" id="basicForm" enctype="multipart/form-data">
    		<input type="hidden" name="memId" value="${memberInfo.memId}">
+   		<input type="hidden" name="memImage" value="">
 	      <div class="modal-body">
 	      	<div class="modal-body-top-left">
 	      		<div>
@@ -364,7 +365,7 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- jQuery validation 문법 쓰기 : 주의! jQuery 문법을 쓴 후에 적어야 됨-->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script type="text/javascript" src="/resources/js/member/my_page_detail.js?ver=35"></script>
+<script type="text/javascript" src="/resources/js/member/my_page_detail.js?ver=38"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

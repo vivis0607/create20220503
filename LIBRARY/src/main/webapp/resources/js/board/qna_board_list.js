@@ -35,3 +35,13 @@ $(document).on("click", ".qnaPwSpan", function () {
      var qnaNum = $(this).data('id');
      $(".modal-body #qnaNum").val(qnaNum);
 });
+
+
+var filter = 0;
+//답변유무로 필터
+function answerFilter(){
+	filter ++;
+	alert(filter);
+	
+	location.href='/otherB/qnaBoard?answerFilter='+filter;
+}

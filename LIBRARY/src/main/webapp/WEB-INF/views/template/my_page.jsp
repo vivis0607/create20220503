@@ -5,82 +5,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/side.css" rel="stylesheet">
 <style type="text/css">
-	.sideBodyDiv{
-		display: flex;
-		justify-content: center;
-	} 
-
-	
-	table, tr, td{
-		border-collapse: collapse;
-		border: 1px soilid black;
-	}
-	
-	.myPageLeftDiv table td{
-		height: 2.5rem;
-		padding-left: 1rem;
-	}
-	
-	@keyframes tdhover{
-		from{
-			width: 0;
-			background-color: white;
-			color: #16784B;
-		}
-		to{
-			width: 100%;
-			background-color: #16784B;
-			color: white;
-		}
-	}
-	.myPageLeftDiv table td:hover{
-		animation: tdhover 0.1s linear forwards;
-	}
-	a:hover{
-		color: inherit;
-	} 
-	
-	
-	.myPageDiv{
-		width: 85%;
-		margin: 0px auto;
-	}
-
-	.myPageLeftDiv{
-		display: flex;
-		flex-direction: column;
-	}
-	
-	.myPage-simple{
-		display: flex;
-		flex-direction: column;
-		margin-bottom: 1rem;
-		border-radius: 10px;
-		color: #16784B;
-		font-size: 1rem;
-		text-align: center;
-	}
-	.myPage-simple img{
-		width: 200px;
-		height: 200px;
-		object-fit:cover;
-		border-radius: 100%;
-		margin-bottom: 1rem;
-	}
-	.simpleMyBook{
-		display: flex;
-		flex-direction: column;
-		border: 1px solid #28D987;
-		border-radius: 10px;
-		margin: 1.8rem 0;
-		padding: 2px 0;
-		box-shadow: 1px 1px 4px 2px #c7e2d1;
-	}
-	.simpleMyBook > div{
-		display: flex;
-		justify-content: space-evenly;
-	}
+.myPage-simple{
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1rem;
+	border-radius: 10px;
+	color: #16784B;
+	font-size: 1rem;
+	text-align: center;
+}
+.myPage-simple img{
+	width: 200px;
+	height: 200px;
+	object-fit:cover;
+	border-radius: 100%;
+	margin-bottom: 1rem;
+}
+.simpleMyBook{
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #28D987;
+	border-radius: 10px;
+	margin: 1.8rem 0;
+	padding: 2px 0;
+	box-shadow: 1px 1px 4px 2px #c7e2d1;
+}
+.simpleMyBook > div{
+	display: flex;
+	justify-content: space-evenly;
+}
 </style>
 </head>
 <body>
@@ -88,8 +43,8 @@
 	<div class="pageName">
 		마이페이지
 	</div>
-	<div class="myPageDiv">
-		<div class="myPageLeftDiv">
+	<div class="side-box">
+		<div class="side-box-div">
 		
 			<div class="myPage-simple">
 				<div>

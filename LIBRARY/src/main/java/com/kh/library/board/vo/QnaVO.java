@@ -15,8 +15,16 @@ public class QnaVO {
 	private String isAnswered;
 	private String sort;
 	private String keyword;
+	private int answerFilter;
 	
 	
+	
+	public int getAnswerFilter() {
+		return answerFilter;
+	}
+	public void setAnswerFilter(int answerFilter) {
+		this.answerFilter = answerFilter;
+	}
 	public String getSort() {
 		return sort;
 	}

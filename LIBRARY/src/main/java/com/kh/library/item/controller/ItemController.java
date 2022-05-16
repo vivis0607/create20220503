@@ -162,7 +162,80 @@ public class ItemController {
 	@PostMapping("/updateItem")
 	public String updateItem(ItemVO itemVO, MultipartHttpServletRequest multi) {
 		itemAdminService.updateItem(itemVO);
-		
+		if(!itemVO.getMainUpdate().equals("파일선택")||!itemVO.getSubUpdate().equals("파일선택")) {
+			//이미지저장공간세팅
+			List<ItemImgVO> imgList = new ArrayList<ItemImgVO>();
+			ItemImgVO itemImgVO = new ItemImgVO();
+			//다음에 들어갈 itemCode, itemImgCode 조회
+			int nextItemImgCode = itemAdminService.selectNextItemImgCode();
+			
+			//파일업로드
+			Iterator<String> inputTagNames = multi.getFileNames();
+			String uploadPath = "C:\\Users\\fierc\\OneDrive\\Desktop\\workspaceSTS\\LIBRARY\\src\\main\\webapp\\resources\\images\\item\\";
+			
+			while(inputTagNames.hasNext()) {
+				String inputTagName = inputTagNames.next();
+				
+				// 다중첨부
+				if(inputTagName.equals("subImg")) {
+					List<MultipartFile> fileList = multi.getFiles(inputTagName);
+					for(MultipartFile file : fileList) {
+						//원본파일명
+						String originFileName = file.getOriginalFilename();
+				
+						if(!originFileName.equals("")) {
+							//첨부할 파일명
+							String attachedFileName = System.currentTimeMillis()+"_"+originFileName;
+							
+							try {
+								file.transferTo(new java.io.File(uploadPath+attachedFileName));
+								ItemImgVO vo = new ItemImgVO();
+								vo.setItemImgCode(nextItemImgCode++);
+								vo.setItemOriginName(originFileName);
+								vo.setItemAtImgName(attachedFileName);
+								vo.setIsMain("N");
+								vo.setItemCode(itemVO.getItemCode());
+								imgList.add(vo);
+							} catch (IllegalStateException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							
+						}
+					}
+				}
+				//단일첨부
+				else {
+					MultipartFile file = multi.getFile(inputTagName);
+					String originFileName = file.getOriginalFilename();
+					
+					if(!originFileName.equals("")) {
+						String attachedFileName = System.currentTimeMillis()+"_"+originFileName;
+						
+						try {
+							file.transferTo(new java.io.File(uploadPath+attachedFileName));		
+							ItemImgVO vo = new ItemImgVO();
+							vo.setItemImgCode(nextItemImgCode++);
+							vo.setItemOriginName(originFileName);
+							vo.setItemAtImgName(attachedFileName);
+							vo.setIsMain("Y");
+							vo.setItemCode(itemVO.getItemCode());
+							imgList.add(vo);
+						} catch (IllegalStateException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				} 		
+			}//--이미지첨부끝!//	
+			
+			//굿즈 insert
+			itemImgVO.setItemImgList(imgList);
+			itemImgVO.setItemCode(itemVO.getItemCode());
+			itemAdminService.updateItemImg(itemImgVO);
+		}
 		
 		return "redirect:/item/itemManage";
 	}

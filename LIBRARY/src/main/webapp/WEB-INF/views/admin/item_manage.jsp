@@ -31,8 +31,8 @@
 </head>
 <body>
 <div class="item_Container">
-	<div>
-		<h2>GOODS MANAGE</h2>
+	<div style="text-align: left;">
+		<h4>상품 관리</h4>
 	</div>
 	<div class="BoardbtnDiv">
 		<button type="button" class="btn btn-success btn-m" onclick="location.href='/item/insertItem';">아이템등록</button>

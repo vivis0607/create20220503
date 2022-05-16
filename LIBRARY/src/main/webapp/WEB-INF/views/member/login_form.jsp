@@ -10,6 +10,7 @@
 		width: 60%;
 		height: 100%;
 		margin: 4rem auto;
+		margin-right: 7rem;
 		padding-top: 4.5rem;
 		border: 5px solid #FAF1CF;
 		border-radius: 20px;
@@ -22,7 +23,7 @@
 		padding: 1rem;
 		background-color: white;
 		position: relative;
-		left: 46%;
+		left: 58%;
 		top: 100px;
 	}
 	.loginForm-box input[type="text"], .loginForm-box input[type="password"]{
@@ -106,7 +107,7 @@
 <div class="container">
 	<div class="loginTitle">LOGIN</div>
 	<div class="loginForm-box">
-		<form action="" method="post">
+		<form action="" method="post" id="loginForm">
 			<input type="text" name="memId" placeholder="아이디 입력">
 			<input type="password" name="memPwd" placeholder="비밀번호 입력">
 			<div class="wrapper">
@@ -124,6 +125,6 @@
 		
 	</div>
 </div>
-<script type="text/javascript" src="/resources/js/member/login_form.js?ver=7"></script>
+<script type="text/javascript" src="/resources/js/member/login_form.js?ver=8"></script>
 </body>
 </html>

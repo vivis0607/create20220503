@@ -34,20 +34,14 @@ public interface ItemAdminService {
 	
 	//아이템 삭제상태변경
 	void updateIsDeleteItem(ItemVO itemVO);
-	
-	//아이템 완전삭제
-	void deleteItem(ItemVO itemVO);
-	
+
 	//아이템 선택 삭제상태변경
 	void updateIsDeleteItems(ItemVO itemVO);
-	
-	//아이템 선택 삭제
-	void deleteItems(ItemVO itemVO);
 	
 	//아이템 수정
 	void updateItem(ItemVO itemVO);
 	
-	//아이템이미지 전체삭제
-	void deleteItemImgAll(ItemImgVO itemImgVO);
+	//상품 이미지 수정
+	void updateItemImg(ItemImgVO itemImgVO);
 	
 }

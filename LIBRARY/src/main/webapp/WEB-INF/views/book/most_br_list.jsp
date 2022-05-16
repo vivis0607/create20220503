@@ -37,6 +37,7 @@ img:hover{
 		<button type="submit" class="btn btn-success btn-sm" onclick="location.href='book/searchBook';">검색</button>
 	</form>
 </div>
+
 </div>
 </body>
 </html>

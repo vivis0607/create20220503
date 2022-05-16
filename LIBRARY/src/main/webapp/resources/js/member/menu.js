@@ -40,3 +40,101 @@ function onGeoError(){
 }
 
 navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
+
+
+
+
+var menuBtn = document.querySelector('.menu-btn');
+var nav = document.querySelector('.toRead-nav');
+var link = document.querySelector('.toRead-nav .nav-links');
+menuBtn.addEventListener('click', () => {
+    nav.classList.toggle('nav-open');
+    link.classList.toggle('fade-in');
+})
+
+
+
+
+//to read list
+const toReadForm = document.getElementById('toread-form');
+const toReadInput = toReadForm.querySelector('input');
+const toReadList = document.getElementById('toread-list');
+const readDoneIcon = '🤍';
+const readYetIcon = '💛';
+
+const TODOS_KEY = 'todos';
+
+let toReads = [];
+
+function saveToDos(){
+	localStorage.setItem(TODOS_KEY, JSON.stringify(toReads));
+	
+}
+
+
+function deleteToRead(event){
+	const li = event.target.parentElement;
+	li.remove();
+	toReads = toReads.filter((toRead) => toReads.id !== parseInt(li.id));
+	saveToDos();
+}
+
+function notDoneToRead(event){
+	let li = event.target.parentElement;
+	li.firstChild.innerText = readYetIcon
+	li.style.textDecoration = 'none';
+	li.style.color = 'black';
+	li.firstChild.addEventListener('click', doneToRead);
+	saveToDos();
+}
+function doneToRead(event){
+	let li = event.target.parentElement;
+	li.style.textDecoration = 'line-through';
+	li.style.color = '#d4d4d4';
+	li.firstChild.innerText = readDoneIcon;
+	li.firstChild.addEventListener('click', notDoneToRead);
+	saveToDos();
+}
+
+function paintToRead(newToRead){
+	const li = document.createElement('li');
+	li.id = newToRead.id;
+	const span = document.createElement('span');
+	span.innerText = newToRead.text;
+	const xBtn = document.createElement('span');
+	xBtn.innerText = '❌';
+	const chkBtn = document.createElement('span');
+	chkBtn.innerText = readYetIcon;
+	xBtn.addEventListener('click', deleteToRead);
+	chkBtn.addEventListener('click', doneToRead);
+	li.appendChild(chkBtn);
+	li.appendChild(span);
+	li.appendChild(xBtn);
+	toReadList.appendChild(li);
+}
+
+function handleToReadSubmit(event){
+	event.preventDefault();
+	const newToRead = toReadInput.value;
+	toReadInput.value = '';
+	
+	const newToReadObj = {
+		text: newToRead,
+		id: Date.now(),
+	};
+	
+	toReads.push(newToReadObj);
+	paintToRead(newToReadObj);
+	saveToDos();
+}
+
+toReadForm.addEventListener('submit', handleToReadSubmit);
+
+
+const savedToDos = localStorage.getItem(TODOS_KEY);
+
+if(savedToDos !== null){
+	const parsedToDos = JSON.parse(savedToDos);
+	toDos = parsedToDos;
+	parsedToDos.forEach(paintToRead)
+}

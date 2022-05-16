@@ -63,17 +63,16 @@ input{
 	
 	<div class="searchContainer">
 		<div class="searchDiv">
-			<form action="/item/searchItem" method="post" id="searchForm">
+			<form action="/item/searchItem" method="post" id="searchForm1">
 		      <span>
-		          <input type="text" name="keyword" id="keyword" onkeydown="if (event.keyCode == 13) { search(); }"> 
-			         <span onclick="search();" style="cursor: pointer;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-			              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-			         </svg></span>
+		         <input type="text" name="keyword" id="searchText" onkeydown="if (event.keyCode == 13) { search(); }"> 
+		         <span onclick="search();" style="cursor: pointer;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+		              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+		        </svg></span>
 		      </span>
 			</form>
 	    </div>
 	</div>
-	
 	
 	
 	<div class="cateDiv">
@@ -102,9 +101,10 @@ input{
 </div>
 <script type="text/javascript">
 	function search(){
-		document.getElementById('searchForm').submit();
+		const searchForm = document.getElementById('searchForm1');
+		searchForm.submit();
 	}
 </script>
-<script src="\resources\js\item\item_list.js?ver=3" type="text/javascript" ></script>
+<script src="\resources\js\item\item_list.js?ver=5" type="text/javascript" ></script>
 </body>
 </html>

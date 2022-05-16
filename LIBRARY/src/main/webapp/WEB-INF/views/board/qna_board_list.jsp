@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 <title>Insert title here</title>
 <link href="/resources/css/common/infoBar.css" rel="stylesheet">
 <style type="text/css">
-table{
+.container table{
    border: 1px solid black;
    border-collapse: collapse;
    width: 100%;
@@ -82,10 +83,10 @@ select{
 			<colgroup>
 				<col width="7%">
 				<col width="*">
-				<col width="15%">
 				<col width="13%">
-				<col width="11%">
+				<col width="15%">
 				<col width="10%">
+				<col width="12%">
 			</colgroup>
 				<thead>
 					<tr>
@@ -94,10 +95,15 @@ select{
 						<td>작성자</td>
 						<td>작성일</td>
 						<td>조회수</td>
-						<td>답변유무</td>
+						<td>
+							<div onclick="answerFilter();">
+								답변유무
+								<img alt="..." src="/resources/images/common/파일정렬.png" height="13px;" width="13px;">
+							</div>
+						</td>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="qnaTbody">
 					<c:choose>
 						<c:when test="${empty qnaList }">
 							<tr>
@@ -106,8 +112,11 @@ select{
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${qnaList }" var="qna">
+							<c:set var="j"  value="${j+1}"/>
 								<tr>
-									<td>${qna.rownum }</td>
+									<td> 
+										${j}
+									</td>
 									<td>
 										<c:choose>
 											<c:when test="${qna.qnaIsPrivate eq 'Y' and sessionScope.loginInfo.memId ne 'admin' }">
@@ -129,7 +138,14 @@ select{
 												답변완료
 											</c:when>
 											<c:otherwise>
-												문의확인중
+												<c:choose>
+													<c:when test="${sessionScope.loginInfo.memId eq 'admin'}">
+														<span style="color: #CC0000;">문의확인중</span>
+													</c:when>
+													<c:otherwise>
+														<span>문의확인중</span>
+													</c:otherwise>
+												</c:choose>
 											</c:otherwise>
 										</c:choose>
 									</td>
@@ -172,6 +188,6 @@ select{
     </div>
   </div>
 </div>
-<script type="text/javascript" src="/resources/js/board/qna_board_list.js?ver=3"></script>
+<script type="text/javascript" src="/resources/js/board/qna_board_list.js?ver=5"></script>
 </body>
 </html>

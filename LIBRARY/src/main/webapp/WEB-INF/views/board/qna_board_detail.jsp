@@ -105,7 +105,7 @@ textarea{
 				<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="location.href='/otherB/qnaUpdateFrom?qnaNum=${qnaInfo.qnaNum}';">수정</button>
 				<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="location.href='/otherB/qnaDelete?qnaNum=${qnaInfo.qnaNum}';">삭제</button>
 			</c:if>
-			<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="location.href='/otherB/freeBoard';">목록</button>
+			<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="location.href='/otherB/qnaBoard';">목록</button>
 		</div>
 	</div>
 	

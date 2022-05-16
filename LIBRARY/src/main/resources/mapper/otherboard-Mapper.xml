@@ -39,6 +39,7 @@
 		<result column="IS_ANSWERED" 		property="isAnswered"/>
 		<result column="sort" 				property="sort"/>
 		<result column="keyword" 			property="keyword"/>	
+		<result column="answerFilter" 		property="answerFilter"/>	
 	</resultMap>
 	
 	<resultMap type="com.kh.library.board.vo.QnaAnswerVO" id="qnaAnswer">
@@ -281,8 +282,13 @@
 			, ROWNUM
 			, IS_ANSWERED
 		FROM QNA
-		ORDER BY QNA_CREATE_DATE DESC
-			, ROWNUM DESC
+		<if test="answerFilter==0">
+			ORDER BY QNA_CREATE_DATE DESC
+		</if>
+		<if test="answerFilter!=0">
+			ORDER BY IS_ANSWERED ASC
+					, QNA_CREATE_DATE ASC
+		</if>
 	</select>
 	
 	<!-- Qna 비밀글 비밀번호 체크 -->
@@ -311,7 +317,7 @@
 	<!-- Qna게시판 조회수 -->
 	<update id="updateQnaReadCnt">
 		UPDATE QNA
-		SET QNA_READ_CNT = QNA_READ_CNT+1
+		SET QNA_READ_CNT = TO_NUMBER(QNA_READ_CNT)+1
 		WHERE QNA_NUM = #{qnaNum}
 	</update>
 	

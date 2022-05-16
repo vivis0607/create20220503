@@ -21,12 +21,11 @@ function previewFile(){
 //프사 삭제
 
 function deleteProfileImage(){
+	const hiddenMemImg = document.querySelector('#basicForm input[name="memImage"]');
+	
 	let preview = document.getElementById('thumbnail');
-
-	
 	preview.src = '/resources/images/member/profile_sample.jpg';
-	
-
+	hiddenMemImg.value = 'profile_sample.jpg';
 	
 }
 
@@ -39,27 +38,43 @@ $('#basicForm').validate({
       	username: 'memTell1 memTell2'
       },	
       rules: {
+		memName:{
+			required: true
+		},
 		memTell1:{
+			required: true,
 			digits:true,
 			minlength: 3,
 			maxlength: 4
 		},
 		memTell2:{
+			required: true,
 			digits:true,
 			minlength: 4,
 			maxlength: 4
 		},
+		memEmail:{
+			required: true
+		}
       },
       messages: {
+		memName:{
+			required: '필수 입력 사항입니다'
+		},
 		memTell1:{
+			required: '필수 입력 사항입니다',
 			digits:'전화번호 표기 방식이 올바르지 않습니다',
 			minlength: '3~4자리의 숫자를 입력해 주세요.',
 			maxlength: '4자리의 숫자를 입력해 주세요.'
 		},
 		memTell2:{
+			required: '필수 입력 사항입니다',
 			digits:'전화번호 표기 방식이 올바르지 않습니다',
 			minlength: '3~4자리의 숫자를 입력해 주세요.',
 			maxlength: '4자리의 숫자를 입력해 주세요.'
+		},
+		memEmail:{
+			required: '필수 입력 사항입니다'
 		}
       },
       errorElement:'div',

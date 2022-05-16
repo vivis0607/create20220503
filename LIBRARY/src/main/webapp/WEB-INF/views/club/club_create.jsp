@@ -12,28 +12,15 @@ table tr td:nth-child(odd){
 }
 /* hs-write-form 작성폼 */
    .hs-write-form{
-      display: flex;
       text-align: center;
-       flex-direction: column;
-       justify-content: center;
+      flex-direction: column; 
+      justify-content: center;
    
    }
    .hs-write-form-top{
-      display: flex;
+       /* display: flex;  */
        justify-content: center;
    }
-   .hs-write-form-top div:nth-child(1){
-      flex-grow: 90;
-   }
-   .hs-write-form-top div:nth-child(2){
-      margin-left: 10px;
-      flex-grow: 0;
-      width: 17%;
-   }
-   .hs-write-form-top div:nth-child(2) input[type="text"]{
-      text-align: center;
-   }
-   
    
    .hs-write-form input[type="text"]{
       width: 100%;
@@ -45,7 +32,7 @@ table tr td:nth-child(odd){
       border-bottom: 1px solid #16784B;
    }
    .hs-write-form-bottom textarea{
-      width: 100%;
+   	  width: 100%
       margin: 1rem auto;
       padding: 5px;
       border: 1px solid #d4d4d4;
@@ -69,9 +56,8 @@ table tr td:nth-child(odd){
 </style>
 </head>
 <body>
-<div class="row">
-	<div class="col-4"></div>
-	<div class="col-4 text-right">
+<div class="container">
+	<div class="text-right">
 		<form action="/club/clubCreate" method="post" id="regClub">
 			<input type="hidden" name="memId" value="${sessionScope.loginInfo.memId}">
 			<input type="hidden" name="memName" value="${sessionScope.loginInfo.memName}">
@@ -83,10 +69,19 @@ table tr td:nth-child(odd){
 						<div>
 							<input type="text" name="clubHeadCnt" placeholder="인원">
 						</div>
+						<div>
+							<input type="text" name="clubPlace" placeholder="모임 장소">
+						</div>
+						<div>
+							첫모임 시작일 : <input type="date" name="clubDate">
+						</div>
+						<div>
+							<input type="text" name="clubIntro" placeholder="한줄소개">
+						</div>
 					</div>
 					<div class="hs-write-form-bottom">
-						<textarea rows="10" cols="50" name="clubIntro" onkeyup="byteCheck(this, '500');" placeholder="북클럽 소개말"></textarea>
-						<div><span class="byteSpan"><span id="byteInfo">0</span> /500bytes </span>
+						<textarea rows="30" cols="90" name="clubInfo" onkeyup="byteCheck(this, '5000');" placeholder="북클럽 소개말"></textarea>
+						<div><span class="byteSpan"><span id="byteInfo">0</span> /5000bytes </span>
 						<button type="button" class="btn btn-success" onclick="clubCreate(this);">모임생성</button></div>
 					</div>
 				</div>

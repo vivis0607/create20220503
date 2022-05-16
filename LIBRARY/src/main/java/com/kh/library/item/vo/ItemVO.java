@@ -15,6 +15,20 @@ public class ItemVO {
 	private String keyword;
 	private int itemCnt;
 	private String isDelete;
+	private String mainUpdate;
+	private String subUpdate;
+	public String getMainUpdate() {
+		return mainUpdate;
+	}
+	public void setMainUpdate(String mainUpdate) {
+		this.mainUpdate = mainUpdate;
+	}
+	public String getSubUpdate() {
+		return subUpdate;
+	}
+	public void setSubUpdate(String subUpdate) {
+		this.subUpdate = subUpdate;
+	}
 	
 	public String getIsDelete() {
 		return isDelete;

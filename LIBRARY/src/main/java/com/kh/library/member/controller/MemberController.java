@@ -223,7 +223,8 @@ public class MemberController {
          , HttpSession session, RedirectAttributes re) {
 	  memberVO.setMemTell(memberVO.getMemTell().replace(",", "-"));
       MultipartFile file = multi.getFile("file");
-      System.out.println("@@@@@@@@@@@@@@@@@@@" + file.getOriginalFilename());
+      System.out.println("@@@@@@@@@@@@@@@@@@@" + memberVO.getMemImage());
+      System.out.println("@@@@@@file name is" + file.getOriginalFilename());
       if(!file.getOriginalFilename().equals("")) {
          String uploadPath = "D:\\dev\\workspaceSTS\\LIBRARY\\src\\main\\webapp\\resources\\images\\member\\";
          
@@ -250,20 +251,24 @@ public class MemberController {
       }
       //기본 정보 수정은 했는데 프로필은 바꾸지 않았을 경우
       else if(file.getOriginalFilename().equals("")){
-         memberVO.setMemImage(memberService.selectMemAtImgName(memberVO.getMemId()));
+         //프로필 삭제를 했을 경우 (profile_sample로 바꿀 경우)
+         if(memberVO.getMemImage().equals("profile_sample.jpg")){
+        	 MemberImageVO vo = new MemberImageVO();
+        	 vo.setMemOriginName("profile_sample.jpg");
+        	 vo.setMemAtImgName("profile_sample.jpg");
+        	 vo.setMemId(memberVO.getMemId());
+        	 memberService.updateMemImage(vo);
+        	 memberVO.setMemImage("profile_sample.jpg");
+        	// memberService.joinMember(memberVO);
+        	// memberService.insertMemberImage(vo);
+         }
+         else {
+        	 memberVO.setMemImage(memberService.selectMemAtImgName(memberVO.getMemId()));
+         }
          
       
       }
       
-      else if(file.getOriginalFilename().equals("profile_sample.jpg")){
-          MemberImageVO vo = new MemberImageVO();
-          vo.setMemOriginName("profile_sample.jpg");
-          vo.setMemAtImgName("profile_sample.jpg");
-          vo.setMemId(memberVO.getMemId());
-          memberVO.setMemImage("profile_sample.jpg");
-          memberService.joinMember(memberVO);
-          memberService.insertMemberImage(vo);
-       }
       
       memberService.updateBasicInfo(memberVO);
       session.setAttribute("loginInfo", memberService.login(memberVO.getMemId()));

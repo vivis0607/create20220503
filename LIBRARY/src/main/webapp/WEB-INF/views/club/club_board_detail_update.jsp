@@ -72,7 +72,7 @@
 				<div>작성자 : ${clubBoard.memName }</div>
 				<div>작성일 : ${clubBoard.cbBoardDate }</div>
 				<div class="hs-write-form-bottom">
-					<textarea rows="5" cols="50" name="cbBoardContent">${clubBoard.cbBoardContent}</textarea><br>
+					<textarea rows="10" cols="50" name="cbBoardContent">${clubBoard.cbBoardContent}</textarea><br>
 				</div>
 				<button type="submit" class="btn btn-success btn-sm">등록</button>
 			</form>

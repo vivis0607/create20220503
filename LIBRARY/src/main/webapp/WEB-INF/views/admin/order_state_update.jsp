@@ -14,6 +14,7 @@
 }
 .searchStateTb{
 	border: 1px solid black;
+	width: 100%;
 }
 .searchStateTb tr td{
 	text-align: left;
@@ -21,13 +22,12 @@
 }
 .searchStateDiv{
 	margin: 0 auto;
-	width: 70%;
+	width: 90%;
 }
 
 .orderStateUDcontainer{
 	width: 100%;
-	margin: 0 auto;
-	margin-top: 50px;
+	margin-top: 30px;
 	text-align: center;
 }
 .itemStateSpan{
@@ -78,9 +78,10 @@
 </style>
 </head>
 <body>
+<div class="container">
 <div class="orderStateUDcontainer">
-	<div style="margin-bottom: 30px;">
-		<h3>GOODS ORDER LIST</h3>
+	<div style="margin-bottom: 30px; text-align: left;">
+		<h4>상품 주문 내역</h4>
 	</div>
 	<div class="row searchStateDiv">
 		<div class="col-12">
@@ -134,16 +135,17 @@
 			</table>
 		</div>
 	</div>
-	<div class="OrdertotalCntDiv">총 주문수 : </div>
+	<div class="OrdertotalCntDiv"></div>
 	<div>
 		<table class="table table-hover table-border text-center">
 			<colgroup>
 				<col width="5%">
 				<col width="17%">
 				<col width="13%">
+				<col width="12%">
+				<col width="14%">
 				<col width="13%">
-				<col width="17%">
-				<col width="13%">
+				<col width="10%">
 				<col width="*%">
 			</colgroup>
 			<thead>
@@ -172,10 +174,10 @@
 						<td>
 							<fmt:formatNumber value="${sales.totalPrice }" pattern="#,###"/>원
 						</td>
-						<td>
+						<td style="padding: 0; vertical-align: middle; margin: 0 auto; text-align: center;">
 							<form action="/sales/updateItemState" method="post" id="updateItemState">
 								<input type="hidden" name="orderNum" value="${sales.orderNum }">
-								<select name="itemState">
+								<select name="itemState" style="width: 100%;">
 									<option value="결제완료"
 										<c:if test="${sales.itemState eq '결제완료' }">selected</c:if>>결제완료</option>
 									<option value="상품준비중"
@@ -189,7 +191,7 @@
 								</select>
 							</form>
 						</td>
-						<td>
+						<td style="padding: 0; vertical-align: middle; margin: 0 auto; text-align: center;">
 							<button type="button" class="btn btn-success btn-sm"  onclick="updateItemState(this);">적용</button>
 							<!-- <button>상세보기</button> -->
 						</td>
@@ -203,7 +205,7 @@
 		<button type="button" class="btn btn-success btn-m"  data-bs-target="#updateItemsModal" data-bs-toggle="modal" >상태일괄변경</button>
 	</div>
 </div>
-
+</div>
 
 
 

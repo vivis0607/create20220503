@@ -7,72 +7,101 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
+<link href="/resources/css/book/bookDetail.css" rel="stylesheet">
 <style type="text/css">
-img{
-	padding: 5px;
-}
 
+
+
+.btnDiv{
+
+	padding-top:10px;
+	text-align:right;
+}
 
 </style>
 </head>
 <body>
 <!-- /////////////////////////////// ADMIN //////////////////////////////////// -->
 <div class="container">
-	<div class="img">
-		<img src="/resources/images/book/${bookDetail.bkImg }"  alt="..." height="120px;" width="80px;" align="left">
-	</div>
-	<div class="title">
-		<h3>${bookDetail.title }</h3>
-	</div>	
-	<div class="table">
-		<table>
-			<tr>
-				<td>저자</td>
-				<td> ${bookDetail.writer }</td>
-				<td>발행처</td>
-				<td>${bookDetail.publisher }</td>
-				<td>발행년도</td>
-				<td>${bookDetail.pubDate }</td>
-			</tr>
-			<tr>
-				<td>청구기호</td>
-				<td>청구기호</td>
-				<td>ISBN</td>
-				<td>${bookDetail.isbn }</td>
-				<td>키워드</td>
-				<td>${bookDetail.keyword }</td>
-			</tr>
-		</table>
-		<div id="content">
-		${bookDetail.bkContent }
-		</div>
-		<div id="rcdBook">
 
-			<button type="button" id="recommendBook">추천 ${bookDetail.rcdCnt }</button>
-		</div>
-		<div id="rsvBook">
-			<c:set var ="status" scope ="session" value="${bookDetail.status }"/>
-			<c:set var ="bkStock" scope ="session" value="${bookDetail.bkStock }"/>
-			<c:choose>
-				<c:when test="${ bkStock-status > 0}">
-					<c:set var ="brCnt" scope ="session" value="${member.brCnt}"/>
-					<c:set var ="isOd" scope ="session" value="${member.isOd}"/>
-				
-					<button type="button" >대출가능 ${bkStock-status }</button>
-					
-				</c:when>
-				<c:otherwise>
-					<button type="button">대출불가</button>
-				</c:otherwise>
-			</c:choose>
-		</div>
+	<div class="subTit">
+      <div class="line_map">홈 > 자료검색 > 소장자료검색 > 도서상세보기</div>
+      <div class="tit">도서상세보기</div>
+   </div>
+	<div class="title">
+			${bookDetail.title }
 	</div>
-	<div id = "manageBook">	
-		<input type="hidden" id="bookCode" value="${bookDetail.bookCode }">
-		<button type="button" id="modifyBook" onclick="modifyBk();">수정</button>
-		<button type="button" data-toggle="modal" data-target="#deleteBook" onclick="showModal();">삭제</button>
-	</div>
+	<div class="bkDetail">
+		<div class="imgT">
+			<table>
+				<tr>
+					<td class="img"><img src="/resources/images/book/${bookDetail.bkImg }"  alt="..." height="267px" width="200px" align="left"></td>
+
+			</table>
+		</div>
+		<div class="infoT">
+			<table>
+				<tr>
+					<td class="tit">저자</td>
+					<td> ${bookDetail.writer }</td>
+				</tr>
+				<tr>
+					<td class="tit">발행처</td>
+					<td>${bookDetail.publisher }</td>
+				</tr>
+				<tr>
+					<td class="tit">발행년도</td>
+					<td >${bookDetail.pubDate }</td>
+				</tr>
+				<tr>
+					<td class="tit">ISBN</td>
+					<td >${bookDetail.isbn }</td>
+				</tr>
+				<tr>
+					<td class="tit">키워드</td>
+					<td >${bookDetail.keyword }</td>
+				</tr>
+				<tr>
+					<td class="tit">글내용</td>
+				</tr>
+				<tr>
+					<td rowspan="2" colspan="2" class="content">${bookDetail.bkContent }</td>
+				</tr>
+			</table>
+			<div class="brInfo">
+				<table >
+					<tr>
+						<td>보유 권 수</td>
+						<td>현재 대출 수</td>
+						<td>총 대출 수</td>
+						<td>대출 상태 </td>
+						<td>추천 수</td>
+					</tr>
+					<tr>
+						<td>${bookDetail.bkStock }</td>
+						<td>${bookDetail.status }</td>
+						<td><c:set var ="status" scope ="session" value="${bookDetail.status }"/>
+							<c:set var ="bkStock" scope ="session" value="${bookDetail.bkStock }"/>
+							<c:choose>
+								<c:when test="${ bkStock-status > 0}">대출 가능</c:when>
+								<c:otherwise >대출 불가</c:otherwise>
+							</c:choose></td>
+						<td>totalbrCnt</td>
+						<td>${bookDetail.rcdCnt }</td>
+					</tr>
+				</table>
+			</div>
+			
+		</div>
 </div>
+	<div id = "manageBook" class="btnDiv">	
+		<input type="hidden" id="bookCode" value="${bookDetail.bookCode }">
+		<button type="button" id="modifyBook" class="btn btn-success justify-content-md-end"  onclick="modifyBk();">수정</button>
+		<button type="button" class="btn text-white" style="background-color: #CC0000;" data-toggle="modal" data-target="#deleteBook" onclick="showModal();">삭제</button>
+		<button type="button" class="btn btn-success justify-content-md-end" onclick="location.href='/book/bookListU';">목록</button>
+	</div>	
+</div>	
 
 <!--삭제 확인  Modal -->
 <div class="modal fade" id="deleteBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -85,7 +114,7 @@ img{
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-primary" onclick="deleteBk();">삭제</button>
+        <button type="button" class="btn text-white" style="background-color: #CC0000;" onclick="deleteBk();">삭제</button>
       </div>
     </div>
   </div>

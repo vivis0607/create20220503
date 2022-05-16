@@ -61,23 +61,11 @@ public class ItemAdminServiceImpl implements ItemAdminService {
 	@Override
 	public void updateIsDeleteItem(ItemVO itemVO) {
 		sqlSession.update("itemMapper.updateIsDeleteItem", itemVO);
-		sqlSession.delete("itemMapper.deleteItemImgAll",itemVO);
 	}
 
 	@Override
 	public void updateIsDeleteItems(ItemVO itemVO) {
 		sqlSession.update("itemMapper.updateIsDeleteItems", itemVO);
-		sqlSession.delete("itemMapper.deleteItemsImgs", itemVO);
-	}
-	@Override
-	public void deleteItem(ItemVO itemVO) {
-		sqlSession.delete("itemMapper.deleteItem",itemVO);
-		
-	}
-
-	@Override
-	public void deleteItems(ItemVO itemVO) {
-		sqlSession.delete("itemMapper.deleteItems", itemVO);
 	}
 
 	@Override
@@ -87,15 +75,17 @@ public class ItemAdminServiceImpl implements ItemAdminService {
 	}
 
 	@Override
-	public void deleteItemImgAll(ItemImgVO itemImgVO) {
-		sqlSession.delete("itemMapper.deleteItemImgAll", itemImgVO);
-	}
-
-	@Override
 	public void insertItemImges(ItemImgVO itemImgVO) {
 		sqlSession.insert("itemMapper.insertItemImg", itemImgVO);
 	}
-	
+
+	@Override
+	public void updateItemImg(ItemImgVO itemImgVO) {
+		sqlSession.delete("itemMapper.deleteItemImgAll", itemImgVO);
+		sqlSession.insert("itemMapper.insertItemImg", itemImgVO);
+	}
+
+
 
 	
 

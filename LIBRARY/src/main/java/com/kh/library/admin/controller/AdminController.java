@@ -45,28 +45,39 @@ public class AdminController {
 	@Resource(name="bookAdminService")
 	private BookAdminService bookAdminService;
    
-   //메인페이지, 연체일 확인, 연체제한 업데이트
-   @GetMapping("/test") 
-   public String test() { 
-      
-      bookAdminService.updateOverdue();
-      bookAdminService.clearLimitDate();
-       
-      return "manage/home"; 
-   }
-		
-   //관리자 메뉴
-   @GetMapping("/adminMenu")
-	public String goAdminMenu() {
-		return "admin/go_menu";
-	}
-
-	//도서 예약
-	@RequestMapping("/reserveBook")
-	public String reserveBook(ReserveVO reserveVO) {
-		return "redirect:/admin/reserveList";
-	}
-	
+   
+	//메인페이지, 연체일 확인, 연체제한 업데이트
+	   @GetMapping("/test") 
+	   public String test() { 
+	      
+	      bookAdminService.updateOverdue();
+	      bookAdminService.clearLimitDate();
+	       
+	      return "manage/home"; 
+	   }
+	   //도서관 소개
+	   @GetMapping("/libraryInfo")
+	   public String libraryInfo() {
+		   return "info/library_info";
+	   }
+	   
+	   //도서관 연혁
+	   @GetMapping("/libraryHistory")
+	   public String libraryHistory() {
+		   return "info/library_history";
+	   }
+	   
+	   //도서관 찾아오는 길
+	   @GetMapping("/libraryLocation")
+	   public String libraryLocation() {
+		   return "info/library_location";
+	   }
+	   //관리자 메뉴
+	   @GetMapping("/adminMenu")
+	   public String goAdminMenu() {
+	      return "admin/go_menu";
+	   }
+	   
 	//------------------------------회원관리------------------------------//
 	//회원관리 페이지
 	@RequestMapping("/memberManage")

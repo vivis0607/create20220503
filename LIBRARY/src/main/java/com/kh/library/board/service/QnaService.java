@@ -15,8 +15,8 @@ public interface QnaService {
 	//QNA 다음 게시판 번호 조회
 	String selectNextQnaNum();
 	
-	//게시판 조회
-	List<QnaVO> selectQnaList();
+	//QNA게시판 조회
+	List<QnaVO> selectQnaList(QnaVO qnaVO);
 	
 	//QNA게시판 비밀번호 확인
 	String checkQnaPw(QnaVO qnaVO);
@@ -50,4 +50,7 @@ public interface QnaService {
 	
 	//Q&A검색
 	List<QnaVO> selectSearchQna(QnaVO qnaVO);
+	
+	//Q&A조회수
+	void updateQnaReadCnt(QnaVO qnaVO);
 }

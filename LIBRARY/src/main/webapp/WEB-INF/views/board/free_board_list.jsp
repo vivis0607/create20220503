@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 <link href="/resources/css/common/infoBar.css" rel="stylesheet">
 <style type="text/css">
-table{
+.container table{
    border: 1px solid black;
    border-collapse: collapse;
    width: 100%;
@@ -52,7 +52,13 @@ select{
 .ntBtn{
 	text-align:right;
 }
-
+.page-item.active .page-link {
+   background-color: #198754;
+   border-color: #198754;
+}
+.page-link {
+   color: #198754;
+}
 </style>
    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">

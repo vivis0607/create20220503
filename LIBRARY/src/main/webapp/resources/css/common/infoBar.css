@@ -1,8 +1,5 @@
 @charset "UTF-8";
-.container{
-   width: 80%;
-   margin: 0px auto;
-}
+
 .subTit {
     border-bottom: 1px solid #dddddd;
     padding: 15px 0px 7px 10px;
@@ -22,8 +19,7 @@
 }
 
 .subTit .sub_tit {
-    width: 45%;
-    font-size: 0.8rem;
+    width: 70%;
     text-align: left;
     display: inline-block;
 }

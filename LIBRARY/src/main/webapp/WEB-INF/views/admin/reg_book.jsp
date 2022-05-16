@@ -9,9 +9,7 @@
 </head>
 <body>
 <div class="row">
-	<div class="col">
-		<h4>Registration Book</h4>
-	</div>
+
 </div>
 <div class="row">
 	<div class="col-8">
