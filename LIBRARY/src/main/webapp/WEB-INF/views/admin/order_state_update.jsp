@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
+<link href="/resources/css/book/bookDetail.css" rel="stylesheet">
 <style type="text/css">
 .table{
 	font-size: 15px;
@@ -79,10 +81,11 @@
 </head>
 <body>
 <div class="container">
+	<div class="subTit">
+      <div class="line_map">홈 > 관리자메뉴 > 상품주문내역</div>
+      <div class="tit">상품주문내역</div>
+    </div>
 <div class="orderStateUDcontainer">
-	<div style="margin-bottom: 30px; text-align: left;">
-		<h4>상품 주문 내역</h4>
-	</div>
 	<div class="row searchStateDiv">
 		<div class="col-12">
 			<table class="table searchStateTb">

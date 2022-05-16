@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
+<link href="/resources/css/book/bookDetail.css" rel="stylesheet">
 <style type="text/css">
 .itemCate_container{
 	width: 100%;
@@ -32,11 +34,12 @@
 </head>
 <body>
 <div class="container">
+	<div class="subTit">
+      <div class="line_map">홈 > 관리자메뉴 > 상품 카테고리 관리</div>
+      <div class="tit">상품 카테고리 관리</div>
+    </div>
 <div class="row itemCate_container">
 	<div class="col-12">
-		<div class="row" style="text-align: left;">
-			<h4>상품 카테고리 관리</h4>
-		</div>
 		<div class="row BoardbtnDiv">
 			<div class="col-12">
 				<button type="button" class="btn btn-success btn-m" onclick="addCate();">추가</button>

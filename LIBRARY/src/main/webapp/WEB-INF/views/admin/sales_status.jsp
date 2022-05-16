@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="/code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
+<link href="/resources/css/book/bookDetail.css" rel="stylesheet">
 <style type="text/css">
 .DayBoxDiv{
 	border: 5px solid #F0F2F6;
@@ -23,7 +26,8 @@
 	vertical-align: middle;
 }
 .SalesStatusContainer{
-margin-top: 30px;
+	margin-top: 30px;
+	width: 100%;
 }
 canvas{
 	width: 80%;
@@ -73,196 +77,196 @@ input{
 	vertical-align: middle;
 }
 </style>
-<script src="/code.jquery.com/jquery-1.11.1.min.js"></script>
-
 </head>
 <body>
 <div class="container">
-
-<div class="row SalesStatusContainer">
-<div class="col-12 ">
-	<div style="text-align:left; margin-bottom: 30px;">
-		<h4>매출 현황</h4>
-	</div>
-	<div class="row" style="margin-bottom: 20px;">
-		<div class="col-3 DayBoxDiv">
-			<table class="priceTb">
-			<colgroup>
-				<col width="50%">
-				<col width="*">
-			</colgroup>
-				<tr class="totalPriceTr" style="color: #77D0DF;">
-					<td colspan="2">
-						<span style="font-size: xx-large;"><fmt:formatNumber value="${salesDay.totalPrice }" pattern="#,###"/></span> 원
-					</td>
-				</tr>
-				<tr>
-					<td class="dayTd">
-						오늘			
-					</td>
-					<td class="daytotalTd" style="color: #77D0DF;">
-						<fmt:formatNumber value="${salesDay.orderCnt }" pattern="#,###"/> 건
-					</td>
-				</tr>
-			</table>
-		</div>
-		<div class="col-3 DayBoxDiv">
-			<table class="priceTb">
-			<colgroup>
-				<col width="50%">
-				<col width="*">
-			</colgroup>
-				<tr class="totalPriceTr" style="color: #FF7861;">
-					<td colspan="2">
-						<span style="font-size: xx-large;"><fmt:formatNumber value="${salesWeek.totalPrice }" pattern="#,###"/></span> 원
-					</td>
-				</tr>
-				<tr>
-					<td class="dayTd">
-						이번주		
-					</td>
-					<td class="daytotalTd" style="color: #FF7861;">
-						<fmt:formatNumber value="${salesWeek.orderCnt }" pattern="#,###"/> 건
-					</td>
-				</tr>
-			</table>
-		</div>
-		<div class="col-3 DayBoxDiv">
-			<table class="priceTb">
-			<colgroup>
-				<col width="50%">
-				<col width="*">
-			</colgroup>
-				<tr class="totalPriceTr" style="color: #7599CC;">
-					<td colspan="2">
-						<span style="font-size: xx-large;"><fmt:formatNumber value="${salesMonth.totalPrice }" pattern="#,###"/></span> 원
-					</td>
-				</tr>
-				<tr>
-					<td class="dayTd">
-						이번달			
-					</td>
-					<td class="daytotalTd" style="color: #7599CC;">
-						<fmt:formatNumber value="${salesMonth.orderCnt }" pattern="#,###"/> 건
-					</td>
-				</tr>
-			</table>
-		</div>
-		<div class="col-3 DayBoxDiv">
-			<table class="priceTb">
-			<colgroup>
-				<col width="50%">
-				<col width="*">
-			</colgroup>
-				<tr class="totalPriceTr" style="color: #8E81AC;">
-					<td colspan="2">
-						<span style="font-size: xx-large;"><fmt:formatNumber value="${salesYear.totalPrice}" pattern="#,###"/></span> 원
-					</td>
-				</tr>
-				<tr>
-					<td class="dayTd">
-						올해			
-					</td>
-					<td class="daytotalTd" style="color: #8E81AC;">
-						<fmt:formatNumber value="${salesYear.orderCnt}" pattern="#,###"/> 건
-					</td>
-				</tr>
-			</table>
-		</div>
-	</div>
-	<div class="row" style="margin-bottom: 20px;">
-		<div class="col-4 StateBoxDiv">
-			<div class="row" style="width: 110%; height: 100%;">
-				<table class="stateTb" style="border-bottom: 5px solid #F0F2F6;">
+	<div class="subTit">
+      <div class="line_map">홈 > 관리자메뉴 > 매출현황</div>
+      <div class="tit">매출현황</div>
+    </div>
+<div class="SalesStatusContainer">
+	<div class="row">
+	<div class="col-12 ">
+		<div class="row" style="margin-bottom: 20px;">
+			<div class="col-3 DayBoxDiv">
+				<table class="priceTb">
 				<colgroup>
 					<col width="50%">
 					<col width="*">
 				</colgroup>
-					<tr>
-						<td class="stateTd">상품준비중</td>
-						<td class="stateCntTd"><span><fmt:formatNumber value="${itemPre.orderCnt}" pattern="#,###"/></span>건</td>
+					<tr class="totalPriceTr" style="color: #77D0DF;">
+						<td colspan="2">
+							<span style="font-size: xx-large;"><fmt:formatNumber value="${salesDay.totalPrice }" pattern="#,###"/></span> 원
+						</td>
 					</tr>
 					<tr>
-						<td colspan="2" class="statePriceTd"><span><fmt:formatNumber value="${itemPre.totalPrice}" pattern="#,###"/></span>원</td>
+						<td class="dayTd">
+							오늘			
+						</td>
+						<td class="daytotalTd" style="color: #77D0DF;">
+							<fmt:formatNumber value="${salesDay.orderCnt }" pattern="#,###"/> 건
+						</td>
 					</tr>
 				</table>
-				<table class="stateTb">
+			</div>
+			<div class="col-3 DayBoxDiv">
+				<table class="priceTb">
 				<colgroup>
 					<col width="50%">
 					<col width="*">
 				</colgroup>
-					<tr>
-						<td class="stateTd">배송준비중</td>
-						<td class="stateCntTd"><span><fmt:formatNumber value="${deliPre.orderCnt}" pattern="#,###"/></span>건</td>
+					<tr class="totalPriceTr" style="color: #FF7861;">
+						<td colspan="2">
+							<span style="font-size: xx-large;"><fmt:formatNumber value="${salesWeek.totalPrice }" pattern="#,###"/></span> 원
+						</td>
 					</tr>
 					<tr>
-						<td colspan="2" class="statePriceTd"><span><fmt:formatNumber value="${deliPre.totalPrice}" pattern="#,###"/></span>원</td>
+						<td class="dayTd">
+							이번주		
+						</td>
+						<td class="daytotalTd" style="color: #FF7861;">
+							<fmt:formatNumber value="${salesWeek.orderCnt }" pattern="#,###"/> 건
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-3 DayBoxDiv">
+				<table class="priceTb">
+				<colgroup>
+					<col width="50%">
+					<col width="*">
+				</colgroup>
+					<tr class="totalPriceTr" style="color: #7599CC;">
+						<td colspan="2">
+							<span style="font-size: xx-large;"><fmt:formatNumber value="${salesMonth.totalPrice }" pattern="#,###"/></span> 원
+						</td>
+					</tr>
+					<tr>
+						<td class="dayTd">
+							이번달			
+						</td>
+						<td class="daytotalTd" style="color: #7599CC;">
+							<fmt:formatNumber value="${salesMonth.orderCnt }" pattern="#,###"/> 건
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-3 DayBoxDiv">
+				<table class="priceTb">
+				<colgroup>
+					<col width="50%">
+					<col width="*">
+				</colgroup>
+					<tr class="totalPriceTr" style="color: #8E81AC;">
+						<td colspan="2">
+							<span style="font-size: xx-large;"><fmt:formatNumber value="${salesYear.totalPrice}" pattern="#,###"/></span> 원
+						</td>
+					</tr>
+					<tr>
+						<td class="dayTd">
+							올해			
+						</td>
+						<td class="daytotalTd" style="color: #8E81AC;">
+							<fmt:formatNumber value="${salesYear.orderCnt}" pattern="#,###"/> 건
+						</td>
 					</tr>
 				</table>
 			</div>
 		</div>
-		<div class="col-4 StateBoxDiv">
-			<table style="width: 100%; height: 100%; margin: 0 auto; vertical-align: middle; text-align: center; border: none; padding: 5px;">
-				<tr>
-					<td style="font-weight: bold; font-size: 25px;">
-						결제완료
-					</td>
-				</tr>
-				<tr style="height: 40px;">
-					<td >
-						<span style="font-weight: bold; font-size: 25px;"><fmt:formatNumber value="${payFin.orderCnt}" pattern="#,###"/></span>건
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span style="font-weight: bold; font-size:35px;"><fmt:formatNumber value="${payFin.totalPrice}" pattern="#,###"/></span>원
-					</td>
-				</tr>
-			</table>
-		</div>
-		<div class="col-4 StateBoxDiv">
-				<div class="row" style="width: 110%; height: 100%;">
-				<table class="stateTb" style="border-bottom: 5px solid #F0F2F6;">
-				<colgroup>
-					<col width="50%">
-					<col width="*">
-				</colgroup>
+		<div class="row" style="margin-bottom: 20px;">
+			<div class="col-4 StateBoxDiv">
+				<div class="row" style="width: 100%; height: 100%;">
+					<table class="stateTb" style="border-bottom: 5px solid #F0F2F6;">
+					<colgroup>
+						<col width="50%">
+						<col width="*">
+					</colgroup>
+						<tr>
+							<td class="stateTd">상품준비중</td>
+							<td class="stateCntTd"><span><fmt:formatNumber value="${itemPre.orderCnt}" pattern="#,###"/></span>건</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="statePriceTd"><span><fmt:formatNumber value="${itemPre.totalPrice}" pattern="#,###"/></span>원</td>
+						</tr>
+					</table>
+					<table class="stateTb">
+					<colgroup>
+						<col width="50%">
+						<col width="*">
+					</colgroup>
+						<tr>
+							<td class="stateTd">배송준비중</td>
+							<td class="stateCntTd"><span><fmt:formatNumber value="${deliPre.orderCnt}" pattern="#,###"/></span>건</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="statePriceTd"><span><fmt:formatNumber value="${deliPre.totalPrice}" pattern="#,###"/></span>원</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="col-4 StateBoxDiv">
+				<table style="width: 100%; height: 100%; margin: 0 auto; vertical-align: middle; text-align: center; border: none; padding: 5px;">
 					<tr>
-						<td class="stateTd">배송처리</td>
-						<td class="stateCntTd"><span><fmt:formatNumber value="${deliPro.orderCnt}" pattern="#,###"/></span>건</td>
+						<td style="font-weight: bold; font-size: 25px;">
+							결제완료
+						</td>
+					</tr>
+					<tr style="height: 40px;">
+						<td >
+							<span style="font-weight: bold; font-size: 25px;"><fmt:formatNumber value="${payFin.orderCnt}" pattern="#,###"/></span>건
+						</td>
 					</tr>
 					<tr>
-						<td colspan="2" class="statePriceTd"><span><fmt:formatNumber value="${deliPro.totalPrice}" pattern="#,###"/></span>원</td>
-					</tr>
-				</table>
-				<table class="stateTb">
-				<colgroup>
-					<col width="50%">
-					<col width="*">
-				</colgroup>
-					<tr>
-						<td class="stateTd">배송완료</td>
-						<td class="stateCntTd"><span><fmt:formatNumber value="${deliFin.orderCnt}" pattern="#,###"/></span>건</td>
-					</tr>
-					<tr>
-						<td colspan="2" class="statePriceTd"><span><fmt:formatNumber value="${deliFin.totalPrice}" pattern="#,###"/></span>원</td>
+						<td>
+							<span style="font-weight: bold; font-size:35px;"><fmt:formatNumber value="${payFin.totalPrice}" pattern="#,###"/></span>원
+						</td>
 					</tr>
 				</table>
 			</div>
+			<div class="col-4 StateBoxDiv">
+					<div class="row" style="width: 100%; height: 100%;">
+					<table class="stateTb" style="border-bottom: 5px solid #F0F2F6;">
+					<colgroup>
+						<col width="50%">
+						<col width="*">
+					</colgroup>
+						<tr>
+							<td class="stateTd">배송처리</td>
+							<td class="stateCntTd"><span><fmt:formatNumber value="${deliPro.orderCnt}" pattern="#,###"/></span>건</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="statePriceTd"><span><fmt:formatNumber value="${deliPro.totalPrice}" pattern="#,###"/></span>원</td>
+						</tr>
+					</table>
+					<table class="stateTb">
+					<colgroup>
+						<col width="50%">
+						<col width="*">
+					</colgroup>
+						<tr>
+							<td class="stateTd">배송완료</td>
+							<td class="stateCntTd"><span><fmt:formatNumber value="${deliFin.orderCnt}" pattern="#,###"/></span>건</td>
+						</tr>
+						<tr>
+							<td colspan="2" class="statePriceTd"><span><fmt:formatNumber value="${deliFin.totalPrice}" pattern="#,###"/></span>원</td>
+						</tr>
+					</table>
+				</div>
+				</div>
 			</div>
-		</div>
-		<div style="margin-bottom: 20px; vertical-align: middle;">
-			<input type="date" id="inputSDate"> ~ <input type="date" id="inputEDate">
-			<button type="button" class="btn btn-success btn-sm" onclick="searchPeriod();">조회</button>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<c:forEach items="${period }" var="peri">
-					<input type="hidden" class="buyDates" value="${peri.buyDate }">
-					<input type="hidden" class="totalPrices" value="${peri.totalPrice }">
-				</c:forEach>
-				<div class="graphBox">
-					<canvas id="bar-chart"></canvas>
+			<div style="margin-bottom: 20px; vertical-align: middle;">
+				<input type="date" id="inputSDate"> ~ <input type="date" id="inputEDate">
+				<button type="button" class="btn btn-success btn-sm" onclick="searchPeriod();">조회</button>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<c:forEach items="${period }" var="peri">
+						<input type="hidden" class="buyDates" value="${peri.buyDate }">
+						<input type="hidden" class="totalPrices" value="${peri.totalPrice }">
+					</c:forEach>
+					<div class="graphBox">
+						<canvas id="bar-chart"></canvas>
+					</div>
 				</div>
 			</div>
 		</div>

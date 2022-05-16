@@ -193,7 +193,6 @@ public class OtherBoardController {
 	//Q&A상세보기페이지 이동
 	@GetMapping("/qnaDetail")
 	public String qnaDetail(QnaVO qnaVO, Model model) {
-		qnaService.updateQnaReadCnt(qnaVO);
 		model.addAttribute("qnaInfo", qnaService.selectQnaDetail(qnaVO));
 		model.addAttribute("answerList", qnaService.selectQnaAnswer(qnaVO));
 		if(qnaService.selectQnaAnswer(qnaVO).size() != 0) {

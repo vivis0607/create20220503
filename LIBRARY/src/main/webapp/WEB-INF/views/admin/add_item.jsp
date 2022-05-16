@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
+<link href="/resources/css/book/bookDetail.css" rel="stylesheet">
 <style type="text/css">
 .add_item_container{
 	text-align: center;
@@ -144,11 +146,16 @@
   border-bottom: 1px solid #16784B;
  }
 </style>
+
 </head>
 <body>
 <div class="container">
+	<div class="subTit">
+      <div class="line_map">홈 > 관리자메뉴 > 상품관리 > 상품등록</div>
+      <div class="tit">상품등록</div>
+    </div>
 <div class="add_item_container">
-	<div style="margin:0 auto; margin-bottom: 20px; text-align: left;"> <h4>상품 등록</h4> </div>
+   </div>
 	<form action="/item/insertItem" method="post" id="regItemForm" enctype="multipart/form-data">
 		<div class="add_itemcuverDiv">
 			<table class="addItemTB">
@@ -207,7 +214,6 @@
 			<button type="button" class="btn btn-success btn-sm" onclick="regItem();">상품등록</button>
 		</div>
 	</form>
-</div>
 </div>
 <script src="\resources\js\item\add_item.js?ver=9" type="text/javascript" ></script>
 </body>

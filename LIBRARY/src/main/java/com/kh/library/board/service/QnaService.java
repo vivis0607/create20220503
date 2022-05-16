@@ -51,6 +51,5 @@ public interface QnaService {
 	//Q&A검색
 	List<QnaVO> selectSearchQna(QnaVO qnaVO);
 	
-	//Q&A조회수
-	void updateQnaReadCnt(QnaVO qnaVO);
+
 }

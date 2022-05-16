@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
+<link href="/resources/css/book/bookDetail.css" rel="stylesheet">
 <style type="text/css">
 
 .item_Container{
@@ -30,10 +32,12 @@
 </style>
 </head>
 <body>
-<div class="item_Container">
-	<div style="text-align: left;">
-		<h4>상품 관리</h4>
+<div class="container">
+	<div class="subTit">
+	      <div class="line_map">홈 > 관리자메뉴 > 상품관리</div>
+	      <div class="tit">상품관리</div>
 	</div>
+<div class="item_Container">
 	<div class="BoardbtnDiv">
 		<button type="button" class="btn btn-success btn-m" onclick="location.href='/item/insertItem';">아이템등록</button>
 		<button type="button" class="btn btn-success btn-m" onclick="deleteItems();">선택삭제</button>
@@ -73,7 +77,7 @@
 		</table>
 	</div>
 </div>
-
+</div>
 <script type="text/javascript" src="/resources/js/item/item_manage.js?ver=1"></script>
 </body>
 </html>

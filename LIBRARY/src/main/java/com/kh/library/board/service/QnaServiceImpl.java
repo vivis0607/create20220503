@@ -91,10 +91,6 @@ public class QnaServiceImpl implements QnaService {
 		sqlSession.delete("otherboardMapper.qnaDelete", qnaVO);
 	}
 
-	@Override
-	public void updateQnaReadCnt(QnaVO qnaVO) {
-		sqlSession.update("otherboardMapper.updateQnaReadCnt", qnaVO);
-	}
 	
 	
 }
