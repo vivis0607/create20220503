@@ -159,7 +159,7 @@ function sample4_execDaumPostcode() {
 	}
     	
 
-    	
+//모달 닫고 열었을 때 정보 다 사라져있도록
 function showPopup(){
 	$('#myPageDetail-basic .modal-body-top-right input').each(function(index, element){
 		$(element).val('');
@@ -167,5 +167,4 @@ function showPopup(){
 	
 	$('#myPageDetail-basic').modal('show');
 }    	
-    	
     	

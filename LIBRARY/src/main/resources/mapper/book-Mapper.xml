@@ -371,7 +371,29 @@
 		        FROM BOOK
 		        WHERE IS_DELETE='N'
 		    )
-		WHERE MRCD &lt; 4
+		WHERE MRCD &lt; 10
+	
+	</select>
+	
+		<!-- 추천도서 랭킹 -->
+	<select id="selectRcdBook3" resultMap="book">
+		SELECT BOOK_CODE
+		    , TITLE
+			, WRITER
+			, BK_IMG
+		    , RCD_CNT
+		    
+		FROM (
+		        SELECT BOOK_CODE
+		            , TITLE
+					, WRITER
+					, BK_IMG
+		            , RCD_CNT
+		            , DENSE_RANK() OVER(ORDER BY RCD_CNT DESC) AS MRCD
+		        FROM BOOK
+		        WHERE IS_DELETE='N'
+		    )
+		WHERE MRCD &lt; =3
 	
 	</select>
 	

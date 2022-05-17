@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/resources/css/book/searchBar.css" rel="stylesheet">
+<link href="/resources/css/book/newBookSlide.css" rel="stylesheet">
 <style type="text/css">
 .container{
 	width: 100%;
@@ -35,7 +36,89 @@
 			<button type="submit" class="btn btn-success btn-sm" onclick="location.href='book/searchBook';">검색</button>
 		</form>
 	</div> 
-	<div class="rcdBook"  >
+	
+	
+	<div class="slide col-4" style="display: inline-block;">
+	<!-- 신착도서 슬라이드  -->
+	<div class="goNewBookList" >
+		<div class="slideTitle">신착도서</div>
+		<div class="plusBtn"><i class="fa-solid fa-plus" style=" margin-right:5px;"></i><a href="/book/selectNewBook1">더보기</a></div>
+	</div>
+	<div class="newBookSlide">
+		 <div id="carouselExampleIndicators2" class="carousel carousel-dark slide" data-bs-ride="carousel" style="max-width: 100%; height: 100%;">
+		      <div class="carousel-indicators">
+		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
+		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="3" aria-label="Slide 4"></button>
+		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="4" aria-label="Slide 5"></button>
+		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="5" aria-label="Slide 6"></button>
+		      </div>
+		      <div class="carousel-inner newBookImg">
+			  <c:forEach items="${newBookList }" var="nBook" varStatus="status">
+			      <div class="carousel-item <c:if test="${status.index == 0 }">active</c:if>" onclick="location.href='/book/bookDetail?bookCode=${nBook.bookCode }&memId=${sessionScope.loginInfo.memId}'">
+			         <div class="card">
+			           <div class="row">
+			             <div class="text-center">
+			             	<div class="img">
+			             		<img src="/resources/images/book/${nBook.bkImg }"  alt="..."  class="img-fluid rounded-start">
+			             	</div>
+			             	<div class = "newBookTitle">
+			             		${nBook.title }
+			             	</div>
+			               
+			             </div>
+			           </div>
+			         </div>
+			       </div>
+		       </c:forEach>
+		      </div>
+			</div>
+	</div>
+	</div>
+	
+	
+	<div class="slide col-4" style="display: inline-block;">
+	<!-- 추천도서 랭킹 슬라이드  -->
+	<div class="goNewBookList" >
+		<div class="slideTitle">추천도서</div>
+		<div class="plusBtn"><i class="fa-solid fa-plus" style=" width: 30px; margin-right:5px;"></i><a href="/book/selectRcdBook1">더보기</a></div>
+	</div>
+	<div class="newBookSlide">
+		 <div id="carouselExampleIndicators2" class="carousel carousel-dark slide" data-bs-ride="carousel" style="max-width: 100%; height: 100%;">
+		      <div class="carousel-indicators">
+		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
+		      </div>
+		      <div class="carousel-inner rcdBookImg">
+			  <c:forEach items="${bookList}" var="book" varStatus="status">
+			  <c:set var="i" value="${i+1 }"/>
+			      <div class="carousel-item <c:if test="${status.index == 0 }">active</c:if>" onclick="location.href='/book/bookDetail?bookCode=${book.bookCode }&memId=${sessionScope.loginInfo.memId}'">
+			         <div class="card">
+			           <div class="row">
+			             <div class="text-center">
+			             	<div class="img">
+			             	<span class="rank"  style=" margin-left: 100px; " >
+			             				<i class="fa-solid fa-medal" style="width: 100%; height: 100%; color: gold;"></i>
+			             	</span>
+			             		<img src="/resources/images/book/${book.bkImg }"  alt="..."  class="img-fluid rounded-start">
+			             	</div>
+			             	<div class = "newBookTitle">
+			             		${book.title }
+			             	</div>
+			               
+			             </div>
+			           </div>
+			         </div>
+			       </div>
+		       </c:forEach>
+		      </div>
+			</div>
+	</div>
+	</div>
+</div>
+<%-- 	<div class="rcdBook"  >
 		<h3>이달의 인기도서</h3>
 		<a href="/book/selectRcdBook">확인하러가기</a>
 			
@@ -57,7 +140,27 @@
 		</div>
 	</div>
 </div>
-
+ --%>
+ <c:if test="${sessionScope.loginInfo.isOd eq 'Y' }">
+	<script type="text/javascript">
+		
+	        if (!confirm("연체 중인 도서가 있습니다. 대여 목록 상세조회로 이동할까요?")) {
+	            alert("취소(아니오)를 누르셨습니다.");
+	        } else {
+	            location.href='/member/borrowListU?memId=${loginInfo.memId }';
+	        } 
+	</script>
+</c:if>
+ <c:if test="${sessionScope.loginInfo.isPwdTemp eq 'Y' }">
+	<script type="text/javascript">
+        if (!confirm("새로운 비밀번호로 설정해 주세요.")) {
+            alert("언제든지 내 정보 상세보기에서 수정 가능합니다.");
+        } 
+        else {
+            location.href='/member/myPageDetail';
+        }
+	</script>
+</c:if>
 <script type="text/javascript" src="/resources/js/book/rcd_book.js?ver=1"></script>
 </body>
 </html>

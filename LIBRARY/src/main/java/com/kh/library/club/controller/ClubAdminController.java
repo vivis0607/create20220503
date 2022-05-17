@@ -15,6 +15,7 @@ import com.kh.library.club.service.ClubAdminService;
 import com.kh.library.club.service.MessageService;
 import com.kh.library.club.vo.ClubApplyVO;
 import com.kh.library.club.vo.ClubVO;
+import com.kh.library.club.vo.MonthlyBookVO;
 import com.kh.library.member.vo.MemberVO;
 
 import oracle.jdbc.proxy.annotation.Post;
@@ -58,5 +59,33 @@ public class ClubAdminController {
 	public void clubMemKick(MemberVO memberVO) {
 		clubAdminService.clubMemberKick(memberVO);
 	}
+	
+	//이달의 책 등록페이지
+	@GetMapping("/monthlyBook")
+	public String monthlyBook() {
+		return "club/club_monthly_book";
+	}
+	
+	//이달의책 등록
+	@PostMapping("/regMonthlyBook")
+	public String regMonthlyBook(MonthlyBookVO monthlyBookVO) {
+		clubAdminService.insertMonthlyBook(monthlyBookVO);
+		return "redirect:/club/clubDetail?clubCode=" + monthlyBookVO.getClubCode();
+	}
+	
+	//이달의 책 수정페이지
+	@GetMapping("/monthlyBookUpdate")
+	public String monthlyBookUpdate() {
+		return "club/update_club_monthly_book";
+	}
+	
+	//이달의책 수정
+	@PostMapping("/UpdateMonthlyBook")
+	public String UpdateMonthlyBook(String clubCode) {
+		clubAdminService.updateMonthlyBook(clubCode);
+		return "redirect:/club/clubDetail?clubCode=" + clubCode;
+	}
+	
+	
 	
 }

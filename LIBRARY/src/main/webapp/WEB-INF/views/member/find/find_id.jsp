@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 <link href="/resources/css/common/infoBar.css" rel="stylesheet">
 <link href="/resources/css/common/input-01.css" rel="stylesheet">
-<link href="/resources/css/member/find.css" rel="stylesheet">
 <style type="text/css">
 .find-box{
 	border: 4px solid #E7EDE4;

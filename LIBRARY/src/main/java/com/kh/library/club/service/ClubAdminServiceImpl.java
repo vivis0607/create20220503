@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.library.admin.vo.MessageVO;
 import com.kh.library.club.vo.ClubApplyVO;
 import com.kh.library.club.vo.ClubVO;
+import com.kh.library.club.vo.MonthlyBookVO;
 import com.kh.library.member.vo.MemberVO;
 
 @Service("clubAdminService")
@@ -64,6 +65,24 @@ public class ClubAdminServiceImpl implements ClubAdminService{
 	@Override
 	public void insertClubJoinMessage(MessageVO messageVO) {
 		sqlSession.insert("clubMapper.insertClubJoinMessage", messageVO);
+	}
+
+
+	@Override
+	public void insertMonthlyBook(MonthlyBookVO monthlyBookVO) {
+		sqlSession.insert("clubMapper.insertMonthlyBook", monthlyBookVO);
+	}
+
+
+	@Override
+	public void updateMonthlyBook(String clubCode) {
+		sqlSession.update("clubMapper.updateMonthlyBook", clubCode);
+	}
+
+	//이달의책 조회
+	@Override
+	public MonthlyBookVO selectMonthlyBook(String clubCode) {
+		return sqlSession.selectOne("clubMapper.selectMonthlyBook", clubCode);
 	}
 
 

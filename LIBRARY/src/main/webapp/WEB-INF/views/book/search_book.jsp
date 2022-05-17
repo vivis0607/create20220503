@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 <link href="/resources/css/common/infoBar.css" rel="stylesheet">
 <link href="/resources/css/book/searchBar.css" rel="stylesheet">
+<link href="/resources/css/book/bookList.css" rel="stylesheet">
 <style type="text/css">
 img:hover{
 	opacity: 0.7;
@@ -40,67 +41,47 @@ img:hover{
 	
 	<div class="searchRes">
 	 <c:forEach items="${searchList }" var="search">
-	 	<div class="result" >
-	 	</div>
-			<table>
-				<tr>
-					<td rowspan="3"><a href="/book/bookDetail?bookCode=${search.bookCode }&memId=${sessionScope.loginInfo.memId}"><img src="/resources/images/book/${search.bkImg }"  alt="..." height="120px;" width="80px;" ></a></td>
-					<td colspan="3"><a href="/book/bookDetail?bookCode=${search.bookCode }&memId=${sessionScope.loginInfo.memId}"><strong>${search.title }</strong></a></td>
-				</tr>
-				<tr>
-					<td>저자</td>
-					<td colspan="2">${search.writer }</td>
-				</tr>
-				<tr>
-					<td>발행처</td>
-					<td colspan="2">${search.publisher }</td>
-				</tr>
-				<tr>
-					<td>발행년도</td>
-					<td>${search.pubDate }</td>
-					<td colspan="2">ISBN<td>
-					<td>${search.isbn }<td>
-				</tr>
-				<tr>
-					<td>키워드</td>
-					<td colspan="3">${search.keyword }</td>
-				</tr>
-				<tr>
-					<td colspan="4">*자료위치 ${search.area }</td>		
-				</tr>
-			
-				
-			
-			
-			</table>
-		</c:forEach>
-			
-		<%-- <c:forEach items="${searchList } " var="search">
-			<div class="span-3 text-center">
-			<img src="/resources/images/book/${search.bkImg }" class="card-img-top" alt="..." height="150px;">
-			<h3>${search.title }</h3>
-		<table>
+	 	<div class="bookList" >
+	 	<table>
 			<tr>
+				<td class="title" colspan="3"><a href="/book/bookDetail?bookCode=${search.bookCode }&memId=${sessionScope.loginInfo.memId}">${search.title }</a></td>
+			</tr>
+			<tr>
+				<td class="img" rowspan="5"><a href="/book/bookDetail?bookCode=${search.bookCode }&memId=${sessionScope.loginInfo.memId}"><img src="/resources/images/book/${search.bkImg }"  alt="..." height="185px;" width="122px;" ></a></td>
 				<td>저자</td>
-				<td> ${search.writer }</td>
-				<td>카테코드</td>
-				<td>${search.cateCode }</td>
-				<td>발행년도</td>
-				<td>${search.pubDate }</td>
+				<td>${search.writer }</td>
 			</tr>
 			<tr>
-				<td>청구기호</td>
-				<td>청구기호</td>
-				<td>ISBN</td>
-				<td>ISBN</td>
-				<td>키워드</td>
-				<td>${search.keyword }</td>
+				<td class="tit">발행처</td>
+				<td colspan="2">${search.publisher }</td>
 			</tr>
-		</table>
-			<button type="button" onclick="location.href='/book/selectStatus';">${search.status } </button>
-		</div>
-		</c:forEach>  --%>
-	</div>
+			<tr>
+				<td class="tit">ISBN</td>
+				<td colspan="2">${search.isbn }</td>
+			</tr>
+			<tr>
+				<td class="tit">발행년도</td>
+				<td colspan="2">${search.pubDate }</td>
+			</tr>
+			<tr>
+			
+				<td class="tit">키워드</td>
+				<td colspan="2">${search.keyword }</td>
+			</tr>
+			<tr>
+				<td class="location" colspan="2">*자료위치 &ensp; &emsp;${search.area }</td>
+			</tr>
+	 	</table>
+	 	</div>
+	 	</c:forEach>
+	 	
+	 	
+	 	
+	 	
+	 	
+	 	
+
+</div>
 </div>
 </body>
 </html>

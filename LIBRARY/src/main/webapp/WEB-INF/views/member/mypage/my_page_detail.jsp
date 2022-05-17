@@ -7,138 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/resources/css/common/infoBar.css" rel="stylesheet">
+<link href="/resources/css/member/my_page_detail.css" rel="stylesheet">
 
-<style type="text/css">
-	.modal-body-top-left img{
-		margin: auto 0px;
-		width: 112px;
-		height: 112px;
-	}
-	.modal-body{
-		display: flex;
-		flex-direction: row;
-		justify-content: space-evenly;
-	}
-	.modal-body-top-right{
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-	}
-	.modal-body-top-left{
-		display: flex;
-		flex-direction: column;
-		width: 7rem;
-		flex-wrap: wrap;
-		
-	}
-	.profileFileButton{
-		display: flex;
-		justify-content: space-between;
-	}
-	.file-label {
-	  margin-top: 1rem;
-	  padding: 2px 10px;
-	  background-color: #16784B;
-	  color: #fff;
-	  text-align: center;
-	  width: 100%;
-	  border-radius: 6px;
-	  cursor: pointer;
-	}
-	.file {
-	  display: none;
-	}
-	.myPageDetail-part{
-		display: flex;
-		align-items: center;
-		font-size: 1.3rem;
-		font-weight: bold;
-		color: #16784B;
-	}
-	.myPageDetail-part > span{
-		margin-right: 7px;
-	}
-	.modal-body-pwd{
-		flex-direction: column;
-	}
-	.plus{
-		display: flex;
-		flex-direction: column;
-		height: 9rem;
-		justify-content: space-between;
-	}
-	.modal-body-plus{
-		display: flex;
-		justify-content: space-around;
-		right: 20px;
-	}
-	.modal-body-plus input[type="text"], .modal-body-plus input[type="date"]{
-		width: 250px;
-	}
-	.plus > .modal-body-plus:nth-child(1) > div:nth-child(2){
-		display: flex;
-		flex-direction: column;
-	}
-	
-	.error{
-		z-index: 1;
-	}
-	
-	.myPageDetail table tr{
-		padding: 3px 0;
-	}
-	.myPageDetail-secret{
-	    margin: 2rem 0;
-	
-	}
-	.modal-body-pwd{
-		width: 80%;
-	}
-	
-	.myPageDetail{
-		padding-left: 60px;
-	}
-	
-	.myPageDetail-table{
-	    width: 801px;
-	    margin-top: 0.5rem;
-	    margin-left: 2rem;
-	    border: 1px solid #eee;
-	    border-left: 3px solid #16784B;
-	}
-	.myPageDetail-table td{
-		padding: 1rem 15px;
-	}
-	.myPageDetail-table td:first-child {
-		background-color: #eee;
-		font-weight: bold;
-	}
-	
-	.modal-body table{
-		width: 100%;
-	}
-	.modal-body input{
-		border: 1px solid #d4d4d4;
-		border-radius: 3px;
-		padding: 3.5px;
-	}
-	.modal-body input:focus {
-		border-color: #c7e2d1;
-		box-shadow: 0 0 8px #c7e2d1;
-	}
-	.modal-body-pwd input, .modal-body-plus input{
-		width:100%;
-		margin: 3px 0;
-	}
-	
-	.modal-body-plus div:first-child {
-		padding-top: 8px;
-	}
-	
-	myPageDetail-part button:checkd{
-		border: none;
-	}
-</style>
 </head>
 <body>
 
@@ -206,7 +76,7 @@
 				<tr>
 					<td>비밀번호</td>
 					<td>
-						
+						<c:if test="${sessionScope.loginInfo.isPwdTemp eq 'Y' }">임시 비밀번호로 설정돼 있습니다. 새로운 비밀번호로 변경해 주세요.</c:if>
 					</td>
 				</tr>
 			</table>
@@ -237,6 +107,9 @@
 		</div>
 	</div>
 </form>
+<div class="deleteMem-btn">
+	<button type="button" class="btn btn-sm btn-outline-success" onclick="location.href='/member/deletePwdChk';">회원 탈퇴</button>
+</div>
 
 <!--기본정보 수정 Modal -->
 <div class="modal fade" id="myPageDetail-basic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -14,16 +14,6 @@
 	max-height: calc(100vh - 200px);
 	overflow-y: auto;
 }
-.page-item.active .page-link {
-	background-color: #72a37c;
-	border-color: #72a37c;
-}
-.page-link {
-	color: #72a37c;
-}
-.page-link:hover {
-	color: #72a37c;
-}
 .table{
  --bs-table-hover-bg:#ecf7f1; 
 }
@@ -183,6 +173,7 @@
 	</div>
 </div>
 
+
 <!--알림 전송 Modal -->
 <div class="messageModal modal fade" id="messageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -202,7 +193,7 @@
             <textarea class="form-control" id="message-content" rows="7" name="msgContent" style="resize: none;" onkeyup="byteCheck(this, '500');"></textarea>
             <div style="text-align: right;"><span id="byteInfo">0</span> /500bytes</div>
           <div class="mb-3 justify-content-md-end">
-	        <button type="button" class="btn btn-secondary justify-content-md-end" data-bs-dismiss="modal">닫기</button>
+	        <button type="button" class="msg-close btn btn-secondary justify-content-md-end">닫기</button>
 	        <button type="button" class="btn btn-success justify-content-md-end" onclick="sendMsg();">메세지 전송</button>
           </div>
           </div>

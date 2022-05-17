@@ -61,14 +61,41 @@ public class BoardController {
 	
 	//공지사항 리스트
 	@GetMapping("/ntBoardList")
-	public String selectNtBoardList(Model model) {
-		model.addAttribute("ntBoardList", boardService.selectNtBoardList());
+	public String selectNtBoardList(Model model, NtBoardVO ntBoardVO) {
+		//-----------------페이징 정보 세팅
+		//1.전체 데이터의 개수 조회
+		int listCnt = boardService.selectBoardCnt(ntBoardVO);
+		ntBoardVO.setTotalCnt(listCnt);
+		
+		System.out.println(ntBoardVO.getTotalCnt());
+
+		System.out.println(ntBoardVO.getNowPage());
+		
+		//2.페이징 처리를 위한 세팅 메소드 호출
+		ntBoardVO.setPageInfo();
+		
+		System.out.println(ntBoardVO.getStartNum());
+		System.out.println(ntBoardVO.getEndNum());
+		
+		model.addAttribute("ntBoardList", boardService.selectNtBoardList(ntBoardVO));
 		return "board/nt_board_list";
 	}
 	
 	//공지사항 검색
 	@RequestMapping("/searchNt")
 	public String selectSearchNt(Model model, NtBoardVO ntBoardVO) {
+		//-----------------페이징 정보 세팅
+		//1.전체 데이터의 개수 조회
+		int listCnt = boardService.selectBoardCnt(ntBoardVO);
+		ntBoardVO.setTotalCnt(listCnt);
+		
+		System.out.println(ntBoardVO.getTotalCnt());
+		System.out.println(ntBoardVO.getStartNum());
+		System.out.println(ntBoardVO.getEndNum());
+		
+		//2.페이징 처리를 위한 세팅 메소드 호출
+		ntBoardVO.setPageInfo();
+		
 		model.addAttribute("ntBoardList", boardService.selectSearchNt(ntBoardVO));
 		return "board/nt_board_list";
 	}

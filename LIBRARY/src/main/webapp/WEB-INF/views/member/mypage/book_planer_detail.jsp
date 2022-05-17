@@ -113,7 +113,7 @@
 		<div class="board-content"><pre>${bookPlaner.complitReview }</pre></div>
 		<hr>
 		<div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end">
-			<button type="button" class="btn btn-success" onclick="history.back();">뒤로가기</button>
+			<button type="button" class="btn btn-success" onclick="location.href='/member/bookPlaner';">목록보기</button>
 			<button type="button" class="btn btn-success" onclick="location.href='/member/bookPlanerUpdate?memId=${loginInfo.memId }&complitCode=${bookPlaner.complitCode }&bookCode=${bookPlaner.bookCode}';">수정</button>
 			<button type="button" class="btn btn-success" onclick="bookPlanerDelete();">삭제</button>
 			

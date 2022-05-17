@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.library.admin.vo.MessageVO;
 import com.kh.library.club.vo.ClubApplyVO;
 import com.kh.library.club.vo.ClubVO;
+import com.kh.library.club.vo.MonthlyBookVO;
 import com.kh.library.member.vo.MemberVO;
 
 public interface ClubAdminService {
@@ -27,4 +28,12 @@ public interface ClubAdminService {
 
 	void updateAndDeleteClubAcceptance(ClubApplyVO clubApplyVO, String getId);
 	
+	//이달의책 등록
+	void insertMonthlyBook(MonthlyBookVO monthlyBookVO);
+	
+	//이달의책 수정
+	void updateMonthlyBook(String clubCode);
+	
+	//이달의책 조회
+	MonthlyBookVO selectMonthlyBook(String clubCode);
 }

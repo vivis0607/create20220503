@@ -89,6 +89,12 @@ public class BookAdminServiceImpl implements BookAdminService {
 	}
 
 	
+	//추천도서 랭킹 홈 
+	@Override
+	public List<BookVO> selectRcdBook3(){
+		return sqlSession.selectList("bookMapper.selectRcdBook3");
+	}
+	
 	//추천도서 랭킹
 	@Override
 	public List<BookVO> selectRcdBook(){

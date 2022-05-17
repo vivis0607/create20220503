@@ -2,13 +2,15 @@ package com.kh.library.member.vo;
 
 import com.kh.library.book.vo.BookCategoryVO;
 import com.kh.library.book.vo.BookVO;
+import com.kh.library.util.vo.PageVO;
 
-public class BookComplitVO {
+public class BookComplitVO extends PageVO{
 	private String complitCode;
 	private String complitDate;
 	private String bookCode;
 	private String memId;
 	private String complitReview;
+	private int rowNum;
 	private int cnt;
 	private int highPct;
 	private BookVO bookInfo;
@@ -19,6 +21,13 @@ public class BookComplitVO {
 	
 	
 	
+
+	public int getRowNum() {
+		return rowNum;
+	}
+	public void setRowNum(int rowNum) {
+		this.rowNum = rowNum;
+	}
 	public int getHighPct() {
 		return highPct;
 	}

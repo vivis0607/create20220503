@@ -84,37 +84,69 @@
 	FROM ITEM_CATEGORY
 	</select>
 
+	<!-- 굿즈 개수 조회 -->
+	<select id="selcetItemCnt" resultType="int">
+		SELECT COUNT(ITEM_CODE)
+		FROM ITEM
+		WHERE IS_DELETE = 'N'
+		<if test="cateCode != null and !cateCode.equals('')">
+			AND CATE_CODE = #{cateCode}
+		</if>
+	</select>
+	
 	<!-- 굿즈목록조회 -->
 	<select id="selectItems" resultMap="item">
-	SELECT ITEM.ITEM_CODE
+	SELECT ITEM_CODE
 		, ITEM_NAME
 		, ITEM_PRICE
 		, CATE_CODE
 		, ITEM_AT_IMG_NAME
-	FROM ITEM ITEM, ITEM_IMAGE IMG
-	WHERE ITEM.ITEM_CODE = IMG.ITEM_CODE
-	AND IS_MAIN ='Y'
-	AND IS_DELETE = 'N'
-	<if test="cateCode != null and !cateCode.equals('')">
-		AND CATE_CODE = #{cateCode}
-	</if>
-	ORDER BY ITEM.ITEM_CODE DESC
+		, ROW_NUM
+	FROM
+		(
+     	SELECT ITEM.ITEM_CODE
+			, ITEM_NAME
+			, ITEM_PRICE
+			, CATE_CODE
+			, ITEM_AT_IMG_NAME
+			, ROWNUM AS ROW_NUM
+		FROM ITEM ITEM, ITEM_IMAGE IMG
+		WHERE ITEM.ITEM_CODE = IMG.ITEM_CODE
+		AND IS_MAIN ='Y'
+		AND IS_DELETE = 'N'
+		<if test="cateCode != null and !cateCode.equals('')">
+			AND CATE_CODE = #{cateCode}
+		</if>
+		ORDER BY ITEM.ITEM_CODE DESC
+	)
+	WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}		
 	</select>
 	
 	
 	<!-- 굿즈검색 -->
 	<select id="searchItem" resultMap="item">
-	SELECT ITEM.ITEM_CODE
+	SELECT ITEM_CODE
 		, ITEM_NAME
 		, ITEM_PRICE
 		, CATE_CODE
 		, ITEM_AT_IMG_NAME
-	FROM ITEM ITEM, ITEM_IMAGE IMG
-	WHERE ITEM.ITEM_CODE = IMG.ITEM_CODE
-	AND IS_MAIN ='Y'
-	AND IS_DELETE = 'N'
-	AND ITEM_NAME LIKE '%'||#{keyword}||'%'
-	ORDER BY ITEM.ITEM_CODE DESC
+		, ROW_NUM
+	FROM
+	(
+	  SELECT ITEM.ITEM_CODE
+			, ITEM_NAME
+			, ITEM_PRICE
+			, CATE_CODE
+			, ITEM_AT_IMG_NAME
+			, ROWNUM AS ROW_NUM
+		FROM ITEM ITEM, ITEM_IMAGE IMG
+		WHERE ITEM.ITEM_CODE = IMG.ITEM_CODE
+		AND IS_MAIN ='Y'
+		AND IS_DELETE = 'N'
+		AND ITEM_NAME LIKE '%'||#{keyword}||'%'
+		ORDER BY ITEM.ITEM_CODE DESC
+	)
+	WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}		
 	</select>
 	
 	<!-- 굿즈 검색 개수 -->
@@ -184,7 +216,7 @@
 	
 	<!-- ITEM_IMG_CODE 다음 값 조회 -->
 	<select id="NextImgCode" resultType="int">
-	SELECT NVL(MAX(ITEM_IMG_CODE), 0) + 1
+	SELECT NVL(MAX(TO_NUMBER(ITEM_IMG_CODE)), 0) + 1
 	FROM ITEM_IMAGE
 	</select>
 	

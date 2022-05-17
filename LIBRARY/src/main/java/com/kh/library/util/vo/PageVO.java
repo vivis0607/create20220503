@@ -18,6 +18,14 @@ public class PageVO {
 		displayPageCnt = 5;
 	}
 
+	public int getDisplayCnt() {
+		return displayCnt;
+	}
+
+	public void setDisplayCnt(int displayCnt) {
+		this.displayCnt = displayCnt;
+	}
+
 	public int getNowPage() {
 		return nowPage;
 	}

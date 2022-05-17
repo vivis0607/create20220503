@@ -12,20 +12,21 @@
 .add_item_container{
 	text-align: center;
 	width: 100%;
+	height:100%;
 	margin: 0 auto;
 	margin-top: 30px;
 }
 .add_itemcuverDiv{
 	border: 5px solid #c7e2d1;
 	border-radius: 8px;
-	width: 100%;
+	width: 90%;
 	padding: 20px;
 	margin-bottom: 20px;
 	
 }
 .addItemTB {
 	border: none;
-	width: 100%;
+	width: 90%;
 	margin: 0 auto;
 	vertical-align: middle;
 }
@@ -160,7 +161,7 @@
 		<div class="add_itemcuverDiv">
 			<table class="addItemTB">
 			<colgroup>
-				<col width="30%">
+				<col width="20%">
 				<col width="*">
 			</colgroup>
 				<tr>
@@ -210,7 +211,7 @@
 				</tr>
 			</table>
 		</div>
-		<div>
+		<div style="float: right; margin-right: 10%;">
 			<button type="button" class="btn btn-success btn-sm" onclick="regItem();">상품등록</button>
 		</div>
 	</form>

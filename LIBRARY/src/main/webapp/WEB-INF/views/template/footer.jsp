@@ -36,9 +36,9 @@
 <body>
 <div class="bottom-container">
 	<div class="footer-section01">
-		<div>양심 도서관</div>
-		<div class="footer-section01-addr">(00000) 울산광역시 남구 삼산로000번길 00(삼산동) 전화 052-000-0000 / 팩스 052-000-0000<br>
-			Copyright © Busan Metropolitan Library, All rights reserved.</div>
+		<div>늘봄 도서관</div>
+		<div class="footer-section01-addr">(00000) 울산광역시 남구 OO로 OOO번길 OO(OO동) 전화 052-000-0000 / 팩스 052-000-0000<br>
+			Copyright © Ulsan Metropolitan Library, All rights reserved.</div>
 		</div>
 		<div class="footer-section02">
 			<div>이용약관</div>

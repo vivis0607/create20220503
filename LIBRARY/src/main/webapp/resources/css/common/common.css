@@ -34,6 +34,10 @@ div.sideBodyDiv{
 	width: 1400px;
 	margin-left: 50px;
 }
+.nonSide-container{
+	width: 1400px;
+	margin: 0px auto;
+}
 
 a{
 	color: inherit;
@@ -57,4 +61,19 @@ input:focus {
 }
 ul{
 	list-style: none;
+}
+
+pre{ 
+   white-space: pre-wrap;
+   overflow: auto;
+}
+.page-item.active .page-link {
+	background-color: #72a37c;
+	border-color: #72a37c;
+}
+.page-link {
+	color: #72a37c;
+}
+.page-link:hover{
+	color: #72a37c; 
 }

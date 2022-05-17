@@ -14,11 +14,12 @@ public class MemberVO extends PageVO{
 	private String memBirth;
 	private String isDelete;
 	private String isAdmin;
+	private String isPwdTemp;
 	private String clubAdmin;
 	private String clubCode;
 	private String keyword;
 	private String rowNum;
-	private String clubApplyCode;
+	private int msgCnt;
 	private String bookComplitCnt;
 	
 	
@@ -31,6 +32,13 @@ public class MemberVO extends PageVO{
 	
 	
 	
+	
+	public String getIsPwdTemp() {
+		return isPwdTemp;
+	}
+	public void setIsPwdTemp(String isPwdTemp) {
+		this.isPwdTemp = isPwdTemp;
+	}
 	public int getRsvCnt() {
 		return rsvCnt;
 	}
@@ -145,11 +153,11 @@ public class MemberVO extends PageVO{
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-	public String getClubApplyCode() {
-		return clubApplyCode;
+	public int getMsgCnt() {
+		return msgCnt;
 	}
-	public void setClubApplyCode(String clubApplyCode) {
-		this.clubApplyCode = clubApplyCode;
+	public void setMsgCnt(int msgCnt) {
+		this.msgCnt = msgCnt;
 	}
 	public String getBookComplitCnt() {
 		return bookComplitCnt;

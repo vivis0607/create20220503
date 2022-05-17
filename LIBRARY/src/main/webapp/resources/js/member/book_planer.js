@@ -81,4 +81,10 @@ const myChart = new Chart(ctx, {
     }
 });
 
-
+/*툴팁*/
+const tooltip = document.querySelector('.tip');
+const tooltext = document.querySelector('.tiptext');
+function tooltipHandler(){
+	tooltext.classList.toggle('hid');
+}
+tooltip.addEventListener("mouseenter", tooltipHandler);

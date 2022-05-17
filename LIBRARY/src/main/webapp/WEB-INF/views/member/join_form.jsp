@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/button01.css" rel="stylesheet">
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
+
 <style type="text/css">
 
 	.joinFormDiv{
@@ -23,60 +26,6 @@
 		font-size: 12px;
 	}
 	
-	
-	
-	.wrapper button{
-		background: none;
-		border: 0;
-		box-sizing: border-box;
-		width: 250px;
-	  	height: 50px;
-		margin: 4rem 0;
-		margin-left: 20%;
-		display: block;
-		padding: 0.7rem 1.7rem;
-		box-shadow: inset 0 0 0 2px #16784B;
-		color: #16784B;
-		font-size: inherit;
-		font-weight: 700;
-		
-		position: relative;
-		vertical-align: middle;
-		
-		} 
-	.wrapper button{
-	  line-height: 20px;
-	  font-size: 18px;
-	  color: #16784B;
-	  text-align: center;
-	  position: relative;
-	  transition: all .35s;
-	}
-	
-	.wrapper button span{
-	  position: relative;
-	  z-index: 2;
-	}
-	
-	.wrapper button:after{
-	  position: absolute;
-	  content: "";
-	  top: 0;
-	  left: 0;
-	  width: 0;
-	  height: 100%;
-	  background:  #16784B;
-	  transition: all .35s;
-	}
-	
-	.wrapper button:hover{
-	  color: #ffffff;
-	}
-	
-	.wrapper button:hover:after{
-	  width: 100%;
-	}
-	
 	.joinFormDiv input{
 		border: 1px solid #d4d4d4;
 		border-radius: 3px;
@@ -90,20 +39,25 @@
 	
 	}
 	.joinFormDiv #username1-error{
-		padding-left: 9.3rem;
+		padding-left: 11rem;
+	}
+	
+	.wrapper button{
+	margin: 3rem auto auto 16rem;
 	}
 </style>
 </head>
 <body>
-<div class="container">
-	<div class="pageName">
-		회원 가입
-	</div>
+<div class="nonSide-container">
+	<div class="subTit">
+      <div class="line_map">홈 > 회원가입</div>
+      <div class="tit">회원가입</div>
+   </div>
 	<div class="joinFormDiv">
 		<form action="/member/join" method="post" id="joinForm" enctype="multipart/form-data">
 		 <div class="row mb-3">
 		    <label for="inputId" class="col-sm-2 col-form-label">아이디</label>
-		    <div class="col-sm-4">
+		    <div class="col-sm-4" style="margin-right: 3.8rem;">
 		      <input type="text" class="form-control" id="inputId" name="memId">
 			  <div class="id-available">사용할 수 있는 아이디예요.</div>
 		      <div class="id-unavailable">다른 사람이 사용 중인 아이디입니다.</div>    
@@ -161,7 +115,7 @@
 		 
 		 <div class="row mb-3">
 		    <label for="inputProfileImg" class="col-sm-2 col-form-label">프로필 이미지</label>
-		    <div class="col-sm-4">
+		    <div class="col-sm-6">
 				<div class="input-group mb-3">
 				  <input type="file" class="form-control" id="inputGroupFile02" name="file">
 				  <label class="input-group-text" for="inputGroupFile02">Upload</label>
@@ -173,7 +127,7 @@
 		 
 		 <div class="row mb-3">
 		    <label for="inputAddr" class="col-sm-2 col-form-label">주소</label>
-		    <div class="col-sm-4">
+		    <div class="col-sm-4" style="margin-right: 3.8rem;">
 		      <input type="text" class="form-control" name="memAddr" id="inputAddr" onclick="sample4_execDaumPostcode();">
 		    </div>
            <div class="col-sm-2">

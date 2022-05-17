@@ -64,6 +64,16 @@
 		<result column="CLUB_CODE" 			property="clubCode"/>
 	</resultMap>
 	
+	<resultMap type="com.kh.library.club.vo.MonthlyBookVO" id="monthly">
+		<id column="MB_CODE" property="mbCode"/>
+		<result column="MB_TITLE" property="mbTitle"/>
+		<result column="MB_WRITER" property="mbWriter"/>
+		<result column="MB_PUBLISHER" property="mbPublisher"/>
+		<result column="MB_THUMBNAIL" property="mbThumbnail"/>
+		<result column="CLUB_CODE" property="clubCode"/>
+	
+	</resultMap>
+	
 	<!-- 이미지 코드 숫자 -->
 	<select id="selectNextClubImgCode" resultType="int">
 		SELECT NVL(MAX(TO_NUMBER(CB_IMG_CODE)),0)+1
@@ -574,6 +584,46 @@
 			, '신청한 북클럽에 가입되셨습니다. 북클럽 게시판에 첫 인사를 올려보세요!'
 		)		
 	</insert>
+	
+	<!-- 이달의책 등록 -->
+	<insert id="insertMonthlyBook">
+		INSERT INTO MONTHLY_BOOK (
+			MB_CODE
+			, MB_TITLE
+			, MB_WRITER
+			, MB_PUBLISHER
+			, MB_THUMBNAIL
+			, CLUB_CODE
+		) VALUES (
+			(SELECT 'MB_'||LPAD(NVL(MAX(TO_NUMBER(SUBSTR(MB_CODE, 4))), 0) + 1, 3, 0) AS MB_CODE FROM MONTHLY_BOOK)
+			, #{mbTitle}
+			, #{mbWriter}
+			, #{mbPublisher}
+			, #{mbThumbnail}
+			, #{clubCode}
+		)
+	</insert>
+	
+	<!-- 이달의책 업데이트 -->
+	<update id="updateMonthlyBook">
+		UPDATE MONTHLY_BOOK
+		SET
+		MB_TITLE = #{mbTitle}
+		, MB_WRITER = #{mbWriter}
+		, MB_PUBLISHER = #{mbPublisher}
+		, MB_THUMBNAIL = #{mbThumbnail}
+		WHERE CLUB_CODE = #{clubCode}
+	</update>
+	<!-- 이달의책 조회 -->
+	<select id="selectMonthlyBook" resultMap="monthly">
+		SELECT MB_CODE
+			, MB_TITLE
+			, MB_WRITER
+			, MB_PUBLISHER
+			, MB_THUMBNAIL
+		FROM MONTHLY_BOOK		
+		WHERE CLUB_CODE = #{clubCode}
+	</select>
 	
 	<!-- ////////////////////////알림함///////////////////////////// -->	
 	<!-- 알림함 조회 -->

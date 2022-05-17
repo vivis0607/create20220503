@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kh.library.admin.service.ItemAdminService;
+import com.kh.library.book.service.BookAdminService;
 import com.kh.library.item.service.ItemService;
 import com.kh.library.item.vo.ItemCategoryVO;
 import com.kh.library.item.vo.ItemImgVO;
@@ -24,6 +25,20 @@ import com.kh.library.item.vo.ItemVO;
 @Controller
 @RequestMapping("/item")
 public class ItemController {
+
+	@Resource(name="bookAdminService")
+	private BookAdminService bookAdminService;
+	//메인페이지, 연체일 확인, 연체제한 업데이트
+   @GetMapping("/test") 
+   public String test(Model model) { 
+      
+      bookAdminService.updateOverdue();
+      bookAdminService.clearLimitDate();
+      model.addAttribute("newBookList", bookAdminService.selectNewBook()); 
+      return "item/home2"; 
+   }
+	
+	
 	
 	@Resource(name = "itemAdminService")
 	private ItemAdminService itemAdminService;
@@ -33,17 +48,32 @@ public class ItemController {
 	//아이템 조회
 	@GetMapping("/itemList")
 	public String itemList(Model model, ItemVO itemVO) {
+		//-----------------페이징 정보 세팅
+		//1.전체 데이터의 개수 조회
+		int listCnt = itemService.selcetItemCnt(itemVO);
+		itemVO.setTotalCnt(listCnt);
+		//2.페이징 처리를 위한 세팅 메소드 호출
+		itemVO.setPageInfo();
+		
 		model.addAttribute("itemList",itemService.selectItems(itemVO));
 		model.addAttribute("cateList",itemService.selectItemCategory());
 	
 		return "item/item_list";
 	}
 	//아이템 검색
-	@PostMapping("/searchItem")
-	public String searchItem(Model model, String keyword) {
-		model.addAttribute("itemList",itemService.searchItem(keyword));
-		model.addAttribute("itemCnt",itemService.searchItemCnt(keyword));
-		model.addAttribute("keyword",keyword);
+	@RequestMapping("/searchItem")
+	public String searchItem(Model model, ItemVO itemVO) {
+		//-----------------페이징 정보 세팅
+		//1.전체 데이터의 개수 조회
+		int listCnt = itemService.searchItemCnt(itemVO);
+		itemVO.setTotalCnt(listCnt);
+		//2.페이징 처리를 위한 세팅 메소드 호출
+		itemVO.setPageInfo();
+
+		model.addAttribute("itemList",itemService.searchItem(itemVO));
+		model.addAttribute("itemCnt",listCnt);
+		model.addAttribute("keyword", itemVO.getKeyword());
+		
 		return "item/search_item";
 	}
 	
@@ -59,6 +89,14 @@ public class ItemController {
 	//아이템 관리페이지이동
 	@GetMapping("/itemManage")
 	public String itemManage(Model model, ItemVO itemVO) {
+		//-----------------페이징 정보 세팅
+		//1.전체 데이터의 개수 조회
+		int listCnt = itemService.selcetItemCnt(itemVO);
+		itemVO.setTotalCnt(listCnt);
+		itemVO.setDisplayCnt(10);
+		//2.페이징 처리를 위한 세팅 메소드 호출
+		itemVO.setPageInfo();
+		
 		model.addAttribute("itemList",itemService.selectItems(itemVO));
 		model.addAttribute("cateList",itemService.selectItemCategory());
 		

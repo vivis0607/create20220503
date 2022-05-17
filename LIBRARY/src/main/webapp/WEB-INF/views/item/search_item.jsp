@@ -9,9 +9,10 @@
 <title>Insert title here</title>
 <style type="text/css">
 .itemlist_container{
-	width: 100%;
+	width:75%;
 	margin: 0 auto;
-	margin-top: 50px;
+	margin-top: 30px;
+	font-size: 17px;
 }
 .col-3{
 	margin-bottom: 16px;
@@ -54,14 +55,17 @@ input{
 	margin-bottom: 20px;
 	text-align: center;
 }
+.itemName{
+	font-weight: bold;
+}
 </style>
 </head>
 <body>
-<div class="container">
+<div class="nonSide-container">
 <div class="itemlist_container">
 	<div>
 		<div class="searchResultDiv">
-			<span style="font-size: x-large; font-weight: bold;">" ${keyword } "</span>에 대한 <span>${itemCnt }</span>개의 통합 검색결과입니다
+			<span style="font-size: x-large; font-weight: bold;">" ${keyword } " </span>에 대한 <span>${itemCnt }</span>개의 통합 검색결과입니다
 		</div>
 		<div class="row searchContainer">
 			<div class="col-12 searchDiv">
@@ -86,12 +90,31 @@ input{
 				</div>
 				<div onclick="location.href='/item/itemDetail?itemCode=${item.itemCode}';">
 					<span class="itemName" >${item.itemName }</span><br>
-					<fmt:formatNumber value="${item.itemPrice }" pattern="\#,###"/>
+					<fmt:formatNumber value="${item.itemPrice }" pattern="#,###"/> <span style="font-size: medium;">원</span>
 				</div>
 				<div>
 				</div>
 			</div>
 		</c:forEach>
+	</div>
+<div class="pageDiv">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination pagination-sm justify-content-center">
+				<li class="page-item <c:if test="${!itemVO.prev }">disabled</c:if>">
+				<a class="page-link" href="/item/searchItem?nowPage=${itemVO.beginPage - 1 }"
+					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+				</a></li>
+				<c:forEach begin="${itemVO.beginPage }" end="${itemVO.endPage }" var="pageIndex">
+						<li class="page-item <c:if test="${itemVO.nowPage eq pageIndex }">active</c:if>"><a class="page-link" 
+						href="/item/searchItem?nowPage=${pageIndex }">${pageIndex }</a></li>
+					</c:forEach>
+				<li class="page-item <c:if test="${!itemVO.next }">disabled</c:if>">
+				      <a class="page-link" href="/item/searchItem?nowPage=${itemVO.endPage + 1 }" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				</li>
+			</ul>
+		</nav>
 	</div>
 </div>
 </div>

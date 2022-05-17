@@ -46,6 +46,10 @@ public interface MemberService {
 	String checkPwd(String memId);
 	//추가 정보 수정
 	void updatePlusInfo(MemberVO memberVO);
+	//탈퇴 위한 비번 체크
+	String deletePwdChk(String memId);
+	//탈퇴
+	void deleteMember(String memId);
 	
 	//----------마이페이지:북클럽----------//
 	//북클럽 조회
@@ -60,6 +64,12 @@ public interface MemberService {
 	//----------마이페이지:독서플래너----------//
 	//조회
 	List<BookComplitVO> selectBookPlaner(String memId);
+	//조회 for 페이지
+	List<BookComplitVO> selectBookPlanerForPage(String memId);
+	
+	//독서 기록 수 조회
+	int selectBookPlanerCnt(BookComplitVO bookComplitVO);
+	
 	//독서량 상위 백분율
 	BookComplitVO selectComplitHighPct(String memId);
 	//차트조회

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import com.kh.library.admin.vo.MessageVO;
 import com.kh.library.book.service.BookAdminService;
 import com.kh.library.book.service.BookService;
 import com.kh.library.book.vo.ReserveVO;
+import com.kh.library.club.service.ClubService;
 import com.kh.library.book.vo.BorrowVO;
 import com.kh.library.item.service.ItemService;
 import com.kh.library.member.vo.MemberVO;
@@ -44,15 +46,25 @@ public class AdminController {
 		 
 	@Resource(name="bookAdminService")
 	private BookAdminService bookAdminService;
+	
+   @Resource(name = "clubService")
+	private ClubService clubService;
    
    
 	//메인페이지, 연체일 확인, 연체제한 업데이트
 	   @GetMapping("/test") 
-	   public String test() { 
+	   public String test(Model model, HttpSession session) { 
 	      
 	      bookAdminService.updateOverdue();
 	      bookAdminService.clearLimitDate();
-	       
+	      model.addAttribute("newBookList", bookAdminService.selectNewBook()); 
+	      model.addAttribute("bookList", bookAdminService.selectRcdBook3());
+	      
+	      if(session.getAttribute("loginInfo") != null) {
+	    	  String getId = ((MemberVO)(session.getAttribute("loginInfo"))).getMemId();
+	    	  
+	    	  model.addAttribute("msgCnt", clubService.selectMsgCount(getId));
+	      }
 	      return "manage/home"; 
 	   }
 	   //도서관 소개

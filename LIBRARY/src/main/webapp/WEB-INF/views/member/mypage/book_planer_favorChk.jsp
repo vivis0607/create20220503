@@ -9,8 +9,8 @@
 <link href="/resources/css/member/book_planer.css" rel="stylesheet">
 <style type="text/css">
 @font-face {
-    font-family: 'ONE-Mobile-POP';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-POP.woff') format('woff');
+    font-family: 'SuseongDotum';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/SuseongDotum.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
@@ -18,7 +18,7 @@
 	text-align: center;
 }
 .highRankDiv{
-	font-family: 'ONE-Mobile-POP';
+	font-family: 'SuseongDotum';
 	font-size: 1.5rem;
 }
 
@@ -75,9 +75,9 @@
 <div class="complitBookList jello-horizontal">
 <c:choose>
 	<c:when test="${empty complitBookList }">
-		<div class="bookPlaner-empty">
+		<span class="bookPlaner-empty">
 			${loginInfo.memName }님의 첫 번째 완독 도서를 등록해 보세요!
-		</div>
+		</span>
 	</c:when>
 	<c:otherwise>
 		<c:forEach items="${complitBookList }" var="complitBook">

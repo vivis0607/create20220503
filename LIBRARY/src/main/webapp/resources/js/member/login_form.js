@@ -17,6 +17,11 @@ function login(){
 				loginCheck += '아이디 또는 비밀번호를 잘못 입력했습니다.';
 				document.querySelector('span.loginChk').innerHTML = loginCheck;
 			}
+			else if(result === 2){
+				alert('로그인 실패');
+				loginCheck += '탈퇴한 회원의 정보입니다.';
+				document.querySelector('span.loginChk').innerHTML = loginCheck;
+			}
 			
 		},
 		error: function() {

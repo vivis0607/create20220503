@@ -5,13 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/button01.css" rel="stylesheet">
 <style type="text/css">
 	.loginForm-box{
-		width: 60%;
-		height: 100%;
+		width: 49%;
+   		height: 31rem;
 		margin: 4rem auto;
-		margin-right: 7rem;
-		padding-top: 4.5rem;
+		padding-top: 8.5rem;
 		border: 5px solid #FAF1CF;
 		border-radius: 20px;
 	}
@@ -23,7 +23,7 @@
 		padding: 1rem;
 		background-color: white;
 		position: relative;
-		left: 58%;
+		left: 46.5%;
 		top: 100px;
 	}
 	.loginForm-box input[type="text"], .loginForm-box input[type="password"]{
@@ -48,63 +48,14 @@
 		border-bottom:2px solid #246350;
 	}
 	
-	button{
-		background: none;
-		border: 0;
-		box-sizing: border-box;
-		width: 200px;
-	  	height: 40px;
-		margin: 2rem auto;
-		display: block;
-		padding: 0.7rem 1.7rem;
-		box-shadow: inset 0 0 0 2px #02475E;
-		color: #16784B;
-		font-size: inherit;
-		font-weight: 700;
-		
-		position: relative;
-		vertical-align: middle;
-		
-		} 
-	.wrapper button{
-	  line-height: 20px;
-	  font-size: 18px;
-	  color: #16784B;
-	  text-align: center;
-	  position: relative;
-	  transition: all .35s;
-	}
 	
-	.wrapper button span{
-	  position: relative;
-	  z-index: 2;
-	}
-	
-	.wrapper button:after{
-	  position: absolute;
-	  content: "";
-	  top: 0;
-	  left: 0;
-	  width: 0;
-	  height: 100%;
-	  background:  #16784B;
-	  transition: all .35s;
-	}
-	
-	.wrapper button:hover{
-	  color: #ffffff;
-	}
-	
-	.wrapper button:hover:after{
-	  width: 100%;
-	}
 
 
 
 </style>
 </head>
 <body>
-<div class="container">
+<div class="nonSide-container">
 	<div class="loginTitle">LOGIN</div>
 	<div class="loginForm-box">
 		<form action="" method="post" id="loginForm">

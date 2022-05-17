@@ -27,13 +27,13 @@
 }
 .salesStauesContainer{
 	text-align: center;
-	width: 80%;
+	width: 45%;
 	margin: 0 auto;
 	margin-top: 30px;
 }
 canvas{
-	width: 700px;
-	height: 200px;
+	width: 1000px;
+	height: 400px;
 	padding-right: 0px;
 }
 .graphBox{
@@ -90,7 +90,7 @@ input{
       <div class="line_map">홈 > 관리자메뉴 > 매출현황</div>
       <div class="tit">매출현황</div>
     </div>
-<div class="row">
+<div class="row .salesStauesContainer">
 	<div class="col-12 ">
 		<div class="row" style="margin-bottom: 20px;">
 			<div class="col-3 DayBoxDiv">
@@ -262,10 +262,10 @@ input{
 			<div style="margin-bottom: 20px; vertical-align: middle;">
 				<form id="ExcelForm" name="ExcelForm">
 					<input type="date" id="inputSDate" name="inputSDate"> ~ <input type="date" id="inputEDate" name="inputEDate">
+					<button type="button" class="btn btn-success btn-sm" onclick="searchPeriod();">조회</button>
 				</form>
-				<button type="button" class="btn btn-success btn-sm" onclick="searchPeriod();">조회</button>
 			</div>
-			<div>
+			<div style="float: right; margin-right: 23%;">
 				<button type="button" class="btn btn-success btn-sm" onclick="salesExcel();">매출 엑셀 다운로드</button>
 			</div>
 			<div class="row">
@@ -284,6 +284,6 @@ input{
 </div>	
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-<script type="text/javascript" src="/resources/js/item/sales_status.js?ver=12"></script>
+<script type="text/javascript" src="/resources/js/item/sales_status.js?ver=13"></script>
 </body>
 </html>

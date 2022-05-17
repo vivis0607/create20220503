@@ -139,9 +139,15 @@ public class MemberController {
       MemberVO loginMem = memberService.login(memId);
       int result = 1;
       if (loginMem != null && pwEncoder.matches(memPwd, loginMem.getMemPwd())) {
-         session.setAttribute("loginInfo", loginMem);
-         //session.setMaxInactiveInterval(60*60);
-         result = 0;
+    	  
+    	  if(loginMem.getIsDelete().equals("Y")) {
+    		  result = 2;
+    	  }
+    	  else {
+    		  session.setAttribute("loginInfo", loginMem);
+    		  //session.setMaxInactiveInterval(60*60);
+    		  result = 0;
+    	  }
       }
       return result; // 메인 화면 경로 정하기
    }
@@ -214,7 +220,6 @@ public class MemberController {
    // 내 정보 상세조회 이동
    @GetMapping("/myPageDetail")
    public String myPageDetail(Model model, HttpSession session) {
-	   
 	  model.addAttribute("memberInfo", memberService.selectMyPageDetail(((MemberVO)(session.getAttribute("loginInfo"))).getMemId()));
       return "mypage/my_page_detail";
    }
@@ -293,16 +298,18 @@ public class MemberController {
 	   }
    }
    @PostMapping("/updateSecretInfo")
-   public String updateSecretInfo(MemberVO memberVO) {
+   public String updateSecretInfo(MemberVO memberVO, HttpSession session) {
 	   //-------------------비밀번호 암호화-----------------------//
 	      String encodePw = pwEncoder.encode(memberVO.getMemPwd());
 	      memberVO.setMemPwd(encodePw);
 	      memberService.updateSecretInfo(memberVO);
-	   //   session.setAttribute("loginInfo", memberService.login(memberVO.getMemId()));
+	      
+	   session.setAttribute("loginInfo", memberService.login(memberVO.getMemId()));
 	      
 	   return "redirect:/member/myPageDetail?memId=" + memberVO.getMemId();
    }
    
+  
    //추가 정보 수정
    @PostMapping("/updatePlusInfo")
    public String updatePlusInfo(MemberVO memberVO) {
@@ -313,6 +320,40 @@ public class MemberController {
 	   memberService.updatePlusInfo(memberVO);
 	   return "redirect:/member/myPageDetail?memId=" + memberVO.getMemId();
    }
+   
+   //회원 탈퇴를 위한 비밀번호 확인 페이지로 이동
+   @GetMapping("/deletePwdChk")
+   public String deletePwdChk(HttpSession session, Model model) {
+	   model.addAttribute("memId", ((MemberVO)(session.getAttribute("loginInfo"))).getMemId());
+	   return "mypage/delete_pwd_chk";
+   }
+   
+   //회원 탈퇴를 위한 비밀번호 확인
+   @ResponseBody
+   @PostMapping("/deleteChk")
+   public int deleteChk(String memId, String memPwd) {
+	   //memId, memPwd 잘 넘어옴
+	   System.out.println("@@@@@@@@@@@@@@@@@@@" + memberService.deletePwdChk(memId));
+	   boolean a = pwEncoder.matches(memPwd, memberService.deletePwdChk(memId));
+	   if(pwEncoder.matches(memPwd, memberService.checkPwd(memId))) {
+		   return 1;
+	   }
+	   else {
+		   return 0;
+	   }
+   }
+   //탈퇴 안내
+   @GetMapping("/deleteMemberInfo")
+   public String deleteMemberInfo() {
+	   return "mypage/delete_member_info";
+   }
+   //회원 탈퇴
+   @GetMapping("/deleteMember")
+   public String deleteMember(HttpSession session) {
+	   memberService.deleteMember(((MemberVO)(session.getAttribute("loginInfo"))).getMemId());
+	   return "member/bye_member";
+   }
+  
 
    // 대출 리스트 상세
    @GetMapping("/reserveListDetail")
@@ -323,11 +364,10 @@ public class MemberController {
    
    // 독서 플래너
 	@GetMapping("/bookPlaner")
-	public String bookPlaner(HttpSession session, Model model) {
+	public String bookPlaner(HttpSession session, Model model, BookComplitVO bookComplitVO) {
 		String memId = ((MemberVO)(session.getAttribute("loginInfo"))).getMemId();
-		List<BookComplitVO> list = memberService.selectBookPlaner(memId);
+		List<BookComplitVO> list = memberService.selectBookPlanerForPage(memId);
 		 if(!(memberService.selectRecommendBook(memId)).isEmpty()) {
-				System.out.println("좋아하는 카테고리로 추천");
 				if((memberService.selectRecommendBook(memId)).size() < 3) {
 					model.addAttribute("rcdList", memberService.selectRecommendBook(memId));
 				}
@@ -337,10 +377,16 @@ public class MemberController {
 				}
 			}
 			else {
-				System.out.println("텅비어서 다른 카테고리 추천");
 				model.addAttribute("rcdList", getRcdList(memberService.selectReadYet(memId)));
-				System.out.println("왜 안되는 거임 ㅡㅡ");
 			}
+		//1.전체 데이터의 개수 조회
+		 	bookComplitVO.setMemId(memId);
+			int listCnt = memberService.selectBookPlanerCnt(bookComplitVO);
+			bookComplitVO.setTotalCnt(listCnt);
+			System.out.println(listCnt + "2개수개수개ㅜㅅ개수개수@@@@@@@@@@@@@@@@@@@");
+			bookComplitVO.setDisplayCnt(5);
+			//2.페이징 처리를 위한 세팅 메소드 호출
+			bookComplitVO.setPageInfo();
 		model.addAttribute("complitBookList", list);
 		model.addAttribute("myTopThree", memberService.topThreeBookPlaner(memId));
 		model.addAttribute("chartList", memberService.selectBookPlanerChart(memId));
@@ -377,6 +423,8 @@ public class MemberController {
 	//독서 플래너 상세조회
 	  @GetMapping("/bookPlanerDetail")
 	  public String bookPlanerDetail(BookComplitVO bookComplitVO, Model model) {
+		//-----------------페이징 정보 세팅
+		
 		  model.addAttribute("bookPlaner", memberService.selectBookPlanerDetail(bookComplitVO));
 		  return "mypage/book_planer_detail";
 	  }

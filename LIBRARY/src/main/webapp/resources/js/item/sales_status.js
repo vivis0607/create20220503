@@ -32,7 +32,7 @@ new Chart(document.getElementById("bar-chart"), {
 			yAxes: [{
 				ticks: {
 					min: 0,
-					stepSize : 50,
+					stepSize : 1000,
 				}
 			}]
 		}
@@ -83,7 +83,7 @@ $.ajax({
 				yAxes: [{
 					ticks: {
 						min: 0,
-						stepSize : 50,
+						stepSize : 1000,
 					}
 				}]
 			}
@@ -105,9 +105,3 @@ function salesExcel(){
 	formObj.attr('method', 'post');
 	formObj.submit();
 }
-
-
-
-
-
-

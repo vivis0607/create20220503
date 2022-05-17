@@ -8,73 +8,104 @@
 <title>Insert title here</title>
 <link href="/resources/css/club/club_detail.css" rel="stylesheet">
 <style type="text/css">
+.book-bg{
+ 	background-color: #F7F7F5;
+ 	text-align: center;
+ 	height: 250px;
+ 	width: 250px;
+}
+.book-bg img{
+	width: 110px;
+	height: 164px;
+	image-rendering: -webkit-optimize-contrast;
+	border-radius: 0;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+.ranking-title{
+	font-size: 20px;
+}
+.mb-title{
+	font-size: 15px;
+	color: blue;
+}
+.mb-writer{
+	font-size: 14px;
+}
+.month-book{
+	 font-size: 18px;
+	 display: inline-block;
+}
+.club-img{
+	display: inline-block;
+	margin-right: 150px;
+}
+img,
+svg {
+  vertical-align: baseline;
+}
 </style>
 </head>
 <body>
 <div class="container">
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<div class="row">
 		<div class="col-9 justify-content-md-end">
-			<div class="row">
-				<div class="col-6">
-						<div class="club-img"><img src="/resources/images/club/${club.cbAtName }"></div>
-				</div>
-				<div class="month-book col-3">
+			<div class="club-img"><img src="/resources/images/club/${club.cbAtName }"></div>
+				<div class="month-book">
 					5월의 책
-					<c:if test="${sessionScope.loginInfo.clubAdmin eq 'Y' }">
-						<button type="button" class="book-btn btn btn-success btn-sm">Success</button>
+					<c:if test="${sessionScope.loginInfo.clubAdmin eq 'Y' and sessionScope.loginInfo.clubCode eq club.clubCode}">
+						<button type="button" class="book-btn btn btn-sm" onclick="location.href='/clubAdmin/monthlyBookUpdate';">수정하기</button>
 					</c:if>
 					<div class="book-bg">
-						<div>
-							
+							<div><img class="thumbnail" alt="" src="${monthlyBk.mbThumbnail }"></div>
+						<div class="mb-title">${monthlyBk.mbTitle }</div>
+						<div class="mb-writer">${monthlyBk.mbWriter }</div>
+					</div>
+				</div>
+				<div>
+					<div class="club-name">${club.clubName }</div>
+				</div>
+				<div>
+					<div class="club-intro">${club.clubIntro}</div>
+				</div>
+				<div>
+					<div class="club-name">모임 인원</div><div class="club-1">${club.clubNumberPeople} / ${club.clubHeadCnt }&nbsp;&nbsp;&nbsp;&nbsp;</div>
+					<div class="dropdown">
+						<a href="#" class="px-2" id="triggerId3" data-bs-toggle="dropdown" aria-expanded="false">click
+					</a>
+						<div class="dropdown-menu" aria-labelledby="triggerId3">
+							<table class="memListT table table-hover">
+								<tr>
+									<c:forEach items="${memList }" var="mem" >
+											<td>
+												<div class="user-info__img"><img src="/resources/images/member/${mem.memImage }"></div>
+												<div class="mem-name">${mem.memName }</div>
+											</td>
+									</c:forEach>
+								</tr>
+							</table>
 						</div>
 					</div>
 				</div>
-					<div class="board-info">
-						<div class="club-name">${club.clubName }</div>
-						<div>
-							<div class="club-intro">${club.clubIntro}</div>
-						</div>
-						<div>
-							<div class="club-name">모임 인원</div><div class="club-1">${club.clubNumberPeople} / ${club.clubHeadCnt }&nbsp;&nbsp;&nbsp;&nbsp;</div>
-							<div class="dropdown">
-								<a href="#" class="px-2" id="triggerId3" data-bs-toggle="dropdown" aria-expanded="false">click
-							</a>
-								<div class="dropdown-menu" aria-labelledby="triggerId3">
-									<table class="memListT table table-hover">
-										<tr>
-											<c:forEach items="${memList }" var="mem" >
-													<td>
-														<div class="user-info__img"><img src="/resources/images/member/${mem.memImage }"></div>
-														<div class="mem-name">${mem.memName }</div>
-													</td>
-											</c:forEach>
-										</tr>
-									</table>
-								</div>
-							</div>
-						</div>
-						<div>
-							<div class="club-name">모임 장소</div><div class="club-1">${club.clubPlace }</div>
-						</div>
-						<div>
-							<div class="club-name">모임 일정</div><div class="club-1">첫모임 ${club.clubDate }</div>
-						</div>
-						<div>
-							<div class="club-name">독후감&nbsp;&nbsp;&nbsp;&nbsp;</div><div class="club-1">매 모임 2일 전까지 클럽 게시판에 제출 | 최소 글자수 400자</div>
-						</div>
-					</div>
-			</div>
-			
+				<div>
+					<div class="club-name">모임 장소</div><div class="club-1">${club.clubPlace }</div>
+				</div>
+				<div>
+					<div class="club-name">모임 일정</div><div class="club-1">${club.clubDate }</div>
+				</div>
+				<div>
+					<div class="club-name">독후감&nbsp;&nbsp;&nbsp;&nbsp;</div><div class="club-1">매 모임 2일 전까지 클럽 게시판에 제출 | 최소 글자수 400자</div>
+				</div>
 				<div>
 					<details>
 						<summary>북클럽 소개📚</summary>
 						<div class="club-info"><div>${club.clubInfo }</div></div>
 					</details>
 				</div>
-				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 					 <c:choose>
 						<c:when test="${club.clubNumberPeople eq club.clubHeadCnt }">
-							<a href="#" class="btn btn-secondary disabled">신청마감</a>
+							<a href="#" class="end-btn btn btn-secondary disabled">신청마감</a>
 						</c:when>
 						<c:otherwise>
 				  	  		<a href="#" class="join-btn btn" onclick="clubJoin('${club.clubCode}','${clubApplyCode }');">신청하기</a>
@@ -83,7 +114,6 @@
 					<input type="hidden" id="memId" value="${sessionScope.loginInfo.memId }">
 					<input type="hidden" id="clubAdmin" value="${sessionScope.loginInfo.clubAdmin }">
 					<input type="hidden" id="clubCode" value="${sessionScope.loginInfo.clubCode }">
-				</div>
 				<table class="board-table table table-hover table-border text-center">
 				<colgroup>
 					<col width="10%">
@@ -105,7 +135,7 @@
 						<tr class="notic-tr">
 							<th><button type="button" class="btn btn-danger btn-sm">공지</button></th>
 							<c:choose>
-								<c:when test="${(sessionScope.loginInfo.clubCode eq notice.clubCode) || (sessionScope.loginInfo.clubAdmin eq 'Y')}">
+								<c:when test="${(sessionScope.loginInfo.clubCode eq notice.clubCode) || (sessionScope.loginInfo.isAdmin eq 'Y')}">
 									<th>
 										<a href="/club/clubBoardDetail?cbBoardNum=${notice.cbBoardNum }&&clubCode=${notice.clubCode}">
 											${notice.cbBoardTitle } (${notice.cbCmtCount })
@@ -129,7 +159,7 @@
 								<tr>
 									<td>${clubBoardVO.totalCnt - boardInfo.rowNum + 1 }</td>
 									<c:choose>
-										<c:when test="${sessionScope.loginInfo.clubCode eq boardInfo.clubCode || (sessionScope.loginInfo.clubAdmin eq 'Y')}">
+										<c:when test="${sessionScope.loginInfo.clubCode eq boardInfo.clubCode || (sessionScope.loginInfo.isAdmin eq 'Y')}">
 											<td><a href="/club/clubBoardDetail?cbBoardNum=${boardInfo.cbBoardNum }&&clubCode=${boardInfo.clubCode}">${boardInfo.cbBoardTitle } (${boardInfo.cbCmtCount })</a></td>
 										</c:when>
 										<c:otherwise>
@@ -197,15 +227,15 @@
 				</div>
 			</div>
 			<div class="col-3">
-				5월 독서 랭킹
-				<table class="table table-hover">
+				<span class="ranking-title">5월 독서 랭킹📖</span>
+				<table class="rankingT table table-hover">
 					<c:forEach items="${memList }" var="mem" varStatus="status">
 						<tr>
 							<td>
-								${status.index + 1 }
+								<div class="ranking">${status.index + 1 }위</div>
 								<div class="user-info__img"><img alt="" src="/resources/images/member/${mem.memImage }" >
-									${mem.memName }
-									${mem.bookComplitCnt }권
+									<div class="ranking-name">${mem.memName }
+									${mem.bookComplitCnt }권</div>
 								</div>
 							</td>
 						</tr>

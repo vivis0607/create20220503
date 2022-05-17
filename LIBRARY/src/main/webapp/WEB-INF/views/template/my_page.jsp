@@ -174,6 +174,5 @@ a:hover{
 			</div>
 		</div>
 </div>
-<script type="text/javascript" src="/resources/js/member/my_page.js?ver=0"></script>
 </body>
 </html>

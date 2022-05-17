@@ -258,10 +258,10 @@ public class BookController {
 	}
 	
 	//신간도서 select  //////////////////////////admin으로 빼야 됨///////////////////////////////////
-	@GetMapping("/selectNewBook")
+	@GetMapping("/selectRcdBook2")
 	public String selectNewBook(Model model) {
-		model.addAttribute("newBookList", bookAdminService.selectNewBook());
 		
+		model.addAttribute("bookList", bookAdminService.selectRcdBook3());
 		return "book/list";
 	}
 	

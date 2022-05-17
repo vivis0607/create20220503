@@ -49,7 +49,10 @@ public interface BookAdminService {
 	
 	
 	
-	//추천도서 랭킹 
+	//추천도서 랭킹 (홈) 
+	List<BookVO> selectRcdBook3();
+	
+	//추천도서 랭킹 더보기
 	List<BookVO> selectRcdBook();
 	
 	//신간도서 select

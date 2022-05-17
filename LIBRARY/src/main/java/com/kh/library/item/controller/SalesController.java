@@ -1,7 +1,10 @@
 package com.kh.library.item.controller;
 
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
@@ -132,7 +136,7 @@ public class SalesController {
 	}
 	
 	
-	/////매출 엑셀 출력
+/////매출 엑셀 출력
 	@RequestMapping(value = "/salesExcel", method = RequestMethod.POST)
 	public void salesExcel(Model model, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		String inputSDate = request.getParameter("inputSDate");
@@ -146,9 +150,10 @@ public class SalesController {
 		Workbook wb = new HSSFWorkbook(); //엑셀파일 객체 생성
 		Sheet sheet = wb.createSheet("매출"); //시트생성(첫번째 시트, 시트면은 '매출')
 		
+		
 		CellStyle style = wb.createCellStyle(); //셀 스타일 생성
 		Font font = wb.createFont();
-		font.setFontHeight((short)(16*18));//글자크기
+		font.setFontHeight((short)(14*16));//글자크기
 		font.setFontName("맑은 고딕");//글씨체
 		
 		//자바의 배열처럼 첫번째 인덱스가 0부터 시작
@@ -156,15 +161,27 @@ public class SalesController {
 		int titleColNum = 0; //첫번째 열이기 때문에 0
 			Cell titleCell = titleRow.createCell(titleColNum); //첫번째행의 첫번째 열을 지정
 			titleCell.setCellValue("조회하신 매출현황"); //setCellValue 셀에 값넣기
-			titleRow.setHeight((short)920); //Row에서 setHeight를 하면 행높이가 조정된다.
-			sheet.addMergedRegion(new CellRangeAddress(0,0,0,8)); //셀병합 세로1번째 가로 1~8번째열까지 병합
+			titleRow.setHeight((short)400); //Row에서 setHeight를 하면 행높이가 조정된다.
+			sheet.addMergedRegion(new CellRangeAddress(0,0,0,3)); //셀병합 세로1번째 가로 1~8번째열까지 병합
 			//new CellRangeAddress(시작 row, 끝 row, 시작 col, 끝 col)
 			
 			style.setWrapText(true); //문자열을 입력할때 \n 같은 개행을 인식한다.
 			style.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);//수직 가운데 정렬
 			style.setAlignment(CellStyle.ALIGN_CENTER); //수평 가운데 정렬
 			style.setFont(font); //스타일에 font 스타일 적용
+			 
+			CellStyle headStyle = wb.createCellStyle();
+			headStyle.setBorderRight(HSSFCellStyle.BORDER_THIN); //오른쪽 테두리
+			headStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN); //왼쪽 테두리
+			headStyle.setBorderTop(HSSFCellStyle.BORDER_THIN); //상단 테두리
+			headStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN); //하단 테두리
+			headStyle.setFillForegroundColor(HSSFColor.GREY_25_PERCENT.index);
+			headStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+			
+			
 			titleCell.setCellStyle(style);
+			
+			
 			
 			//입력받은 날짜 출력하기
 			Row dayRow = sheet.createRow(1);
@@ -176,18 +193,22 @@ public class SalesController {
 			Row headerRow = sheet.createRow(3); //네번째줄 생성
 			Cell headerCell = headerRow.createCell(0);
 			headerCell.setCellValue("날짜");
+			headerCell.setCellStyle(headStyle);
 			headerCell = headerRow.createCell(1);
 			headerCell.setCellValue("공급가액");
+			headerCell.setCellStyle(headStyle);
 			headerCell = headerRow.createCell(2);
 			headerCell.setCellValue("부가가치세");
+			headerCell.setCellStyle(headStyle);
 			headerCell = headerRow.createCell(3);
 			headerCell.setCellValue("결제금액");
+			headerCell.setCellStyle(headStyle);
 			
-		CellStyle dataStyle = wb.createCellStyle(); //데이터스타일은 테두리 만들기 세팅
-		dataStyle.setBorderRight(HSSFCellStyle.BORDER_THIN); //오른쪽 테두리
-		dataStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN); //왼쪽 테두리
-		dataStyle.setBorderTop(HSSFCellStyle.BORDER_THIN); //상단 테두리
-		dataStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN); //하단 테두리
+			CellStyle dataStyle = wb.createCellStyle(); //데이터스타일은 테두리 만들기 세팅
+			dataStyle.setBorderRight(HSSFCellStyle.BORDER_THIN); //오른쪽 테두리
+			dataStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN); //왼쪽 테두리
+			dataStyle.setBorderTop(HSSFCellStyle.BORDER_THIN); //상단 테두리
+			dataStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN); //하단 테두리
 		
 		//데이터 입력하기
 		int rowNum = 4;
@@ -214,8 +235,8 @@ public class SalesController {
 		
 		
 		 dataRow = sheet.createRow(rowNum++); dataCell = dataRow.createCell(0);
-		 dataCell.setCellValue("합계"); dataCell.setCellStyle(dataStyle); dataCell =
-		 dataRow.createCell(1);
+		 dataCell.setCellValue("합계"); dataCell.setCellStyle(dataStyle); 
+		 dataCell = dataRow.createCell(1);
 		 dataCell.setCellFormula("SUM(B5:B"+(4+salesData.size())+")");
 		 dataCell.setCellStyle(dataStyle); dataCell = dataRow.createCell(2);
 		 dataCell.setCellFormula("SUM(C5:C"+(4+salesData.size())+")");
@@ -225,7 +246,7 @@ public class SalesController {
 		 
 	 
 		response.setContentType("ms-vnd/excel");
-	    response.setHeader("Content-Disposition", "attachment;filename="+inputSDate+"-"+inputEDate+"매출내역.xls");
+	    response.setHeader("Content-Disposition", "attachment;filename="+inputSDate+"~"+inputEDate+"sales.xls");
 	    wb.write(response.getOutputStream());
 		
 	}

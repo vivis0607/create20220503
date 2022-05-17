@@ -14,6 +14,7 @@
       <result column="MEM_BIRTH"           property="memBirth"/>
       <result column="IS_DELETE"           property="isDelete"/>
       <result column="IS_ADMIN"            property="isAdmin"/>
+      <result column="IS_PWD_TEMP"         property="isPwdTemp"/>
       <result column="CLUB_ADMIN"          property="clubAdmin"/>
       <result column="CLUB_CODE"           property="clubCode"/>
       <result column="KEYWORD"             property="keyword"/>
@@ -22,8 +23,8 @@
       <result column="BR_CNT"              property="brCnt"/>
        <result column="RSV_CNT"            property="rsvCnt"/>
       <result column="LIMIT_DATE"          property="limitDate"/>
-      <result column="CLUB_APPLY_CODE"     property="clubApplyCode"/>
-      <result column="BOOK_COMPLIT_CNT"    property="bookComplitCnt"/>
+      <result column="MSG_CNT"    		   property="msgCnt"/>
+       <result column="BOOK_COMPLIT_CNT"    property="bookComplitCnt"/>
    </resultMap>
    <resultMap type="com.kh.library.member.vo.MemberImageVO" id="memberImage">
       <id column="MEM_IMG_CODE"            property="memImgCode"/>
@@ -39,6 +40,7 @@
       <result column="MEM_ID"              property="memId"/>
       <result column="CNT"                 property="cnt"/>
       <result column="HIGH_PCT"            property="highPct"/>
+      <result column="ROW_NUM" 			   property="rowNum"/>
       <association property="bookInfo"     resultMap="bookMapper.book" />
       <association property="cateInfo"     resultMap="bookMapper.bookCate" />
    </resultMap>
@@ -116,8 +118,13 @@
          , CLUB_ADMIN
          , IS_ADMIN
          , IS_OD
-         , CLUB_APPLY_CODE
+         , IS_DELETE
+         , IS_PWD_TEMP
          , LIMIT_DATE
+         , (SELECT COUNT(MSG_CODE)
+			FROM MESSAGE
+			WHERE GET_ID = #{getId}
+			AND IS_READ = 'N') AS MSG_CNT
       FROM BOOK_MEMBER
       WHERE MEM_ID = #{memId}
    </select>
@@ -142,8 +149,10 @@
    <update id="updateTempPwd">
       UPDATE BOOK_MEMBER
       SET MEM_PWD = #{memPwd}
+      	, IS_PWD_TEMP = 'Y'
       WHERE MEM_ID = #{memId}
    </update>
+   
    
    <!-- 마이페이지 -->
    <!-- 내 정보 상세조회 -->
@@ -156,6 +165,7 @@
           , MEM_EMAIL
           , MEM_IMAGE
           , MEM_GENDER
+          , IS_PWD_TEMP
           , TO_CHAR(MEM_BIRTH, 'YYYY"년 "MM"월 "DD"일"') AS MEM_BIRTH
           , CLUB_ADMIN
           , CLUB_CODE
@@ -199,6 +209,7 @@
    <update id="updateSecretInfo">
       UPDATE BOOK_MEMBER
       SET MEM_PWD = #{memPwd}
+      	, IS_PWD_TEMP = 'N'
       WHERE MEM_ID = #{memId}
    </update>
    <!-- 추가 정보 수정 -->
@@ -209,6 +220,20 @@
       WHERE MEM_ID = #{memId}
       
    </update>
+   
+   <!-- 탈퇴를 위한 비번 확인 -->
+	<select id="deletePwdChk" resultType="String">
+		SELECT MEM_PWD
+		FROM BOOK_MEMBER
+		WHERE MEM_ID = #{memId}
+	</select>
+	
+	<!-- 탈퇴 회원으로 전환 -->
+	<update id="deleteMember">
+		UPDATE BOOK_MEMBER 
+		SET IS_DELETE = 'Y' 
+		WHERE MEM_ID = #{memId}
+	</update>
    
    <!--  독서플래너 조회  -->
    <select id="selectBookPlaner" resultMap="complit"> 
@@ -221,6 +246,45 @@
       WHERE MEM_ID = #{memId} 
       ORDER BY COMPLIT_DATE DESC
    </select>
+   
+   <!--  페이징 위한 독서플래너 조회  -->
+   <select id="selectBookPlanerForPage" resultMap="complit"> 
+	   SELECT COMPLIT_CODE
+	         , COMPLIT_DATE
+	         , BOOK_CODE
+	         , TITLE
+	         , ROW_NUM
+	      FROM
+	      (
+	        SELECT DISTINCT C.COMPLIT_CODE 
+	         , C.BOOK_CODE 
+	         , COMPLIT_DATE
+	         , (SELECT TITLE FROM BOOK B WHERE B.BOOK_CODE = C.BOOK_CODE) AS TITLE 
+	         , (SELECT BK_PAGE FROM BOOK B WHERE B.BOOK_CODE = C.BOOK_CODE) AS BK_PAGE 
+		, ROWNUM AS ROW_NUM
+	      FROM BOOK_COMPLIT C 
+	      WHERE MEM_ID = #{memId}
+	      ORDER BY COMPLIT_DATE DESC
+	      )
+	      WHERE ROW_NUM &gt;= 1 AND ROW_NUM &lt;= 5
+	      
+      <!-- SELECT DISTINCT C.COMPLIT_CODE 
+         , C.BOOK_CODE 
+         , COMPLIT_DATE
+         , (SELECT TITLE FROM BOOK B WHERE B.BOOK_CODE = C.BOOK_CODE) AS TITLE 
+         , (SELECT BK_PAGE FROM BOOK B WHERE B.BOOK_CODE = C.BOOK_CODE) AS BK_PAGE 
+      FROM BOOK_COMPLIT C 
+      WHERE MEM_ID = #{memId} 
+      ORDER BY COMPLIT_DATE DESC -->
+   </select>
+   
+   <!-- 페이징 처리 위한 완독 기록 개수 -->
+   <select id="selectBookPlanerCnt" resultType="int">
+		SELECT COUNT(COMPLIT_CODE)
+		FROM BOOK_COMPLIT
+		WHERE MEM_ID = #{memId}
+	
+	</select>
    
    <!-- 독서량 상위 백분율 -->
    <select id="selectComplitHighPct" resultMap="complit">
@@ -387,7 +451,7 @@
 
    <!-- 독서 플래너 상세조회 -->
    <select id="selectBookPlanerDetail" resultMap="complit">
-      SELECT C.COMPLIT_CODE
+   	 SELECT C.COMPLIT_CODE
          , C.COMPLIT_DATE
          , C.COMPLIT_REVIEW
          , B.BOOK_CODE

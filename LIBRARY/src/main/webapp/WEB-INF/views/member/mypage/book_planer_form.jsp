@@ -37,6 +37,11 @@
 		border: 1px solid #d4d4d4;
 		border-radius: 10px;
 	}
+	
+	.bookPlaner-search-result:not(div.result-row-thead){
+		overflow-y: scroll;
+		height: 300px;
+	}
 	.result-row-thead, .result-row-tbody{
 		display: flex;
 		justify-content: space-evenly;

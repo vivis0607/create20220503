@@ -30,13 +30,18 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<ItemVO> searchItem(String keyword) {
-		return sqlSession.selectList("itemMapper.searchItem",keyword);
+	public List<ItemVO> searchItem(ItemVO itemVO) {
+		return sqlSession.selectList("itemMapper.searchItem",itemVO);
 	}
 
 	@Override
-	public int searchItemCnt(String keyword) {
-		return sqlSession.selectOne("itemMapper.searchItemCnt", keyword);
+	public int searchItemCnt(ItemVO itemVO) {
+		return sqlSession.selectOne("itemMapper.searchItemCnt", itemVO);
+	}
+
+	@Override
+	public int selcetItemCnt(ItemVO itemVO) {
+		return sqlSession.selectOne("itemMapper.selcetItemCnt", itemVO);
 	}
 
 }

@@ -9,42 +9,47 @@
 <title>Insert title here</title>
 <style type="text/css">
 .itemD_container{
-	width: 80%;
+	width: 75%;
 	margin: 0 auto;
-	margin-top: 30px;
+	font-size: 20px;
 }
 .itemDiv{
 	height: 500px;
 }
 .freeMark{
 	height: 10px;
-	font-size: x-small;
-	width: 40px;
+	font-size: small;
+	width: 60px;
 	color: blue;
 	margin-bottom: 8px;
 }
 .itemNameDiv{
-	font-size: x-large;
+	font-size: xx-large;
 	font-weight: bold;
 	letter-spacing: 3px;
 	word-spacing: 3px;
+	margin-bottom: 50px;
 }
 .itemInfoTb{
 	margin-top: 40px;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	width: 400px;
+	vertical-align: middle;
 }
 .itemInfoTb tr th{
  text-align: right;
  padding-right: 30px;
+ padding-bottom: 10px;
 }
 .itemInfoTb tr td{
  text-align: right;
+ padding-bottom: 10px;
 }
-.button{
+.itemD_button{
 	align-items: center;
 	bottom: 50px;
-	margin-top: 50px;
+	margin-top: 80px;
+	margin-left: 20px;
 }
 .detailDiv{
 	width: 90%;
@@ -59,15 +64,18 @@
 	margin-bottom: 100px;
 	margin-top: 30px;
 }
-
+.itemDiv hr{
+	color: #72a37c;
+	height: 3px;
+}
 </style>
 </head>
 <body>
 
 <div class="row itemD_container">
-	<div class="col-12" style="margin-top: 30px;">
+	<div class="col-12">
 		<div style="text-align: right;">
-			&nbsp; <a href="/item/itemList">home</a>/
+			&nbsp; <a href="/item/itemList">GOODS</a>/
 			<c:forEach items="${cateList }" var="cate">		
 				<c:if test="${item.cateCode eq cate.cateCode }">
 					<a>${cate.cateName }</a><br><br>
@@ -91,14 +99,14 @@
 				<div>
 					<table class="itemInfoTb">
 					<colgroup>
-						<col width="30%">
+						<col width="35%">
 						<col width="*">
 					</colgroup>
 						<tr>
 							<th>판매가</th>
 							<td><div id="itemPrice">
 								<span id="priceSpan" data-price="${item.itemPrice }" data-name="java">
-									<fmt:formatNumber value="${item.itemPrice }" pattern="\#,###"/>
+									<fmt:formatNumber value="${item.itemPrice }" pattern="#,###"/> <span style="font-size: medium;">원</span>
 								</span>
 							</div></td>
 						</tr>
@@ -115,12 +123,12 @@
 					</table>
 				</div>
 				<hr>
-				<div>
+				<div style="padding-left: 20px;">
 					총 상품금액 : 
 					<span id="totalPriceSpan">${item.itemPrice } 원</span>
 				</div>
-				<div class="button">
-					<div onclick="buy('${sessionScope.loginInfo.memId}', '${item.itemCode }');">BUY NOW</div>
+				<div class="itemD_button">
+					<div onclick="buy('${sessionScope.loginInfo.memId}', '${item.itemCode }');" style="margin-bottom: 10px;">BUY NOW</div>
 					<div onclick="goCart('${sessionScope.loginInfo.memId}', '${item.itemCode }');">ADD TO CART</div>
 				</div>
 			</div>
@@ -133,7 +141,7 @@
 				<div class="row">
 					<c:forEach items="${item.itemImgList }" var="img">
 						<c:if test="${img.isMain eq 'N' }">
-							<img alt="..." src="/resources/images/item/${img.itemAtImgName }" height="600px;"><br>
+							<img alt="..." src="/resources/images/item/${img.itemAtImgName }" width="80%;" style="margin-bottom: 20px;">
 						</c:if>
 					</c:forEach>
 				</div>

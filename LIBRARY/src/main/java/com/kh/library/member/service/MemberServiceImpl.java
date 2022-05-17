@@ -109,6 +109,18 @@ public class MemberServiceImpl implements MemberService{
 	public void updatePlusInfo(MemberVO memberVO) {
 		sqlSession.update("memberMapper.updatePlusInfo", memberVO);
 	}
+	//탈퇴 위한 비번 체크
+	@Override
+	public String deletePwdChk(String memId) {
+		return sqlSession.selectOne("memberMapper.deletePwdChk", memId);
+	}
+	//탈퇴
+	@Override
+	public void deleteMember(String memId) {
+		sqlSession.update("memberMapper.deleteMember", memId);
+	}
+
+	
 	//-------------마이페이지:북클럽----------------//
 	//내 북클럽 조회
 	@Override
@@ -129,11 +141,22 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	//-------------마이페이지:독서플래너----------------//
-	//독서 플래너 조회
+	//페이징 위한 독서 기록 개수 조회
+	@Override
+	public int selectBookPlanerCnt(BookComplitVO bookComplitVO) {
+		return sqlSession.selectOne("memberMapper.selectBookPlanerCnt", bookComplitVO);
+	}
+	//페이징 처리 위한 독서 기록 조회
+	@Override
+	public List<BookComplitVO> selectBookPlanerForPage(String memId) {
+		return sqlSession.selectList("memberMapper.selectBookPlanerForPage", memId);
+	}
+	//독서 기록 조회
 	@Override
 	public List<BookComplitVO> selectBookPlaner(String memId) {
 		return sqlSession.selectList("memberMapper.selectBookPlaner", memId);
 	}
+
 	//독서량 상위 백분율
 	@Override
 	public BookComplitVO selectComplitHighPct(String memId) {
@@ -207,6 +230,9 @@ public class MemberServiceImpl implements MemberService{
 	public void updateBookPlaner(BookComplitVO bookComplitVO) {
 		sqlSession.update("memberMapper.updateBookPlaner", bookComplitVO);
 	}
+
+	
+	
 
 	
 

@@ -77,6 +77,25 @@
 		</table>
 	</div>
 </div>
+<div class="pageDiv">
+		<nav aria-label="Page navigation example">
+			<ul class="pagination pagination-sm justify-content-center">
+				<li class="page-item <c:if test="${!itemVO.prev }">disabled</c:if>">
+				<a class="page-link" href="/item/itemList?nowPage=${itemVO.beginPage - 1 }"
+					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+				</a></li>
+				<c:forEach begin="${itemVO.beginPage }" end="${itemVO.endPage }" var="pageIndex">
+						<li class="page-item <c:if test="${itemVO.nowPage eq pageIndex }">active</c:if>"><a class="page-link" 
+						href="/item/itemList?nowPage=${pageIndex }">${pageIndex }</a></li>
+					</c:forEach>
+				<li class="page-item <c:if test="${!itemVO.next }">disabled</c:if>">
+				      <a class="page-link" href="/item/itemList?nowPage=${itemVO.endPage + 1 }" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				</li>
+			</ul>
+		</nav>
+	</div>
 </div>
 <script type="text/javascript" src="/resources/js/item/item_manage.js?ver=1"></script>
 </body>

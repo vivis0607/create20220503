@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/resources/css/common/side.css" rel="stylesheet">
+<link href="/resources/css/common/sideMenu.css?ver=3" rel="stylesheet">
 <style type="text/css">
 
 
@@ -15,71 +16,34 @@
 <body>
 <div class="sideContainer">
 	<div class="side-box-div">
-		<table>
-			<tr>
-				<td><a href="#">관리자메뉴</a></td>
-			</tr>
-			<tr>
-				<td><a href="/book/regBookForm">책등록</a></td>
-			</tr>
-			<tr>
-				<td><a href="/book/bookList">등록도서확인</a></td>
-			</tr>
-			<tr>
-				<td><a href="/book/reserveListAdmin">예약목록확인</a></td>
-			</tr>
-			<tr>
-				<td><a href="/book/selectBrList">대여목록확인</a></td>
-			</tr>
-			<tr>
-				<td><a href="/book/hopeBookList">희망도서조회</a></td>
-			</tr>
-			<tr>
-				<td><a href="/item/itemCateManage">아이템카테고리관리</a></td>
-			</tr>
-			<tr>
-				<td><a href="/item/itemManage">아이템관리</a></td>
-			</tr>
-			<tr>
-				<td><a href="/sales/orderStateManage">주문내역조회</a></td>
-			</tr>
-			<tr>
-				<td><a href="/sales/salesStatus">매출현황</a></td>
-			</tr>
-			<tr>
-				<td><span class="memberManage" style="font-weight: bold; color:#125B50;" onclick="location.href='/admin/memberManage';">회원관리</span></td>
-			</tr>
-		</table>
+		<div class="menuTitle">
+		관리자메뉴
+		</div>
+		<ul id="nav-v1">
+			
+			<li class="menu-v1" id="menu-v1-y"><a href="#">도서관리</a>
+				<ul class="submenu">
+					<li><a href="/book/bookList">등록도서확인</a></li>
+					<li><a href="/book/reserveListAdmin">예약목록확인</a></li>
+					<li><a href="/book/selectBrList">대여목록확인</a></li>
+					<li><a href="/book/hopeBookList">희망도서관리</a></li>
+				</ul>
+			</li>
+			<li class="menu-v1" id="menu-v1-yy"><a href="#">Goods</a>
+				<ul class="submenu">
+					<li><a href="/item/itemCateManage">아이템카테고리관리</a></li>
+					<li><a href="/item/itemManage">아이템관리</a></li>
+					<li><a href="/sales/orderStateManage">주문내역조회</a></li>
+					<li><a href="/sales/salesStatus">매출현황</a></li>
+				</ul>
+			</li>
+			<li class="menu-v1" id="menu-v1"><a href="/admin/memberManage">회원관리</a></li>
+		</ul>
+		<div class="clear"></div>
 	</div>
 </div>
-	<!-- <div class="menuName">
-		관리자메뉴
-	</div>
-	<div class="adminPageDiv">
-		<div class="adminMenuDiv">
-			<ul>
-				<li> <span style="font-weight: bold; color:#125B50;">굿즈관리</span>
-					<ul>
-						<li>
-							
-						</li>
-						<li>
-							<a href="/item/itemCateManage">아이템카테고리관리</a>
-						</li>
-						<li>
-							
-						</li>
-						<li>
-							<a href="/sales/salesStatus">매출현황(관리자)</a>
-						</li>
-					</ul>
-				</li>
-				<li><span class="memberManage" style="font-weight: bold; color:#125B50;" onclick="location.href='/admin/memberManage';">회원관리</span>
-			</ul>
-			
-				
-		</div>
-	</div> -->
+<script type="text/javascript" src="/resources/js/admin/side_menu_drop.js?ver=0"></script>
+	
 </body>
 </html>
 
