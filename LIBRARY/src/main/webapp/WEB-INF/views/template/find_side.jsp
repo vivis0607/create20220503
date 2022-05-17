@@ -5,24 +5,34 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/side.css" rel="stylesheet">
 <style type="text/css">
-	.find-container{
-		background-color: #efefef;
-		width: 300px;
-	}
-	.sideBodyDiv{
-	width: 100%;
-	
-	} 
 </style>
 </head>
 <body>
-<div class="find-container">
-	<div onclick="location.href='/member/findId';">
-		아이디 찾기
-	</div>
-	<div onclick="location.href='/member/findPwd';">
-		비밀번호 찾기
+<div class="sideContainer">
+	<div class="side-box">
+		<div class="side-box-div">
+			<table>
+				<tr>
+					<td>
+					ID / PW 찾기
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="/member/findId">
+					아이디 찾기</a></td>
+				</tr>
+				<tr>
+					<td>
+					<a href="/member/findPwd">
+					비밀번호 찾기
+					</a>
+					</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 </div>
 </body>

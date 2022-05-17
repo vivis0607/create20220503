@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
+
 <style type="text/css">
 	.modal-body-top-left img{
 		margin: auto 0px;
@@ -140,9 +142,11 @@
 </head>
 <body>
 
-
-<div class="pageName">
-	내 정보 상세조회
+<div class="container">
+<div class="subTit">
+   <div class="line_map">홈 > 마이 페이지 > 내 정보 상세조회</div>
+   <div class="tit">내 정보 상세조회</div>
+</div>
 </div>
 <form action="/member/myPageDetailUpdate" method="post">
 	<div class="myPageDetail">

@@ -27,10 +27,12 @@ $.ajax({
 }
 
 function findPwd(){
-	const memId = document.querySelector('input[name="memId"]').value;
-	const memName = document.querySelector('input[name="memName"]').value;
-	const memEmail = document.querySelector('input[name="memEmail"]').value;
+	const findPwd = document.querySelector('.find-pwd');
+	const memId = findPwd.querySelector('input[name="memId"]').value;
+	const memName = findPwd.querySelector('input[name="memName"]').value;
+	const memEmail = findPwd.querySelector('input[name="memEmail"]').value;
 
+alert(memName);
 	$.ajax({
 	   url: '/member/findPwd', //요청경로
 	    type: 'post',

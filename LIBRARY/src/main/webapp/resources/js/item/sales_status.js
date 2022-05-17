@@ -24,6 +24,7 @@ new Chart(document.getElementById("bar-chart"), {
       ]
     },
     options: {
+		responsive : false,
 		legend: {
         	display: false
         },
@@ -74,6 +75,7 @@ $.ajax({
 		      ]
 		    },
 		   options: {
+			responsive : false,
 			legend: {
 	        	display: false
 	        },
@@ -96,7 +98,13 @@ $.ajax({
 }
 
 
-
+//엑셀 다운로드 관련
+function salesExcel(){
+	var formObj = $('#ExcelForm');
+	formObj.attr('action', '/sales/salesExcel');
+	formObj.attr('method', 'post');
+	formObj.submit();
+}
 
 
 

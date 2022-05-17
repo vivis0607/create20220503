@@ -10,6 +10,16 @@
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp" />
 	</definition>
 	
+	<!-- 팝업 -->
+	<definition name="favor" template="/WEB-INF/views/template/empty.jsp">
+		<put-attribute name="title" value="My favorite" />
+		<put-attribute name="content" value="" />
+	</definition>
+	<definition name="favor/*" extends="favor">
+		<put-attribute name="content" value="/WEB-INF/views/member/mypage/{1}.jsp" />
+	</definition>
+	
+	
 	<!-- 도서관 이용  -->
 	<definition name="info/*" extends="baseLayout">
       <put-attribute name="side" value="/WEB-INF/views/template/library_menu.jsp" />
@@ -61,9 +71,6 @@
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
 	</definition>
 	
-
-	
-
 
 </tiles-definitions>
 

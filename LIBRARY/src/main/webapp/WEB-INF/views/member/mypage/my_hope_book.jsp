@@ -7,20 +7,29 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
+<link href="/resources/css/book/statusBar.css" rel="stylesheet">
 </head>
 <body>
-	<form action="/member/hopeBookStatusU?memId=${loginInfo.memId}" method="post" id="searchBook">
-	<!-- 검색구분 선택 -->
-	<label for="select">현재 신청 상태</label>
-		<select name="searchSub">
-			<option value="all" >전체</option>
-			<option value="0">승인대기</option>
-			<option value="1">처리중</option>
-			<option value="2">소장중</option>
-		</select>
-		<input type="submit" value="적용">
-	</form>
-	<table>
+<div class="container">
+	<div class="subTit">
+      <div class="line_map">홈 > 마이페이지 > 희망도서신청 조회</div>
+      <div class="tit">희망도서신청 조회</div>
+   	</div>
+   	<div class="statusBar">
+		<form action="/member/hopeBookStatusU?memId=${loginInfo.memId}" method="post" id="searchBook">
+		<!-- 검색구분 선택 -->
+			<select name="searchSub">
+				<option value="all" >전체</option>
+				<option value="0">신청중</option>
+				<option value="1">처리중</option>
+				<option value="2">소장중</option>
+				<option value="3">거절</option>
+			</select>
+			<button type="submit" class="btn btn-success" >적용</button>
+		</form>
+	</div>
+	<table class="table table-hover table-border text-center">
 			<thead>
 				<tr>
 					<td>No</td>
@@ -51,5 +60,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
+</div>
 </body>
 </html>

@@ -1,12 +1,24 @@
 package com.kh.library.board.controller;
 
-import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.UUID;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.library.board.service.BoardService;
 import com.kh.library.board.vo.NtBoardVO;
@@ -26,8 +38,21 @@ public class BoardController {
 	}
 	
 	//공지사항 글 등록
-	@PostMapping("/regNtBoard")
-	public String insertNtBoard(Model model, NtBoardVO ntBoardVO) {
+	@RequestMapping("/regNtBoard")
+	public String insertNtBoard(Model model, NtBoardVO ntBoardVO, RedirectAttributes rttr) throws Exception {
+		//파일 업로드
+		String fileName=null;
+		MultipartFile uploadFile = ntBoardVO.getUploadFile();
+		
+		if(!uploadFile.isEmpty()){
+			String originalFileName = uploadFile.getOriginalFilename();
+			String ext = FilenameUtils.getExtension(originalFileName);
+			UUID uuid = UUID.randomUUID();
+			fileName = uuid+"."+ext;
+			uploadFile.transferTo(new File("D:\\git\\spring\\LIBRARY\\src\\main\\webapp\\resources\\upload\\"+fileName));
+		}
+		ntBoardVO.setFileName(fileName);
+		
 		String nextNtCode = boardService.selectNextNtCode();
 		ntBoardVO.setNtCode(nextNtCode);
 		boardService.insertNtBoard(ntBoardVO);
@@ -76,6 +101,56 @@ public class BoardController {
 		
 		return "redirect:/board/ntBoardList";
 	}
-
+	
+	
+	//공지사항 첨부파일 다운로드
+	@RequestMapping("/fileDownload")
+	public void fileDownload(HttpServletRequest request, HttpServletResponse response) {
+		
+		String filename = request.getParameter("fileName");
+		String realFilename="";
+		System.out.println(filename);
+		
+		try {
+			String browser = request.getHeader("User-Agent");
+			
+			if(browser.contains("MSIE")|| browser.contains("Trident")|| browser.contains("Chrome")) {
+				filename = URLEncoder.encode(filename,"UTF-8").replaceAll("\\+", "%20");
+			}
+			else {
+				filename = new String(filename.getBytes("UTF-8"), "ISO-8859-1");
+			}
+		}catch (UnsupportedEncodingException ex) {
+			System.out.println("UnsupportedEncodingException");
+		}
+		
+		realFilename = "D:\\git\\spring\\LIBRARY\\src\\main\\webapp\\resources\\upload\\"+filename;
+		System.out.println(realFilename);
+		
+		File file1 = new File(realFilename);
+		if(!file1.exists()) {
+			return;
+		}
+		
+		response.setContentType("application/octer-stream");
+		response.setHeader("Content-Transfer-Encoding", "binary;");
+		response.setHeader("Content-Disposition", "attachment; filename=\""+filename+"\"");
+		
+		try {
+			OutputStream os = response.getOutputStream();
+			FileInputStream fis = new FileInputStream(realFilename);
+			
+			int ncount = 0;
+			byte[] bytes = new byte[512];
+			
+			while((ncount = fis.read(bytes)) != -1) {
+				os.write(bytes, 0 , ncount);
+			}
+			fis.close();
+			os.close();
+		}catch (Exception e) {
+			System.out.println("FileNotFoundException: " +e);
+		}
+	}
 
 }

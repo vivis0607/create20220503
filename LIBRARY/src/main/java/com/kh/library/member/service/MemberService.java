@@ -60,8 +60,16 @@ public interface MemberService {
 	//----------마이페이지:독서플래너----------//
 	//조회
 	List<BookComplitVO> selectBookPlaner(String memId);
+	//독서량 상위 백분율
+	BookComplitVO selectComplitHighPct(String memId);
 	//차트조회
 	List<BookComplitVO> selectBookPlanerChart(String memId);
+	//취향 순위
+	List<BookComplitVO> topThreeBookPlaner(String memId);
+	//취향 책 추천
+	List<BookComplitVO> selectRecommendBook(String memId);
+	//안 읽어본 책 추천
+	List<BookComplitVO> selectReadYet(String memId);
 	//to-read-list 조회
 	List<ToReadListVO> selectToReadList(String memId);
 		//추가

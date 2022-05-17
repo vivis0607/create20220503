@@ -188,6 +188,6 @@ select{
     </div>
   </div>
 </div>
-<script type="text/javascript" src="/resources/js/board/qna_board_list.js?ver=5"></script>
+<script type="text/javascript" src="/resources/js/board/qna_board_list.js?ver=6"></script>
 </body>
 </html>

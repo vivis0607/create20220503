@@ -51,5 +51,4 @@ public interface QnaService {
 	//Q&A검색
 	List<QnaVO> selectSearchQna(QnaVO qnaVO);
 	
-
 }

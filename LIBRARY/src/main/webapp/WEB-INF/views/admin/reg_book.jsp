@@ -6,13 +6,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
+<style type="text/css">
+.btnDiv button{
+	width: 100%;
+	
+}
+.btnDiv{
+	text-align: center;
+}
+	
+</style>
 </head>
 <body>
-<div class="row">
 
-</div>
-<div class="row">
-	<div class="col-8">
+<div class="container">
+	<div class="subTit">
+      <div class="line_map">홈 > 관리자메뉴 > 도서등록</div>
+      <div class="tit">도서등록</div>
+   </div>
+
+
+	<div>
 		<div style="background-color: #eeeeee; padding: 16px; border-radius: 12px;">
 			<form class="row g-3" action="/book/regBook" method="post" id="regBookForm" enctype="multipart/form-data">
 				<div class="col-12">
@@ -50,11 +65,11 @@
 					<input type="number" min="10" max="900" value="200" class="form-control" id="bkPage" name="bkPage">
 				</div>
 				<div class="col-12">
-					<label for="bkSize" class="form-label">크기</label>
-					<input type="number" min="100" max="300" value="200" class="form-control" id="bkSize" name="bkSize">mm
+					<label for="bkSize" class="form-label">크기(mm)</label>
+					<input type="number" min="100" max="300" value="200" class="form-control" id="bkSize" name="bkSize">
 				</div>
 				<div class="col-12">
-					<label for="pubDate" class="form-label">출판일</label>
+					<label for="pubDate" class="form-label">출판년도</label>
 					<input type="text" class="form-control" id="pubDate" name="pubDate">
 				</div>
 				<div class="col-12">
@@ -74,9 +89,8 @@
 					<input type="file" class="form-control" id="bkImg" name="file" >
 					
 				</div>
-				<div class="col-12 d-grid gap-2">
-					<input type="submit" value="도서등록">
-					
+				<div class="btnDiv">
+					<button type="submit" class="btn btn-success">도서등록</button>
 				</div>
 			</form>
 		</div>

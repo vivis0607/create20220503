@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .top-container{
-		background-color: #16784B;
+		background-color: #427a4e;
 	    height: 86%;
 		display: flex;
 		flex-direction: column;
@@ -24,10 +24,15 @@
 	.header-loginBox .header-weatherBox{
 		display: flex;
 		justify-content: flex-start;
+		padding-left: 13.6rem;
 	}
 	.header-loginBoxDiv{
-		margin: 2rem 1rem;
+		margin: 2rem 0.5rem;
 		color: #FDFAF6;
+		padding-right: 19rem;
+	}
+	.header-loginBoxDiv-div{
+		padding-right: 0rem;
 	}
 	.header-mainBox{
 		display: flex;
@@ -56,8 +61,9 @@
 	}
 	
 	.nav-main-menu{
-		background-color: #FAF1E6;
 		margin-top: 10px;
+		background-color: #fff;
+		border-bottom: 2px solid #427a4e;
 	}
 	.nav-main-menu ul{
 		display: flex;
@@ -119,7 +125,7 @@
 .header-nav {
   overflow: hidden;
   position: absolute;
-  left: 99%;
+  left: 86%;
   bottom: 77%;
   width: auto;
   height: 65px;
@@ -233,13 +239,14 @@
 .toRead-nav {
 	text-align: right;
 	left: 95%;
+    bottom: 10%;
 	background-color: #F5F3CE;
 	opacity: 0.9;
     overflow: hidden;
     position: relative;
     position: fixed;
     transform: translateX(0px);
-    height: 70%;
+    height: 50%;
     width: 400px;
     transition: all 800ms cubic-bezier(.8, 0, .33, 1);
     border-radius: 100% 0% 50% 100%;

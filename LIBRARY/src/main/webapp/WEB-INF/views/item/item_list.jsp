@@ -58,6 +58,7 @@ input{
 
 </head>
 <body>
+<div class="container">
 <div class="itemlist_container">
 	<button onclick="location.href='/buy/buyPage';">구매하기</button><br>
 	
@@ -98,6 +99,7 @@ input{
 			</div>
 		</c:forEach>
 	</div>
+</div>
 </div>
 <script type="text/javascript">
 	function search(){

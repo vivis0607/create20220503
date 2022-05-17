@@ -12,7 +12,6 @@ table tr td:nth-child(odd){
 }
 /* hs-write-form 작성폼 */
    .hs-write-form{
-      text-align: center;
       flex-direction: column; 
       justify-content: center;
    
@@ -32,7 +31,7 @@ table tr td:nth-child(odd){
       border-bottom: 1px solid #16784B;
    }
    .hs-write-form-bottom textarea{
-   	  width: 100%
+   	  width: 100%;
       margin: 1rem auto;
       padding: 5px;
       border: 1px solid #d4d4d4;
@@ -53,12 +52,19 @@ table tr td:nth-child(odd){
 	  margin-left: 350px;
 	  font-size: 14px;
    }
+   .clubDate{
+	   	margin-bottom: 5px;
+	   	margin-top: 5px;
+   }
+   .club-info{
+	   	margin-top: 5px;
+   }
 </style>
 </head>
 <body>
 <div class="container">
 	<div class="text-right">
-		<form action="/club/clubCreate" method="post" id="regClub">
+		<form class="row g-3" action="/club/clubCreate" method="post" id="regClub" enctype="multipart/form-data">
 			<input type="hidden" name="memId" value="${sessionScope.loginInfo.memId}">
 			<input type="hidden" name="memName" value="${sessionScope.loginInfo.memName}">
 				<div class="hs-write-form">
@@ -67,16 +73,19 @@ table tr td:nth-child(odd){
 							<input type="text" name="clubName" placeholder="북클럽 이름">
 						</div>
 						<div>
-							<input type="text" name="clubHeadCnt" placeholder="인원">
+							<input type="number" class="form-control" name="clubHeadCnt" placeholder="인원" min="3" max="10">
 						</div>
 						<div>
 							<input type="text" name="clubPlace" placeholder="모임 장소">
 						</div>
 						<div>
-							첫모임 시작일 : <input type="date" name="clubDate">
+							<input type="text" name="clubIntro" placeholder="한줄소개">
+						</div>
+						<div class="club-info">
+							첫모임 시작일 : <input type="date" class="clubDate form-control" name="clubDate">
 						</div>
 						<div>
-							<input type="text" name="clubIntro" placeholder="한줄소개">
+							<input type="file" class="form-control" id="cbAtName" name="file">
 						</div>
 					</div>
 					<div class="hs-write-form-bottom">
@@ -88,6 +97,7 @@ table tr td:nth-child(odd){
 		</form>
 	</div>
 </div>
+
 <script type="text/javascript" src="/resources/js/club/club_create.js?ver=9"></script>
 </body>
 </html>

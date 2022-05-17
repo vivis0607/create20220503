@@ -31,14 +31,14 @@
 	</div>
 	<c:if test="${empty sessionScope.loginInfo}">
 	<div class="header-loginBoxDiv">
-		<div class="header-loginBoxDiv" onclick="location.href='/member/login';">로그인</div>
-		<div class="header-loginBoxDiv" onclick="location.href='/member/join';">회원가입</div>
+		<div class="header-loginBoxDiv header-loginBoxDiv-div" onclick="location.href='/member/login';">로그인</div>
+		<div class="header-loginBoxDiv header-loginBoxDiv-div" onclick="location.href='/member/join';">회원가입</div>
 	</div>
 	</c:if>
 	</div>		
 		
 	<div class="header-mainBox">
-		<div class="nav-logoDiv"><a href="/admin/test"><h1>양심 도서관</h1></a></div>
+		<div class="nav-logoDiv"><a href="/admin/test"><h1>늘봄 도서관</h1></a></div>
 		
 		<c:if test="${not empty sessionScope.loginInfo }">
 		<div class="header-profile">

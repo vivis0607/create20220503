@@ -9,7 +9,6 @@
 </head>
 <body>
 <div class="sideContainer">
-<div class="side-box">
 	<div class="side-box-div">
 		<table>
 			<tr>
@@ -35,7 +34,6 @@
 			</tr>
 		</table>
 	</div>
-</div>
 </div>
 <script type="text/javascript" src="/resources/js/member/my_page.js?ver=0"></script>
 </body>

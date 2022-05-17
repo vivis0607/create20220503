@@ -131,11 +131,12 @@ public class BookController {
 	}	
 		
 	//도서 수정폼
-	@GetMapping("/modifyBook")
+	@GetMapping("/updateBookForm")
 	public String modifyBook(Model model, BookVO bookVO) {
+		model.addAttribute("cateList",bookService.selectBookCategory());
 		model.addAttribute("bk", bookService.selectBookDetail(bookVO));
 		
-		return "admin/modify_book_form";
+		return "admin/update_book";
 	}
 	
 	//도서 수정

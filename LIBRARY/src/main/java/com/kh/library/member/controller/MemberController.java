@@ -3,7 +3,9 @@ package com.kh.library.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
@@ -51,6 +53,7 @@ public class MemberController {
    @Autowired
    private BCryptPasswordEncoder pwEncoder;
 
+ 
    // --------------회원가입---------------
    // 회원가입창 이동
    @GetMapping("/join")
@@ -210,9 +213,9 @@ public class MemberController {
 
    // 내 정보 상세조회 이동
    @GetMapping("/myPageDetail")
-   public String myPageDetail(Model model, String memId) {
-	
-	  model.addAttribute("memberInfo", memberService.selectMyPageDetail(memId));
+   public String myPageDetail(Model model, HttpSession session) {
+	   
+	  model.addAttribute("memberInfo", memberService.selectMyPageDetail(((MemberVO)(session.getAttribute("loginInfo"))).getMemId()));
       return "mypage/my_page_detail";
    }
    
@@ -321,10 +324,38 @@ public class MemberController {
    // 독서 플래너
 	@GetMapping("/bookPlaner")
 	public String bookPlaner(HttpSession session, Model model) {
-		
 		String memId = ((MemberVO)(session.getAttribute("loginInfo"))).getMemId();
 		List<BookComplitVO> list = memberService.selectBookPlaner(memId);
-			for(int i = 0 ; i < list.size() ; i++) {
+		 if(!(memberService.selectRecommendBook(memId)).isEmpty()) {
+				System.out.println("좋아하는 카테고리로 추천");
+				if((memberService.selectRecommendBook(memId)).size() < 3) {
+					model.addAttribute("rcdList", memberService.selectRecommendBook(memId));
+				}
+				else {
+					model.addAttribute("rcdList", getRcdList(memberService.selectRecommendBook(memId)));
+					
+				}
+			}
+			else {
+				System.out.println("텅비어서 다른 카테고리 추천");
+				model.addAttribute("rcdList", getRcdList(memberService.selectReadYet(memId)));
+				System.out.println("왜 안되는 거임 ㅡㅡ");
+			}
+		model.addAttribute("complitBookList", list);
+		model.addAttribute("myTopThree", memberService.topThreeBookPlaner(memId));
+		model.addAttribute("chartList", memberService.selectBookPlanerChart(memId));
+		
+		return "mypage/book_planer";
+	}
+	
+	//독서 취향 새 창
+	  @GetMapping("/favChk")
+	   public String favChk(HttpSession session, Model model) {
+		  String memId = ((MemberVO)(session.getAttribute("loginInfo"))).getMemId();
+		   
+		 //짭적북적 구현
+		  List<BookComplitVO> list = memberService.selectBookPlaner(memId);
+		  	for(int i = 0 ; i < list.size() ; i++) {
 				if(list.get(i).getBookInfo().getBkPage() >= 100) { //100페이지 이상이면
 					list.get(i).getBookInfo().setBkPage((int)(list.get(i).getBookInfo().getBkPage() * 0.025));
 				}
@@ -332,19 +363,23 @@ public class MemberController {
 					list.get(i).getBookInfo().setBkPage(2);
 				}
 			}
-			
-			model.addAttribute("chartList", memberService.selectBookPlanerChart(memId));
-			model.addAttribute("complitBookList", list);
-		
-		return "mypage/book_planer";
-	}
-	
+		  	model.addAttribute("highPct", memberService.selectComplitHighPct(memId));
+		  	System.out.println(memberService.selectComplitHighPct(memId));
+		  	model.addAttribute("complitBookList", list);
+		  	return "favor/book_planer_favorChk";
+	  }
+	  //독서 플래너 상세조회
+	  @GetMapping("/favorBookPlanerDetail")
+	  public String favorBookPlanerDetail(BookComplitVO bookComplitVO, Model model) {
+		  model.addAttribute("bookPlaner", memberService.selectBookPlanerDetail(bookComplitVO));
+		  return "favor/book_planer_detail";
+	  }
 	//독서 플래너 상세조회
-	@GetMapping("/bookPlanerDetail")
-	public String bookPlanerDetail(BookComplitVO bookComplitVO, Model model) {
-		model.addAttribute("bookPlaner", memberService.selectBookPlanerDetail(bookComplitVO));
-		return "mypage/book_planer_detail";
-	}
+	  @GetMapping("/bookPlanerDetail")
+	  public String bookPlanerDetail(BookComplitVO bookComplitVO, Model model) {
+		  model.addAttribute("bookPlaner", memberService.selectBookPlanerDetail(bookComplitVO));
+		  return "mypage/book_planer_detail";
+	  }
 	//독서 플래너 삭제
 	@ResponseBody
 	@PostMapping("/bookPlanerDelete")
@@ -435,7 +470,7 @@ public class MemberController {
    @RequestMapping("/hopeBookStatusU")
    public String selectHpStatusUser(Model model, HopeBookVO hbVO) {
       model.addAttribute("hbBook", bookService.selectHpStatusUser(hbVO));
-      return "my_page/my_hope_book";
+      return "mypage/my_hope_book";
    }
 
    // 대소문자 + 숫자 포함 8자리 문자열 생성 및 리턴
@@ -455,6 +490,24 @@ public class MemberController {
       return tempPwd.toString();
    }
    
+   //리스트가 아녀도 되는 것 같긴 한데...
+	public List<BookComplitVO> getRcdList(List<BookComplitVO> list){
+		
+		List<BookComplitVO> rcdList = new ArrayList<BookComplitVO>();
+		Random random = new Random();
+		
+		for(int i = 0 ; i < 3 ; i++) {
+			rcdList.add(i, list.get(random.nextInt(list.size())));
+			
+			for(int j = 0 ; j < i ; j++) {
+				if(rcdList.get(i) == rcdList.get(j)) {
+					rcdList.remove(i); //이거 안 만들어서 리스트 16개까지 만들어짐^^..
+					i--;
+				}
+			}
+		}
+		return rcdList;
+	}
    
    
 }

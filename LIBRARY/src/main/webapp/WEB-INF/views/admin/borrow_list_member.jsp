@@ -7,20 +7,55 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
+<link href="/resources/css/book/statusBar.css" rel="stylesheet">
+<style type="text/css">
+.btnDiv{
+
+	padding-top:10px;
+	text-align:right;
+}
+</style>
 </head>
 <body>
+<div class="container">
+	<div class="subTit">
+      <div class="line_map">홈 > 관리자메뉴 > 대여 목록 조회</div>
+      <div class="tit">회원 대여 목록 조회</div>
+   </div>
 
-	<h2>도서대여목록</h2>
-	<table>
+<div class="statusBar">
+	<form action="/book/selectBrStatus" method="post" id="searchBook">
+	<!-- 검색구분 선택 -->
+		<select name="searchSub">
+			<option value="all" >전체</option>
+			<option value="0">대여중</option>
+			<option value="1">연체</option>
+			<option value="2">반납</option>
+		</select>
+		<button type="submit" class="btn btn-success ">적용 </button>
+	</form>
+</div>
+
+<table class="table table-hover table-border text-center">
+            <colgroup>
+               <col width="5%">
+               <col width="15%">
+               <col width="15%">
+               <col width="*%">
+               <col width="14%">
+               <col width="14%">
+               <col width="10%">
+            </colgroup>
 		<thead>
 			<tr>
-				<td>코드</td>
-				<td>회원아이디</td>
-				<td>제목</td>
-				<td>ISBN</td>
-				<td>대여일</td>
-				<td>반납예정일</td>
-				<td>대여상태</td>
+				<td scope="col">코드</td>
+				<td scope="col">회원아이디</td>
+				<td scope="col">제목</td>
+				<td scope="col">ISBN</td>
+				<td scope="col">대여일</td>
+				<td scope="col">반납예정일</td>
+				<td scope="col">상태</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,12 +69,12 @@
 					<td>${borrow.rtDate }</td>
 					<td><c:choose>
 						<c:when test="${borrow.status eq 0}">
-							<button type="button" data-toggle="modal" onclick="showModal(this);"data-target="#returnBook" class="btn btn-primary" >
+							<button type="button" data-toggle="modal" onclick="showModal(this);"data-target="#returnBook" class="btn btn-success " >
 								대여중
 							</button>
 						</c:when>
 						<c:when test="${borrow.status eq 1 }" >
-							<button type="button" data-toggle="modal" onclick="showModalOD(this);" data-target="#returnOverdue" class="btn btn-primary" >
+							<button type="button" data-toggle="modal" onclick="showModalOD(this);" data-target="#returnOverdue" class="btn text-white" style="background-color: #CC0000;" >
 								연체
 							</button>
 						</c:when>
@@ -53,8 +88,10 @@
 		<input type="hidden" id="limitDate" name="limitDate" value="${member.limitDate }"/>
 
 	</div>
-	
-
+	<div class="btnDiv">
+		<button type="button" class="btn btn-success justify-content-md-end" onclick="location.href='/book/selectBrList';">회원 전체 대여 목록</button>
+	</div>
+</div>
 
 <!-- 정상 반납 Modal -->
 <div class="modal fade" id="returnBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

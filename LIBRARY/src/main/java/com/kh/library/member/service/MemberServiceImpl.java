@@ -134,6 +134,26 @@ public class MemberServiceImpl implements MemberService{
 	public List<BookComplitVO> selectBookPlaner(String memId) {
 		return sqlSession.selectList("memberMapper.selectBookPlaner", memId);
 	}
+	//독서량 상위 백분율
+	@Override
+	public BookComplitVO selectComplitHighPct(String memId) {
+		return sqlSession.selectOne("memberMapper.selectComplitHighPct", memId);
+	}
+	//독서 취향 순위
+	@Override
+	public List<BookComplitVO> topThreeBookPlaner(String memId) {
+		return sqlSession.selectList("memberMapper.topThreeBookPlaner", memId);
+	}
+	//취향 책 추천
+	@Override
+	public List<BookComplitVO> selectRecommendBook(String memId) {
+		return sqlSession.selectList("memberMapper.selectRecommendBook", memId);
+	}
+	//안 읽어본 책 추천
+	@Override
+	public List<BookComplitVO> selectReadYet(String memId) {
+		return sqlSession.selectList("memberMapper.selectReadYet", memId);
+	}
 	//독서 플래너 차트 조회
 	@Override
 	public List<BookComplitVO> selectBookPlanerChart(String memId) {
@@ -187,6 +207,9 @@ public class MemberServiceImpl implements MemberService{
 	public void updateBookPlaner(BookComplitVO bookComplitVO) {
 		sqlSession.update("memberMapper.updateBookPlaner", bookComplitVO);
 	}
+
+	
+
 
 	
 	

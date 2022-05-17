@@ -54,18 +54,41 @@
 	background-color: #E7EDE4;
 }
 .freeCmtTb{
-	border: 1px solid gray;
 	margin-top: 10px;
 	text-align: left;
-	width: 80%;
+	width: 100%;
 }
 .inputCmtTb{
+	width: 100%;
 	margin: 0 auto;
 	margin-bottom: 30px;
 }
-.freeCmtDiv{
+.cmtDiv{
 	width: 50%;
 	margin: 0 auto;
+}
+textarea{
+	resize: none;
+}
+.board-img{
+	width: 60px; 
+	height: 60px; 
+	border-radius: 70%;
+}
+.board-name{
+	font-size: 13px;
+}
+.board-date{
+	font-size: 12px; 
+	font-weight: normal;
+}
+.cmt-content{
+	margin-top: 20px; 
+	margin-bottom: 5px;
+}
+pre{
+	font-size: 20px;
+	padding-left: 10px;
 }
 </style>
 </head>
@@ -105,33 +128,28 @@
 	</div>
 	
 	<div class="cmtDiv">
-	<c:if test="${not empty sessionScope.loginInfo }">
 		<div>
-			<form action="/otherB/regFreeBoardCmt" method="post">
-			<input type="hidden" name="boardNum" value="${board.boardNum }">
-				<table class="inputCmtTb">
-					<tr>
-						<td>
-							<img alt="" src="/resources/images/member/${loginInfo.memImage }" height="50px;"><br>
-							${sessionScope.loginInfo.memName}
-						</td>
-						<td>
-							<textarea rows="3" 
-			                    class="form-control" 
-			                    id="textArea_byteLimit" 
-			                    name="commentContent" 
-			                    onkeyup="fn_checkByte(this)"></textarea>
-							<br><sup><span id="nowByte">0</span>/200bytes</sup> (* 영문/숫자 기준 200자, 한글 기준 자까지 입력 가능합니다.)
-						</td>
-						<td>
-							<button type="submit">댓글등록</button>
-						</td>
-					</tr>
-				</table>
-			</form>
+			<div style="margin-bottom: 10px;">${cmtList.size() }개의 댓글</div>
+			<c:if test="${not empty sessionScope.loginInfo }">
+				<form action="/otherB/regFreeBoardCmt" method="post">
+				<input type="hidden" name="boardNum" value="${board.boardNum }">
+					<table class="inputCmtTb">
+						<tr>
+							<td>
+								<textarea rows="3" 
+				                    class="form-control" 
+				                    id="textArea_byteLimit" 
+				                    name="commentContent" 
+				                    onkeyup="fn_checkByte(this)"></textarea>
+								<br><sup><span id="nowByte">0</span>/200bytes</sup><span style="font-size: 12px;"> (* 영문/숫자 기준 200자, 한글 기준 자까지 입력 가능합니다.)</span><br>
+								<div style="float: right;"><button type="submit" class="btn btn-success btn-sm">댓글등록</button></div>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</c:if>
 		</div>
-	</c:if>
-		<div class="freeCmtDiv">
+		<div class="freeCmtDiv" style="width: 100%;">
 			<c:forEach items="${cmtList }" var="cmt">
 				<table class="freeCmtTb">
 					<colgroup>
@@ -140,32 +158,35 @@
 					</colgroup>
 					<tr>
 						<td>
-							<img alt="" src="/resources/images/member/${cmt.memImage}" height="50px;">
+							<img class="board-img" alt="" src="/resources/images/member/${cmt.memImage}">
 						</td>
 						<td>
-							<div>${cmt.memName }</div>
-							<div>${cmt.commentDate }</div>
+							<span class="board-name">${cmt.memName }</span><br>
+							<span class="board-date">${cmt.commentDate }</span>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2">
-							<div>
-								${cmt.commentContent }
+							<div class="cmt-content">
+								<pre>${cmt.commentContent }</pre>
 								
 							</div>
 							<c:if test="${cmt.memId eq sessionScope.loginInfo.memId }">
-								<div>
-									<button type="button" onclick="updateFreeCmt(this, ${cmt.commentNum}, '${cmt.boardNum }');">수정</button>
-									<button type="button" onclick="deleteFreeCmt(${cmt.commentNum}, '${cmt.boardNum }');">삭제</button>
+								<div style="float: right; padding-right: 10px;">
+									<button type="button" class="btn btn-success btn-sm" onclick="updateFreeCmt(this, ${cmt.commentNum}, '${cmt.boardNum }');">수정</button>
+									<button type="button" class="btn btn-success btn-sm" onclick="deleteFreeCmt(${cmt.commentNum}, '${cmt.boardNum }');">삭제</button>
 								</div>
 							</c:if>
 						</td>
+					</tr>
+					<tr>
+						<td colspan="2"> <hr> </td>
 					</tr>
 				</table>
 			</c:forEach>
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="/resources/js/board/free_board_detail.js?ver=4"></script>
+<script type="text/javascript" src="/resources/js/board/free_board_detail.js?ver=5"></script>
 </body>
 </html>

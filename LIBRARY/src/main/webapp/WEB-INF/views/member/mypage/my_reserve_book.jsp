@@ -6,11 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
 </head>
 <body>
+<div class="container">
+   <div class="subTit">
+      <div class="line_map">홈 > 마이페이지 > 예약도서조회</div>
+      <div class="tit">예약도서조회</div>
+   </div>
 <div id="cancleRsv">
 	<input type="hidden" id="memId" value="${sessionScope.loginInfo.memId }">
-	<table>
+	<table class="table table-hover table-border text-center">
 	
 		<thead>
 			<tr>
@@ -25,7 +31,7 @@
 			<c:forEach items="${userReserve }" var="reserve">
 				<tr>
 					<td>${reserve.rowNum }</td>
-					<td><a href="/book/bookDetail?bookCode=${reserve.bookCode}">${reserve.title }</a></td>
+					<td><a href="/book/bookDetail?bookCode=${reserve.bookCode}&memId=$${sessionScope.loginInfo.memId}">${reserve.title }</a></td>
 					<td>${reserve.isbn }</td>
 					<td>${reserve.rsvDate }</td>
 					<td><button type="button" data-toggle="modal" data-target="#cancleReserve" onclick="showModal(this);">예약취소</button></td>
@@ -33,6 +39,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+</div>
 </div>
 
 

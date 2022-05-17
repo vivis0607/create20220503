@@ -5,10 +5,18 @@
 	justify-content: center;
 }
 .sideContainer{
-    width: 100%;
+    width: 250px;
+    padding-left:12px;
+    padding-right:12px;
+	margin-left:200px;    
 }
-.side-box-div table{
+.side-box-div{
+	display: flex;
+	flex-direction: column;
 	width: 100%;
+}
+
+.side-box-div table{
 	text-align: left;
 }
 
@@ -21,6 +29,7 @@
 }
 .side-box-div tr:first-child > td{
 	padding-left:0px;
+	
 }
 .side-box-div tr{
 	height: 50px;
@@ -54,20 +63,12 @@
 		color: white;
 	}
 }
-.side-box-div table td:hover{
+.side-box-div table tr:hover:not(.side-box-div table tr:first-child){
 	animation: tdhover 0.1s linear forwards;
 }
+
 a:hover{
 	color: inherit;
 } 
 
 
-.side-box{
-	width: 100%;
-	padding-right: 100px;
-}
-
-.side-box-div{
-	display: flex;
-	flex-direction: column;
-}

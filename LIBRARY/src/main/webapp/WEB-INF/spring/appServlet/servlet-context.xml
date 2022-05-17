@@ -38,6 +38,14 @@
 		<beans:property name="order" value="2" />
 	</beans:bean>
 	
+	<!-- 게시판 첨부파일 업로드 패스 설정 -->
+	<beans:bean class="java.lang.String" id="uploadPath">
+		<beans:constructor-arg value="D:\git\spring\LIBRARY\src\main\webapp\resources"></beans:constructor-arg>
+	</beans:bean>
+	
+	<!-- ck업로드 에디터 이미지 첨부 파일 경로 -->
+	<resources location="/resources/upload" mapping="/upload/**"></resources>
+
 	<context:component-scan base-package="com.kh.library.admin.controller" />
 	<context:component-scan base-package="com.kh.library.board.controller" />
 	<context:component-scan base-package="com.kh.library.book.controller" />

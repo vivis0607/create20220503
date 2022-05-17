@@ -37,7 +37,15 @@
 	display: flex;
 	align-items: center;
 }
-.mem_id{
+.borrow-info{
+	font-size: 18px;
+	font-style: italic;
+	font-weight: normal;
+	text-decoration:underline;
+}
+.member-info{
+	margin-bottom: 50px;
+	font-size: 20px;
 	font-weight: bold;
 }
 </style>
@@ -48,7 +56,10 @@
 	<div class="col-10">
 		<div class="row">
 			<div class="col-8">
-				<span class="mem-id">${borrowVO.memId }</span>님의 대여정보
+				<div class="member-info">📝${borrowVO.memId }님</div>
+				<div class="borrow-info col-8">
+					대여정보
+				</div>
 			</div>
 		</div>
 		<div class="row">
@@ -104,11 +115,16 @@
 			<div class="col-8"><hr></div>
 		</div>
 		<div class="row">
-			<div class="col-5" style="margin-top: 10px;">
-				<span class="mem-id">${borrowVO.memId }</span>님의 예약정보
+			<div class="borrow-info col-5" style="margin-top: 10px;">
+				예약정보
 			</div>
 			<div class="col-8">
 				<table class="table table-striped text-center">
+				<colgroup>
+					<col width="5%">
+					<col width="*">
+					<col width="20%">
+					<col width="20%">
 				  <thead>
 				    <tr>
 				      <th scope="col">No</th>

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
 <style type="text/css">
 .modalBody tr,td{
 	margin:0 auto;
@@ -14,9 +15,20 @@
 </style>
 </head>
 <body>
-<h2>대여예약목록창</h2>
-
-<table>
+<div class="container">
+	<div class="subTit">
+      <div class="line_map">홈 > 관리자메뉴 > 대여 목록 조회</div>
+      <div class="tit">대여 목록 조회</div>
+   </div>
+<table class="table table-hover table-border text-center">
+		 <colgroup>
+               <col width="10%">
+               <col width="15%">
+               <col width="15%">
+               <col width="*%">
+               <col width="15%">
+               <col width="11%">
+            </colgroup>
 		<thead>
 			<tr>
 				<td>코드</td>
@@ -35,12 +47,12 @@
 					<td><a href="/book/bookDetail?bookCode=${reserve.bookCode}">${reserve.title }</a></td>
 					<td>${reserve.isbn }</td>
 					<td>${reserve.rsvDate }</td>
-					<td><button type="button" data-toggle="modal" data-target="#insertBorrow" class="btn btn-primary" onclick="showModal(this);">대여</button></td>
+					<td><button type="button" data-toggle="modal" data-target="#insertBorrow" class="btn btn-success" onclick="showModal(this);">대여</button></td>
  				</tr> 
 			</c:forEach>
 		</tbody>
 	</table>
-
+</div>
 
 <div class="modal fade" id="insertBorrow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<form action="/book/borrowBook" id="borrow">
@@ -65,7 +77,7 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">닫기</button>
-	        <button type="button" class="btn btn-primary" onclick="insertBorrow();">대여</button>
+	        <button type="button" class="btn btn-success" onclick="insertBorrow();">대여</button>
 	      </div>
 	    </div>
 	  </div>

@@ -25,14 +25,20 @@
 	height: 200px;
 	vertical-align: middle;
 }
-.SalesStatusContainer{
+.salesStauesContainer{
+	text-align: center;
+	width: 80%;
+	margin: 0 auto;
 	margin-top: 30px;
-	width: 100%;
 }
 canvas{
-	width: 80%;
+	width: 700px;
 	height: 200px;
-	margin: 0 auto;
+	padding-right: 0px;
+}
+.graphBox{
+	padding: 0px;
+	width: 95%;
 }
 .priceTb{
 	height: 100%;
@@ -84,8 +90,7 @@ input{
       <div class="line_map">홈 > 관리자메뉴 > 매출현황</div>
       <div class="tit">매출현황</div>
     </div>
-<div class="SalesStatusContainer">
-	<div class="row">
+<div class="row">
 	<div class="col-12 ">
 		<div class="row" style="margin-bottom: 20px;">
 			<div class="col-3 DayBoxDiv">
@@ -173,7 +178,7 @@ input{
 				</table>
 			</div>
 		</div>
-		<div class="row" style="margin-bottom: 20px;">
+		<div class="row" style="margin-bottom: 40px;">
 			<div class="col-4 StateBoxDiv">
 				<div class="row" style="width: 100%; height: 100%;">
 					<table class="stateTb" style="border-bottom: 5px solid #F0F2F6;">
@@ -255,11 +260,16 @@ input{
 				</div>
 			</div>
 			<div style="margin-bottom: 20px; vertical-align: middle;">
-				<input type="date" id="inputSDate"> ~ <input type="date" id="inputEDate">
+				<form id="ExcelForm" name="ExcelForm">
+					<input type="date" id="inputSDate" name="inputSDate"> ~ <input type="date" id="inputEDate" name="inputEDate">
+				</form>
 				<button type="button" class="btn btn-success btn-sm" onclick="searchPeriod();">조회</button>
 			</div>
+			<div>
+				<button type="button" class="btn btn-success btn-sm" onclick="salesExcel();">매출 엑셀 다운로드</button>
+			</div>
 			<div class="row">
-				<div class="col-12">
+				<div class="col-12" style="width: 100%;">
 					<c:forEach items="${period }" var="peri">
 						<input type="hidden" class="buyDates" value="${peri.buyDate }">
 						<input type="hidden" class="totalPrices" value="${peri.totalPrice }">
@@ -272,7 +282,6 @@ input{
 		</div>
 	</div>
 </div>	
-</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script type="text/javascript" src="/resources/js/item/sales_status.js?ver=12"></script>

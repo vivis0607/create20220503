@@ -7,7 +7,7 @@ function bookPlanerDelete(){
 }
 
 function deleteBookPlaner(){
-	const code = document.querySelector('input[type="hidden"]').value;
+	const code = document.querySelector('.hiddenComplitCode').value;
 	$.ajax({
 			url: '/member/bookPlanerDelete', //요청경로
 			type: 'post',

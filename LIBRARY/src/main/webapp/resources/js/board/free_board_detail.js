@@ -6,12 +6,11 @@ function updateFreeCmt(selectTag, commentNum, boardNum){
 	
 	str1 += '<form action="/otherB/updateFreeCmt" method="post" id="updateCmt">';
 	str1 += '<textarea rows="3" class="form-control" id="textArea_byteLimit" name="commentContent"'
-			+'onkeyup="fn_checkByte(this)"></textarea><br>'
-			+'<sup><span id="nowByte">0</span>/200bytes</sup> (* 영문/숫자 기준 200자, 한글 기준 자까지 입력 가능합니다.)';
+			+'onkeyup="fn_checkByte(this)"></textarea>';
 	str1 += '<input type="hidden" name="commentNum" value="'+commentNum+'">';
 	str1 += '<input type="hidden" name="boardNum" value="'+boardNum+'">';
 	str1 += '</form>';
-	str2 += '<button type="button" onclick="updateCmt();">수정완료</button>';
+	str2 += '<button type="button" class="btn btn-success btn-sm" onclick="updateCmt();">수정완료</button>';
 	
 	selectTag.closest('td').firstElementChild.innerHTML = str1;
 	selectTag.closest('div').innerHTML = str2;

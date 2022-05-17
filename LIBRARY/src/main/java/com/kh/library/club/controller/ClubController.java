@@ -1,5 +1,7 @@
 package com.kh.library.club.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,14 +14,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.library.admin.vo.MessageVO;
+import com.kh.library.book.vo.BookImgVO;
 import com.kh.library.club.service.ClubService;
 import com.kh.library.club.service.MessageService;
 import com.kh.library.club.vo.ClubApplyVO;
 import com.kh.library.club.vo.ClubBoardCmtVO;
 import com.kh.library.club.vo.ClubBoardVO;
+import com.kh.library.club.vo.ClubImageVO;
 import com.kh.library.club.vo.ClubVO;
 import com.kh.library.member.vo.MemberVO;
 import com.kh.library.util.vo.PageVO;
@@ -33,6 +39,12 @@ public class ClubController {
 
 	@Resource(name = "messageService")
 	private MessageService messageService;
+	
+	//북클럽 이용안내
+	@GetMapping("/clubInfo")
+	public String clubInfo() {
+		return "club/club_info";
+	}
 	
 	//북클럽 목록 조회
 	@GetMapping("/clubList")
@@ -67,13 +79,55 @@ public class ClubController {
 	}
 	//북클럽 생성
 	@PostMapping("/clubCreate")
-	public String clubCreate(ClubVO clubVO) {
-		clubService.insertUpdateClubCreate(clubVO);
+	public String clubCreate(ClubVO clubVO, MultipartHttpServletRequest multi) {
+		
+		//이미지 저장 공간
+		String nextClubCode = clubService.selectNextClubCode();
+	    int nextcbImgCode = clubService.selectNextClubImgCode();
+	    
+	    clubVO.setClubCode(nextClubCode);
+	    
+	      MultipartFile file = multi.getFile("file");
+	      if(!file.getOriginalFilename().equals("")) {
+	    	  String uploadPath = "D:\\Git\\workspaceSTS\\LIBRARY\\src\\main\\webapp\\resources\\images\\club\\";
+	    	  
+	    	  try {
+	    		  String cbOriginName = file.getOriginalFilename();
+	    		  String cbAtName = System.currentTimeMillis()+"_"+file.getOriginalFilename();
+	    		  file.transferTo(new File(uploadPath+cbAtName));
+	    		  ClubImageVO vo = new ClubImageVO();
+	    		  vo.setCbImgCode(nextcbImgCode++);
+	    		  vo.setCbOriginName(cbOriginName);
+	    		  vo.setCbAtName(cbAtName);
+	    		  vo.setClubCode(clubVO.getClubCode());
+	    		  
+	    		  //클럽 insert
+	    		  clubVO.setCbAtName(cbAtName);
+	    		  clubService.insertUpdateClubCreate(clubVO, vo);
+			      
+	    			  } catch(IllegalStateException e) {
+	    				  e.printStackTrace();
+	    			  } catch(IOException e) {
+	    				  e.printStackTrace();
+	    			  }
+	    		  }
+	      //이미지 첨부 안하면 기본 이미지 세팅 필요
+	      else {
+	    	  ClubImageVO vo = new ClubImageVO();
+	    	  vo.setCbImgCode(nextcbImgCode++);
+    		  vo.setCbOriginName("club_sample.jpg");
+    		  vo.setCbAtName("club_sample.jpg");
+    		  vo.setClubCode(clubVO.getClubCode());
+		  		clubVO.setCbAtName("club_sample.jpg");
+		  		clubService.insertUpdateClubCreate(clubVO, vo);
+	      }
+	      
+		
 		return "redirect:/club/clubList";
 	}
 	//북클럽 상세조회 + 검색
 	@RequestMapping("/clubDetail")
-	public String clubDetail(Model model, String clubCode, MemberVO memberVO, PageVO pageVO, ClubBoardVO clubBoardVO) {
+	public String clubDetail(Model model, String clubCode, MemberVO memberVO, ClubBoardVO clubBoardVO, HttpSession session) {
 		
 		//-----------------페이징 정보 세팅
 		//1.전체 데이터의 개수 조회
@@ -89,6 +143,14 @@ public class ClubController {
 		model.addAttribute("boardList", clubService.selectClubBoardList(clubBoardVO));
 		//클럽 회원리스트
 		model.addAttribute("memList", clubService.selectClubMemberList(memberVO));
+		//공지사항 조회
+		model.addAttribute("noticeList", clubService.selectNoticBoardList(clubBoardVO));
+	
+		
+		if(session.getAttribute("loginInfo") != null) {
+			String memId = ((MemberVO)(session.getAttribute("loginInfo"))).getMemId();
+			model.addAttribute("clubApplyCode", clubService.selectClubApplyCode(memId));
+		}
 		
 		return "club/club_detail";
 	}
@@ -101,9 +163,37 @@ public class ClubController {
 	}
 	//북클럽 수정
 	@PostMapping("/clubDetailUpdate")
-	public String clubDetailUpdate(ClubVO clubVO, Model model, String clubCode, RedirectAttributes redirectAttributes) {
+	public String clubDetailUpdate(ClubVO clubVO, Model model, RedirectAttributes redirectAttributes, MultipartHttpServletRequest multi) {
+		MultipartFile file = multi.getFile("file");
+		
+	    if(!file.getOriginalFilename().equals("")) {
+    	  String uploadPath = "D:\\Git\\workspaceSTS\\LIBRARY\\src\\main\\webapp\\resources\\images\\club\\";
+    	  
+    	  try {
+    		  
+    		  String cbOriginName = file.getOriginalFilename();
+    		  String cbAtName = System.currentTimeMillis()+"_"+file.getOriginalFilename();
+    		  file.transferTo(new File(uploadPath+cbAtName));
+    		  ClubImageVO vo = new ClubImageVO();
+    		  vo.setCbOriginName(cbOriginName);
+    		  vo.setCbAtName(cbAtName);
+    		  vo.setClubCode(clubVO.getClubCode());
+    		  clubService.updateClubImage(vo);
+    		  
+    		  clubVO.setCbAtName(cbAtName);
+		      
+    			  } catch(IllegalStateException e) {
+    				  e.printStackTrace();
+    			  } catch(IOException e) {
+    				  e.printStackTrace();
+    			  }
+    		  }
+	    else if(file.getOriginalFilename().equals("")) {
+	    	clubVO.setCbAtName(clubService.selectCbAtName(clubVO.getClubCode()));
+	    }
+		
 		clubService.updateClubDetail(clubVO);
-		redirectAttributes.addAttribute("clubCode", clubCode);
+		redirectAttributes.addAttribute("clubCode", clubVO.getClubCode());
 		return "redirect:/club/clubDetail";
 	}
 	//북클럽게시판 글쓰기 페이지 이동
@@ -193,6 +283,7 @@ public class ClubController {
 		clubService.insertClubJoin(clubApplyVO);
 		return "redirect:/club/clubList";
 	}
+	
 	
 	//-------------------------알림함--------------------------
 	@GetMapping("/getMsgList")

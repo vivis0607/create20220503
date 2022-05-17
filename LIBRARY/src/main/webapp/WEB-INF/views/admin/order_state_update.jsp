@@ -140,6 +140,7 @@
 	</div>
 	<div class="OrdertotalCntDiv"></div>
 	<div>
+		<div style="text-align: left; padding-left: 10px;">총 건수: ${salesList.size()}건</div>
 		<table class="table table-hover table-border text-center">
 			<colgroup>
 				<col width="5%">

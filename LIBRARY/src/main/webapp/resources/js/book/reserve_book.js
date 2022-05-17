@@ -23,7 +23,7 @@ function reserveBook(){
 	
 	var sum = parseInt(brCnt)+parseInt(rsvCnt) ;
 
-	if((sum)<5 && isOd !='Y'){
+	if(sum<5 && isOd !='Y'){
 	
 		$.ajax({
 		url: '/book/selectRsvCode',

@@ -1,5 +1,7 @@
 package com.kh.library.board.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class NtBoardVO {
 	private String ntCode;
 	private String ntTitle;
@@ -10,6 +12,32 @@ public class NtBoardVO {
 	private String ntRdCnt;
 	private String searchSub;
 	private int rowNum;
+	private String fileName;
+	private String fileExt;
+	private MultipartFile uploadFile;
+	
+	
+	
+	
+	
+	public String getFileExt() {
+		return fileExt;
+	}
+	public void setFileExt(String fileExt) {
+		this.fileExt = fileExt;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
 	public int getRowNum() {
 		return rowNum;
 	}

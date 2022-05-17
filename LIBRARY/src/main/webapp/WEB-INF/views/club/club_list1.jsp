@@ -86,6 +86,40 @@
 }
 .club-btn{
 	margin-bottom: 20px;
+	color: #ffa900;
+	border-color: #ffa900;
+}
+.club-btn:hover{
+	background-color: #ffa900;
+	color: white;
+}
+.join-btn{
+	background-color: #ffa900;
+	color: white;
+}
+.card-title{
+	margin-bottom: 15px;
+	font-size: 18px;
+	font-weight: bold;
+}
+.card-subtitle{
+	color: #6c757d;
+	font-size: 12px;
+	display: inline-block;
+	font-weight: normal;
+}
+.card-text{
+	font-size: 14px;
+	color: #6c757d;
+	margin-bottom: 50px;
+}
+img{
+	image-rendering: -webkit-optimize-contrast;
+	width: 240px;
+	height: 160px;
+}
+.card-footer{
+	margin-top: 40px;
 }
 </style>
 </head>
@@ -94,11 +128,6 @@
 
 <div class="container">
 	<div>
-		북클럽조회
-		<c:if test="${sessionScope.loginInfo.clubAdmin eq 'Y' }">
-			<a
-				href="/clubAdmin/clubAdmin?clubCode=${sessionScope.loginInfo.clubCode }">북클럽관리</a>
-		</c:if>
 		<a href="/admin/memberManage">회원관리</a>
 		
 		<span type="button" class="badge1" data-badge="${msgCnt }" id="msgList" onclick="msgList('${sessionScope.loginInfo.memId }');" >
@@ -107,45 +136,47 @@
 				</svg>
 			</span>
 	</div>
-	<div class="row">
 		<div class="subTit" >
 			<div class="line_map">홈 > 북클럽 > 북클럽 조회</div>
 			  <h2>북클럽 조회</h2>
 		</div>
-		<div class="club-btn d-grid gap-2 d-md-flex justify-content-md-end">
-			<button type="button" class="btn btn-sm btn-outline-success"  onclick="createClub();" >북클럽 생성</button>
+		
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			<button type="button" class="club-btn btn btn-sm"  onclick="createClub();" >북클럽 생성</button>
 			<input type="hidden" id="memId" value="${sessionScope.loginInfo.memId }">
 			<input type="hidden" id="clubAdmin" value="${sessionScope.loginInfo.clubAdmin }">
 			<input type="hidden" id="clubCode" value="${sessionScope.loginInfo.clubCode }">
 			<input type="hidden" id="clubApplyCode" value="${clubApplyCode }">
 		</div>
-		<c:forEach items="${clubList }" var="club">
-			<div class="col" style="margin-bottom: 20px;">
-				<div class="card h-100" style="width: 23rem;">
-				<img src="..." class="card-img-top" alt="...">
-				  <div class="card-body">
-					<input type="hidden" value="${clubVO.totalCnt - club.rowNum + 1 }">
-				    <h5 class="card-title"  style="margin-bottom: 10px;"><a href="/club/clubDetail?clubCode=${club.clubCode }">${club.clubName }</a></h5>
-				    <h6 class="card-subtitle mb-2 text-muted" style="font-size: 14px;">모집 : ${club.clubNumberPeople} / ${club.clubHeadCnt }</h6>
-				    <p class="card-text" style="font-size: 14px;">${club.clubIntro }</p>
-				    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-				   <c:choose>
-						<c:when test="${club.clubNumberPeople eq club.clubHeadCnt }">
-							<a href="#" class="btn btn-secondary disabled">신청마감</a>
-						</c:when>
-						<c:otherwise>
-				  	  		<a href="#" class="btn btn-success " onclick="clubJoin('${club.clubCode}','${clubApplyCode }');">신청하기</a>
-						</c:otherwise>	
-					</c:choose> 
-				  	 </div>
-				  </div>
-			     <div class="card-footer">
-			      <small class="text-muted">첫 모임일 ${club.clubDate }</small>
-			    </div>
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+			<c:forEach items="${clubList }" var="club">
+				<div class="col" style="margin-bottom: 20px;">
+					<div class="card h-100">
+						<img class="card-img-top" src="/resources/images/club/${club.cbAtName }">
+						  <div class="card-body">
+							<input type="hidden" value="${clubVO.totalCnt - club.rowNum + 1 }">
+						    <div class="card-title"><a href="/club/clubDetail?clubCode=${club.clubCode }">${club.clubName }</a>
+						    <div class="card-subtitle" ></div></div>
+						    <p class="card-text">${club.clubIntro }</p>
+<%-- 						    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+						   <c:choose>
+								<c:when test="${club.clubNumberPeople eq club.clubHeadCnt }">
+									<a href="#" class="btn btn-secondary disabled">신청마감</a>
+								</c:when>
+								<c:otherwise>
+						  	  		<a href="#" class="join-btn btn" onclick="clubJoin('${club.clubCode}','${clubApplyCode }');">신청하기</a>
+								</c:otherwise>	
+							</c:choose> 
+						  	 </div> --%>
+						  </div>
+					     <div class="card-footer">
+					      <small class="text-muted">첫 모임일 ${club.clubDate }</small>
+					    </div>
+					</div>
 				</div>
-			</div>
-		</c:forEach>
-		<nav aria-label="Page navigation example">
+			</c:forEach>
+		</div>
+<%-- 		<nav aria-label="Page navigation example">
 			<ul class="pagination pagination-sm justify-content-center">
 				<li class="page-item <c:if test="${!clubVO.prev }">disabled</c:if>">
 				<a class="page-link" href="/admin/memberManage?nowPage=${clubVO.beginPage - 1 }"
@@ -159,8 +190,7 @@
 					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 				</a></li>
 			</ul>
-		</nav>
-	</div>
+		</nav> --%>
 </div>
 
 <!-- 알림창 Modal -->

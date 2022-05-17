@@ -92,5 +92,4 @@ public class QnaServiceImpl implements QnaService {
 	}
 
 	
-	
 }

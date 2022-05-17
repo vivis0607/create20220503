@@ -3,65 +3,65 @@
 <!-- 모든 SQL문을 mapper태그 안에 작성 -->
 <mapper namespace="memberMapper">
    <resultMap type="com.kh.library.member.vo.MemberVO" id="member">
-      <id column="MEM_ID"                   property="memId"/>
+      <id column="MEM_ID"                  property="memId"/>
       <result column="MEM_PWD"             property="memPwd"/>
-      <result column="MEM_NAME"             property="memName"/>
+      <result column="MEM_NAME"            property="memName"/>
       <result column="MEM_ADDR"            property="memAddr"/>
       <result column="MEM_TELL"            property="memTell"/>
-      <result column="MEM_EMAIL"             property="memEmail"/>
-      <result column="MEM_IMAGE"            property="memImage"/>
-      <result column="MEM_GENDER"            property="memGender"/>
-      <result column="MEM_BIRTH"             property="memBirth"/>
-      <result column="IS_DELETE"             property="isDelete"/>
-      <result column="IS_ADMIN"             property="isAdmin"/>
+      <result column="MEM_EMAIL"           property="memEmail"/>
+      <result column="MEM_IMAGE"           property="memImage"/>
+      <result column="MEM_GENDER"          property="memGender"/>
+      <result column="MEM_BIRTH"           property="memBirth"/>
+      <result column="IS_DELETE"           property="isDelete"/>
+      <result column="IS_ADMIN"            property="isAdmin"/>
       <result column="CLUB_ADMIN"          property="clubAdmin"/>
-      <result column="CLUB_CODE"             property="clubCode"/>
+      <result column="CLUB_CODE"           property="clubCode"/>
       <result column="KEYWORD"             property="keyword"/>
       <result column="ROW_NUM"             property="rowNum"/>
-      <result column="IS_OD"                property="isOd"/>
-      <result column="BR_CNT"                property="brCnt"/>
-       <result column="RSV_CNT"             property="rsvCnt"/>
+      <result column="IS_OD"               property="isOd"/>
+      <result column="BR_CNT"              property="brCnt"/>
+       <result column="RSV_CNT"            property="rsvCnt"/>
       <result column="LIMIT_DATE"          property="limitDate"/>
-      <result column="CLUB_APPLY_CODE"      property="clubApplyCode"/>
-      <result column="BOOK_COMPLIT_CNT"     property="bookComplitCnt"/>
+      <result column="CLUB_APPLY_CODE"     property="clubApplyCode"/>
+      <result column="BOOK_COMPLIT_CNT"    property="bookComplitCnt"/>
    </resultMap>
    <resultMap type="com.kh.library.member.vo.MemberImageVO" id="memberImage">
-      <id column="MEM_IMG_CODE"             property="memImgCode"/>
-      <result column="MEM_ORIGIN_NAME"       property="memOriginName"/>
-      <result column="MEM_AT_IMG_NAME"       property="memAtImgName"/>
-      <result column="MEM_ID"                property="memId"/>
-   </resultMap>
-      
+      <id column="MEM_IMG_CODE"            property="memImgCode"/>
+      <result column="MEM_ORIGIN_NAME"     property="memOriginName"/>
+      <result column="MEM_AT_IMG_NAME"     property="memAtImgName"/>
+      <result column="MEM_ID"              property="memId"/>
+   </resultMap>      
    <resultMap type="com.kh.library.member.vo.BookComplitVO" id="complit">
-      <id column="COMPLIT_CODE"             property="complitCode"/>
-      <result column="COMPLIT_DATE"          property="complitDate"/>
-      <result column="COMPLIT_REVIEW"       property="complitReview"/>
-      <result column="BOOK_CODE"             property="bookCode"/>
-      <result column="MEM_ID"                property="memId"/>
-      <result column="CNT"               property="cnt"/>
-      <association property="bookInfo"       resultMap="bookMapper.book" />
-      <association property="cateInfo"       resultMap="bookMapper.bookCate" />
+      <id column="COMPLIT_CODE"            property="complitCode"/>
+      <result column="COMPLIT_DATE"        property="complitDate"/>
+      <result column="COMPLIT_REVIEW"      property="complitReview"/>
+      <result column="BOOK_CODE"           property="bookCode"/>
+      <result column="MEM_ID"              property="memId"/>
+      <result column="CNT"                 property="cnt"/>
+      <result column="HIGH_PCT"            property="highPct"/>
+      <association property="bookInfo"     resultMap="bookMapper.book" />
+      <association property="cateInfo"     resultMap="bookMapper.bookCate" />
    </resultMap>
    
    <resultMap type="com.kh.library.member.vo.ToReadListVO" id="toReadList">
       <id column="TO_READ_LIST_CODE"       property="toReadListCode"/>
       <result column="TO_READ_TITLE"       property="toReadTitle"/>
-      <result column="MEM_ID"          property="memId"/>
-      <result column="IS_DONE"          property="isDone"/>
+      <result column="MEM_ID"              property="memId"/>
+      <result column="IS_DONE"             property="isDone"/>
    </resultMap>
    
    <!--/////////////////////회원가입//////////////////// -->
    <!-- ID 중복체크 -->
    <select id="checkId" resultType="int">
-      SELECT COUNT(MEM_ID)
-      FROM BOOK_MEMBER
-      WHERE MEM_ID = #{memId}
+	SELECT COUNT(MEM_ID)
+	FROM BOOK_MEMBER
+	WHERE MEM_ID = #{memId}
    </select>
    
    <!-- 프로필 사진 MEM_IMG_CODE 생성 -->
    <select id="selectNextMemImgCode" resultType="int">
-      SELECT NVL(MAX(TO_NUMBER(MEM_IMG_CODE)), 0) + 1
-      FROM MEMBER_IMAGE
+	SELECT NVL(MAX(TO_NUMBER(MEM_IMG_CODE)), 0) + 1
+	FROM MEMBER_IMAGE
    </select>
    
    <!-- 프로필 사진 이미지 등록 -->
@@ -115,6 +115,7 @@
          , CLUB_CODE
          , CLUB_ADMIN
          , IS_ADMIN
+         , IS_OD
          , CLUB_APPLY_CODE
          , LIMIT_DATE
       FROM BOOK_MEMBER
@@ -216,11 +217,104 @@
          , COMPLIT_DATE
          , (SELECT TITLE FROM BOOK B WHERE B.BOOK_CODE = C.BOOK_CODE) AS TITLE 
          , (SELECT BK_PAGE FROM BOOK B WHERE B.BOOK_CODE = C.BOOK_CODE) AS BK_PAGE 
-         FROM BOOK_COMPLIT C 
-         WHERE MEM_ID = #{memId} 
-         ORDER BY COMPLIT_DATE DESC
+      FROM BOOK_COMPLIT C 
+      WHERE MEM_ID = #{memId} 
+      ORDER BY COMPLIT_DATE DESC
    </select>
    
+   <!-- 독서량 상위 백분율 -->
+   <select id="selectComplitHighPct" resultMap="complit">
+   		SELECT MEM_ID, CNT
+			, TRUNC((RANK / (
+			        SELECT COUNT(MEM_ID)
+			        FROM BOOK_MEMBER
+			        ) * 100), 0) AS HIGH_PCT
+		FROM (SELECT DENSE_RANK() OVER (ORDER BY CNT DESC) AS RANK
+		        , MEM_ID, CNT
+		        FROM (
+		            SELECT C.MEM_ID
+		            , DECODE(B.CNT, NULL, 0, B.CNT) AS CNT
+		        FROM (
+		            SELECT MEM_ID
+		            FROM BOOK_MEMBER
+		            ) C LEFT OUTER JOIN (
+		            SELECT MEM_ID, COUNT(COMPLIT_CODE) AS CNT
+		            FROM BOOK_COMPLIT
+		            GROUP BY MEM_ID
+		            ) B
+		        ON B.MEM_ID = C.MEM_ID
+		        ORDER BY CNT DESC
+		            )) 
+		WHERE MEM_ID = #{memId}
+		GROUP BY RANK, MEM_ID, CNT
+		ORDER BY CNT DESC
+   </select>
+   
+   <!-- 독서플래너 취향 순위 -->
+   <select id="topThreeBookPlaner" resultMap="complit">
+	  SELECT ROWNUM, CATE_NAME, CNT
+	  FROM(SELECT
+	  CATE_NAME, CNT
+	  FROM (
+		  SELECT COUNT(BOOK_CODE) AS CNT, CATE_CODE
+		  FROM (
+			  SELECT BC.BOOK_CODE, B.CATE_CODE
+			  FROM BOOK B, BOOK_COMPLIT BC
+		  	  WHERE B.BOOK_CODE = BC.BOOK_CODE
+			  AND BC.MEM_ID = #{memId}
+		  )
+		  GROUP BY CATE_CODE	
+	  ) B, BOOK_CATEGORY CA
+	  WHERE B.CATE_CODE = CA.CATE_CODE
+	  ORDER BY CNT DESC)
+	  WHERE ROWNUM &lt; 4
+   </select>
+   
+   <!-- 내 취향 TOP3의 카테고리에서 내가 읽지 않은 책들 조회 -->
+   <select id="selectRecommendBook" resultMap="complit">
+	SELECT AL.BOOK_CODE, AL.TITLE, AL.WRITER
+	FROM (SELECT BOOK_CODE, TITLE, WRITER
+	    FROM BOOK
+	    WHERE CATE_CODE 
+	    IN(SELECT CATE_CODE
+	        FROM (
+	        SELECT ROWNUM, CATE_CODE, CATE_NAME, CNT
+	        FROM(SELECT A.CATE_CODE, CATE_NAME, CNT
+	            FROM (SELECT B.CATE_CODE, COUNT(C.BOOK_CODE) AS CNT
+	                    FROM BOOK B, 
+	                        (SELECT BOOK_CODE
+	                            FROM BOOK_COMPLIT
+	                            WHERE MEM_ID = #{memId}) C
+	                    WHERE B.BOOK_CODE = C.BOOK_CODE
+	                    GROUP BY B.CATE_CODE
+	                    )A, BOOK_CATEGORY CA
+	            WHERE A.CATE_CODE = CA.CATE_CODE
+	            ORDER BY CNT DESC)
+	        WHERE ROWNUM &lt; 4))) AL
+	LEFT JOIN (
+	    SELECT C.BOOK_CODE, B.TITLE, B.WRITER
+	    FROM BOOK_COMPLIT C, BOOK B
+	    WHERE C.BOOK_CODE = B.BOOK_CODE
+	    AND C.MEM_ID = #{memId}) DONE
+	ON AL.BOOK_CODE = DONE.BOOK_CODE
+	WHERE DONE.BOOK_CODE IS NULL
+   </select>
+   
+   <!-- 안읽어본 책 조회하기 -->
+   <select id="selectReadYet" resultMap="complit">
+	   SELECT ROWNUM, BOOK_CODE, TITLE, WRITER
+		FROM (SELECT YET.BOOK_CODE, YET.TITLE, YET.WRITER, YET.RCD_CNT
+		FROM BOOK YET
+		LEFT JOIN
+		    (SELECT BOOK_CODE
+		        FROM BOOK_COMPLIT
+		        WHERE MEM_ID = #{memId}
+		    ) DONE
+		ON YET.BOOK_CODE = DONE.BOOK_CODE
+		WHERE DONE.BOOK_CODE IS NULL
+		ORDER BY YET.RCD_CNT DESC)
+		WHERE ROWNUM &lt; 4
+   </select>
    <!-- 독서플래너 차트 조회 -->
    <select id="selectBookPlanerChart" resultMap="complit">
       SELECT BC.CATE_CODE, BC.CATE_NAME, COUNT(BC.CATE_NAME) AS CNT

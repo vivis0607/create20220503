@@ -30,7 +30,7 @@ function modifyBk(){
 	
 	var bookCode = $('#manageBook #bookCode').val();
 	
-	location.href = '/book/modifyBook?bookCode='+bookCode;
+	location.href = '/book/updateBookForm?bookCode='+bookCode;
 }
 
 function deleteBk(){

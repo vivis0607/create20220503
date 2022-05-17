@@ -5,16 +5,14 @@ function updateAnswer(selectTag, answerNum, qnaNum){
 	
 	str1 += '<form action="/otherB/updateAnswer" method="post" id="updateAns">';
 	str1 += '<textarea rows="3" class="form-control" id="textArea_byteLimit" name="answerContent"'
-			+'onkeyup="fn_checkByte(this)"></textarea><br>'
-			+'<sup><span id="nowByte">0</span>/200bytes</sup> (* 영문/숫자 기준 1000자, 한글 기준 자까지 입력 가능합니다.)';
+			+'onkeyup="fn_checkByte(this)"></textarea>';
 	str1 += '<input type="hidden" name="answerNum" value="'+answerNum+'">';
 	str1 += '<input type="hidden" name="qnaNum" value="'+qnaNum+'">';
 	str1 += '</form>';
-	str2 += '<button type="button" onclick="updateAns();">수정완료</button>';
+	str2 += '<button type="button" class="btn btn-success btn-sm" onclick="updateAns();">수정완료</button>';
 	
 	selectTag.closest('td').firstElementChild.innerHTML = str1;
 	selectTag.closest('div').innerHTML = str2;
-	
 	
 }
 

@@ -6,10 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
 </head>
 <body>
+<div class="container">
+   <div class="subTit">
+      <div class="line_map">홈 > 마이페이지 > 대여도서조회</div>
+      <div class="tit">대여도서조회</div>
+   </div>
+
 <input type="hidden" id="memId" value="${sessionScope.loginInfo.memId}">
-		<table>
+		<table class="table table-hover table-border text-center">
 		<thead>
 			<tr>
 				<td>No</td>
@@ -24,7 +31,7 @@
 			<c:forEach items="${userBorrow }" var="borrow">
 				<tr>
 					<td>${borrow.rowNum }</td>
-					<td><p id="goDetail" onclick="getBkDetail(this);"><strong>${borrow.title }</strong></p></td>
+					<td><a href="/book/bookDetail?bookCode=${borrow.bookCode }&memId=${sessionScope.loginInfo.memId}">${borrow.title }</a></td>
 					<td>${borrow.isbn }</td>
 					<td>${borrow.brDate }</td>
 					<td>${borrow.rtDate }</td>
@@ -38,6 +45,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+</div>
 <script type="text/javascript" src="/resources/js/book/detail_book.js?ver=15"></script>
 </body>
 </html>

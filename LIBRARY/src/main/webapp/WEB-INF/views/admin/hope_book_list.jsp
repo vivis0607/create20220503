@@ -7,21 +7,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
+<link href="/resources/css/book/statusBar.css" rel="stylesheet">
+<style type="text/css">
+.btnDiv{
+
+	padding-top:10px;
+	text-align:right;
+}
+</style>
 </head>
 <body>
+<div class="container">
+	<div class="subTit">
+      <div class="line_map">홈 > 관리자메뉴 > 희망도서신청조회</div>
+      <div class="tit">희망도서신청조회</div>
+   </div>
+
+<div class="statusBar">
 	<form action="/book/hopeBookListStatus" method="post" id="searchBook">
 	<!-- 검색구분 선택 -->
-	<label for="select">현재 신청 상태</label>
 		<select name="searchSub">
 			<option value="all" >전체</option>
-			<option value="0">승인대기</option>
+			<option value="0">신청중</option>
 			<option value="1">처리중</option>
 			<option value="2">소장중</option>
 		</select>
-		<input type="submit" value="적용">
+		<button type="submit" class="btn btn-success">적용</button>
 	</form>
+	</div>
 	<form action="/book/updateHopeBook" method="post" id="updateHopeBook">
-	<table>
+	<table class="table table-hover table-border text-center">
 			<thead>
 				<tr>
 					<td><input id="allCheck" class ="form-check-input" type="checkbox" onclick="allChk(this);"/></td>
@@ -70,8 +86,11 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<button type="button" onclick="updateChecked();">변경하기</button>
+		<div class="btnDiv">
+			<button type="button" onclick="updateChecked();" class="btn btn-success">변경하기</button>
+		</div>
 	</form>
+</div>
 <script type="text/javascript" src="/resources/js/book/admin_hpList.js?ver=3"></script>
 </body>
 </html>

@@ -57,20 +57,24 @@ textarea{
 	resize: none;
 }
 .answerTb{
-	border: 1px solid gray;
-	margin-top: 10px;
 	text-align: left;
 	width: 100%;
 	margin: 0 auto;
+	margin-top: 10px;
 }
 .inputanswer{
+	width: 100%;
 	margin: 0 auto;
 	margin-bottom: 30px;
 	
 }
 .answerDiv{
-	width: 50%;
+	width: 70%;
 	margin: 0 auto;
+}
+pre{
+	font-size: 20px;
+	padding-left: 10px;
 }
 </style>
 </head>
@@ -112,6 +116,7 @@ textarea{
 	
 	
 	<div class="answerDiv">
+	<div style="margin-bottom: 20px;">${answerList.size() }개의 댓글</div>
 	<c:if test="${sessionScope.loginInfo.memId eq 'admin'}">
 		<div>
 			<form action="/otherB/regQnaCmt" method="post">
@@ -119,14 +124,17 @@ textarea{
 				<table class="inputanswer">
 					<tr>
 						<td>
-							문의 건에 대한 답변<br>
+							문의 건에 대한 답변</td>
+					</tr>
+					<tr>
+						<td>
 							<textarea rows="3" 
 			                    class="form-control" 
 			                    id="textArea_byteLimit" 
 			                    name="answerContent" 
 			                    onkeyup="fn_checkByte(this)"></textarea>
-							<br><sup><span id="nowByte">0</span>/200bytes</sup> (* 영문/숫자 기준 1000자, 한글 기준 자까지 입력 가능합니다.)
-							<br><button type="submit">댓글등록</button>
+							<br><sup><span id="nowByte">0</span>/1000bytes</sup><span style="font-size: 12px;"> (* 영문/숫자 기준 1000자, 한글 기준 자까지 입력 가능합니다.)</span><br>
+							<div style="float: right;"><button type="submit" class="btn btn-success btn-sm">댓글등록</button></div>
 						</td>
 					</tr>
 				</table>
@@ -134,7 +142,7 @@ textarea{
 		</div>
 	</c:if>
 	
-	<div class="answerDiv">
+	<div>
 				<table class="answerTb">
 					<c:choose>
 						<c:when test="${empty answerList }">
@@ -150,19 +158,28 @@ textarea{
 									문의하신 내용의 답변입니다	
 								</td>
 							</tr>
+							<tr>
+								<td>
+									<hr>
+								</td>
+							</tr>
 						</c:otherwise>
 					</c:choose>
 					<c:forEach items="${answerList }" var="answer">
 						<tr>
 							<td>
-								<div>${answer.answerDate }</div>
-								<div>
-									${answer.answerContent }
+								<div style="font-size: smaller; vertical-align: baseline;">${answer.answerDate }</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div style="margin-top: 10px; margin-bottom: 10px;">
+									<pre>${answer.answerContent }</pre>
 								</div>
 								<c:if test="${sessionScope.loginInfo.memId eq 'admin'}">
-									<div>
-										<button type="button" onclick="updateAnswer(this, '${answer.answerNum}', '${answer.qnaNum }');">수정</button>
-										<button type="button" onclick="deleteAnswer('${answer.answerNum}', '${answer.qnaNum }');">삭제</button>
+									<div style="float: right; padding-right: 10px;">
+										<button type="button" class="btn btn-success btn-sm" onclick="updateAnswer(this, '${answer.answerNum}', '${answer.qnaNum }');">수정</button>
+										<button type="button" class="btn btn-success btn-sm" onclick="deleteAnswer('${answer.answerNum}', '${answer.qnaNum }');">삭제</button>
 									</div>
 								</c:if>
 							</td>

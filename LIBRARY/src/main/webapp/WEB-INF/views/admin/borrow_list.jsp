@@ -7,31 +7,51 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
+<link href="/resources/css/book/statusBar.css" rel="stylesheet">
+<style type="text/css">
+
+</style>
 </head>
 <body>
-<h2>도서대여목록</h2>
+<div class="container">
+	<div class="subTit">
+      <div class="line_map">홈 > 관리자메뉴 > 대여 목록 조회</div>
+      <div class="tit">대여 목록 조회</div>
+   </div>
 
-<form action="/book/selectBrStatus" method="post" id="searchBook">
-<!-- 검색구분 선택 -->
-<label for="select">현재 대여 상태</label>
-	<select name="searchSub">
-		<option value="all" >전체</option>
-		<option value="0">대여중</option>
-		<option value="1">연체</option>
-		<option value="2">반납</option>
-	</select>
-	<input type="submit" value="적용">
-</form>
-<table>
+<div class="statusBar">
+	<form action="/book/selectBrStatus" method="post" id="searchBook">
+	<!-- 검색구분 선택 -->
+		<select name="searchSub">
+			<option value="all" >전체</option>
+			<option value="0">대여중</option>
+			<option value="1">연체</option>
+			<option value="2">반납</option>
+		</select>
+		<button type="submit" class="btn btn-success ">적용 </button>
+	</form>
+</div>
+
+<table class="table table-hover table-border text-center">
+            <colgroup>
+               <col width="7%">
+               <col width="*">
+               <col width="15%">
+               <col width="13%">
+               <col width="11%">
+               <col width="11%">
+               <col width="11%">
+            </colgroup>
 		<thead>
 			<tr>
-				<td>코드</td>
-				<td>회원아이디</td>
-				<td>제목</td>
-				<td>ISBN</td>
-				<td>대여일</td>
-				<td>반납예정일</td>
-				<td>상태</td>
+				<td scope="col">코드</td>
+				<td scope="col">회원아이디</td>
+				<td scope="col">제목</td>
+				<td scope="col">ISBN</td>
+				<td scope="col">대여일</td>
+				<td scope="col">반납예정일</td>
+				<td scope="col">상태</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -52,9 +72,10 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<button type="button" data-toggle="modal"  data-target="#selectBorrow" id="openModalBtn" class=btn btn-primary" >
+	<button type="button" data-toggle="modal"  data-target="#selectBorrow" id="openModalBtn" class="btn btn-success" >
 		회원 대여 정보
 	</button>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="selectBorrow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -76,7 +97,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" id="closeModalBtn" data-dismiss="modal">닫기</button>
-			        <button type="button" class="btn btn-primary" onclick="selectBrMember();">조회</button>
+			        <button type="button" class="btn btn-success" onclick="selectBrMember();">조회</button>
 			      </div>
      		
     </div>

@@ -10,6 +10,7 @@ public class BookComplitVO {
 	private String memId;
 	private String complitReview;
 	private int cnt;
+	private int highPct;
 	private BookVO bookInfo;
 	private BookCategoryVO cateInfo;
 
@@ -18,6 +19,12 @@ public class BookComplitVO {
 	
 	
 	
+	public int getHighPct() {
+		return highPct;
+	}
+	public void setHighPct(int highPct) {
+		this.highPct = highPct;
+	}
 	public int getCnt() {
 		return cnt;
 	}
