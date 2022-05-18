@@ -1,11 +1,22 @@
 function clubCreate(tag){
-	var result = confirm('모임을 생성하시겠습니까?');
-	var formTag = document.getElementById('regClub');
-	if(result){
-		formTag.submit();
-	}
+	if ($("#clubName").val() == "") {
+	alert("클럽명을 정확히 입력해주세요");
+	return;
+}
+if ($("#clubName").val().length <= 1) {
+	alert("이름을 정확히 입력해주세요");
+	return;
+}
+
 	else{
-		return;
+		var result = confirm('모임을 생성하시겠습니까?');
+		var formTag = document.getElementById('regClub');
+		if(result){
+			formTag.submit();
+		}
+		else{
+			return;
+		}
 	}
 	
 }
@@ -47,3 +58,38 @@ function byteCheck(obj, maxByte){
         document.getElementById('byteInfo').innerText = rbyte;
      }	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

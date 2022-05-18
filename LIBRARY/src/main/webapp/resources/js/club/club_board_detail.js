@@ -22,7 +22,7 @@ function updateCmt(tag, memId, cbCmtNum, clubCode, cbBoardNum, cbCmtContent){
 	str1 += '<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="cbCmtContent" style="resize: none;">'+ cbCmtContent +'</textarea>';
 	str1 += '</form>'
 	
-	str2 += '<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="updateCmtComplete();" style="margin-top: 5px;">수정완료</button>';
+	str2 += '<button type="button" class="update-btn btn btn-sm justify-content-md-end" onclick="updateCmtComplete();" style="margin-top: 5px;">수정완료</button>';
 	
 	tag.closest('div').previousElementSibling.innerHTML = str1;
 	tag.closest('div').innerHTML = str2;

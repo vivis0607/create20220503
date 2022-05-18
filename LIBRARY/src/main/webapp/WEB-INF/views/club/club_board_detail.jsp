@@ -90,6 +90,10 @@
 .cmt-cnt{
 	font-weight: bold;
 }
+.update-btn{
+	background-color: #72a37c;
+	color: white;
+}
 </style>
 </head>
 <body>

@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link href="/resources/css/common/infoBar.css" rel="stylesheet">
 <link href="/resources/css/book/bookDetail.css" rel="stylesheet">
+
 <style type="text/css">
 .add_item_container{
 	text-align: center;

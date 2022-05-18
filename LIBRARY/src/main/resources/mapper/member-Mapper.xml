@@ -266,7 +266,7 @@
 	      WHERE MEM_ID = #{memId}
 	      ORDER BY COMPLIT_DATE DESC
 	      )
-	      WHERE ROW_NUM &gt;= 1 AND ROW_NUM &lt;= 5
+	      WHERE ROW_NUM &gt;= #{startNum} AND ROW_NUM &lt;= #{endNum}	
 	      
       <!-- SELECT DISTINCT C.COMPLIT_CODE 
          , C.BOOK_CODE 

@@ -75,7 +75,8 @@ h4{
    </div>
    <div class="goForm">
 	   	<div class="title">양심도서관 회원만 신청 가능합니다.</div>
-	   	<button class="btn btn-success justify-content-md-end" onclick="location.href='/book/hopeBookForm';">희망도서 신청바로가기 >></button>
+	   	<input type="hidden" id="memId" value="${sessionScope.loginInfo.memId }">
+	   	<button class="btn btn-success justify-content-md-end" onclick="goHpBookForm();">희망도서 신청바로가기 >></button>
    </div>
    
 	<div class="notice">
@@ -131,5 +132,6 @@ h4{
 		<div></div>
 	</div>
 </div>
+<script type="text/javascript" src="/resources/js/book/go_hope_book_form.js?ver=1"></script>
 </body>
 </html>

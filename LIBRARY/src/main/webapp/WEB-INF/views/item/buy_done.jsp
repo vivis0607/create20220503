@@ -8,9 +8,8 @@
 <title>Insert title here</title>
 <style type="text/css">
 .buyFinContainer{
-	width: 80%;
+	width: 90%;
 	margin: 0 auto;
-	margin-top: 30px;
 }
 .orderInfoTb{
 	width: 100%;
@@ -64,6 +63,7 @@
 </style>
 </head>
 <body>
+<div class="nonSide-container">
 <div class="buyFinContainer">
 	<div style="font-size:xx-large; text-align: center; color: #16784B; font-weight: bolder; font-size: ">
 		Thanks For
@@ -140,6 +140,7 @@
 		&nbsp; <button type="button" class="btn btn-success btn-sm"" onclick="location.href='/order/referOrderd?orderNum=${buyer.orderNum }';">주문확인하기</button>
 	</div>
 	<div></div>
+</div>
 </div>
 </body>
 </html>

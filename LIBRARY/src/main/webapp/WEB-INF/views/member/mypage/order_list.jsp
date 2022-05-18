@@ -7,16 +7,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
 <style type="text/css">
 .orderListContainerDiv{
 	margin: 0 auto;
 	margin-top: 30px;
-	width: 80%;
 	text-align: center;
 }
 .searchDateDiv{
 	margin-top: 30px;
 	margin-bottom: 30px;
+	float: right;
+	margin-right: 5%;
 }
 .listCuverDiv{
 	margin: 0 auto;
@@ -40,8 +42,12 @@ input {
 </style>
 </head>
 <body>
-<div class="orderListContainerDiv">
-	<h3>주문조회</h3>
+<div class="container">
+	<div class="subTit">
+      <div class="line_map">홈 > 마이페이지 > 주문조회</div>
+      <div class="tit">주문조회</div>
+    </div>
+	<div class="orderListContainerDiv">
 	<div class="searchDateDiv">
 		<form action="/order/searchOrderPeriod" method="post">
 			<input type="date" name="inputSDate">
@@ -65,45 +71,54 @@ input {
 				</tr>
 			</table>
 		</div>
-		<c:forEach items="${orderList }" var="order">
 		<div class="listCuverDiv">
 			<table class="orderListTb">
-				<tr>
-					<td colspan="3" style="text-align: left;">
-						주문번호 : ${order.orderNum }<br>
-						<span style="font-size: small;">(${order.buyDate })</span>
-						<input type="hidden" name="buyDate" id="buyDate" value="${order.buyDate }">
-					</td>
-				</tr>
-					
-				<c:forEach items="${buyViewList }" var="buy">
-					<c:if test="${order.orderNum eq buy.orderNum}">
-						<tr style="border-bottom: 0.5px solid #16784B;">
-							<td>
-								<img alt="..." src="/resources/images/item/${buy.itemAtImgName }" 
-									height="50px;" onclick="location.href='/item/itemDetail?itemCode=${buy.itemCode}';">
-							</td>
-							<td>
-								<div onclick="location.href='/item/itemDetail?itemCode=${buy.itemCode}';">${buy.itemName }</div>
-								<div><fmt:formatNumber value="${buy.itemPrice }" pattern="#,###"/>원 &nbsp; | &nbsp; ${buy.itemCnt }개</div>
-							</td>
-							<td>
-								${order.itemState }
-							</td>
+				<c:choose>
+					<c:when test="${empty buyViewList }">
+						<tr>
+							<td colspan="3">주문하신 상품 내역이 없습니다</td>
 						</tr>
-					</c:if>
-				</c:forEach>
-				<tr>
-					<td colspan="3" style="text-align: right; padding-right: 10px; padding-top: 10px;">
-						<button type="button" class="btn btn-success btn-sm" onclick="location.href='/order/referOrderd?orderNum=${order.orderNum}';">주문상세보기</button>
-					</td>
-				</tr>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${orderList }" var="order">
+								<tr>
+									<td colspan="3" style="text-align: left;">
+										주문번호 : ${order.orderNum }<br>
+										<span style="font-size: small;">(${order.buyDate })</span>
+										<input type="hidden" name="buyDate" id="buyDate" value="${order.buyDate }">
+									</td>
+								</tr>
+								<c:forEach items="${buyViewList }" var="buy">
+									<c:if test="${order.orderNum eq buy.orderNum}">
+										<tr style="border-bottom: 0.5px solid #16784B;">
+											<td>
+												<img alt="..." src="/resources/images/item/${buy.itemAtImgName }" 
+													height="50px;" onclick="location.href='/item/itemDetail?itemCode=${buy.itemCode}';">
+											</td>
+											<td>
+												<div onclick="location.href='/item/itemDetail?itemCode=${buy.itemCode}';">${buy.itemName }</div>
+												<div><fmt:formatNumber value="${buy.itemPrice }" pattern="#,###"/>원 &nbsp; | &nbsp; ${buy.itemCnt }개</div>
+											</td>
+											<td>
+												${order.itemState }
+											</td>
+										</tr>
+									</c:if>
+								</c:forEach>
+								<tr>
+									<td colspan="3" style="text-align: right; padding-right: 10px; padding-top: 10px;">
+										<button type="button" class="btn btn-success btn-sm" onclick="location.href='/order/referOrderd?orderNum=${order.orderNum}';">주문상세보기</button>
+									</td>
+								</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>	
 			</table>
 		</div>
-		</c:forEach>
 	</div>
 	<div>
 	</div>
+</div>
 </div>
 </body>
 </html>

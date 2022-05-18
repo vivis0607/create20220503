@@ -70,7 +70,7 @@ table tr td:nth-child(odd){
 				<div class="hs-write-form">
 					<div class="hs-write-form-top">
 						<div>
-							<input type="text" name="clubName" placeholder="북클럽 이름">
+							<input type="text" id="clubName" name="clubName" placeholder="북클럽 이름">
 						</div>
 						<div>
 							<input type="number" class="form-control" name="clubHeadCnt" placeholder="인원" min="3" max="10">

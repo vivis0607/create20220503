@@ -131,6 +131,7 @@ $('#joinForm').validate({
 /*아이디 중복 체크 */
 function checkId(){
 const memId = document.getElementById('inputId').value;
+const btn = document.querySelector('.joinFormDiv button');
 
 $.ajax({
 		url: '/member/checkId', //요청경로
@@ -138,9 +139,13 @@ $.ajax({
 		data: {'memId':memId}, //필요한 데이터 '데이터이름':값
 		success: function(result) {
 			if(result === 1){
+				let str = '';
+				str += '확인';
+				btn.innerText = str;
+				alert(2);
+				
 				$('.id-unavailable').css("display", "inline-block");
 				$('.id-available').css("display", "none");
-				$('button[type="submit"]').css("disabled", true);
 			}
 			else if(result === 0) {
 				$('.id-available').css("display", "inline-block");

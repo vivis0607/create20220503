@@ -9,9 +9,8 @@
 <title>Insert title here</title>
 <style type="text/css">
 .buy_container{
-	width: 70%;
 	margin: 0 auto;
-	margin-top: 30px;
+	width: 90%;
 }
 .buytitleDiv{
 	margin-top: 100px;
@@ -148,6 +147,7 @@ input{
 </style>
 </head>
 <body>
+<div class="nonSide-container">
 <div class="buy_container">
 	<div class="buytitleDiv">주문결제</div>
 	<div class="buysubDiv">
@@ -263,9 +263,9 @@ input{
 						<div>
 							<input type="text" id="postcode" placeholder="우편번호" required="required">
 							<button type="button" class="btn btn-success btn-sm"  onclick="sample4_execDaumPostcode()">우편번호 찾기</button><br>
-							<input type="text" id="roadAddress" name="memAddr" placeholder="도로명주소" style="margin-top: 10px;" required>
+							<input type="text" id="roadAddress" name="memAddr" placeholder="도로명주소" style="margin-top: 10px; width: 400px;" required>
 							<span id="guide" style="color:#999;display:none"></span>
-							<input type="text" id="detailAddress" name="memAddr" placeholder="상세주소" required>
+							<input type="text" id="detailAddress" name="memAddr" placeholder="상세주소" style="width: 400px;" required>
 						</div>
 					</td>
 				</tr>
@@ -351,6 +351,7 @@ input{
 		<button type="button" class="btn btn-success btn-sm" id="check_module" onclick="payment();">주문하기</button>
 		<button type="button" class="btn btn-success btn-sm" onclick="deleteBuy();">취소하기</button>
 	</div>
+</div>
 </div>
 <script type="text/javascript" src="/resources/js/item/buy.js?var=42"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

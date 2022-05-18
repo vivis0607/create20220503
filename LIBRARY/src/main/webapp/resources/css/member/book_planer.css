@@ -99,8 +99,11 @@
 	color: #eee;
 }
 
-.bookJ > div:first-child > div{
+/* .bookJ > div:first-child > div{
 	display: flex;
+} */
+.bookJ > div:first-child button{
+	width: 146px;
 }
 .bookJ > div:last-child{width: 80%;}
 
@@ -171,4 +174,11 @@
 .bookPlaner-top{
 	display: flex;
 	justify-content: space-around;
+}
+
+
+
+
+.pageDiv button{
+	height: 2rem;
 }

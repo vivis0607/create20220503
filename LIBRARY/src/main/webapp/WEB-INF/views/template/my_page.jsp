@@ -149,7 +149,7 @@ a:hover{
 					</tr>
 					<tr>
 						<td>
-						<a href="/member/borrowListU?memId=${loginInfo.memId }">
+						<a href="/member/borrowListU?memId=${loginInfo.memId}">
 						대여목록 상세조회
 						</a>
 						</td>
@@ -159,7 +159,7 @@ a:hover{
 					</tr>
 					<tr>
 						<td>
-						<a href="/member/bookPlaner">
+						<a href="/member/bookPlaner?memId=${loginInfo.memId }">
 						독서 플래너</a></td>
 					</tr>
 					<tr>

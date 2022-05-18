@@ -81,7 +81,7 @@
 				</tr>
 				<c:if test="${ntBoard.fileName ne null }">
 				<tr>
-					<td>첨부파일 <a href="/board/fileDownload?fileName=${ntBoard.fileName}">${ntBoard.fileName}</a></td>
+					<td colspan="2"style="border-top: 1px solid #dddddd; padding:5px;"><button style="margin-right: 10px;"type="button" class="btn-default">첨부파일</button><a href="/board/fileDownload?fileName=${ntBoard.fileName}">${ntBoard.fileName}</a></td>
 				</tr>
 				</c:if>
 			</tbody>

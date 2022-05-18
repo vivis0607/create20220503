@@ -67,6 +67,11 @@
    .form-control{
    		width: 50%;
    }
+   .update-btn{
+   		background-color: #72a37c;
+   		color: white;
+   		border-color: #72a37c;
+   }
 </style>
 </head>
 <body>
@@ -87,7 +92,7 @@
 				<textarea rows="10" cols="50" name="clubInfo" onkeyup="byteCheck(this, '500');" placeholder="북클럽 소개말">${club.clubInfo }</textarea>
 			</div>
 				<div style="text-align: right;"><span id="byteInfo">0</span> /500bytes</div>
-				<button type="submit" class="btn btn-success">수정 완료</button>
+				<button type="submit" class="update-btn btn btn-success">수정 완료</button>
 		</form>
 	</div>
 </div>

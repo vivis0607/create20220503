@@ -148,8 +148,8 @@ public class MemberServiceImpl implements MemberService{
 	}
 	//페이징 처리 위한 독서 기록 조회
 	@Override
-	public List<BookComplitVO> selectBookPlanerForPage(String memId) {
-		return sqlSession.selectList("memberMapper.selectBookPlanerForPage", memId);
+	public List<BookComplitVO> selectBookPlanerForPage(BookComplitVO bookComplitVO) {
+		return sqlSession.selectList("memberMapper.selectBookPlanerForPage", bookComplitVO);
 	}
 	//독서 기록 조회
 	@Override

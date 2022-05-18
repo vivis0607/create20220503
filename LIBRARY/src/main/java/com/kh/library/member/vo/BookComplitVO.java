@@ -18,9 +18,6 @@ public class BookComplitVO extends PageVO{
 
 	
 	
-	
-	
-	
 
 	public int getRowNum() {
 		return rowNum;

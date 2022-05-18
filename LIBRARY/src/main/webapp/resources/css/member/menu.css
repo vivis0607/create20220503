@@ -394,7 +394,7 @@ li {
 	clear: both; }
 	
 		
-.nav-main-menu a{
+/* .nav-main-menu a{
 	text-decoration: none;
 }
 
@@ -403,6 +403,9 @@ li {
 	background-color: #fff;
 	border-bottom: 2px solid #427a4e;
 	position: relative;
+	z-index: 999; 
+	width: 100%;
+	margin: 0 auto;
 }
 
 .menu01 ul{
@@ -410,6 +413,7 @@ li {
 }
 .menu01 ul a{
 	font-size: 16px;
+	width: 100%;
 }
 .nav-main-menu > ul > li{
 	border-bottom: none;
@@ -431,4 +435,69 @@ li {
 }
 .nav-main-menu > ul > li > ul > li > a{
 	text-align: left;
+} */
+
+#nav-main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  background: white;
+  border-bottom: 2px solid #427a4e;
+}
+
+#main-menu > li {
+  float: left;
+  position: relative;
+}
+
+#main-menu > li > a {
+  font-size: 1rem;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  padding: 14px 60px;
+  border-right: 1px solid rgba(0,0,0,0.15);
+}
+
+#main-menu > li:nth-child(1) > a {
+  border-left: 1px solid rgba(0,0,0,0.15);
+}
+
+#sub-menu {
+  position: absolute;
+  background: #F7F7F5;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.15s ease-in;
+  z-index: 999;
+}
+
+#sub-menu > li {
+ padding: 16px 28px;
+  border-bottom: 1px solid rgba(0,0,0,0.15);
+  text-align: left;
+  
+  }
+
+#sub-menu > li >  a {
+  color: #427a4e;
+  text-decoration: none;
+  text-align: left;
+  font-size: .9rem;
+}
+
+#main-menu > li:hover #sub-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+#sub-menu > li >  a:hover {
+ text-decoration: underline;
+}
+
+dl, ol, ul {
+    margin-top: 0;
+    margin-bottom: 0rem;
 }

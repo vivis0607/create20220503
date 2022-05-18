@@ -7,11 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
+<link href="/resources/css/book/bookDetail.css" rel="stylesheet">
+
 <style type="text/css">
 .cart_container{
 	margin: 0 auto;
 	margin-top: 30px;
-	width: 80%;
 }
 .table{
 	vertical-align: middle;
@@ -123,6 +125,7 @@ input[type="number"]{
 </style>
 </head>
 <body>
+<div class="nonSide-container">
 <div class="cart_container">
 	<h3>장바구니</h3>
 	<div style="vertical-align: middle;">
@@ -169,7 +172,7 @@ input[type="number"]{
 								${cart.itemName }
 							</span></td>
 							<td><div>
-								<fmt:formatNumber value="${cart.itemPrice }" pattern="\#,###"/>
+								<fmt:formatNumber value="${cart.itemPrice }" pattern="#,###"/> 원
 							</div></td>
 							<td>
 								<div style="margin-bottom: 8px;">
@@ -180,7 +183,7 @@ input[type="number"]{
 								</div>
 							</td>
 							<td class="totalPriceTd">
-								<fmt:formatNumber value="${cart.totalPrice }" pattern="\#,###"/>
+								<fmt:formatNumber value="${cart.totalPrice }" pattern="#,###"/> 원
 							</td>
 							<td><span>
 								<button type="button" class="btn btn-success btn-m" style="width: 80px;" onclick="deleteCart(this,'${cart.itemCode}');">삭제</button>
@@ -203,7 +206,7 @@ input[type="number"]{
 				<td>총구매금액</td>
 				<td>
 					<div id="buyPriceDiv">
-						<fmt:formatNumber value="${totalPrice }" pattern="\#,###"/>
+						<fmt:formatNumber value="${totalPrice }" pattern="#,###"/> 원
 					</div>
 				</td>
 			</tr>
@@ -215,7 +218,7 @@ input[type="number"]{
 				<td>결재예정금액</td>
 				<td>
 					<div id="buytotalPriceDiv">
-						<fmt:formatNumber value="${totalPrice }" pattern="\#,###"/>
+						<fmt:formatNumber value="${totalPrice }" pattern="#,###"/> 원
 					</div>
 				</td>
 			</tr>
@@ -232,6 +235,7 @@ input[type="number"]{
 			<button type="button" class="btn btn-success btn-m" onclick="buy();">주문하기</button>
 		</span>
 	</div>
+</div>
 </div>
 <script type="text/javascript" src="/resources/js/item/cart.js?var=15"></script>
 </body>

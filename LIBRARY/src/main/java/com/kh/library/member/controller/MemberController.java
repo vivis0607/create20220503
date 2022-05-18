@@ -52,8 +52,13 @@ public class MemberController {
 
    @Autowired
    private BCryptPasswordEncoder pwEncoder;
-
- 
+   
+	@GetMapping("/test01")
+	public String test01() {
+	 return "manage/test01";
+   }
+   
+   
    // --------------회원가입---------------
    // 회원가입창 이동
    @GetMapping("/join")
@@ -364,29 +369,34 @@ public class MemberController {
    
    // 독서 플래너
 	@GetMapping("/bookPlaner")
-	public String bookPlaner(HttpSession session, Model model, BookComplitVO bookComplitVO) {
-		String memId = ((MemberVO)(session.getAttribute("loginInfo"))).getMemId();
-		List<BookComplitVO> list = memberService.selectBookPlanerForPage(memId);
-		 if(!(memberService.selectRecommendBook(memId)).isEmpty()) {
-				if((memberService.selectRecommendBook(memId)).size() < 3) {
-					model.addAttribute("rcdList", memberService.selectRecommendBook(memId));
-				}
-				else {
-					model.addAttribute("rcdList", getRcdList(memberService.selectRecommendBook(memId)));
-					
-				}
+	public String bookPlaner(Model model, BookComplitVO bookComplitVO) {
+		//1.전체 데이터의 개수 조회
+		int listCnt = memberService.selectBookPlanerCnt(bookComplitVO);
+		bookComplitVO.setTotalCnt(listCnt);
+		bookComplitVO.setDisplayCnt(5);
+		
+		System.out.println(bookComplitVO.getStartNum()+"스타트넘멈머머ㅓ머머머머");
+		System.out.println(bookComplitVO.getEndNum() + "엔드너너너너너너너너ㅓㅁ");
+		//2.페이징 처리를 위한 세팅 메소드 호출
+		bookComplitVO.setPageInfo();
+		System.out.println(bookComplitVO.getMemId() + "북컴플릿vo에 들어있는");
+		List<BookComplitVO> list = memberService.selectBookPlanerForPage(bookComplitVO);
+		String memId = bookComplitVO.getMemId();
+		System.out.println(memId + "멤아이디ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ");
+		if(!(memberService.selectRecommendBook(bookComplitVO.getMemId())).isEmpty()) {
+			if((memberService.selectRecommendBook(bookComplitVO.getMemId())).size() < 3) {
+				model.addAttribute("rcdList", memberService.selectRecommendBook(bookComplitVO.getMemId()));
 			}
 			else {
-				model.addAttribute("rcdList", getRcdList(memberService.selectReadYet(memId)));
+				model.addAttribute("rcdList", getRcdList(memberService.selectRecommendBook(bookComplitVO.getMemId())));
+				
 			}
-		//1.전체 데이터의 개수 조회
-		 	bookComplitVO.setMemId(memId);
-			int listCnt = memberService.selectBookPlanerCnt(bookComplitVO);
-			bookComplitVO.setTotalCnt(listCnt);
-			System.out.println(listCnt + "2개수개수개ㅜㅅ개수개수@@@@@@@@@@@@@@@@@@@");
-			bookComplitVO.setDisplayCnt(5);
-			//2.페이징 처리를 위한 세팅 메소드 호출
-			bookComplitVO.setPageInfo();
+			}
+		else {
+			model.addAttribute("rcdList", getRcdList(memberService.selectReadYet(memId)));
+		}
+	 	
+		
 		model.addAttribute("complitBookList", list);
 		model.addAttribute("myTopThree", memberService.topThreeBookPlaner(memId));
 		model.addAttribute("chartList", memberService.selectBookPlanerChart(memId));

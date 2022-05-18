@@ -11,7 +11,16 @@
 <link href="/resources/css/common/infoBar.css" rel="stylesheet">
 
 <style type="text/css">
-
+.page-item.active .page-link {
+	background-color: #72a37c;
+	border-color: #72a37c;
+}
+.page-link {
+	color: #72a37c;
+}
+.page-link:hover{
+	color: #72a37c; 
+}
 
 .btn-outline-success{
 	background-color: #fff;
@@ -39,6 +48,12 @@
 }
 .page-link {
    color: #198754;
+}
+
+.pageDiv{
+	display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
 }
 </style>
 </head>
@@ -94,12 +109,7 @@
 	<div>
 		<span>나의 독서 기록</span>
 		<div>
-			<div>
-				<button class="btn btn-sm btn-outline-success" onclick="window.open('/member/favChk', '내 취향', 'scrollbars=yes,resizable=no width=700 height=1000, left=0,top=0'); return false">쌓아보기</button>
-			</div>
-			<div>
-				<button class="btn btn-sm btn-outline-success"  onclick="location.href='/member/bookPlanerForm';" >기록하기</button>
-			</div>
+			<button class="btn btn-sm btn-outline-success" onclick="window.open('/member/favChk', '내 취향', 'scrollbars=yes,resizable=no width=700 height=1000, left=0,top=0'); return false">쌓아보기</button>
 		</div>
 	</div>
 	<div class="complitBookList-table">
@@ -130,37 +140,29 @@
 			</c:choose>
 			</tbody>
 		</table>
-	
-	
-	
-	
-	
-	
-	<div class="pageDiv">
-		<nav aria-label="Page navigation example">
-			<ul class="pagination pagination-sm justify-content-center">
-				<li class="page-item <c:if test="${!bookComplitVO.prev }">disabled</c:if>">
-				<a class="page-link" href="/member/bookPlanerDetail?nowPage=${bookComplitVO.beginPage - 1 }"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-				</a></li>
-				<c:forEach begin="${bookComplitVO.beginPage }" end="${bookComplitVO.endPage }" var="pageIndex">
-						<li class="page-item <c:if test="${bookComplitVO.nowPage eq pageIndex }">active</c:if>"><a class="page-link" 
-						href="/member/bookPlanerDetail?nowPage=${pageIndex }">${pageIndex }</a></li>
-					</c:forEach>
-				<li class="page-item <c:if test="${!bookComplitVO.next }">disabled</c:if>">
-				      <a class="page-link" href="/member/bookPlanerDetail?nowPage=${bookComplitVO.endPage + 1 }" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				      </a>
-				</li>
-			</ul>
-		</nav>
 	</div>
 	
-	
-	
-	
-	
-	</div>
+</div>
+<div class="pageDiv">
+	<nav aria-label="Page navigation example">
+		<ul class="pagination pagination-sm justify-content-center">
+			<li class="page-item <c:if test="${!bookComplitVO.prev }">disabled</c:if>">
+			<a class="page-link" href="/member/bookPlaner?memId=${loginInfo.memId}&nowPage=${bookComplitVO.beginPage - 1 }"
+				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+			</a>
+			</li>
+			<c:forEach begin="${bookComplitVO.beginPage }" end="${bookComplitVO.endPage }" var="pageIndex">
+					<li class="page-item <c:if test="${bookComplitVO.nowPage eq pageIndex }">active</c:if>"><a class="page-link" 
+					href="/member/bookPlaner?memId=${loginInfo.memId}&nowPage=${pageIndex }">${pageIndex }</a></li>
+			</c:forEach>
+			<li class="page-item <c:if test="${!bookComplitVO.next }">disabled</c:if>">
+			      <a class="page-link" href="/member/bookPlaner?memId=${loginInfo.memId}&nowPage=${bookComplitVO.endPage + 1 }" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			</li>
+		</ul>
+	</nav>
+	<button class="btn btn-sm btn-outline-success"  onclick="location.href='/member/bookPlanerForm';" >기록하기</button>
 </div>
 <c:forEach items="${chartList }" var="chart">
 	<input class="bookCategory" type="hidden" value="${chart.cateInfo.cateName }">

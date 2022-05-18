@@ -11,7 +11,7 @@
 .itemD_container{
 	width: 75%;
 	margin: 0 auto;
-	font-size: 20px;
+	font-size: 17px;
 }
 .itemDiv{
 	height: 500px;
@@ -24,7 +24,7 @@
 	margin-bottom: 8px;
 }
 .itemNameDiv{
-	font-size: xx-large;
+	font-size: x-large;
 	font-weight: bold;
 	letter-spacing: 3px;
 	word-spacing: 3px;
@@ -71,10 +71,10 @@
 </style>
 </head>
 <body>
-
+<div class="nonSide-container">
 <div class="row itemD_container">
 	<div class="col-12">
-		<div style="text-align: right;">
+		<div style="text-align: right; font-size: medium;">
 			&nbsp; <a href="/item/itemList">GOODS</a>/
 			<c:forEach items="${cateList }" var="cate">		
 				<c:if test="${item.cateCode eq cate.cateCode }">
@@ -125,7 +125,7 @@
 				<hr>
 				<div style="padding-left: 20px;">
 					총 상품금액 : 
-					<span id="totalPriceSpan">${item.itemPrice } 원</span>
+					<span id="totalPriceSpan"><fmt:formatNumber value="${item.itemPrice }" pattern="#,###"/> 원</span>
 				</div>
 				<div class="itemD_button">
 					<div onclick="buy('${sessionScope.loginInfo.memId}', '${item.itemCode }');" style="margin-bottom: 10px;">BUY NOW</div>
@@ -148,6 +148,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 <script type="text/javascript" src="/resources/js/item/item_details.js?ver=30"></script>
 </body>

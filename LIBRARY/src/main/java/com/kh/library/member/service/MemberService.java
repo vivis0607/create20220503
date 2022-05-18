@@ -65,7 +65,7 @@ public interface MemberService {
 	//조회
 	List<BookComplitVO> selectBookPlaner(String memId);
 	//조회 for 페이지
-	List<BookComplitVO> selectBookPlanerForPage(String memId);
+	List<BookComplitVO> selectBookPlanerForPage(BookComplitVO bookComplitVO);
 	
 	//독서 기록 수 조회
 	int selectBookPlanerCnt(BookComplitVO bookComplitVO);

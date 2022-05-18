@@ -27,6 +27,14 @@
 	margin-bottom: 15px;
 	image-rendering: -webkit-optimize-contrast;
 }
+.btn{
+	background-color: #ffa900;
+	color: white;
+	border-color: #ffa900;
+}
+.container{
+	text-align: center;
+}
 </style>
 </head>
 <body>
@@ -43,8 +51,10 @@
 		<input type="hidden" name="memName" value="${sessionScope.loginInfo.memName }">
 		<input type="hidden" name="memImage" value="${sessionScope.loginInfo.memImage }">
 		
-		<input type="button" class="btn btn-success" value="가입하기" onclick="clubJoin();">
-		<input type="button" class="btn btn-success" value="뒤로가기" onclick="history.back();">
+		<div class="d-grid gap-2 d-md-flex justify-content-center">
+			<input type="button" class="btn " value="가입하기" onclick="clubJoin();">
+			<input type="button" class="btn " value="뒤로가기" onclick="history.back();">
+		</div>
 	</form>
 </div>
 <script type="text/javascript" src="/resources/js/club/club_join.js"></script>

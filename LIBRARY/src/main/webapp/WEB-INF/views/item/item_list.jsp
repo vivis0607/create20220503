@@ -65,11 +65,6 @@ input{
 <body>
 <div class="nonSide-container">
 
-<div>
-	<button type="button" onclick="location.href='/item/test';">홈테스트</button>
-</div>
-
-
 <div class="itemlist_container">
 	<div class="searchContainer">
 		<div class="searchDiv">

@@ -8,6 +8,51 @@
 <title>Insert title here</title>
 <link href="/resources/css/book/searchBar.css" rel="stylesheet">
 <link href="/resources/css/book/newBookSlide.css" rel="stylesheet">
+<script>
+//쿠키설정    
+function setCookie( name, value, expiredays ) {
+var todayDate = new Date();
+todayDate.setDate( todayDate.getDate() + expiredays );
+document.cookie = name + '=' + escape( value ) + '; path=/; expires=' + todayDate.toGMTString() + ';'
+}
+
+//쿠키 불러오기
+function getCookie(name) 
+{ 
+    var obj = name + "="; 
+    var x = 0; 
+    while ( x <= document.cookie.length ) 
+    { 
+        var y = (x+obj.length); 
+        if ( document.cookie.substring( x, y ) == obj ) 
+        { 
+            if ((endOfCookie=document.cookie.indexOf( ";", y )) == -1 ) 
+                endOfCookie = document.cookie.length;
+            return unescape( document.cookie.substring( y, endOfCookie ) ); 
+        } 
+        x = document.cookie.indexOf( " ", x ) + 1; 
+        
+        if ( x == 0 ) break; 
+    } 
+    return ""; 
+}
+
+//닫기 버튼 클릭시
+function closeWin(key)
+{
+    if($("#todaycloseyn").prop("checked"))
+    {
+        setCookie('divpop'+key, 'Y' , 1 );
+    }
+    $("#divpop"+key+"").hide();
+}
+
+$(function(){    
+    if(getCookie("divpop1") !="Y"){
+        $("#divpop1").show();
+    }
+});
+</script>
 <style type="text/css">
 .container{
 	width: 100%;
@@ -17,27 +62,107 @@
 	float: left;
 	width: 50%;
 }
+.sBar{
+ position: relative;
+ height: 300px;
+ background: url("/resources/images/common/2016110800999_0.jpg") no-repeat 50% 0;
+ background-size: cover;
+ padding: 0;
+ z-index:10; 
+}
+.testsearchBar{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    padding: 0;
+    width:100%;
+    height:100%;
+ 	background-color: #ffffff;
+    background-color: rgba( 255, 255, 255, 0.5 );
+    text-align: center;
+    z-index:10; 
+}
+.realSearch{
+	width: 100%;
+	z-index:10; 
+}
+.realSearch select{
+	background-color: #F8B400;
+	width: 150px;
+	height: 70px;
+	text-align: center;
+	margin-right: 0;
+}
+.realSearch input{
+	outline: none;
+	height: 70px;
+	width: 700px;
+	margin-left: 0;
+	margin-right: 0;
+}
+.realSearch button{
+	margin-left: 0;
+	margin-right: 0;
+	height: 70px;
+	width: 150px;
+	font-size: large;
+}
+.vision{
+	position: absolute;
+    left: 30px;
+    top: 5px;
+    color: #1A3C40;
+    font-weight: bold;
+    font-size: large;
+}
+.divpop {
+      position: absolute; 
+      z-index:999; 
+      top:50px; 
+      left:50px;
+      width:350px;
+      height:500px; 
+      background-color: #fff;
+      display:none;
+      border: 2rem solid #F5F3CE;
+}
+.title_area {
+	font-weight:bold;
+	text-align:center;
+	width:100%
+}
+.button_area {
+	position:absolute;
+	bottom:0;
+	left:10px;
+} 
+
 </style>
 </head>
 <body>
+	<div class="sBar">
+			<div class="testsearchBar">
+				<div class="vision">늘 봄처럼 늘봄 같이...</div>
+				<div class="realSearch">
+				<form action="/book/searchBook" method="post">
+				<!-- 검색구분 선택 -->
+					<select name="searchSub">
+						<option value="all" >전체</option>
+						<option value="title">도서명</option>
+						<option value="writer">저자</option>
+						<option value="publisher">출판사</option>
+						<option value="keyword">키워드</option>
+					</select>
+					<input type="text" name="searchTxt" placeholder="소장자료 검색">
+					<button type="submit" class="btn btn-success btn-sm searchBtn" onclick="location.href='book/searchBook';">검 색</button>
+					
+				</form>
+				</div>
+			</div> 
+		</div>
+	</div>
 <div class="container">
-	<div class="searchBar">
-	
-		<form action="/book/searchBook" method="post" id="searchBook">
-		<!-- 검색구분 선택 -->
-			<select name="searchSub">
-				<option value="all" >전체</option>
-				<option value="title">도서명</option>
-				<option value="writer">저자</option>
-				<option value="publisher">출판사</option>
-				<option value="keyword">키워드</option>
-			</select>
-			<input type="text" name="searchTxt" placeholder="소장자료 검색">
-			<button type="submit" class="btn btn-success btn-sm" onclick="location.href='book/searchBook';">검색</button>
-		</form>
-	</div> 
-	
-	
+
 	<div class="slide col-4" style="display: inline-block;">
 	<!-- 신착도서 슬라이드  -->
 	<div class="goNewBookList" >
@@ -141,15 +266,16 @@
 	</div>
 </div>
  --%>
- <c:if test="${sessionScope.loginInfo.isOd eq 'Y' }">
-	<script type="text/javascript">
-		
-	        if (!confirm("연체 중인 도서가 있습니다. 대여 목록 상세조회로 이동할까요?")) {
-	            alert("취소(아니오)를 누르셨습니다.");
-	        } else {
-	            location.href='/member/borrowListU?memId=${loginInfo.memId }';
-	        } 
-	</script>
+<c:if test="${sessionScope.loginInfo.isOd eq 'Y' }">
+
+ <div id="divpop1" class="divpop">    
+          <div class="title_area">연체 중인 도서가 있습니다. 확인해 주세요!</div>
+           <div class="button_area">
+               <input type='checkbox' name='chkbox' id='todaycloseyn' value='Y'>오늘 하루 이 창을 열지 않음    
+               <a href='#' onclick="javascript:closeWin(1);"><B>[닫기]</B></a>
+           </div>
+      </div>
+	
 </c:if>
  <c:if test="${sessionScope.loginInfo.isPwdTemp eq 'Y' }">
 	<script type="text/javascript">
