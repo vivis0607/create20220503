@@ -50,11 +50,13 @@
 	height: 70px;
 	margin-left: 0;
 	margin-right: 0;
+	width: 30%;
 }
 .realSearch button{
 	margin-left: 0;
 	margin-right: 0;
 	height: 70px;
+	width: 100px;
 }
 .vision{
 	position: absolute;
@@ -81,7 +83,7 @@
 					<option value="keyword">키워드</option>
 				</select>
 				<input type="text" name="searchTxt" placeholder="소장자료 검색">
-				<button type="submit" class="btn btn-success btn-sm searchBtn" onclick="location.href='book/searchBook';">검색하기</button>
+				<button type="submit" class="btn btn-success btn-sm searchBtn" onclick="location.href='book/searchBook';">검색</button>
 				
 			</form>
 			</div>
