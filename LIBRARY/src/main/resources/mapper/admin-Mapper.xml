@@ -46,6 +46,7 @@
 			        AND UPPER(MEM_ID) LIKE UPPER('%'||#{keyword}||'%')
 			        </if>
 			        AND IS_ADMIN = 'N'
+			        AND IS_DELETE = 'N'
 			        ORDER BY MEM_ID
 			    )
 			)
@@ -57,9 +58,11 @@
 		SELECT COUNT(MEM_ID)
 		FROM BOOK_MEMBER
 		WHERE 1=1
-	        <if test="keyword != null and !keyword.equals('')">
-	        AND UPPER(MEM_ID) LIKE UPPER('%'||#{keyword}||'%')
-	        </if>
+        <if test="keyword != null and !keyword.equals('')">
+        AND UPPER(MEM_ID) LIKE UPPER('%'||#{keyword}||'%')
+        </if>
+        AND IS_ADMIN = 'N'
+        AND IS_DELETE = 'N'
 	</select>
 	
 	<!-- 알림전송 -->

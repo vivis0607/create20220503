@@ -1,98 +1,119 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ page import="java.io.*"%>
+<%@ page import="java.net.*"%>
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일");
+%>
+<%
+	//파일 기본경로
+	String defaultPath = request.getSession().getServletContext().getRealPath("/");
+	//파일 기본경로, 상세경로
+	String filePath = defaultPath + "ckEimg" + File.separator;
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<meta name="viewport" content="width=80%,  initial-scale=1">
+	<script src="/resources/ckeditor/ckeditor.js"></script>
+	<script>
+		window.onload = function(){
+			ck = CKEDITOR.replace("editor");
+		};
+	</script>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
 <style type="text/css">
-/* hs-write-form 작성폼 */
-   .hs-write-form{
-      display: flex;
-       flex-direction: column;
-       justify-content: center;
-   
-   }
-   .hs-write-form-top{
-      display: flex;
-       justify-content: center;
-   }
-   .hs-write-form-top div:nth-child(1){
-      flex-grow: 90;
-   }
-   .hs-write-form-top div:nth-child(2){
-      margin-left: 10px;
-      flex-grow: 0;
-      width: 17%;
-   }
-   .hs-write-form-top div:nth-child(2) input[type="text"]{
-      text-align: center;
-   }
-   
-   
-   .hs-write-form input[type="text"]{
-      width: 100%;
-      border: none;
-      border-bottom: 1px solid #d4d4d4;
-      padding: 5px;
-   }
-   .hs-write-form input[type="text"]:focus{
-      border-bottom: 1px solid #16784B;
-   }
-   .hs-write-form-bottom textarea{
-      width: 100%;
-      margin: 1rem auto;
-      padding: 5px;
-      border: 1px solid #d4d4d4;
-      border-radius: 7px;
-      resize: none;
-   }
-   .hs-write-form-bottom textarea:focus {
-      border: 1px solid #16784B;;
-      outline: none;
-   }
-   .hs-write-form-bottom {
-      text-align: right;
-   }
-   .hs-write-form-bottom button{
-      margin-right: 2px;
-   }
-   .reg-btn{
-	   	background-color: #ffa900;
-		color: white;
-   }
+.writeForm {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.writeForm table{
+	width:100%;
+}	
+
+.writeForm td{
+	padding: 10px;
+	border-bottom: 1px solid #dddddd;
+	border-top: 1px solid #dddddd;
+}
+.writeForm td:first-child{
+	background-color: #F0F0F0;
+	text-align: center;
+	font-weight: 600;
+}
+.btnDiv{
+	padding-top:10px;
+	padding-left:25px;
+	padding-right:10px;
+	text-align:right;
+}
+
+.btnDiv button{
+		height: 40px;
+		padding-left: 10px;
+		padding-right: 10px;
+		width: 150px;
+}
+
+
 </style>
 </head>
 <body>
 <div class="container">
-	<div class="hs-write-form ">
-		 <div class="hs-write-form-top">
-			<form action="/club/regClubBoard" method="post">
-				<input type="hidden" name="clubCode" value="${clubCode }">
-				<c:if test="${sessionScope.loginInfo.clubAdmin eq 'Y' or sessionScope.loginInfo.isAdmin eq 'Y'}">
-					<div class="form-check">
+	<div class="subTit">
+      <div class="line_map">홈 > 북클럽 > 북클럽 글쓰기</div>
+      <div class="tit">북클럽 글쓰기</div>
+   	</div>
+
+<form action="/club/regClubBoard" method="post" id="clubBoardWrite" class="needs-validation" enctype="multipart/form-data">
+	<input type="hidden" name="memId" value="${sessionScope.loginInfo.memId }">
+	<input type="hidden" name="memName" value="${sessionScope.loginInfo.memName }">
+	<input type="hidden" name="memImage" value="${sessionScope.loginInfo.memImage}">
+	<input type="hidden" name="clubCode" value="${sessionScope.loginInfo.clubCode}">
+	<div class="writeForm">
+		<table>
+			<tr>
+				<td>공지</td>
+				<td><div class="form-check">
 					  <input class="form-check-input" type="checkbox" value="1" name="cbPin" id="flexCheckDefault">
 					  <label class="form-check-label" for="flexCheckDefault">
-					   공지
 					  </label>
-					</div>
-				</c:if>
-				<input type="hidden" name="memId" value="${sessionScope.loginInfo.memId }">
-				<input type="hidden" name="memName" value="${sessionScope.loginInfo.memName }">
-				<input type="hidden" name="memImage" value="${sessionScope.loginInfo.memImage}">
-				 <div>
-				 	<input type="text" name="cbBoardTitle" placeholder="제목">
-				 </div>
-				 <div class="hs-write-form-bottom">
-					<textarea rows="20" cols="60" name="cbBoardContent" id="textarea" placeholder="내용"></textarea>
-				</div>
-				<div class="d-grid gap-2 d-md-flex justify-content-end">
-					<button type="submit" class="reg-btn btn" onclick="regClubBoard();">등록</button>
-				</div>
-			</form>
+					</div></td>
+			</tr>
+			<tr>
+				<td class="title">제목</td>
+				<td><input type ="text" name="cbBoardTitle" id="cbBoardTitle" class="form-control"></td>
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td>${sessionScope.loginInfo.memName }</td>
+			</tr>
+			<tr>
+				<td>등록일</td>
+				<td><%= sf.format(nowTime) %></td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td><textarea name="cbBoardContent" id = "editor"></textarea></td>
+			</tr>
+			<tr>
+				<td>첨부파일</td>
+				<td><input type="file" name="uploadFile" class="form-control"></td>
+			</tr>
+		</table>
 		</div>
+	<div class="btnDiv">
+		<button type="submit" class="btn btn-success">글쓰기</button>
 	</div>
+</form>
 </div>
+
+
 </body>
 </html>

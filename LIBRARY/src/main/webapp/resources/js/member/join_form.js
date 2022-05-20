@@ -7,7 +7,6 @@ function removeSpecData(){
 	let id = form.querySelector('#inputId');
 	
 	id = id.replace(reg, "");
-	alert(id);
 }
 
 
@@ -66,7 +65,7 @@ $('#joinForm').validate({
       },
 	messages: {
   	  memId: {
-			required: '필수입력 항목입니다.',
+			required: '필수 입력 항목입니다.',
             minlength: '5자 이상 입력해 주셔야 해요.',           
             maxlength: '12자 이하로 입력해 주셔야 해요.'            
          },
@@ -84,13 +83,13 @@ $('#joinForm').validate({
 		required: '필수입력 항목입니다.'
 		},
 	memTell1: {
-		digits: '전화번호 표기 방식이 올바르지 않습니다',
+		digits: '올바른 전화번호 표기 형식이 아닙니다.',
 		required: '필수입력 항목입니다.',
 		minlength: '3~4자리의 숫자를 입력해 주세요.',
 		maxlength: '4자리의 숫자를 입력해 주세요.'
 		},
 	memTell2: {
-		digits: '전화번호 표기 방식이 올바르지 않습니다',
+		digits: '올바른 전화번호 표기 형식이 아닙니다.',
 		required: '필수입력 항목입니다.',
 		minlength: '3~4자리의 숫자를 입력해 주세요.',
 		maxlength: '4자리의 숫자를 입력해 주세요.'
@@ -123,6 +122,8 @@ $('#joinForm').validate({
       submitHandler: function(form) {
 		$('#inputTell1').attr('name', 'memTell');
 		$('#inputTell2').attr('name', 'memTell');
+		$('#inputEmail1').attr('name', 'memEmail');
+		$('#inputEmail2').attr('name', 'memEmail');
 		removeSpecData(form);
         form.submit();   //유효성 검사를 통과시 전송
       }
@@ -142,7 +143,6 @@ $.ajax({
 				let str = '';
 				str += '확인';
 				btn.innerText = str;
-				alert(2);
 				
 				$('.id-unavailable').css("display", "inline-block");
 				$('.id-available').css("display", "none");

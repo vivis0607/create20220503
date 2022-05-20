@@ -95,11 +95,6 @@
    </div>
 
 
-
-
-
-
-
 <div class="row">
 	<div class="boardDiv col-11 text-left" >
 		<input type="hidden" class="hiddenComplitCode" value="${bookPlaner.complitCode }">

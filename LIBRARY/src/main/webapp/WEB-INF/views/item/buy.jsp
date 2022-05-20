@@ -169,7 +169,7 @@ input{
 				<c:forEach items="${buyList }" var="item">
 					<tr>
 						<td>
-							<img alt="..." src="/resources/images/item/${item.itemAtImgName}" height="100px">
+							<img alt="..." src="/resources/images/item/${item.itemAtImgName}" height="120px" width="120px;">
 						</td>
 						<td style="text-align: left; padding-left: 10px;">
 							<div>${item.itemName }</div>

@@ -11,9 +11,9 @@ $(document).on('click', '.adminMsgDetail' , function() {
 	var sendDate = $(this).children().eq(2).text();
 
 
-	$('#getId').text(getId);
-	$('#msgContent').text(msgContent);
-	$('#sendDate').text(sendDate);
+	$('#getId-1').text(getId);
+	$('#msgContent-1').text(msgContent);
+	$('#sendDate-1').text(sendDate);
 
 	$('#adminMsgModal').modal('hide');
 	$('#adminMsgDetailModal').modal('show');

@@ -31,6 +31,7 @@ public class SalesServiceImpl implements SalesService {
 
 	@Override
 	public void deleteOrders(OrderSheetVO orderSheetVO) {
+		sqlSession.delete("cartMapper.deleteOrderBuys", orderSheetVO);
 		sqlSession.delete("cartMapper.deleteOrders", orderSheetVO);
 	}
 

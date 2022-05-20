@@ -104,7 +104,6 @@ function payment(){
 			},
 			error: function() {
 				//ajax 실행 실패 시 실행되는 구간
-				alert('실패');
 			}
 		});
 		}
@@ -133,10 +132,7 @@ function payment(){
 			 console.log(rsp);
 			 if (rsp.success) {
 				 var msg = '결제가 완료되었습니다.';
-				 msg += '고유ID : ' + rsp.imp_uid;
-				 msg += '상점 거래ID : ' + rsp.merchant_uid;
-				 msg += '결제 금액 : ' + rsp.paid_amount;
-				 msg += '카드 승인번호 : ' + rsp.apply_num;
+				 msg += '주문완료페이지로 넘어갑니다.'
 				 //JSON.stringify(objArr);
 				$.ajax({
 					url: '/buy/insertOrder', //요청경로
@@ -149,18 +145,14 @@ function payment(){
 							, 'deliMsg' : deliMsg}, //필요한 데이터 '데이터이름':값
 					success: function(result) {
 						//ajax 실행 성공 후 실행할 코드 작성
-						alert('주문완료페이지로 넘어갑니다.');
-						
 						location.href = '/buy/buyFin?orderNum='+result;
 					},
 					error: function() {
 						//ajax 실행 실패 시 실행되는 구간
-						alert('실패');
 					}
 				});
 			 } else {
 				 var msg = '결제에 실패하였습니다.';
-				 msg += '에러내용 : ' + rsp.error_msg;
 			 }
 			 alert(msg);
 		 });
@@ -189,12 +181,10 @@ function deleteBuy(){
 			success: function(result) {
 				//ajax 실행 성공 후 실행할 코드 작성
 				alert('장바구니페이지로 이동합니다.');		
-				alert('result');		
 				location.href = '/cart/cartView?orderNum='+result;
 			},
 			error: function() {
 				//ajax 실행 실패 시 실행되는 구간
-				alert('실패');
 			}
 		});
 	

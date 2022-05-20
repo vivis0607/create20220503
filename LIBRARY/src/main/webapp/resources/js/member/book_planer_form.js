@@ -1,3 +1,56 @@
+
+/*유효성 검사*/
+$.validator.setDefaults({
+    onkeyup: false,
+    onclick: false,
+    onfocusout: false,
+    showErrors: function(errorMap,errorList){
+        if(this.numberOfInvalids()){ // 에러가 있으면
+            alert(errorList[0].message); // 경고창으로 띄움
+        }
+    }
+});
+
+
+$('#bookPlanerForm1').validate({
+	debug: true,
+	rules: {
+		title:{required: true}
+		,writer:{required: true}
+      },
+	messages: {
+		title: {required: '도서 제목을 입력해 주세요.'}
+		,writer:{required: '저자명을 입력해 주세요.'}
+      },
+	errorPlacement: function(error,element){
+	  },
+    submitHandler: function(form) {
+        form.submit();   //유효성 검사를 통과시 전송
+      }
+   });
+/*$('#bookPlanerForm1').validate({
+	debug: true,
+	onkeyup: false,
+	rules: {
+		title:{required: true}
+		,writer:{required: true}
+      },
+	messages: {
+		title: {required: '도서 제목을 입력해 주세요.'}
+		,writer:{required: '저자명을 입력해 주세요.'}
+      },
+	errorPlacement: function(error,element){
+		//alert(11);
+		//alert($(element).attr('name'));
+			if($(element).attr('name') == 'title'){
+				alert(error.html());
+			}
+	  },
+    submitHandler: function(form) {
+        form.submit();   //유효성 검사를 통과시 전송
+      }
+   });*/
+
 //완독도서 검색
 function bookPlanerSearch(){
 	const title = document.querySelector('.bookPlaner-search input[name="title"]').value;
@@ -34,11 +87,11 @@ function bookPlanerSearch(){
 	});
 }
 
+
+
+
 //검색한 완독도서 제목에 넣어주기
 function resultChoice(v){
-	//const first = v.childNodes[1];
-	//alert(v.childNodes[1].innerText);
-	//alert(v.childNodes[2].innerText);
 	
 	document.querySelector('.hs-write-form input[name="title"]').value = v.childNodes[1].innerText;
 	document.querySelector('.hs-write-form input[name="writer"]').value = v.childNodes[2].innerText;

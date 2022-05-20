@@ -104,7 +104,7 @@ input{
 			</c:forEach>
 		</div>
 </div>
-<div class="pageDiv">
+<div class="pageDiv col-4" style=" margin:0 auto;">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination pagination-sm justify-content-center">
 				<li class="page-item <c:if test="${!itemVO.prev }">disabled</c:if>">

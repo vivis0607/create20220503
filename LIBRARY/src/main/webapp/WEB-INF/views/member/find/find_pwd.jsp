@@ -49,6 +49,6 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="/resources/js/member/find_info.js?ver=2"></script>
+<script type="text/javascript" src="/resources/js/member/find_info.js?ver=3"></script>
 </body>
 </html>

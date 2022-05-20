@@ -32,7 +32,7 @@ new Chart(document.getElementById("bar-chart"), {
 			yAxes: [{
 				ticks: {
 					min: 0,
-					stepSize : 1000,
+					stepSize : 10000,
 				}
 			}]
 		}
@@ -83,7 +83,7 @@ $.ajax({
 				yAxes: [{
 					ticks: {
 						min: 0,
-						stepSize : 1000,
+						stepSize : 10000,
 					}
 				}]
 			}

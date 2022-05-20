@@ -23,11 +23,16 @@ function updateCmt(){
 }
 
 function deleteFreeCmt(commentNum, boardNum){
+	alert('삭제되었습니다');
 	location.href='/otherB/deleteFreeCmt?commentNum='+commentNum+'&boardNum='+boardNum;
 }
 
 
-
+function deleteFreeboard(){
+	alert('삭제되었습니다');
+	var boardNum = document.getElementById('boardNumber').value;
+	location.href='/otherB/deleteFreeBoard?boardNum='+boardNum;
+}
 
 
 //textarea 바이트 수 체크하는 함수

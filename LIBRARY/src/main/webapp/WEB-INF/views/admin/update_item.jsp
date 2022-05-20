@@ -6,11 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
+<link href="/resources/css/book/bookDetail.css" rel="stylesheet">
+
 <style type="text/css">
 .update_item_container{
-	margin-top: 30px;
 	text-align: center;
-	vertical-align: middle;
+	width: 100%;
+	height:100%;
+	margin: 0 auto;
+	margin-top: 30px;
 }
 .updateItemCuver{
 	border: 5px solid #c7e2d1;
@@ -148,8 +153,11 @@ img{
 </head>
 <body>
 <div class="container">
+	<div class="subTit">
+      <div class="line_map">홈 > 관리자메뉴 > 상품관리 > 상품수정</div>
+      <div class="tit">상품수정</div>
+    </div>
 	<div class="update_item_container">
-		<div style="margin:0 auto; margin-bottom: 20px;"> <h2>GOODS 수정</h2> </div>
 		<form action="/item/updateItem" method="post" enctype="multipart/form-data">
 		<input type="hidden" value="${item.itemCode }" name="itemCode">
 			<div class="updateItemCuver">

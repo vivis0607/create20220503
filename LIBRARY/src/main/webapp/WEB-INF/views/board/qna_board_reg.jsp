@@ -93,8 +93,8 @@
 					</td>
 					<td id="pwInput">비밀글유무</td>
 					<td>
-						<input type="radio" name="qnaIsPrivate" value="Y" onclick="insertTr();">예 &nbsp;
-						<input type="radio" name="qnaIsPrivate" value="N" onclick="nop();">아니오
+						<input type="radio" name="qnaIsPrivate" value="Y" onclick="insertTr();" required>예 &nbsp;
+						<input type="radio" name="qnaIsPrivate" value="N" onclick="nop();" checked>아니오
 					</td>
 				</tr>
 			</table>
@@ -105,7 +105,7 @@
 			</colgroup>
 				<tr>
 					<td>문의내용</td>
-					<td><textarea name="boardContent" id ="editor"></textarea></td>
+					<td><textarea name="qnaContent" id ="editor"></textarea></td>
 				</tr>
 			</table>
 		</div>

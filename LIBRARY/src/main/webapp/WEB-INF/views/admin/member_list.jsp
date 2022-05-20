@@ -254,13 +254,13 @@
         		<col width="25%">
 			    <tr>
 			      <th scope="col">회원ID</th>
-			      <td id="getId"></td>
+			      <td id="getId-1"></td>
 			      <th scope="col">전송날짜</th>
-			      <td id="sendDate"></td>
+			      <td id="sendDate-1"></td>
 			    </tr>
 			    <tr>
 			      <th scope="row">내용</th>
-			      <td id="msgContent" colspan="4" style="word-break: break-all"></td>
+			      <td id="msgContent-1" colspan="4" style="word-break: break-all"></td>
 			    </tr>
 			</table>
       	</div>

@@ -110,7 +110,7 @@
 						<tr>
 							<td style="text-align: right;">
 								<img alt="..." src="/resources/images/item/${buy.itemAtImgName }" 
-									height="50px;" onclick="location.href='/item/itemDetail?itemCode=${buy.itemCode}';">
+									height="120px" width="120px;" onclick="location.href='/item/itemDetail?itemCode=${buy.itemCode}';">
 							</td>
 							<td style="text-align: left;">
 								<div style="text-align: left; padding-left: 10px;" onclick="location.href='/item/itemDetail?itemCode=${buy.itemCode}';">${buy.itemName }</div>

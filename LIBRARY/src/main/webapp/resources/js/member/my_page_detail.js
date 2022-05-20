@@ -54,27 +54,29 @@ $('#basicForm').validate({
 			maxlength: 4
 		},
 		memEmail:{
-			required: true
+			required: true,
+			email: true
 		}
       },
       messages: {
 		memName:{
-			required: '필수 입력 사항입니다'
+			required: '필수 입력 항목입니다'
 		},
 		memTell1:{
-			required: '필수 입력 사항입니다',
-			digits:'전화번호 표기 방식이 올바르지 않습니다',
+			required: '필수 입력 항목입니다',
+			digits:'올바른 전화번호 표기 형식이 아닙니다.',
 			minlength: '3~4자리의 숫자를 입력해 주세요.',
 			maxlength: '4자리의 숫자를 입력해 주세요.'
 		},
 		memTell2:{
-			required: '필수 입력 사항입니다',
-			digits:'전화번호 표기 방식이 올바르지 않습니다',
+			required: '필수 입력 항목입니다',
+			digits:'올바른 전화번호 표기 형식이 아닙니다.',
 			minlength: '3~4자리의 숫자를 입력해 주세요.',
 			maxlength: '4자리의 숫자를 입력해 주세요.'
 		},
 		memEmail:{
-			required: '필수 입력 사항입니다'
+			required: '필수 입력 항목입니다',
+			email: '올바른 이메일 표기 형식이 아닙니다.'
 		}
       },
       errorElement:'div',

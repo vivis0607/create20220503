@@ -89,12 +89,12 @@
 	</div>
 </div>
 
-<form action="/member/insertBookPlaner" method="post">
+<form action="/member/insertBookPlaner" method="post" id="bookPlanerForm1">
 	<div class="bookPlaner-search-form hs-write-form">
 		<input type="hidden" name="memId" value="${loginInfo.memId }">
 		<div class="hs-write-form-top">
-			<div><input type="text" name="title" placeholder="책 제목"></div>
-			<div><input type="text" name="writer" placeholder="저자"></div>
+			<div><input type="text" name="title" placeholder="도서 제목" ></div>
+			<div><input type="text" name="writer" placeholder="저자명" ></div>
 		</div>
 		<div class="hs-write-form-bottom">
 			<textarea rows="10"  name="complitReview" ></textarea>
@@ -102,7 +102,10 @@
 		</div>
 	</div>
 </form>
-<script type="text/javascript" src="/resources/js/member/book_planer_form.js?ver=51" ></script>
+
+<!-- jQuery validation 문법 쓰기 : 주의! jQuery 문법을 쓴 후에 적어야 됨-->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/resources/js/member/book_planer_form.js?ver=70" ></script>
 </div>
 </body>
 </html>

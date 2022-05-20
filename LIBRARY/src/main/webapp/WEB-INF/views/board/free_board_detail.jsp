@@ -99,6 +99,7 @@ pre{
       <div class="tit">자유게시판</div>
    	</div>
 	<div class="detail">
+				<input type="hidden" id="boardNumber" value="${board.boardNum }">
 		<table>
 			<tbody class="Info">
 				<tr>
@@ -121,7 +122,7 @@ pre{
 		<div class="ntBtn">
 			<c:if test="${board.memId eq sessionScope.loginInfo.memId }">
 				<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="location.href='/otherB/updateFreeBoard?boardNum=${board.boardNum}';">수정</button>
-				<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="location.href='/otherB/deleteFreeBoard?boardNum=${board.boardNum}';">삭제</button>
+				<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="deleteFreeboard();">삭제</button>
 			</c:if>
 			<button type="button" class="btn btn-success btn-sm justify-content-md-end" onclick="location.href='/otherB/freeBoard';">목록</button>
 		</div>
@@ -187,6 +188,6 @@ pre{
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="/resources/js/board/free_board_detail.js?ver=5"></script>
+<script type="text/javascript" src="/resources/js/board/free_board_detail.js?ver=8"></script>
 </body>
 </html>

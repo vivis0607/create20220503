@@ -32,7 +32,6 @@ function findPwd(){
 	const memName = findPwd.querySelector('input[name="memName"]').value;
 	const memEmail = findPwd.querySelector('input[name="memEmail"]').value;
 
-alert(memName);
 	$.ajax({
 	   url: '/member/findPwd', //요청경로
 	    type: 'post',
@@ -43,7 +42,7 @@ alert(memName);
 	    },
 	    error: function(){
 	      //ajax 실행 실패 시 실행되는 구간
-	       alert('실패');
+	       alert('입력된 정보에 해당하는 회원이 없습니다.');
 	    }
 	});
 }

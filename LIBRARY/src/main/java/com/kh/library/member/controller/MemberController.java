@@ -53,11 +53,7 @@ public class MemberController {
    @Autowired
    private BCryptPasswordEncoder pwEncoder;
    
-	@GetMapping("/test01")
-	public String test01() {
-	 return "manage/test01";
-   }
-   
+	
    
    // --------------회원가입---------------
    // 회원가입창 이동
@@ -210,8 +206,8 @@ public class MemberController {
          messageHelper = new MimeMessageHelper(message, true, "UTF-8");
          messageHelper.setFrom("surfurlove@gmail.com");
          messageHelper.setTo(memEmail);
-         messageHelper.setSubject("양심 도서관 비밀번호 잃어버리셨죠?");
-         messageHelper.setText("임시 비밀번호는  " + tempPwd + "  입니다. 로그인 후 새비밀번호로 변경해주세요.");
+         messageHelper.setSubject(memberVO.getMemName() + "님 늘봄 도서관 비밀번호 잃어버리셨죠?");
+         messageHelper.setText("임시 비밀번호는 <" + tempPwd + ">입니다. 로그인 후 새 비밀번호로 변경해 주세요.");
          mailSender.send(message);
 
       } catch (MessagingException e) {
@@ -236,8 +232,6 @@ public class MemberController {
          , HttpSession session, RedirectAttributes re) {
 	  memberVO.setMemTell(memberVO.getMemTell().replace(",", "-"));
       MultipartFile file = multi.getFile("file");
-      System.out.println("@@@@@@@@@@@@@@@@@@@" + memberVO.getMemImage());
-      System.out.println("@@@@@@file name is" + file.getOriginalFilename());
       if(!file.getOriginalFilename().equals("")) {
          String uploadPath = "D:\\dev\\workspaceSTS\\LIBRARY\\src\\main\\webapp\\resources\\images\\member\\";
          
@@ -294,7 +288,6 @@ public class MemberController {
    @PostMapping("/checkPwd")
    public int checkPwd(String memId, String memPwd) {
 	   boolean a = pwEncoder.matches(memPwd, memberService.checkPwd(memId));
-	   System.out.println("@@@@@@@@@@@@@@@@@@@" + a);
 	   if(pwEncoder.matches(memPwd, memberService.checkPwd(memId))) {
 		   return 1;
 	   }
@@ -337,8 +330,6 @@ public class MemberController {
    @ResponseBody
    @PostMapping("/deleteChk")
    public int deleteChk(String memId, String memPwd) {
-	   //memId, memPwd 잘 넘어옴
-	   System.out.println("@@@@@@@@@@@@@@@@@@@" + memberService.deletePwdChk(memId));
 	   boolean a = pwEncoder.matches(memPwd, memberService.deletePwdChk(memId));
 	   if(pwEncoder.matches(memPwd, memberService.checkPwd(memId))) {
 		   return 1;
@@ -409,7 +400,7 @@ public class MemberController {
 	   public String favChk(HttpSession session, Model model) {
 		  String memId = ((MemberVO)(session.getAttribute("loginInfo"))).getMemId();
 		   
-		 //짭적북적 구현
+		 //북적북적 구현
 		  List<BookComplitVO> list = memberService.selectBookPlaner(memId);
 		  	for(int i = 0 ; i < list.size() ; i++) {
 				if(list.get(i).getBookInfo().getBkPage() >= 100) { //100페이지 이상이면
@@ -424,11 +415,11 @@ public class MemberController {
 		  	model.addAttribute("complitBookList", list);
 		  	return "favor/book_planer_favorChk";
 	  }
-	  //독서 플래너 상세조회
+	  //독서 플래너 상세조회 in 북적
 	  @GetMapping("/favorBookPlanerDetail")
 	  public String favorBookPlanerDetail(BookComplitVO bookComplitVO, Model model) {
 		  model.addAttribute("bookPlaner", memberService.selectBookPlanerDetail(bookComplitVO));
-		  return "favor/book_planer_detail";
+		  return "favor/book_planer_detail_inFav";
 	  }
 	//독서 플래너 상세조회
 	  @GetMapping("/bookPlanerDetail")
@@ -445,6 +436,12 @@ public class MemberController {
 		memberService.deleteBookPlaner(complitCode);
 	}
 	
+	//독서 플래너 수정 폼 이동 in 북적
+	@GetMapping("/favorBookPlanerUpdate")
+	public String favorBookPlanerUpdate(BookComplitVO bookComplitVO, Model model){
+		model.addAttribute("bookPlaner", memberService.selectBookPlanerDetail(bookComplitVO));
+		return "favor/book_planer_update";
+	}
 	//독서 플래너 수정 폼 이동
 	@GetMapping("/bookPlanerUpdate")
 	public String bookPlanerUpdate(BookComplitVO bookComplitVO, Model model){

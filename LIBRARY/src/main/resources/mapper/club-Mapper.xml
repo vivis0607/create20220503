@@ -332,6 +332,7 @@
 		FROM BOOK_CLUB_BOARD
 		WHERE CLUB_CODE = #{clubCode}
 		AND CB_PIN = 1
+		ORDER BY CB_BOARD_DATE
 	</select>
 	
 	<!-- 북클럽 게시글 검색 -->

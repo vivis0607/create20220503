@@ -38,13 +38,18 @@
 		outline: none;
 	}
 	
+	.loginChk{
+		display: block;
+	    text-align: center;
+	    margin: 0 0 1.2rem;
+	}
 	
-	.findBox{
+	.findBox, .recommJoin{
 		text-align: center;
-		margin-bottom: 3rem;
+		margin-bottom: 1rem;
 		font-size: 1rem;
 	}
-	.findBox a:hover{
+	.findBox a:hover, .recommJoin a:hover{
 		border-bottom:2px solid #246350;
 	}
 	
@@ -72,6 +77,11 @@
 			<a href="/member/findPwd">
 			비밀번호 찾기
 			</a>
+		</div>
+		<div class="recommJoin">
+			<div>
+				아직 늘봄 회원이 아니세요? <a href="/member/join">지금 가입하러 가기</a>
+			</div>
 		</div>
 		
 	</div>

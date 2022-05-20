@@ -20,6 +20,7 @@
 	margin: 0 auto;
 	width: 100%;
 	text-align: center;
+	vertical-align: middle;
 }
 .row{
 	margin-top: 20px;
@@ -77,8 +78,8 @@
 							<td>추가</td>
 							<td colspan="3">
 								<form action="/item/addCategory" method="post">
-									<span style="float: left; padding-left:17%;"><input type="text" name="cateName"></span>
-									<span style="float: right; padding-right: 6%;"><button type="submit" class="btn btn-success btn-sm">카테고리 추가</button></span>
+									<span style="float: left; padding-left:25%;"><input type="text" name="cateName"></span>
+									<span style="float: right; padding-right: 20%;"><button type="submit" class="btn btn-success btn-sm">카테고리 추가</button></span>
 								</form>
 							</td>
 						</tr>

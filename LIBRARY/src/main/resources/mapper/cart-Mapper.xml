@@ -373,7 +373,15 @@
 	
 	<!-- 선택주문내역 삭제 -->
 	<delete id="deleteOrders">
-		DELETE FROM ORDER_SHEET
+		DELETE ORDER_SHEET
+		WHERE ORDER_NUM IN
+		<foreach collection="orderNums" item="orderNum" open="(" close=")" separator=",">
+			#{orderNum}
+		</foreach>
+	</delete>
+	
+	<delete id="deleteOrderBuys">
+		DELETE BUY
 		WHERE ORDER_NUM IN
 		<foreach collection="orderNums" item="orderNum" open="(" close=")" separator=",">
 			#{orderNum}
@@ -488,9 +496,9 @@
 	SELECT D.BUY_DATE AS BUY_DATE, 
 	    DECODE(O.TOTAL_PRICE, NULL, 0, O.TOTAL_PRICE) AS TOTAL_PRICE
 	FROM (
-			 SELECT TO_CHAR(TO_DATE(TO_DATE(#{inputSDate}, 'YYYY-MM-DD') + LEVEL - 1, 'YY/MM/DD'),'YY/MM/DD') as BUY_DATE
+			 SELECT TO_CHAR(TO_DATE(TO_DATE(#{inputSDate}, 'YYYY-MM-DD') + LEVEL-1, 'YY/MM/DD'),'YY/MM/DD') as BUY_DATE
 	         FROM DUAL
-	         CONNECT BY LEVEL &lt;= TO_DATE(#{inputEDate}, 'YYYY-MM-DD') - TO_DATE(#{inputSDate}, 'YYYY-MM-DD') + 1
+	         CONNECT BY LEVEL &lt;= TO_DATE(#{inputEDate}, 'YYYY-MM-DD') - TO_DATE(#{inputSDate}, 'YYYY-MM-DD')+1
 	    ) D LEFT OUTER JOIN (
 	        SELECT TO_CHAR(BUY_DATE,'YY/MM/DD') AS BUY_DATE
 			    , SUM(TOTAL_PRICE) AS TOTAL_PRICE

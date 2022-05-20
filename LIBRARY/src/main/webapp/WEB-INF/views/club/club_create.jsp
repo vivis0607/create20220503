@@ -22,16 +22,17 @@ table tr td:nth-child(odd){
    }
    
    .hs-write-form input[type="text"]{
-      width: 100%;
+      width: 50%;
       border: none;
       border-bottom: 1px solid #d4d4d4;
       padding: 5px;
+      margin-bottom: 10px;
    }
    .hs-write-form input[type="text"]:focus{
       border-bottom: 1px solid #16784B;
    }
    .hs-write-form-bottom textarea{
-   	  width: 100%;
+   	  width: 80%;
       margin: 1rem auto;
       padding: 5px;
       border: 1px solid #d4d4d4;
@@ -43,7 +44,6 @@ table tr td:nth-child(odd){
       outline: none;
    }
    .hs-write-form-bottom {
-      text-align: right;
    }
    .hs-write-form-bottom button{
       margin-right: 2px;
@@ -59,10 +59,32 @@ table tr td:nth-child(odd){
    .club-info{
 	   	margin-top: 5px;
    }
+   .subTit {
+	    border-bottom: 1px solid #dddddd;
+	    padding: 15px 0px 15px 0px;
+	    margin: 0 auto; 
+	    margin-bottom: 20px;
+	}
+	.hs-write-form input[type="number"]{
+		width: 50%;
+		margin-bottom: 10px;
+	}
+	.hs-write-form input[type="date"]{
+		width: 50%;
+	}
+	.hs-write-form input[type="file"]{
+		width: 50%;
+	}
+	.d-grid{
+		margin-right: 250px;
+	}
 </style>
 </head>
 <body>
 <div class="container">
+	<div class="subTit" >
+		  <h2>북클럽 생성</h2>
+	</div>
 	<div class="text-right">
 		<form class="row g-3" action="/club/clubCreate" method="post" id="regClub" enctype="multipart/form-data">
 			<input type="hidden" name="memId" value="${sessionScope.loginInfo.memId}">
@@ -88,9 +110,9 @@ table tr td:nth-child(odd){
 							<input type="file" class="form-control" id="cbAtName" name="file">
 						</div>
 					</div>
-					<div class="hs-write-form-bottom">
-						<textarea rows="30" cols="90" name="clubInfo" onkeyup="byteCheck(this, '5000');" placeholder="북클럽 소개말"></textarea>
-						<div><span class="byteSpan"><span id="byteInfo">0</span> /5000bytes </span>
+					<div class="hs-write-form-bottom ">
+						<textarea rows="25" cols="50" name="clubInfo" onkeyup="byteCheck(this, '5000');" placeholder="북클럽 소개말"></textarea>
+						<div class="d-grid gap-2 d-md-flex justify-content-md-end"><span class="byteSpan"><span id="byteInfo">0</span> /5000bytes </span>
 						<button type="button" class="btn btn-success" onclick="clubCreate(this);">모임생성</button></div>
 					</div>
 				</div>

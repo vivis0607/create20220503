@@ -121,10 +121,11 @@ $(function(){
       top:50px; 
       left:50px;
       width:350px;
-      height:500px; 
+      height:300px; 
       background-color: #fff;
       display:none;
-      border: 2rem solid #F5F3CE;
+      border: 1rem solid #F5F3CE;
+      padding: 6rem 0px;
 }
 .title_area {
 	font-weight:bold;
@@ -269,7 +270,7 @@ $(function(){
 <c:if test="${sessionScope.loginInfo.isOd eq 'Y' }">
 
  <div id="divpop1" class="divpop">    
-          <div class="title_area">연체 중인 도서가 있습니다. 확인해 주세요!</div>
+          <div class="title_area">${loginInfo.memName }님~ 연체 중인 도서가 있습니다. <br> 마이페이지의 대여 목록을 확인해 주세요!</div>
            <div class="button_area">
                <input type='checkbox' name='chkbox' id='todaycloseyn' value='Y'>오늘 하루 이 창을 열지 않음    
                <a href='#' onclick="javascript:closeWin(1);"><B>[닫기]</B></a>

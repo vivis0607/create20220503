@@ -120,6 +120,7 @@
 				</c:if>
 			</ul>
 	</nav>
+</div>
 <nav class="toRead-nav">
   <div class="menu-btn">
   	TO<br>READ<br>LIST
@@ -145,7 +146,7 @@
         <h5 class="modal-title" id="msgModalLabel">알림함</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" id="msgDetail">
+      <div class="modal-body" id="msg-detail">
         	<table id="msgModalTable" class="table text-center table-hover table-bordered" style="table-layout: fixed; ">
 	     		<colgroup>
 	     			<col width="*">

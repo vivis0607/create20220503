@@ -59,6 +59,7 @@ function buy(memId, itemCode){
 	    type: 'post',
 	    data:{'itemCode':itemCode, 'itemCnt':ea.value}, //필요한 데이터 '데이터이름':값
 	    success: function(result) {
+			alert('구매페이지로 넘어갑니다.');
 	      //ajax 실행 성공 후 실행할 코드 작성
 			location.href='/buy/buyPage';
 			

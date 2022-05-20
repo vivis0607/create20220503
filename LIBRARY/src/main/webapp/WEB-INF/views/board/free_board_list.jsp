@@ -59,6 +59,7 @@ select{
 .page-link {
    color: #198754;
 }
+
 </style>
    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
@@ -131,7 +132,7 @@ select{
 			<button type="button" class="btn btn-success btn-m" onclick="location.href='/otherB/regFreeBoard';" >글등록</button>
 		</div>
 	</c:if>
-	<div class="pageDiv">
+	<div class="pageDiv col-4" style=" margin:0 auto;">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination pagination-sm justify-content-center">
 				<li class="page-item <c:if test="${!freeBoardVO.prev }">disabled</c:if>">

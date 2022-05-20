@@ -88,7 +88,7 @@
 			<div class="col-6 imgDiv">
 				<c:forEach items="${item.itemImgList }" var="img">
 					<c:if test="${img.isMain eq 'Y' }">
-						<img alt="..." src="/resources/images/item/${img.itemAtImgName }" width="95%">
+						<img alt="..." src="/resources/images/item/${img.itemAtImgName }" width="95%" height="500px;">
 					</c:if>
 				</c:forEach>	
 			</div>

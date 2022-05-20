@@ -116,6 +116,7 @@
          , MEM_IMAGE
          , CLUB_CODE
          , CLUB_ADMIN
+         , BR_CNT
          , IS_ADMIN
          , IS_OD
          , IS_DELETE
@@ -169,7 +170,6 @@
           , TO_CHAR(MEM_BIRTH, 'YYYY"년 "MM"월 "DD"일"') AS MEM_BIRTH
           , CLUB_ADMIN
           , CLUB_CODE
-          , CLUB_APPLY_CODE
       FROM BOOK_MEMBER
       WHERE MEM_ID = #{memId}
    </select>

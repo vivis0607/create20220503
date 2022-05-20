@@ -160,7 +160,7 @@ a:hover{
 					<tr>
 						<td>
 						<a href="/member/bookPlaner?memId=${loginInfo.memId }">
-						독서 플래너</a></td>
+						북적북적</a></td>
 					</tr>
 					<tr>
 						<td><a href="/member/selectBookClub?memId=${loginInfo.memId }">나의 북클럽</a></td>

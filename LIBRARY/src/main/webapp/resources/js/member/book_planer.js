@@ -48,7 +48,7 @@ let cntList =[];
 		cntList.push(cnt[i].value);
 	}
 
-console.log(labelList);
+//console.log(labelList);
 
 const myChart = new Chart(ctx, {
     type: 'doughnut',

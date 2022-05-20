@@ -100,7 +100,7 @@ function buy(){
 		data: {'data':JSON.stringify(objArr)}, //필요한 데이터 '데이터이름':값
 		success: function(result) {
 			//ajax 실행 성공 후 실행할 코드 작성
-			alert('주문페이지로 넘어갑니다.');
+			alert('구매페이지로 넘어갑니다.');
 			
 			location.href = '/buy/buyPage';
 		},

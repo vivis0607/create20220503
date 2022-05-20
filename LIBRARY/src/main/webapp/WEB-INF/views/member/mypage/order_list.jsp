@@ -74,7 +74,7 @@ input {
 		<div class="listCuverDiv">
 			<table class="orderListTb">
 				<c:choose>
-					<c:when test="${empty buyViewList }">
+					<c:when test="${empty orderList }">
 						<tr>
 							<td colspan="3">주문하신 상품 내역이 없습니다</td>
 						</tr>

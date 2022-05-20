@@ -166,7 +166,7 @@ input[type="number"]{
 								</div>
 							</th>
 							<td><span>
-								<img alt="..." src="/resources/images/item/${cart.itemAtImgName}" height="100px">
+								<img alt="..." src="/resources/images/item/${cart.itemAtImgName}" height="120px" width="120px;">
 							</span></td>
 							<td style="text-align: left; padding-left: 20px;"><span >
 								${cart.itemName }

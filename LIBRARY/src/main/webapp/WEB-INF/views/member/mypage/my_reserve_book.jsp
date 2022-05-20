@@ -35,7 +35,7 @@
 					<td><a href="/book/bookDetail?bookCode=${reserve.bookCode}&memId=$${sessionScope.loginInfo.memId}">${reserve.title }</a></td>
 					<td>${reserve.isbn }</td>
 					<td>${reserve.rsvDate }</td>
-					<td><button type="button" data-toggle="modal" data-target="#cancleReserve" onclick="showModal(this);">예약취소</button></td>
+					<td><button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#cancleReserve" onclick="showModal(this);">예약취소</button></td>
 				</tr>
 			</c:forEach>
 		</tbody>

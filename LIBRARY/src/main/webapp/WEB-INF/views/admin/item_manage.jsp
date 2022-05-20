@@ -65,7 +65,7 @@
 				<tr>
 					<td>${i}</td>
 					<td>
-						<img alt="..." src="/resources/images/item/${item.itemAtImgName }" height="50px;">
+						<img alt="..." src="/resources/images/item/${item.itemAtImgName }" height="70px" width="70px;">
 					</td>
 					<td style="text-align: left; padding-left: 5px;">${item.itemName}</td>
 					<td><button type="button" class="btn btn-success btn-sm" onclick="location.href='/item/updateItemForm?itemCode=${item.itemCode}';">수정</button></td>
@@ -77,19 +77,19 @@
 		</table>
 	</div>
 </div>
-<div class="pageDiv">
+<div class="pageDiv col-4" style=" margin:0 auto;">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination pagination-sm justify-content-center">
 				<li class="page-item <c:if test="${!itemVO.prev }">disabled</c:if>">
-				<a class="page-link" href="/item/itemList?nowPage=${itemVO.beginPage - 1 }"
+				<a class="page-link" href="/item/itemManage?nowPage=${itemVO.beginPage - 1 }"
 					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 				</a></li>
 				<c:forEach begin="${itemVO.beginPage }" end="${itemVO.endPage }" var="pageIndex">
 						<li class="page-item <c:if test="${itemVO.nowPage eq pageIndex }">active</c:if>"><a class="page-link" 
-						href="/item/itemList?nowPage=${pageIndex }">${pageIndex }</a></li>
+						href="/item/itemManage?nowPage=${pageIndex }">${pageIndex }</a></li>
 					</c:forEach>
 				<li class="page-item <c:if test="${!itemVO.next }">disabled</c:if>">
-				      <a class="page-link" href="/item/itemList?nowPage=${itemVO.endPage + 1 }" aria-label="Next">
+				      <a class="page-link" href="/item/itemManage?nowPage=${itemVO.endPage + 1 }" aria-label="Next">
 				        <span aria-hidden="true">&raquo;</span>
 				      </a>
 				</li>
