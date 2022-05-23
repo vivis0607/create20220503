@@ -76,7 +76,7 @@ h4{
    <div class="goForm">
 	   	<div class="title">양심도서관 회원만 신청 가능합니다.</div>
 	   	<input type="hidden" id="memId" value="${sessionScope.loginInfo.memId }">
-	   	<button class="btn btn-success justify-content-md-end" onclick="goHpBookForm();">희망도서 신청바로가기 >></button>
+	   	<button class="btn btn-success justify-content-md-end" onclick="goHpBookForm();">희망도서 신청하기 >></button>
    </div>
    
 	<div class="notice">

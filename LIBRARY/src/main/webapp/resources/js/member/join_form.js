@@ -1,20 +1,12 @@
- //특수 문자 제거
- 
-const joinForm = document.querySelector('#joinForm');
-
+/*const reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/ ]/gi;
+let inputId = document.querySelector('#inputId').value;
 function removeSpecData(){
-	const reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/ ]/gi;
-	let id = form.querySelector('#inputId');
-	
-	id = id.replace(reg, "");
-}
+	inputId = inputId.replace(reg, "");
+}	
 
+inputId.addEventListener('keyup', removeSpecData);
 
-
-
-joinForm.addEventListener('submit', removeSpecData);
-
-
+*/
 /*유효성 검사*/
 $('#joinForm').validate({
 	debug: false,
@@ -130,26 +122,21 @@ $('#joinForm').validate({
    });
 
 /*아이디 중복 체크 */
-function checkId(){
 const memId = document.getElementById('inputId').value;
-const btn = document.querySelector('.joinFormDiv button');
-
+function checkId(){
 $.ajax({
 		url: '/member/checkId', //요청경로
 		type: 'post',
 		data: {'memId':memId}, //필요한 데이터 '데이터이름':값
 		success: function(result) {
 			if(result === 1){
-				let str = '';
-				str += '확인';
-				btn.innerText = str;
-				
 				$('.id-unavailable').css("display", "inline-block");
 				$('.id-available').css("display", "none");
 			}
 			else if(result === 0) {
 				$('.id-available').css("display", "inline-block");
 				$('.id-unavailable').css("display", "none");
+				$(".wrapper > submit").attr("disabled", false);
 			}
 			
 		},
@@ -159,7 +146,10 @@ $.ajax({
 		}
 	});
 }
-
+function lockId(){
+	$(".wrapper > submit").attr("disabled", true);
+}
+document.querySelector('#inputId').addEventListener('keyup', lockId);
 
 
 /*우편번호 api*/
@@ -172,5 +162,6 @@ function sample4_execDaumPostcode() {
 	    	}
 	  }).open();
 }
+
 
     	

@@ -152,7 +152,7 @@ select{
 					<tr>
 						<td>신청인</td>
 						<td> ${sessionScope.loginInfo.memName }
-							<input type="hidden" name="memId" value="${sessionScope.loginInfo.memId }">
+							<input type="hidden" name="memId" id="memId" value="${sessionScope.loginInfo.memId }">
 						</td>
 					<tr>
 						<td>신청일</td>
@@ -160,22 +160,22 @@ select{
 					</tr>
 					<tr>
 						<td>제목</td>
-						<td><input type="text" name="title" >
+						<td><input type="text" name="title" id ="title">
 							<button type="button" data-toggle="modal" data-target="#searchBook" class="btn btn-success btn-sm justify-content-md-end" onclick="showModal();">책 검색하기</button>
 						</td>
 					</tr>
 					<tr>
 						<td>저자</td>
-						<td><input type="text"  name="writer" ></td>
+						<td><input type="text"  name="writer" id="writer"></td>
 					</tr>
 					<tr>
 						<td>출판사</td>
-						<td><input type="text"  name="publisher" ></td>
+						<td><input type="text"  name="publisher" id="publisher"></td>
 					</tr>
 				</table>
 			</div>
 			<div class="btnDiv">
-				<button id="submitHpBook" class="btn btn-success btn-sm justify-content-md-end" onclick="submit();" >신청하기</button>
+				<button id="submitHpBook" class="btn btn-success btn-sm justify-content-md-end" onclick="submitHp();" >신청하기</button>
 			</div>
 		</form>
 		
@@ -225,7 +225,7 @@ select{
 	
 
 </div>
-<script type="text/javascript" src="/resources/js/book/reg_hope_book.js?ver=50"></script>
+<script type="text/javascript" src="/resources/js/book/reg_hope_book.js?ver=55"></script>
 </body>
 <meta name="referrer" content="unsafe-url" />
 </html>

@@ -94,13 +94,19 @@
 	background-color: #72a37c;
 	color: white;
 }
+.notic-btn{
+	margin-right: 10px; 
+}
+.board-title{
+	font-weight: bold;
+}
 </style>
 </head>
 <body>
 <div class="container">
 <div class="row">
 	<div class="boardDiv col-8 text-left" >
-		<div class="board-title">${clubBoard.cbBoardTitle } </div>
+		<div class="board-title"><c:if test="${clubBoard.cbPin eq 1 }"><button type="button" class="notic-btn btn btn-danger btn-sm">공지</button></c:if>${clubBoard.cbBoardTitle } </div>
 		<div class="row">
 			<div class="col-1">
 				<img class="board-img" src="/resources/images/member/${clubBoard.memImage }">

@@ -159,7 +159,7 @@ select{
 	</div>
 	<c:if test="${not empty sessionScope.loginInfo && sessionScope.loginInfo.memId ne 'admin' }">
 		<div class="ntBtn">
-			<button type="button" class="btn btn-success btn-m" onclick="location.href='/otherB/regQnaForm';">글쓰기</button>
+			<button type="button" class="btn btn-success btn-m" onclick="location.href='/otherB/regQnaForm';">글쓰기등록</button>
 		</div>
 	</c:if>
 </div>

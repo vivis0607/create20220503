@@ -40,6 +40,10 @@ img:hover{
 	</div>
 	
 	<div class="searchRes">
+	<c:choose>
+
+
+	<c:when test="${not empty searchList }">
 	 <c:forEach items="${searchList }" var="search">
 	 	<div class="bookList" >
 	 	<table>
@@ -74,7 +78,20 @@ img:hover{
 	 	</table>
 	 	</div>
 	 	</c:forEach>
-	 	
+	 </c:when>
+	<c:otherwise>
+	   <tr>
+	      <td colspan="2">
+	      	<div class="emptyInfo" style="text-align: center; font-weight: 600;">
+	      	 <div style="font-size:20px; margin: 10px;">등록된 게시글이 없습니다.</div>
+	      	 <input type="hidden" id="memId" value="${sessionScope.loginInfo.memId }">
+	      	 <button class="btn btn-success justify-content-md-end" onclick="location.href='/book/hopeBookInfo';">희망도서 신청바로가기 >></button>
+	      	</div>
+	        
+	      </td>
+	   </tr>
+	</c:otherwise>
+</c:choose>
 	 	
 	 	
 	 	
@@ -83,5 +100,6 @@ img:hover{
 
 </div>
 </div>
+<script type="text/javascript" src="/resources/js/book/go_hope_book_form.js?ver=1"></script>
 </body>
 </html>

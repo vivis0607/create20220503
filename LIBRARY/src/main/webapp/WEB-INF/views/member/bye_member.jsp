@@ -15,6 +15,7 @@
     padding: 6rem 1rem;
     display: flex;
     justify-content: space-evenly;
+    font-size: 1.7rem;
     
 }
 .bye-div > div:first-child img {

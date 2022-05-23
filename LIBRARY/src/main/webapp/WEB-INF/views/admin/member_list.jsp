@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
 <style type="text/css">
 .modal-dialog{
 	overflow-y: initial !important 
@@ -80,18 +81,28 @@
     background-color: #72a37c;
     border-color: #72a37c;
 }
+.pagination{
+	justify-content: center;
+}
+.byte{
+	margin-top: 5px;
+}
 </style>
 </head>
 <body>
 <div class="container">
+		<div class="subTit" >
+			<div class="line_map">홈 > 관리자메뉴 > 회원 관리</div>
+		  <div class="tit">회원 관리</div>
+	</div>
 	<div class="row">
-		<div class="col-10">
+		<div class="col-12">
 			<div class="row">
 				<div class="col-4">
 					<form action="/admin/memberManage" method="post" id="search-form">
 						<input type="hidden" value="1" id="nowPage" name="nowPage">
 						<div class="input-group mb-3">
-						  <input type="text" class="form-control" name="keyword" id="keyword" placeholder="회원 ID" aria-label="Recipient's username" aria-describedby="button-addon2" >
+						  <input type="text" class="form-control" name="keyword" id="keyword" placeholder="회원 ID" aria-label="Recipient's username" aria-describedby="button-addon2" value="">
 						  <button class="search-btn btn btn-success" type="button" id="button-addon2">검색</button>
 						</div>
 					</form>
@@ -152,7 +163,7 @@
 			  		</c:choose>
 			  </tbody>
 			</table>
-			<div class="d-grid gap-2 d-md-flex justify-content-center">
+			<div class="pageDiv col-4" style=" margin:0 auto;">
 				<nav aria-label="Page navigation example">
 					<ul class="pagination pagination-sm">
 						<li class="page-item <c:if test="${!memberVO.prev }">disabled</c:if>">
@@ -179,7 +190,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <h5 class="modal-title" id="exampleModalLabel">알림 전송</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -191,15 +202,14 @@
           <div class="mb-3">
             <label for="message-text" class="col-form-label">내용 :</label>
             <textarea class="form-control" id="message-content" rows="7" name="msgContent" style="resize: none;" onkeyup="byteCheck(this, '500');"></textarea>
-            <div style="text-align: right;"><span id="byteInfo">0</span> /500bytes</div>
-          <div class="mb-3 justify-content-md-end">
-	        <button type="button" class="msg-close btn btn-secondary justify-content-md-end">닫기</button>
-	        <button type="button" class="btn btn-success justify-content-md-end" onclick="sendMsg();">메세지 전송</button>
-          </div>
+            <div class="byte" style="text-align: right;"><span id="byteInfo">0</span> /500bytes</div>
+
           </div>
         </form>
       </div>
       <div class="modal-footer">
+	        <button type="button" class="msg-close btn btn-secondary me-md-2">닫기</button>
+	        <button type="button" class="btn btn-success me-md-2" onclick="sendMsg();">메세지 전송</button>
       </div>
     </div>
   </div>

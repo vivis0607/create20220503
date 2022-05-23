@@ -33,4 +33,10 @@ public interface BoardService {
 
 	//공지사항 페이징 
 	int selectBoardCnt(NtBoardVO ntBoardVO);
+	
+	//공지사항 검색 페이징 
+	int selectBoardSearchCnt(NtBoardVO ntBoardVO);
+
+	//공지사항 홈 화면
+	List<NtBoardVO> selectNtBoardHome();
 }

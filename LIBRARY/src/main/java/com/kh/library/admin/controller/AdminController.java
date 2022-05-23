@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.library.admin.service.ItemAdminService;
 import com.kh.library.admin.service.MemberAdminService;
 import com.kh.library.admin.vo.MessageVO;
+import com.kh.library.board.service.BoardService;
 import com.kh.library.book.service.BookAdminService;
 import com.kh.library.book.service.BookService;
 import com.kh.library.book.vo.ReserveVO;
@@ -49,16 +50,23 @@ public class AdminController {
 	
    @Resource(name = "clubService")
 	private ClubService clubService;
+   	
+	@Resource(name = "boardService")
+	private BoardService boardService;
    
    
-	//메인페이지, 연체일 확인, 연체제한 업데이트
+   
+   
+	//메인페이지, 연체일 확인, 연체제한 업데이트, 예약기간 만료 삭제
 	   @GetMapping("/test") 
 	   public String test(Model model, HttpSession session) { 
 	      
 	      bookAdminService.updateOverdue();
 	      bookAdminService.clearLimitDate();
+	      bookAdminService.deleteRsvOverdue();
 	      model.addAttribute("newBookList", bookAdminService.selectNewBook()); 
 	      model.addAttribute("bookList", bookAdminService.selectRcdBook3());
+	      model.addAttribute("ntBoardList", boardService.selectNtBoardHome());
 	      
 	      if(session.getAttribute("loginInfo") != null) {
 	    	  String getId = ((MemberVO)(session.getAttribute("loginInfo"))).getMemId();

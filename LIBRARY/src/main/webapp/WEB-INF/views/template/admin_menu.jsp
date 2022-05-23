@@ -31,8 +31,8 @@
 			</li>
 			<li class="menu-v1" id="menu-v1-yy"><a href="#">Goods</a>
 				<ul class="submenu">
-					<li><a href="/item/itemCateManage">아이템카테고리관리</a></li>
-					<li><a href="/item/itemManage">아이템관리</a></li>
+					<li><a href="/item/itemCateManage">상품카테고리관리</a></li>
+					<li><a href="/item/itemManage">상품관리</a></li>
 					<li><a href="/sales/orderStateManage">주문내역조회</a></li>
 					<li><a href="/sales/salesStatus">매출현황</a></li>
 				</ul>

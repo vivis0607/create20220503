@@ -64,4 +64,16 @@ public class BoardServiceImpl implements BoardService {
 		return sqlSession.selectList("boardMapper.selectSearchNt",ntBoardVO);
 	}
 
+	@Override
+	public int selectBoardSearchCnt(NtBoardVO ntBoardVO) {
+		return sqlSession.selectOne("boardMapper.selectBoardSearchCnt", ntBoardVO);
+		
+		
+	}
+
+	@Override
+	public List<NtBoardVO> selectNtBoardHome() {
+		return sqlSession.selectList("boardMapper.selectNtBoardHome");
+	}
+
 }

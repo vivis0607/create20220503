@@ -39,48 +39,60 @@ img:hover{
 		<button type="submit" class="btn btn-success btn-sm" onclick="location.href='book/searchBook';">검색</button>
 	</form>
 </div>
+<c:choose>
 
-<c:forEach items="${bookList}" var="book">
-<div class="bookList" >
-<input type="hidden" id="bookCode" value="${book.bookCode }">
-<input type="hidden" id="memId" value="${sessionScope.loginInfo.memId}">
 
-<table>
-	<tr>
-		<td class="title" colspan="3"><a href="/book/bookDetail?bookCode=${book.bookCode }&memId=${sessionScope.loginInfo.memId}">${book.title }</a></td>
-	</tr>
-	<tr>
-		<td class="img" rowspan="5"><a href="/book/bookDetail?bookCode=${book.bookCode }&memId=${sessionScope.loginInfo.memId}"><img src="/resources/images/book/${book.bkImg }"  alt="..." height="185px;" width="122px;" ></a></td>
-		<td>저자</td>
-		<td>${book.writer }</td>
-	</tr>
-	<tr>
-		<td class="tit">발행처</td>
-		<td colspan="2">${book.publisher }</td>
-	</tr>
-	<tr>
-		<td class="tit">ISBN</td>
-		<td colspan="2">${book.isbn }</td>
-	</tr>
-	<tr>
-		<td class="tit">발행년도</td>
-		<td colspan="2">${book.pubDate }</td>
-	</tr>
-	<tr>
+	<c:when test="${not empty bookList }">
+		<c:forEach items="${bookList}" var="book">
+		<div class="bookList" >
+		<input type="hidden" id="bookCode" value="${book.bookCode }">
+		<input type="hidden" id="memId" value="${sessionScope.loginInfo.memId}">
 	
-		<td class="tit">키워드</td>
-		<td colspan="2">${book.keyword }</td>
-	</tr>
-	<tr>
-		<td class="location" colspan="2">*자료위치 &ensp; &emsp;${book.area }</td>
-	</tr>
-
-	
-
-
-</table>
-</div>
-</c:forEach>
+		<table>
+			<tr>
+				<td class="title" colspan="3"><a href="/book/bookDetail?bookCode=${book.bookCode }&memId=${sessionScope.loginInfo.memId}">${book.title }</a></td>
+			</tr>
+			<tr>
+				<td class="img" rowspan="5"><a href="/book/bookDetail?bookCode=${book.bookCode }&memId=${sessionScope.loginInfo.memId}"><img src="/resources/images/book/${book.bkImg }"  alt="..." height="185px;" width="122px;" ></a></td>
+				<td>저자</td>
+				<td>${book.writer }</td>
+			</tr>
+			<tr>
+				<td class="tit">발행처</td>
+				<td colspan="2">${book.publisher }</td>
+			</tr>
+			<tr>
+				<td class="tit">ISBN</td>
+				<td colspan="2">${book.isbn }</td>
+			</tr>
+			<tr>
+				<td class="tit">발행년도</td>
+				<td colspan="2">${book.pubDate }</td>
+			</tr>
+			<tr>
+			
+				<td class="tit">키워드</td>
+				<td colspan="2">${book.keyword }</td>
+			</tr>
+			<tr>
+				<td class="location" colspan="2">*자료위치 &ensp; &emsp;${book.area }</td>
+			</tr>
+		
+			
+		
+		
+		</table>
+		</div>
+		</c:forEach>
+	</c:when>
+	<c:otherwise>
+	   <tr>
+	      <td colspan="2">
+	         등록된 게시글이 없습니다.
+	      </td>
+	   </tr>
+	</c:otherwise>
+</c:choose>
 </div>
 
 

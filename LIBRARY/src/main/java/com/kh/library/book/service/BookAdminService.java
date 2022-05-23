@@ -8,7 +8,6 @@ import java.util.List;
 import com.kh.library.book.vo.BookImgVO;
 import com.kh.library.book.vo.BookVO;
 import com.kh.library.book.vo.BorrowVO;
-import com.kh.library.book.vo.HopeBookApplyVO;
 import com.kh.library.book.vo.HopeBookVO;
 
 public interface BookAdminService {
@@ -69,6 +68,9 @@ public interface BookAdminService {
 	//멤버별 대여제한 이력 조회
 	MemberVO selectLimitDate(MemberVO memberVO);
 	
+	//예약도서 기간 만료 삭제
+	void deleteRsvOverdue();
+	
 	
 	
 	//도서 대여
@@ -102,6 +104,19 @@ public interface BookAdminService {
 	//희망도서 승인
 	void updateHopeBook(HopeBookVO hbVO);
 
+	
+	//희망도서 카운팅
+	int selectHpCnt(HopeBookVO hbVO);
+	
+	//희망도서 중복 신청 방지
+	int selectHpInfo(HopeBookVO hbVO);
+
+	//희망도서 비치 유무 확인
+	int selectIsStock(HopeBookVO hbVO);
+
+
+
+	
 
 
 	

@@ -38,10 +38,12 @@ public class ClubAdminServiceImpl implements ClubAdminService{
 		sqlSession.update("clubMapper.updateClubAcceptance", clubApplyVO);
 	}
 	
-	
+	//모임거절
 	@Override
-	public void deleteApplyList(ClubApplyVO clubApplyVO) {
+	@Transactional(rollbackFor = Exception.class)
+	public void deleteApplyList(ClubApplyVO clubApplyVO, String getId) {
 		sqlSession.delete("clubMapper.deleteApplyList", clubApplyVO);
+		sqlSession.insert("clubMapper.insertClubRejectionMessage", getId);
 	}
 	
 	//회원리스트 조회
@@ -84,6 +86,16 @@ public class ClubAdminServiceImpl implements ClubAdminService{
 	public MonthlyBookVO selectMonthlyBook(String clubCode) {
 		return sqlSession.selectOne("clubMapper.selectMonthlyBook", clubCode);
 	}
+
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void deleteClub(String clubCode) {
+		sqlSession.insert("clubMapper.insertClubDeleteMessage", clubCode);
+		sqlSession.delete("clubMapper.deleteClub", clubCode);
+		sqlSession.update("clubMapper.updateClubDelete", clubCode);
+	}
+
 
 
 

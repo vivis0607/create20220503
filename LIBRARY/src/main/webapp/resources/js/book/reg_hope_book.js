@@ -105,14 +105,66 @@ function pickSearch(selected){
 	
 }
 
-function submit(){
+function submitHp(){
 	
-	console.log('aa');
-	alert('aaa');
-	alert('도서가 신청되었습니다.\n신청목록은 마이페이지에서 확인 가능합니다.');
+	var memId = $('#hpBookForm #memId').val();
+	var title = $('#hpBookForm #title').val();
+	var writer = $('#hpBookForm #writer').val();
 	
-	var formTag = document.getElementById('regBookForm');
-	formTag.submit();
+	$('#submitHpBook').unbind('click');
+	
+	$.ajax({
+		async : false,
+		url: '/book/selectHpCnt',
+		type: 'post',
+		data: {'memId':memId},
+		success:function(result){
+			if($.trim(result)>=5){
+				alert('개인당 5권까지 신청할 수 있습니다.');
+				location.href='book/hopeBookInfo';
+				return;
+			}
+			else{
+				$.ajax({
+					async : false,
+					url: '/book/selectHpInfo',
+					type: 'post',
+					data: {'title':title
+							, 'writer' : writer },
+					success:function(hCode){
+						if($.trim(hCode)!=0){
+							alert('해당도서는 이미 신청되었습니다.');
+							return;
+						}
+						else{
+							$.ajax({
+								async : false,
+								url: '/book/selectIsStock',
+								type: 'post',
+								data: {'title':title
+										, 'writer' : writer },
+								success:function(bCode){
+									if($.trim(bCode)!=0){
+										alert('해당도서는 이미 비치되어 있습니다.');
+										return;
+									}
+									else{
+										
+										alert('도서가 신청되었습니다.\n신청목록은 마이페이지에서 확인 가능합니다.');
+	
+										var formTag = document.getElementById('regBookForm');
+										formTag.submit();
+									}
+								}
+							});
+						}
+					}
+				});
+			}
+		}
+	});
+	
+
 }
 
 //이미지 크기 조정

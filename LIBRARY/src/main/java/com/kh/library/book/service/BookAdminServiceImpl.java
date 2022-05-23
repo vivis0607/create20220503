@@ -12,7 +12,6 @@ import com.kh.library.member.vo.MemberVO;
 import com.kh.library.book.vo.BookImgVO;
 import com.kh.library.book.vo.BookVO;
 import com.kh.library.book.vo.BorrowVO;
-import com.kh.library.book.vo.HopeBookApplyVO;
 import com.kh.library.book.vo.HopeBookVO;
 
 @Service("bookAdminService")
@@ -120,6 +119,12 @@ public class BookAdminServiceImpl implements BookAdminService {
 		return rtDate;
 	}
 	
+	//예약 기간 만료 삭제
+	@Override
+	public void deleteRsvOverdue() {
+		sqlSession.delete("bookMapper.deleteRsvOverdue");
+	}
+	
 	//도서 대여
 	@Override
 	public void borrowBook(ReserveVO reserveVO,  MemberVO memberVO) {
@@ -185,6 +190,24 @@ public class BookAdminServiceImpl implements BookAdminService {
 	@Override
 	public void updateHopeBook(HopeBookVO hbVO) {
 		sqlSession.update("bookMapper.updateHpBook",hbVO);
+	}
+
+	//희망도서 카운팅
+	@Override
+	public int selectHpCnt(HopeBookVO hbVO) {
+		return sqlSession.selectOne("bookMapper.selectHpCnt",hbVO);
+	}
+
+	//희망도서 중복 신청 방지
+	@Override
+	public int selectHpInfo(HopeBookVO hbVO) {
+		return sqlSession.selectOne("bookMapper.selectHpInfo",hbVO);
+	}
+
+	//희망도서 비치 유무 확인
+	@Override
+	public int selectIsStock(HopeBookVO hbVO) {
+		return sqlSession.selectOne("bookMapper.selectIsStock",hbVO);
 	}
 
 	

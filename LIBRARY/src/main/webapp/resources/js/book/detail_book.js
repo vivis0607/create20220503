@@ -24,6 +24,6 @@ function getBkDetail(selected){
 				location.href='/book/bookDetail?memId='+memId+'&bookCode='+bookCode;
 			}
 		}
-	})
+	});
 	
 }

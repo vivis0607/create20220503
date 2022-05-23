@@ -8,7 +8,34 @@
 <title>Insert title here</title>
 <link href="/resources/css/book/searchBar.css" rel="stylesheet">
 <link href="/resources/css/book/newBookSlide.css" rel="stylesheet">
+<link href='${pageContext.request.contextPath}/resources/fullcalendar-5.11.0/lib/main.css' rel='stylesheet' />
+<script src="/resources/fullcalendar-5.11.0/lib/main.js"></script>
 <script>
+//fullCalenar
+document.addEventListener('DOMContentLoaded', function() {
+	  var calendarEl = document.getElementById('calendar');
+
+	  var calendar = new FullCalendar.Calendar(calendarEl, {
+	    googleCalendarApiKey: 'AIzaSyD0lcip5CzP0Ytmssc6U56vXYD2uZq-Wz8',
+	    eventSources: [
+	    {
+	          googleCalendarId: 'ko.south_korea#holiday@group.v.calendar.google.com',
+	          className: '공휴일',
+	          color: '#be5683', //rgb,#ffffff 등의 형식으로 할 수 있어요.
+	          //textColor: 'black' 
+	        }/*,
+	      {
+	          googleCalendarId: '여기에 구글 캘린더 ID를 붙여넣기하시면 됩니다.',
+	          className: '늘봄 휴관일',
+	            color: '#204051',
+	            //textColor: 'black' 
+	        },*/
+
+	    ]
+	  });
+	  calendar.render();
+	});
+
 //쿠키설정    
 function setCookie( name, value, expiredays ) {
 var todayDate = new Date();
@@ -52,6 +79,12 @@ $(function(){
         $("#divpop1").show();
     }
 });
+
+
+
+function delRsv(){
+	
+}
 </script>
 <style type="text/css">
 .container{
@@ -163,110 +196,127 @@ $(function(){
 		</div>
 	</div>
 <div class="container">
+   <div class="row" style="width:150%; " >
+         <div class="slide col-3" style="display: inline-block;">
+         <!-- 신착도서 슬라이드  -->
+            <div class="goNewBookList" >
+               <div class="slideTitle">신착도서</div>
+               <div class="plusBtn"><a href="/book/selectNewBook1"><i class="fa-solid fa-plus" style=" margin-right:5px;"></i>더보기</a></div>
+            </div>
+            <div class="newBookSlide">
+                <div id="carouselExampleIndicators2" class="carousel carousel-dark slide" data-bs-ride="carousel" style="max-width: 100%; height: 100%;">
+                     <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                     </div>
+                     <div class="carousel-inner newBookImg">
+                    <c:forEach items="${newBookList }" var="nBook" varStatus="status">
+                        <div class="carousel-item <c:if test="${status.index == 0 }">active</c:if>" onclick="location.href='/book/bookDetail?bookCode=${nBook.bookCode }&memId=${sessionScope.loginInfo.memId}'">
+                           <div class="card">
+                             <div class="row">
+                               <div class="text-center">
+                                  <div class="img">
+                                     <img src="/resources/images/book/${nBook.bkImg }"  alt="..."  class="img-fluid rounded-start">
+                                  </div>
+                                  <div class = "newBookTitle">
+                                     ${nBook.title }
+                                  </div>
+                                 
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+                      </c:forEach>
+                     </div>
+                  </div>
+               </div>
+               
+               
+               
+               
+               <div class="goNewBookList" style="width:210%; margin-top:32px;">
+	               <div class="slideTitle" style="width:92%;">공지사항</div>
+	               <div class="plusBtn"><i class="fa-solid fa-plus" style=" margin-right:5px;"></i><a href="/board/ntBoardList">더보기</a></div>
+	            </div>
+	            <div class="newBookSlide" style="width:210%; height:305px; padding:10px;">
+	       	          <table class="table table-hover table-border text-center" style="padding:10px;">
+	       	          		<c:forEach items="${ntBoardList }" var="ntBoardInfo" >
+			               		<tr>
+				               		<td width="*%"><a href="/board/ntBoardDetail?ntCode=${ntBoardInfo.ntCode }">${ntBoardInfo.ntTitle }</a></td>
+		                          	<td width="15%">${ntBoardInfo.memName }</td>
+		                          	<td width="15%">${ntBoardInfo.ntCreateDate}</td>
+		                        </tr>
+		                    </c:forEach>
+		               </table>
+	       
+	               </div>
+	       </div>
+            
+            
+         
+         
+         <div class="slide col-3" style="display: inline-block;">
+         <!-- 추천도서 랭킹 슬라이드  -->
+            <div class="goNewBookList" >
+               <div class="slideTitle">추천도서</div>
+               <div class="plusBtn"><i class="fa-solid fa-plus" style=" margin-right:5px;"></i><a href="/book/selectRcdBook1">더보기</a></div>
+            </div>
+            <div class="newBookSlide">
+                <div id="carouselExampleIndicators2" class="carousel carousel-dark slide" data-bs-ride="carousel" style="max-width: 100%; height: 100%;">
+                     <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                     </div>
+                     <div class="carousel-inner rcdBookImg">
+                    <c:forEach items="${bookList}" var="book" varStatus="status">
+                    <c:set var="i" value="${i+1 }"/>
+                        <div class="carousel-item <c:if test="${status.index == 0 }">active</c:if>" onclick="location.href='/book/bookDetail?bookCode=${book.bookCode }&memId=${sessionScope.loginInfo.memId}'">
+                           <div class="card">
+                             <div class="row">
+                               <div class="text-center">
+                                  <div class="img">
+                                  <span class="rank"  style=" margin-left: 100px; " >
+                                           <i class="fa-solid fa-medal" style="width: 100%; height: 100%; color: gold;"></i>
+                                  </span>
+                                     <img src="/resources/images/book/${book.bkImg }"  alt="..."  class="img-fluid rounded-start">
+                                  </div>
+                                  <div class = "newBookTitle">
+                                     ${book.title }
+                                  </div>
+                                 
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+                      </c:forEach>
+                     </div>
+                  </div>
+            </div>
+         </div>
+<!--       <div class="row">
+         <
+      </div> -->
+      
+      <div class="cal col-5" style="display: inline-block;" >
+         <div class="goNewBookList" style="margin-top:12px;" >
+               <div class="slideTitle">늘봄 휴관일</div>
+         </div>
+            <div class="calendar" id="calendar"  >
+            
+            </div>
+      </div>
+      </div>
+      
+  
 
-	<div class="slide col-4" style="display: inline-block;">
-	<!-- 신착도서 슬라이드  -->
-	<div class="goNewBookList" >
-		<div class="slideTitle">신착도서</div>
-		<div class="plusBtn"><i class="fa-solid fa-plus" style=" margin-right:5px;"></i><a href="/book/selectNewBook1">더보기</a></div>
-	</div>
-	<div class="newBookSlide">
-		 <div id="carouselExampleIndicators2" class="carousel carousel-dark slide" data-bs-ride="carousel" style="max-width: 100%; height: 100%;">
-		      <div class="carousel-indicators">
-		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
-		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
-		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="3" aria-label="Slide 4"></button>
-		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="4" aria-label="Slide 5"></button>
-		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="5" aria-label="Slide 6"></button>
-		      </div>
-		      <div class="carousel-inner newBookImg">
-			  <c:forEach items="${newBookList }" var="nBook" varStatus="status">
-			      <div class="carousel-item <c:if test="${status.index == 0 }">active</c:if>" onclick="location.href='/book/bookDetail?bookCode=${nBook.bookCode }&memId=${sessionScope.loginInfo.memId}'">
-			         <div class="card">
-			           <div class="row">
-			             <div class="text-center">
-			             	<div class="img">
-			             		<img src="/resources/images/book/${nBook.bkImg }"  alt="..."  class="img-fluid rounded-start">
-			             	</div>
-			             	<div class = "newBookTitle">
-			             		${nBook.title }
-			             	</div>
-			               
-			             </div>
-			           </div>
-			         </div>
-			       </div>
-		       </c:forEach>
-		      </div>
-			</div>
-	</div>
-	</div>
-	
-	
-	<div class="slide col-4" style="display: inline-block;">
-	<!-- 추천도서 랭킹 슬라이드  -->
-	<div class="goNewBookList" >
-		<div class="slideTitle">추천도서</div>
-		<div class="plusBtn"><i class="fa-solid fa-plus" style=" width: 30px; margin-right:5px;"></i><a href="/book/selectRcdBook1">더보기</a></div>
-	</div>
-	<div class="newBookSlide">
-		 <div id="carouselExampleIndicators2" class="carousel carousel-dark slide" data-bs-ride="carousel" style="max-width: 100%; height: 100%;">
-		      <div class="carousel-indicators">
-		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
-		         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
-		      </div>
-		      <div class="carousel-inner rcdBookImg">
-			  <c:forEach items="${bookList}" var="book" varStatus="status">
-			  <c:set var="i" value="${i+1 }"/>
-			      <div class="carousel-item <c:if test="${status.index == 0 }">active</c:if>" onclick="location.href='/book/bookDetail?bookCode=${book.bookCode }&memId=${sessionScope.loginInfo.memId}'">
-			         <div class="card">
-			           <div class="row">
-			             <div class="text-center">
-			             	<div class="img">
-			             	<span class="rank"  style=" margin-left: 100px; " >
-			             				<i class="fa-solid fa-medal" style="width: 100%; height: 100%; color: gold;"></i>
-			             	</span>
-			             		<img src="/resources/images/book/${book.bkImg }"  alt="..."  class="img-fluid rounded-start">
-			             	</div>
-			             	<div class = "newBookTitle">
-			             		${book.title }
-			             	</div>
-			               
-			             </div>
-			           </div>
-			         </div>
-			       </div>
-		       </c:forEach>
-		      </div>
-			</div>
-	</div>
-	</div>
 </div>
-<%-- 	<div class="rcdBook"  >
-		<h3>이달의 인기도서</h3>
-		<a href="/book/selectRcdBook">확인하러가기</a>
-			
-			
-		<div class="row">
-			<c:forEach items="${bookList }" var="book">
-				<div class="col-3 text-center" style="margin-bottom: 16px;">
-					<div class="card" style="width: 13rem; margin: 0 auto;">
-						 <a href="/book/bookDetail?bookCode=${book.bookCode }&memId=${sessionScope.loginInfo.memId}">
-						 	<img src="/resources/images/book/${book.bkImg }"  alt="..." height="170px;"  >
-						 </a>
-						 <div class="card-body" style="padding:0.2rem 1.2rem;">
-						    <h5 class="card-title">${book.title }</h5>
-						    <p class="card-text"></p>
-						 </div>
-						</div>
-					</div>
-			</c:forEach>
-		</div>
-	</div>
-</div>
- --%>
+
+
 <c:if test="${sessionScope.loginInfo.isOd eq 'Y' }">
 
  <div id="divpop1" class="divpop">    

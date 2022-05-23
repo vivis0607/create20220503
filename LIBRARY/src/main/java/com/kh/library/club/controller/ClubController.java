@@ -134,7 +134,7 @@ public class ClubController {
 	      }
 	      
 		
-		return "redirect:/clubAdmin/monthlyBook?clubCode=" + clubVO.getClubCode();
+		return "redirect:/club/clubDetail?clubCode=" + clubVO.getClubCode();
 	}
 	//북클럽 상세조회 + 검색
 	@RequestMapping("/clubDetail")
@@ -158,6 +158,9 @@ public class ClubController {
 		model.addAttribute("noticeList", clubService.selectNoticBoardList(clubBoardVO));
 		//이달의책 조회
 		model.addAttribute("monthlyBk", clubAdminService.selectMonthlyBook(clubCode));
+		//랭킹 조회
+		model.addAttribute("rkList", clubService.selectRanking(clubCode));
+		
 	
 		
 		if(session.getAttribute("loginInfo") != null) {

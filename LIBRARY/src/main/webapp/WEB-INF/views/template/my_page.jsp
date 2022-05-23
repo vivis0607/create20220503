@@ -117,7 +117,7 @@ a:hover{
 				<div>
 					<img alt="" src="/resources/images/member/${loginInfo.memImage }">
 				</div>
-				<div>${loginInfo.memName }님 반가와요</div>
+				<div>${loginInfo.memName }님 반가워요!</div>
 				<div class="simpleMyBook">
 					<div>
 						<div>대여 도서</div><div>${loginInfo.brCnt }권</div>

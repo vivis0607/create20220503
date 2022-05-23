@@ -14,7 +14,9 @@ public interface ClubAdminService {
 	
 	//모임 수락
 	void updateClubAcceptance(ClubApplyVO clubApplyVO);
-	void deleteApplyList(ClubApplyVO clubApplyVO);
+	
+	//모임 거절
+	void deleteApplyList(ClubApplyVO clubApplyVO, String getId);
 	
 	//클럽멤버리스트 조회
 	List<MemberVO> selectClubMemberList(MemberVO memberVO);
@@ -36,4 +38,7 @@ public interface ClubAdminService {
 	
 	//이달의책 조회
 	MonthlyBookVO selectMonthlyBook(String clubCode);
+	
+	//북클럽 삭제
+	void deleteClub(String clubCode);
 }

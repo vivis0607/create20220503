@@ -94,7 +94,7 @@
 				<col width="80%">
 			</colgroup>
 				<tr>
-					<th>진행상태</th>
+					<th>주문상태</th>
 					<td class="stateTd">
 						<span class="itemStateSpan" onclick="location.href='/sales/orderStateManage';">전체</span>&nbsp;
 						<span class="itemStateSpan" onclick="searchKindState(this);">결제완료</span>&nbsp;

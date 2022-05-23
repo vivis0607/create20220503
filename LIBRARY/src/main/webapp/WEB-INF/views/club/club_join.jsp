@@ -32,30 +32,36 @@
 	color: white;
 	border-color: #ffa900;
 }
-.container{
+.col-6{
 	text-align: center;
+	margin: 0 auto;
 }
+
 </style>
 </head>
 <body>
 <div class="container">
-	<img class="club-img" src="/resources/images/club/${club.cbAtName }">
-	<div class="club-name">${club.clubName }</div>
-	<div class="club-info">${club.clubInfo }</div>
-	<div class="club-join">정말 가입하시겠습니까?</div>
-	
-	<form action="/club/clubJoin" method="post" id="clubJoinForm">
-		<input type="hidden" name="clubCode" value="${club.clubCode }">
-		<input type="hidden" name="clubName" value="${club.clubName }">
-		<input type="hidden" name="memId" value="${sessionScope.loginInfo.memId }">
-		<input type="hidden" name="memName" value="${sessionScope.loginInfo.memName }">
-		<input type="hidden" name="memImage" value="${sessionScope.loginInfo.memImage }">
-		
-		<div class="d-grid gap-2 d-md-flex justify-content-center">
-			<input type="button" class="btn " value="가입하기" onclick="clubJoin();">
-			<input type="button" class="btn " value="뒤로가기" onclick="history.back();">
+	<div class="row">
+		<div class="col-6">
+			<img class="club-img" src="/resources/images/club/${club.cbAtName }">
+			<div class="club-name">${club.clubName }</div>
+			<div class="club-info">${club.clubInfo }</div>
+			<div class="club-join">정말 가입하시겠습니까?</div>
+			
+			<form action="/club/clubJoin" method="post" id="clubJoinForm">
+				<input type="hidden" name="clubCode" value="${club.clubCode }">
+				<input type="hidden" name="clubName" value="${club.clubName }">
+				<input type="hidden" name="memId" value="${sessionScope.loginInfo.memId }">
+				<input type="hidden" name="memName" value="${sessionScope.loginInfo.memName }">
+				<input type="hidden" name="memImage" value="${sessionScope.loginInfo.memImage }">
+				
+				<div class="d-grid gap-2 d-md-flex justify-content-center">
+					<input type="button" class="btn " value="가입하기" onclick="clubJoin();">
+					<input type="button" class="back-btn btn btn-success" value="뒤로가기" onclick="history.back();">
+				</div>
+			</form>
 		</div>
-	</form>
+	</div>
 </div>
 <script type="text/javascript" src="/resources/js/club/club_join.js"></script>
 </body>

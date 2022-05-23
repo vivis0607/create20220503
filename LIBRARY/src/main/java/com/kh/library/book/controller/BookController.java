@@ -261,7 +261,6 @@ public class BookController {
 	@GetMapping("/selectRcdBook2")
 	public String selectNewBook(Model model) {
 		
-		model.addAttribute("bookList", bookAdminService.selectRcdBook3());
 		return "book/list";
 	}
 	
@@ -320,6 +319,9 @@ public class BookController {
 		System.out.println("!!!"+memberVO.getMemId());
 		bookAdminService.borrowBook(reserveVO, memberVO);
 		/* memberAdminService.insertSendMessage(messageVO); */
+		
+      String getId = memberVO.getMemId();
+      memberAdminService.insertBookMessage(getId);
 		
 		return "redirect:/book/reserveListAdmin";
 	}
@@ -393,6 +395,26 @@ public class BookController {
 		return "book/info_hope_book";
 	}
 	
+	//희망도서 카운팅
+	@ResponseBody
+	@PostMapping("/selectHpCnt")
+	public int selectHpCnt(HopeBookVO hbVO) {
+		return bookAdminService.selectHpCnt(hbVO);
+	}
+	
+	//희망도서 중복 신청 방지
+	@ResponseBody
+	@PostMapping("/selectHpInfo")
+	public int selectHpInfo(HopeBookVO hbVO) {
+		return bookAdminService.selectHpInfo(hbVO);
+	}
+	
+	//희망도서 비치 유무 확인
+	@ResponseBody
+	@PostMapping("/selectIsStock")
+	public int selectIsStock(HopeBookVO hbVO) {
+		return bookAdminService.selectIsStock(hbVO);
+	}
 	
 	//희망도서  등록
 	@PostMapping("/regHopeBook")
@@ -400,6 +422,8 @@ public class BookController {
 		bookService.insertHopeBook(hbVO);
 		return "book/reg_hope_book";
 	}
+	
+	
 
 	//희망도서 목록 (ADMIN)
 	@GetMapping("/hopeBookList")
