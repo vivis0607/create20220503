@@ -32,7 +32,7 @@
 	<div class="title">
 			${bookDetail.title }
 	</div>
-	<div class="bkDetail">
+	<div class="bkDetail" style="width:100%;">
 		<div class="imgT">
 			<table>
 				<tr>

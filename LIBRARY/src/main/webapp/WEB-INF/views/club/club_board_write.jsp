@@ -78,6 +78,7 @@
 	<input type="hidden" name="clubCode" value="${sessionScope.loginInfo.clubCode}">
 	<div class="writeForm">
 		<table>
+		<c:if test="${sessionScope.loginInfo.clubAdmin eq 'Y' }">
 			<tr>
 				<td>공지</td>
 				<td><div class="form-check">
@@ -86,6 +87,7 @@
 					  </label>
 					</div></td>
 			</tr>
+		</c:if>
 			<tr>
 				<td class="title">제목</td>
 				<td><input type ="text" name="cbBoardTitle" id="cbBoardTitle" class="form-control"></td>

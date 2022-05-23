@@ -65,7 +65,7 @@ function bookPlanerSearch(){
 
 			if(result != ""){
 				for(let i = 0 ; i < result.length ; i++){
-					str += '<div class="result-row-tbody" onclick="resultChoice(this)" ><div><img  src="' + result[i].bkImg + '"></div>';
+					str += '<div class="result-row-tbody" onclick="resultChoice(this)" ><div><img style="width: 64px;" src="/resources/images/book/' + result[i].bkImg + '"></div>';
 					str += '<div>' + result[i].title + '</div>';
 					str += '<div>' + result[i].writer + '</div></div>';
 				}

@@ -104,7 +104,7 @@
 				<col width="*">
 			</colgroup>
 				<tr>
-					<td>문의내용</td>
+					<td>문의상세내용</td>
 					<td><textarea name="qnaContent" id ="editor"></textarea></td>
 				</tr>
 			</table>

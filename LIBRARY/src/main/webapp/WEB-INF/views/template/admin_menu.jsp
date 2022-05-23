@@ -23,7 +23,8 @@
 			
 			<li class="menu-v1" id="menu-v1-y"><a href="#">도서관리</a>
 				<ul class="submenu">
-					<li><a href="/book/bookList">등록도서확인</a></li>
+					<li><a href="/book/regBookForm">도서 등록</a></li>
+					<li><a href="/book/bookList">도서 관리</a></li>
 					<li><a href="/book/reserveListAdmin">예약목록확인</a></li>
 					<li><a href="/book/selectBrList">대여목록확인</a></li>
 					<li><a href="/book/hopeBookList">희망도서관리</a></li>

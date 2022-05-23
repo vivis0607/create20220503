@@ -360,20 +360,17 @@ public class MemberController {
    
    // 독서 플래너
 	@GetMapping("/bookPlaner")
-	public String bookPlaner(Model model, BookComplitVO bookComplitVO) {
+	public String bookPlaner(Model model, HttpSession session, BookComplitVO bookComplitVO) {
 		//1.전체 데이터의 개수 조회
+		bookComplitVO.setMemId(((MemberVO)(session.getAttribute("loginInfo"))).getMemId());
 		int listCnt = memberService.selectBookPlanerCnt(bookComplitVO);
 		bookComplitVO.setTotalCnt(listCnt);
 		bookComplitVO.setDisplayCnt(5);
 		
-		System.out.println(bookComplitVO.getStartNum()+"스타트넘멈머머ㅓ머머머머");
-		System.out.println(bookComplitVO.getEndNum() + "엔드너너너너너너너너ㅓㅁ");
 		//2.페이징 처리를 위한 세팅 메소드 호출
 		bookComplitVO.setPageInfo();
-		System.out.println(bookComplitVO.getMemId() + "북컴플릿vo에 들어있는");
 		List<BookComplitVO> list = memberService.selectBookPlanerForPage(bookComplitVO);
 		String memId = bookComplitVO.getMemId();
-		System.out.println(memId + "멤아이디ㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣㅣ");
 		if(!(memberService.selectRecommendBook(bookComplitVO.getMemId())).isEmpty()) {
 			if((memberService.selectRecommendBook(bookComplitVO.getMemId())).size() < 3) {
 				model.addAttribute("rcdList", memberService.selectRecommendBook(bookComplitVO.getMemId()));

@@ -7,12 +7,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/resources/css/club/club_manage.css" rel="stylesheet">
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
 	<div class="subTit" >
 		<div class="line_map">홈 > 북클럽 > 북클럽 관리</div>
-		<h2>북클럽 관리</h2>
+		 <div class="tit">북클럽 관리</div>
 	</div>
 <div class="row">
 	<div class="col-8">

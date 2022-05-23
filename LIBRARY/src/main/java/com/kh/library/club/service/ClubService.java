@@ -104,6 +104,8 @@ public interface ClubService {
 	//랭킹
 	List<MemberVO> selectRanking(String clubCode);
 	
+	//클럽명 중복검사
+	int clubNameCheck(String clubName)throws Exception;
 	
 	/////////////////////////알림함/////////////////////////////
 	
@@ -115,4 +117,7 @@ public interface ClubService {
 	
 	//클럽승인코드
 	void updateClubApplyCode(ClubApplyVO clubApplyVO);
+	
+	//알림 삭제
+	void deleteMsg(String msgCode);
 }

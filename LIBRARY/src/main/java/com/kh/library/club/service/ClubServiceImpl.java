@@ -196,4 +196,14 @@ public class ClubServiceImpl implements ClubService {
 		return sqlSession.selectList("clubMapper.selectRanking", clubCode);
 	}
 
+	@Override
+	public void deleteMsg(String msgCode) {
+		sqlSession.delete("clubMapper.deleteMsg", msgCode);
+	}
+
+	@Override
+	public int clubNameCheck(String clubName) throws Exception {
+		return sqlSession.selectOne("clubMapper.clubNameCheck", clubName);
+	}
+
 }

@@ -300,6 +300,23 @@ public class ClubController {
 		return "redirect:/club/clubList";
 	}
 	
+	// 아이디 중복 검사
+	@ResponseBody
+	@RequestMapping("/clubNameChk")
+	public String clubNameChk(String clubName) throws Exception{
+		int result = clubService.clubNameCheck(clubName);
+			
+			if(result != 0) {
+				
+				return "fail";	// 중복 아이디가 존재
+				
+			} else {
+				
+				return "success";	// 중복 아이디 x
+				
+			}	
+	}
+	
 	
 	//-------------------------알림함--------------------------
 	@GetMapping("/getMsgList")
@@ -321,6 +338,13 @@ public class ClubController {
 	@PostMapping("/updateMsgIsRead")
 	public void updateMsgIsRead(String msgCode) {
 		clubService.updateMsgIsRead(msgCode);
+	}
+	
+	//알림 삭제
+	@ResponseBody
+	@PostMapping("/deleteMsg")
+	public void deleteMsg(String msgCode) {
+		clubService.deleteMsg(msgCode);
 	}
 	
 }

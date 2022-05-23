@@ -13,6 +13,9 @@
 .row{
     width: 100%;
 }
+.nav-logoDiv > a:hover{
+	color: #fff;
+}
 </style>
 </head>
 <body>
@@ -123,7 +126,7 @@
 </div>
 <nav class="toRead-nav">
   <div class="menu-btn">
-  	TO<br>READ<br>LIST
+  	TO READ LIST
   </div>
   <div class="nav-links">
   <div class="bookPlaner-div">
@@ -176,7 +179,7 @@
       <div class="modal-header">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" id="msg-detail">
+      <div class="modal-body" id="msg-detail" >
       	<table class="table text-left">
 			    <tr>
 			      <th scope="col">보낸사람</th>
@@ -192,6 +195,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success btn-sm" id="openMsgList">목록</button>
+        <button type="button" class="btn btn-danger btn-sm" id="deleteMsg">삭제</button>
       </div>
     </div>
   </div>

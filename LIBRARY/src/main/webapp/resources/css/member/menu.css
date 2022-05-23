@@ -229,7 +229,7 @@
 
 /*TO READ LIST*/
 .toRead-nav {
-	text-align: right;
+	
 	left: 95%;
     bottom: 4%;
 	background-color: #F5F3CE;
@@ -252,6 +252,7 @@
 }
 
 .toRead-nav .menu-btn {
+	font-weight:bold;
     position: absolute;
     top: 40%;
     left: 8%;
@@ -449,6 +450,8 @@ li {
 #main-menu > li {
   float: left;
   position: relative;
+  width: 200px;
+  height: 50px;
 }
 
 #main-menu > li > a {
@@ -472,12 +475,15 @@ li {
   visibility: hidden;
   transition: all 0.15s ease-in;
   z-index: 999;
+  padding: 0;
 }
 
 #sub-menu > li {
- padding: 16px 28px;
+ padding: 16px 45px;
   border-bottom: 1px solid rgba(0,0,0,0.15);
   text-align: left;
+  width: 200px;
+  height: 57px;
   
   }
 
@@ -486,6 +492,7 @@ li {
   text-decoration: none;
   text-align: left;
   font-size: .9rem;
+  width: 100%;
 }
 
 #main-menu > li:hover #sub-menu {
@@ -495,6 +502,7 @@ li {
 
 #sub-menu > li >  a:hover {
  text-decoration: underline;
+ font-weight: bold;
 }
 
 dl, ol, ul {

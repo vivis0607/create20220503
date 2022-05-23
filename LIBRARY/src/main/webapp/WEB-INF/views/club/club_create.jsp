@@ -7,10 +7,6 @@
 <title>Insert title here</title>
 <link href="/resources/css/common/infoBar.css" rel="stylesheet">
 <style type="text/css">
-table tr td:nth-child(odd){
-	text-align: right;
-	margin-right: 20px;
-}
 /* hs-write-form 작성폼 */
    .hs-write-form{
       flex-direction: column; 
@@ -23,7 +19,7 @@ table tr td:nth-child(odd){
    }
    
    .hs-write-form input[type="text"]{
-      width: 50%;
+      width: 80%;
       border: none;
       border-bottom: 1px solid #d4d4d4;
       padding: 5px;
@@ -58,24 +54,28 @@ table tr td:nth-child(odd){
    .club-info{
 	   	margin-top: 5px;
    }
-   .subTit {
-	    border-bottom: 1px solid #dddddd;
-	    padding: 15px 0px 15px 0px;
-	    margin: 0 auto; 
-	    margin-bottom: 20px;
-	}
 	.hs-write-form input[type="number"]{
 		width: 50%;
 		margin-bottom: 10px;
 	}
 	.hs-write-form input[type="date"]{
-		width: 50%;
+		width: 80%;
 	}
 	.hs-write-form input[type="file"]{
-		width: 50%;
+		width: 80%;
 	}
 	.d-grid{
 		margin-right: 250px;
+	}
+	/* 중복이름 존재하지 않는경우 */
+	.name_input_re_1{
+		color : green;
+		display : none;
+	}
+	/* 중복이름 존재하는 경우 */
+	.name_input_re_2{
+		color : red;
+		display : none;
 	}
 </style>
 </head>
@@ -90,8 +90,12 @@ table tr td:nth-child(odd){
 			<input type="hidden" name="memName" value="${sessionScope.loginInfo.memName}">
 				<div class="hs-write-form">
 					<div class="hs-write-form-top">
-						<div>
-							<input type="text" id="clubName" name="clubName" placeholder="북클럽 이름">
+						<div class="name_wrap">
+							<div>
+								<input type="text" id="clubName" name="clubName" placeholder="북클럽 이름">
+							</div>
+							<span class="name_input_re_1">사용 가능한 이름입니다.</span>
+							<span class="name_input_re_2">이미 사용 중입니다. 다른 이름을 입력해주세요.</span>
 						</div>
 						<div>
 							<input type="number" class="form-control" name="clubHeadCnt" placeholder="인원" min="3" max="10">
@@ -110,7 +114,7 @@ table tr td:nth-child(odd){
 						</div>
 					</div>
 					<div class="hs-write-form-bottom ">
-						<textarea rows="20" cols="30" name="clubInfo" onkeyup="byteCheck(this, '5000');" placeholder="북클럽 소개말"></textarea>
+						<textarea rows="20" cols="50" name="clubInfo" onkeyup="byteCheck(this, '5000');" placeholder="북클럽 소개말"></textarea>
 						<div class="d-grid gap-2 d-md-flex justify-content-md-end"><span class="byteSpan"><span id="byteInfo">0</span> /5000bytes </span>
 						<button type="button" class="btn btn-success" onclick="clubCreate(this);">모임생성</button></div>
 					</div>
@@ -119,6 +123,9 @@ table tr td:nth-child(odd){
 	</div>
 </div>
 
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/resources/js/club/club_create.js?ver=9"></script>
+
 </body>
 </html>

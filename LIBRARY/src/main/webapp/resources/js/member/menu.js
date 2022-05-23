@@ -223,5 +223,30 @@ $(document).on('click', '#openMsgList' , function() {
 	
 });
 
-
-
+$(document).on('click', '#deleteMsg' , function() {
+	let result = confirm('메세지를 정말 삭제하시겠습니까?');
+	var msgCode = $('#open-msgDetail-menu').attr('data-msgCode');
+	
+	if(result){
+		if(result){
+		$.ajax({
+			url: '/club/deleteMsg', //요청경로
+			type: 'post',
+			data: {'msgCode':msgCode}, //필요한 데이터 '데이터이름':값
+			success: function(result) {
+				//ajax 실행 성공 후 실행할 코드 작성
+				$('#msgDetailModal').modal('hide');
+				$('#msgModal').modal('show');
+				
+			},
+			error: function() {
+				//ajax 실행 실패 시 실행되는 구간
+				alert('실패');
+			}
+		});
+	}
+	else{
+		return;
+	}
+	}
+});

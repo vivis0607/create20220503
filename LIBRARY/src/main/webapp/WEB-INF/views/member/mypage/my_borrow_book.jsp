@@ -31,7 +31,7 @@
 			<c:forEach items="${userBorrow }" var="borrow">
 				<tr>
 					<td>${borrow.rowNum }</td>
-					<td><a href="/book/bookDetail?bookCode=${borrow.bookCode }&memId=${sessionScope.loginInfo.memId}">${borrow.title }</a></td>
+					<td><a href="#" onclick="getBkDetail(this);">${borrow.title }</a></td>
 					<td>${borrow.isbn }</td>
 					<td>${borrow.brDate }</td>
 					<td>${borrow.rtDate }</td>
@@ -40,7 +40,7 @@
 						<c:when test="${borrow.status eq 1 }">연체</c:when>
 						<c:otherwise>반납완료</c:otherwise>	
 					</c:choose></td>
-					<td><input type="hidden" id="bookCode" value="${borrow.bookCode }"></td>
+				
  				</tr>
 			</c:forEach>
 		</tbody>

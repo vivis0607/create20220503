@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/resources/css/common/infoBar.css" rel="stylesheet">
 <style type="text/css">
 .btnDiv{
 	padding-top:10px;
@@ -123,18 +124,13 @@ select{
 	max-height: 800px;
 	width: 800px;
 }
-.subTit {
-    border-bottom: 1px solid #dddddd;
-    padding: 15px 0px 15px 0px;
-    margin: 0 auto; 
-    margin-bottom: 20px;
-}
 </style>
 </head>
 <body>
 <div class="container">
 	<div class="subTit" >
-			  <h2>이달의 독서 관리</h2>
+			<div class="line_map">홈 > 북클럽 > 이달의 책 등록</div>
+			 <div class="tit">이달의 책 등록</div>
 		</div>
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	   <form action="/clubAdmin/regMonthlyBook" id ="hpBookForm" method="post">

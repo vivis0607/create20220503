@@ -20,8 +20,8 @@ img:hover{
 <body>
 <div class="container">
 	<div class="subTit">
-      <div class="line_map">홈 > 자료검색 > 소장자료검색</div>
-      <div class="tit">소장자료검색</div>
+      <div class="line_map">홈 > 관리자메뉴 > 도서 관리</div>
+      <div class="tit">도서 관리</div>
    </div>
 
 	<div class="searchBar">

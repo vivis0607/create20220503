@@ -31,6 +31,7 @@ function insertBorrow(){
    
    //rtDate 가져오기
    $.ajax({
+	 async: false,
       url: '/book/selectRtDate',
       type: 'post',
       data: {'memId':memId, 'isbn':isbn},
@@ -53,7 +54,7 @@ function insertBorrow(){
             var reBorrow = year+'-'+month+'-'+date;*/
             
             //이전 반납일에서 3일이 지나지 않았을 때
-            if(reBorrow.getTime()< now.getTime()){
+            if(reBorrow.getTime()> now.getTime()){
                alert('반납 후 3일 이내에 같은 도서 재대출은 불가합니다.\n(이전반납일: '+originRtDate+')');
                $('#insertBorrow').modal('hide');
             }

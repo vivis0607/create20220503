@@ -22,8 +22,8 @@
 
 <div class="container">
 	<div class="subTit">
-      <div class="line_map">홈 > 관리자메뉴 > 도서등록</div>
-      <div class="tit">도서등록</div>
+      <div class="line_map">홈 > 관리자메뉴 > 도서수정</div>
+      <div class="tit">도서 수정</div>
    </div>
 
 

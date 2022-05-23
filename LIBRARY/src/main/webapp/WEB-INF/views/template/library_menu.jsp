@@ -16,7 +16,6 @@
 		</div>
 		<ul id="nav-v1">
 			
-			<li class="menu-v1" id="menu-v1"><a href="/admin/libraryInfo">도서관 소개</a></li>
 			<li class="menu-v1" id="menu-v1"><a href="/admin/libraryInfo">인삿말</a></li>
 			<li class="menu-v1" id="menu-v1"><a href="/admin/libraryHistory">연혁</a></li>
 			<li class="menu-v1" id="menu-v1"><a href="/admin/libraryLocation">찾아오시는 길</a></li>

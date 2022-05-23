@@ -58,7 +58,9 @@ input{
    border: none; 
    outline: 0;
 }
-
+.cateNameSpan:hover{
+	cursor: pointer;
+}
 </style>
 
 </head>
@@ -81,9 +83,9 @@ input{
 	
 	
 	<div class="cateDiv">
-		<span onclick="location.href='/item/itemList';"> 전체보기 </span>  &nbsp;
+		<span onclick="location.href='/item/itemList';" class="cateNameSpan"> 전체보기 </span>  &nbsp;
 		<c:forEach items="${cateList}" var="cate">
-			<span onclick="cateItem('${cate.cateCode}');">${cate.cateName }</span> &nbsp;
+			<span onclick="cateItem('${cate.cateCode}');" class="cateNameSpan">${cate.cateName }</span> &nbsp;
 		</c:forEach>
 	</div>
 		<div class="row itemList">

@@ -64,7 +64,7 @@
 		<div class="myPageDetail-secret">
 			<div class="myPageDetail-part">
 				<span>보안정보</span> 
-				<button type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#myPageDetail-secret" style="background-color: #FDFAF6; color: #16784B;; border: 1px solid #16784B;;">
+				<button type="button" class="btn btn-sm" onclick="showPopup1();"data-bs-toggle="modal" data-bs-target="#myPageDetail-secret" style="background-color: #FDFAF6; color: #16784B;; border: 1px solid #16784B;;">
 				  수정
 				</button>
 			</div>
@@ -242,7 +242,7 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- jQuery validation 문법 쓰기 : 주의! jQuery 문법을 쓴 후에 적어야 됨-->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script type="text/javascript" src="/resources/js/member/my_page_detail.js?ver=39"></script>
+<script type="text/javascript" src="/resources/js/member/my_page_detail.js?ver=41"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

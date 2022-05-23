@@ -142,7 +142,7 @@ $('#secretForm').validate({
       errorPlacement: function(error,element){
 		error.insertAfter(element);
 		error.css('color', 'red');
-		error.css('font-size', '12px');
+		error.css('font-size', '11px');
 	  },
       submitHandler: function(form) {
          form.submit();   //유효성 검사를 통과시 전송
@@ -168,5 +168,12 @@ function showPopup(){
 	});
 	
 	$('#myPageDetail-basic').modal('show');
+}    	
+function showPopup1(){
+	$('#myPageDetail-secret .modal-body-pwd input').each(function(index, element){
+		$(element).val('');
+	});
+	
+	$('#myPageDetail-secret').modal('show');
 }    	
     	

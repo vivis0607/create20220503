@@ -124,8 +124,8 @@ a:hover{
 					</div>
 					<div class="isOd-div">
 						<c:choose>
-							<c:when test="${sessionScope.loginInfo.isOd eq 'Y' }">
-								<div style="color: red;">연체 중인 도서가 있어요!</div>
+							<c:when test="${sessionScope.loginInfo.isOd eq 'Y'}">
+								<div style="color: red;">연체로 인해 대여가 제한됐어요.</div>
 							</c:when>
 							<c:otherwise>
 								<div>연체 중인 도서가 없습니다.</div>

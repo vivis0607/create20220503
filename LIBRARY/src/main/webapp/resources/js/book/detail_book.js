@@ -4,12 +4,10 @@
 //텍스트에 p태그 넣고 onclick() 넣기
 
 function getBkDetail(selected){
-	var OBookCode = $(selected).closest('tr').children().eq(6).val();
+	var OBookCode = $(selected).closest('tr').children().eq(2).text();
 	var memId = $('#memId').val();
+	var bookCode = OBookCode;
 	
-	const bookCode = OBookCode;
-	
-	alert(bookCode+memId);
 	
 	$.ajax({
 		url: '/book/selectIsDelete',

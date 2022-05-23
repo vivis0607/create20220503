@@ -227,7 +227,7 @@
    <select id="selectIsDelete" resultType="String">
    		SELECT IS_DELETE
    		FROM BOOK
-   		WHERE BOOK_CODE=#{bookCode}
+   		WHERE ISBN=#{isbn}
    </select>
    
 	<!-- 검색 조회 -->
@@ -487,6 +487,7 @@
 	<!-- 관리자 예약도서 확인 -->
 	<select id="selectRsvAdmin" resultMap="reserve">
 		SELECT TITLE
+			, RSV_CODE
 			, ISBN
 			, TO_CHAR(RSV_DATE, 'YYYY-MM-DD ') AS RSV_DATE
 			, MEM_ID
@@ -560,6 +561,7 @@
 			, MEM_ID
 			, TITLE
 			, ISBN
+			, BOOK_CODE
 			, TO_CHAR(BR_DATE, 'YYYY-MM-DD ') AS BR_DATE
 			, TO_CHAR(RT_DATE, 'YYYY-MM-DD ') AS RT_DATE
 			, STATUS
