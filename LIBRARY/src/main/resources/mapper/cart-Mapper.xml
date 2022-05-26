@@ -224,6 +224,7 @@
 	<delete id="deleteBuys">
 		DELETE BUY
 		WHERE MEM_ID = #{memId}
+		AND ORDER_NUM IS NULL
 	</delete>
 	
 	<!-- 구매시 orderNum 조회 -->

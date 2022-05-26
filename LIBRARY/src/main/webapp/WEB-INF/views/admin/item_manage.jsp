@@ -39,7 +39,7 @@
 	</div>
 <div class="item_Container">
 	<div class="BoardbtnDiv">
-		<button type="button" class="btn btn-success btn-m" onclick="location.href='/item/insertItem';">상품등록</button>
+		<button type="button" class="btn btn-success btn-m" onclick="location.href='/item/insertItem';">아이템등록</button>
 		<button type="button" class="btn btn-success btn-m" onclick="deleteItems();">선택삭제</button>
 	</div>
 	<div>

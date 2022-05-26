@@ -29,7 +29,8 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${userBorrow }" var="borrow">
-				<tr>
+				<c:set var="i" value="${i+1 }"/>
+				<tr id="${i }">
 					<td>${borrow.rowNum }</td>
 					<td><a href="#" onclick="getBkDetail(this);">${borrow.title }</a></td>
 					<td>${borrow.isbn }</td>
@@ -40,6 +41,7 @@
 						<c:when test="${borrow.status eq 1 }">연체</c:when>
 						<c:otherwise>반납완료</c:otherwise>	
 					</c:choose></td>
+					<td><input type="hidden" value="${borrow.bookCode }" id="bookCode${i }"></td>
 				
  				</tr>
 			</c:forEach>

@@ -30,7 +30,7 @@
 
 .tiptext {
 	position: absolute;
-	right: 45.5%;
+	right: 56.5%;
 	background-color: #E7EDE4;
 	width: 24rem;
 	height: 15rem;

@@ -4,9 +4,9 @@
 //텍스트에 p태그 넣고 onclick() 넣기
 
 function getBkDetail(selected){
-	var OBookCode = $(selected).closest('tr').children().eq(2).text();
+	var i = $(selected).closest('tr').attr('id');
 	var memId = $('#memId').val();
-	var bookCode = OBookCode;
+	var bookCode = $('#bookCode'+i).val();
 	
 	
 	$.ajax({

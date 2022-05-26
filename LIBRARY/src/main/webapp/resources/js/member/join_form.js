@@ -1,12 +1,30 @@
-/*const reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/ ]/gi;
-let inputId = document.querySelector('#inputId').value;
-function removeSpecData(){
-	inputId = inputId.replace(reg, "");
-}	
+/*아이디 중복 체크 */
+function checkId(){
+const newId = document.getElementById('inputId1').value;
+$.ajax({
+		url: '/member/checkId', //요청경로
+		type: 'post',
+		data: {'memId':newId}, //필요한 데이터 '데이터이름':값
+		success: function(result) {
+			if(result === 1){
+				$('.id-unavailable').css("display", "inline-block");
+				$('.id-available').css("display", "none");
+			}
+			else if(result === 0) {
+				$('.id-available').css("display", "inline-block");
+				$('.id-unavailable').css("display", "none");
+			}
+			
+		},
+		error: function() {
+			
+			alert('실패');
+		}
+	});
+}
 
-inputId.addEventListener('keyup', removeSpecData);
 
-*/
+
 /*유효성 검사*/
 $('#joinForm').validate({
 	debug: false,
@@ -121,35 +139,6 @@ $('#joinForm').validate({
       }
    });
 
-/*아이디 중복 체크 */
-const memId = document.getElementById('inputId').value;
-function checkId(){
-$.ajax({
-		url: '/member/checkId', //요청경로
-		type: 'post',
-		data: {'memId':memId}, //필요한 데이터 '데이터이름':값
-		success: function(result) {
-			if(result === 1){
-				$('.id-unavailable').css("display", "inline-block");
-				$('.id-available').css("display", "none");
-			}
-			else if(result === 0) {
-				$('.id-available').css("display", "inline-block");
-				$('.id-unavailable').css("display", "none");
-				$(".wrapper > submit").attr("disabled", false);
-			}
-			
-		},
-		error: function() {
-			
-			alert('실패');
-		}
-	});
-}
-function lockId(){
-	$(".wrapper > submit").attr("disabled", true);
-}
-document.querySelector('#inputId').addEventListener('keyup', lockId);
 
 
 /*우편번호 api*/

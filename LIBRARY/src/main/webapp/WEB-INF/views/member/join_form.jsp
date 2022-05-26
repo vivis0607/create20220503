@@ -45,6 +45,7 @@
 	.wrapper button{
 	margin: 3rem auto auto 16rem;
 	}
+	
 </style>
 </head>
 <body>
@@ -58,7 +59,7 @@
 		 <div class="row mb-3">
 		    <label for="inputId" class="col-sm-2 col-form-label">아이디</label>
 		    <div class="col-sm-4" style="margin-right: 3.8rem;">
-		      <input type="text" class="form-control" id="inputId" name="memId">
+		      <input type="text" class="form-control" id="inputId1" name="memId">
 			  <div class="id-available">사용할 수 있는 아이디예요.</div>
 		      <div class="id-unavailable">다른 사람이 사용 중인 아이디입니다.</div>    
 		    </div>
@@ -174,7 +175,7 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 <!-- jQuery validation 문법 쓰기 : 주의! jQuery 문법을 쓴 후에 적어야 됨-->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-<script type="text/javascript" src="/resources/js/member/join_form.js?ver=53"></script>
+<script type="text/javascript" src="/resources/js/member/join_form.js?ver=58"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

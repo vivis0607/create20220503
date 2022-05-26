@@ -227,7 +227,7 @@
    <select id="selectIsDelete" resultType="String">
    		SELECT IS_DELETE
    		FROM BOOK
-   		WHERE ISBN=#{isbn}
+   		WHERE BOOK_CODE=#{bookCode}
    </select>
    
 	<!-- 검색 조회 -->
@@ -275,13 +275,14 @@
 				, BK_IMG
 				, STATUS
 				, PUB_DATE
+				, INPUT_DATE
 				, KEYWORD
 				, C.CATE_CODE
 		FROM BOOK B, BOOK_CATEGORY C, BOOK_IMAGE I
 		WHERE B.CATE_CODE = C.CATE_CODE
 		AND B.BOOK_CODE = I.BOOK_CODE
 		AND IS_DELETE='N'
-		ORDER BY TITLE DESC
+		ORDER BY INPUT_DATE DESC
 	</select>
 	
 	<!-- 도서 상세 보기 -->

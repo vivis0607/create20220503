@@ -8,7 +8,6 @@ function showModalOD(selectedTag){
 	var rtDate = $(selectedTag).closest('tr').children().eq(5).text();
 	var originLimitDate = $('#member #limitDate').val();
 	
-	alert(originLimitDate);
 	
 	var nowDate = new Date();
 	var rtDateT =new Date(rtDate);

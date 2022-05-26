@@ -50,7 +50,7 @@
 									
 								</c:when>
 								<c:otherwise>
-									<button class="btn btn-success btn-sm justify-content-md-end" type="button">대출불가</button>
+									<button class="btn btn-sm text-white" style="background-color: #CC0000;" type="button">대출불가</button>
 								</c:otherwise>
 							</c:choose>
 					</td>
