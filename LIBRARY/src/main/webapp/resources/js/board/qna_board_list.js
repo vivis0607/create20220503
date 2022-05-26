@@ -41,7 +41,6 @@ var filter = 0;
 //답변유무로 필터
 function answerFilter(){
 	filter ++;
-	alert(filter);
 	
 	location.href='/otherB/qnaBoard?answerFilter='+filter;
 }

@@ -122,7 +122,7 @@ public class ItemController {
 		
 		//파일업로드
 		Iterator<String> inputTagNames = multi.getFileNames();
-		String uploadPath = "C:\\Users\\fierc\\OneDrive\\Desktop\\workspaceSTS\\LIBRARY\\src\\main\\webapp\\resources\\images\\item\\";
+		String uploadPath = "C:\\Users\\fierc\\Desktop\\학원자료\\Git\\create20220503\\LIBRARY\\src\\main\\webapp\\resources\\images\\item\\";
 		
 		while(inputTagNames.hasNext()) {
 			String inputTagName = inputTagNames.next();
@@ -209,7 +209,7 @@ public class ItemController {
 			
 			//파일업로드
 			Iterator<String> inputTagNames = multi.getFileNames();
-			String uploadPath = "C:\\Users\\fierc\\OneDrive\\Desktop\\workspaceSTS\\LIBRARY\\src\\main\\webapp\\resources\\images\\item\\";
+			String uploadPath = "C:\\Users\\fierc\\Desktop\\학원자료\\Git\\create20220503\\LIBRARY\\src\\main\\webapp\\resources\\images\\item\\";
 			
 			while(inputTagNames.hasNext()) {
 				String inputTagName = inputTagNames.next();
